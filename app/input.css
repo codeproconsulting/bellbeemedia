@@ -61,4 +61,32 @@
   .pill-badge {
     @apply inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-surface-1 border border-surface-2 text-surface-dark1 text-sm font-medium;
   }
+  
+  /* GPU-Accelerated Animations */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+  @keyframes float-medium {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(-1.5deg); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-float-medium {
+    animation: float-medium 5s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+    will-change: transform;
+  }
 }
