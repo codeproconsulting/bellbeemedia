@@ -5,8 +5,8 @@ import { routes } from '../../routes.ts'
 export function SocialMediaPage() {
   return () => (
     <Layout
-      title="Social Media Marketing Services | Bell Bee Media"
-      description="Grow your brand with expert social media marketing. Bell Bee Media builds loyal communities, drives engagement, and delivers measurable growth on Instagram, TikTok, LinkedIn, and more."
+      title="Social Media Management Services | Bell Bee Media"
+      description="Grow your brand with expert social media management. Bell Bee Media builds loyal communities, drives engagement, and delivers measurable growth on Instagram, TikTok, LinkedIn, and more."
     >
       {/* Hero */}
       <section class="relative bg-gradient-to-br from-indigo-900 via-indigo-800 to-primary pt-28 pb-24 overflow-hidden">
@@ -16,11 +16,11 @@ export function SocialMediaPage() {
             <div class="flex-1">
               <div class="flex mb-6">
                 <span class="pill-badge bg-white/10 text-white border-white/20">
-                  <i class="ph-fill ph-heart text-white" /> Social Media Marketing
+                  <i class="ph-fill ph-heart text-white" /> Social Media Management
                 </span>
               </div>
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Social Media Marketing That Builds Real Communities
+                Social Media Management That Builds Real Communities
               </h1>
               <p class="text-xl text-indigo-100 leading-relaxed mb-8 max-w-xl">
                 We craft platform-native strategies that transform followers into loyal brand advocates. From content creation to community management, we handle every touchpoint that matters.

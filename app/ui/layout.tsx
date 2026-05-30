@@ -30,77 +30,77 @@ export function Layout() {
                           <h3 class="text-2xl font-black text-surface-dark0 tracking-tight">Our Services</h3>
                           <p class="text-sm text-text-secondary mt-1.5">Everything your brand needs to grow. One team. Every channel.</p>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-3 gap-4">
                           {/* Service Item 1 */}
-                          <a href={routes.servicesSocialMedia.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesSocialMedia.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-heart"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Social Media</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Build loyal communities and brand engagement.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Social Media Management</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">Build loyal communities and brand engagement.</p>
                             </div>
                           </a>
                           
                           {/* Service Item 2 */}
-                          <a href={routes.servicesPerformanceAds.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesPerformanceAds.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-chart-line-up"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Performance Ads</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Maximize ROI with targeted, data-backed PPC ads.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Performance Ads</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">Maximize ROI with targeted, data-backed PPC ads.</p>
                             </div>
                           </a>
 
                           {/* Service Item 3 */}
-                          <a href={routes.servicesDigitalPr.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesDigitalPr.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-megaphone"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Digital PR</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Amplify brand voice via influencer partnerships.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Digital PR</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">Amplify brand voice via influencer partnerships.</p>
                             </div>
                           </a>
 
                           {/* Service Item 4 */}
-                          <a href={routes.servicesProduction.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-red-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesProduction.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-red-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-play"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Production</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">High-quality promotional videos and photos.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Production</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">High-quality promotional videos and photos.</p>
                             </div>
                           </a>
 
                           {/* Service Item 5 */}
-                          <a href={routes.servicesWebSolutions.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesWebSolutions.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-desktop"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Web Solutions</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Fast, conversion-focused responsive websites.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Web Solutions</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">Fast, conversion-focused responsive websites.</p>
                             </div>
                           </a>
 
                           {/* Service Item 6 */}
-                          <a href={routes.servicesDesignCopy.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
+                          <a href={routes.servicesDesignCopy.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-bezier-curve"></i>
                             </div>
                             <div>
-                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Design & Copy</h4>
-                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Overhaul visual identities and sales copywriting.</p>
+                              <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Design & Copy</h4>
+                              <p class="text-xs text-text-secondary mt-1 font-normal leading-normal">Overhaul visual identities and sales copywriting.</p>
                             </div>
                           </a>
                         </div>
                       </div>
 
                       {/* Right Section (Sidebar Cards) */}
-                      <div class="col-span-4 flex flex-col gap-4">
+                      <div class="col-span-4 flex flex-col justify-between h-full">
                         {/* View All services button card */}
                         <a href="/services" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
                           <div class="flex items-center gap-4">
@@ -116,10 +116,10 @@ export function Layout() {
                         </a>
 
                         {/* Help Card */}
-                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4 mt-4">
                           <div class="flex items-center gap-2 text-primary font-bold text-base">
                             <i class="ph ph-phone text-secondary text-xl"></i>
-                            <span>Need help?</span>
+                            <span>Contact Details</span>
                           </div>
                           <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
@@ -204,7 +204,7 @@ export function Layout() {
                       </div>
 
                       {/* Right Section (Sidebar Cards) */}
-                      <div class="col-span-4 flex flex-col gap-4">
+                      <div class="col-span-4 flex flex-col justify-between h-full">
                         {/* View All work button card */}
                         <a href="/our-work" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
                           <div class="flex items-center gap-4">
@@ -220,10 +220,10 @@ export function Layout() {
                         </a>
 
                         {/* Help Card */}
-                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4 mt-4">
                           <div class="flex items-center gap-2 text-primary font-bold text-base">
                             <i class="ph ph-phone text-secondary text-xl"></i>
-                            <span>Need help?</span>
+                            <span>Contact Details</span>
                           </div>
                           <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
@@ -310,7 +310,7 @@ export function Layout() {
                       </div>
 
                       {/* Right Section (Sidebar Cards) */}
-                      <div class="col-span-4 flex flex-col gap-4">
+                      <div class="col-span-4 flex flex-col justify-between h-full">
                         {/* View All about button card */}
                         <a href="/about-us" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
                           <div class="flex items-center gap-4">
@@ -326,10 +326,10 @@ export function Layout() {
                         </a>
 
                         {/* Help Card */}
-                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4 mt-4">
                           <div class="flex items-center gap-2 text-primary font-bold text-base">
                             <i class="ph ph-phone text-secondary text-xl"></i>
-                            <span>Need help?</span>
+                            <span>Contact Details</span>
                           </div>
                           <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
