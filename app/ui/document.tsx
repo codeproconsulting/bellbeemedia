@@ -6,17 +6,19 @@ export interface DocumentProps {
   children?: RemixNode
   head?: RemixNode
   title?: string
+  description?: string
 }
 
 const DEFAULT_TITLE = readAppDisplayName('BellBee%20Media')
 
 export function Document() {
-  return ({ children, head, title = DEFAULT_TITLE }: DocumentProps) => (
+  return ({ children, head, title = DEFAULT_TITLE, description }: DocumentProps) => (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        {description && <meta name="description" content={description} />}
         
         {/* Preload Conthrax font weights to optimize performance & eliminate layout shift */}
         <link rel="preload" href="/conthrax/Fontspring-DEMO-conthrax-rg.otf" as="font" type="font/otf" crossorigin="anonymous" />

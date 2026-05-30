@@ -3,8 +3,8 @@ import { routes } from '../routes.ts'
 import { Document } from './document.tsx'
 
 export function Layout() {
-  return ({ children, title }: { children: RemixNode; title?: string }) => (
-    <Document title={title}>
+  return ({ children, title, description }: { children: RemixNode; title?: string; description?: string }) => (
+    <Document title={title} description={description}>
       <div class="flex flex-col min-h-screen bg-white">
         <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2">
           <div class="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -32,7 +32,7 @@ export function Layout() {
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                           {/* Service Item 1 */}
-                          <a href="/services#social" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesSocialMedia.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-heart"></i>
                             </div>
@@ -43,7 +43,7 @@ export function Layout() {
                           </a>
                           
                           {/* Service Item 2 */}
-                          <a href="/services#performance" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesPerformanceAds.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-chart-line-up"></i>
                             </div>
@@ -54,7 +54,7 @@ export function Layout() {
                           </a>
 
                           {/* Service Item 3 */}
-                          <a href="/services#pr" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesDigitalPr.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-megaphone"></i>
                             </div>
@@ -65,7 +65,7 @@ export function Layout() {
                           </a>
 
                           {/* Service Item 4 */}
-                          <a href="/services#production" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesProduction.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-red-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-play"></i>
                             </div>
@@ -76,7 +76,7 @@ export function Layout() {
                           </a>
 
                           {/* Service Item 5 */}
-                          <a href="/services#web" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesWebSolutions.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-desktop"></i>
                             </div>
@@ -87,7 +87,7 @@ export function Layout() {
                           </a>
 
                           {/* Service Item 6 */}
-                          <a href="/services#design" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.servicesDesignCopy.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-bezier-curve"></i>
                             </div>
@@ -158,7 +158,7 @@ export function Layout() {
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                           {/* Work Item 1 */}
-                          <a href="/our-work" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.ourWorkCaseStudies.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-folder-open"></i>
                             </div>
@@ -169,7 +169,7 @@ export function Layout() {
                           </a>
 
                           {/* Work Item 2 */}
-                          <a href="/our-work#results" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.ourWorkClientResults.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-chart-bar"></i>
                             </div>
@@ -180,7 +180,7 @@ export function Layout() {
                           </a>
 
                           {/* Work Item 3 */}
-                          <a href="/our-work#success" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.ourWorkSuccessStories.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-sparkles"></i>
                             </div>
@@ -191,7 +191,7 @@ export function Layout() {
                           </a>
 
                           {/* Work Item 4 */}
-                          <a href="/our-work#expertise" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.ourWorkIndustryExpertise.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-briefcase"></i>
                             </div>
@@ -264,7 +264,7 @@ export function Layout() {
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                           {/* About Item 1 */}
-                          <a href="/about-us" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.aboutUsOurCompany.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-users"></i>
                             </div>
@@ -275,7 +275,7 @@ export function Layout() {
                           </a>
 
                           {/* About Item 2 */}
-                          <a href="/about-us#mission" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.aboutUsOurMission.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-target"></i>
                             </div>
@@ -286,7 +286,7 @@ export function Layout() {
                           </a>
 
                           {/* About Item 3 */}
-                          <a href="/about-us#why-choose" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.aboutUsWhyChooseUs.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-yellow-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-star"></i>
                             </div>
@@ -297,7 +297,7 @@ export function Layout() {
                           </a>
 
                           {/* About Item 4 */}
-                          <a href="/about-us#careers" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                          <a href={routes.aboutUsCareers.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
                             <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
                               <i class="ph-fill ph-rocket"></i>
                             </div>
