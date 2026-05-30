@@ -4,6 +4,9 @@ export const routes = route({
   assets: get('/assets/*path'),
   home: '/',
   services: '/services',
-  about: '/about',
+  ourWork: '/our-work',
+  blogs: '/blogs',
+  aboutUs: '/about-us',
+  getProposal: get('/get-proposal'),
   contact: get('/contact'),
 })

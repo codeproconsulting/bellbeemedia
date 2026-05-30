@@ -1,34 +1,64 @@
+@font-face {
+  font-family: 'Conthrax';
+  src: url('/conthrax/Fontspring-DEMO-conthrax-rg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Conthrax';
+  src: url('/conthrax/Fontspring-DEMO-conthrax-sb.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Conthrax';
+  src: url('/conthrax/Fontspring-DEMO-conthrax-bd.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Conthrax';
+  src: url('/conthrax/Fontspring-DEMO-conthrax-hv.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --text-primary: #334155;
+    --text-primary: #0f172a;
     --text-secondary: #64748b;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --text-primary: #f8fafc;
-      --text-secondary: #cbd5e1;
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-    }
   }
 
   body {
     @apply bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/10 dark:border-white/10;
+    @apply bg-white/60 backdrop-blur-md border border-white/20;
   }
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  }
+  .pill-badge {
+    @apply inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-surface-1 border border-surface-2 text-surface-dark1 text-sm font-medium;
   }
 }

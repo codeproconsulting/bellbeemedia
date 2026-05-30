@@ -6,6 +6,9 @@ import { HomePage } from '../ui/home-page.tsx'
 import { ServicesPage } from '../ui/services-page.tsx'
 import { AboutPage } from '../ui/about-page.tsx'
 import { ContactPage } from '../ui/contact-page.tsx'
+import { OurWorkPage } from '../ui/our-work-page.tsx'
+import { BlogsPage } from '../ui/blogs-page.tsx'
+import { GetProposalPage } from '../ui/get-proposal-page.tsx'
 
 export default createController(routes, {
   actions: {
@@ -20,11 +23,20 @@ export default createController(routes, {
     services(context) {
       return context.render(<ServicesPage />)
     },
-    about(context) {
+    ourWork(context) {
+      return context.render(<OurWorkPage />)
+    },
+    blogs(context) {
+      return context.render(<BlogsPage />)
+    },
+    aboutUs(context) {
       return context.render(<AboutPage />)
     },
-    contact(context) {
-      return context.render(<ContactPage />)
+    getProposal(context) {
+      return context.render(<GetProposalPage />)
+    },
+    contact() {
+      return redirect(routes.getProposal.href())
     },
   },
 })

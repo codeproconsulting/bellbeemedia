@@ -5,18 +5,391 @@ import { Document } from './document.tsx'
 export function Layout() {
   return ({ children, title }: { children: RemixNode; title?: string }) => (
     <Document title={title}>
-      <div class="flex flex-col min-h-screen">
-        <header class="sticky top-0 z-50 w-full glass">
+      <div class="flex flex-col min-h-screen bg-white">
+        <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2">
           <div class="container mx-auto px-4 h-20 flex items-center justify-between">
-            <a href={routes.home.href()} class="flex items-center gap-2">
-              <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto" />
-            </a>
-            <nav class="hidden md:flex items-center gap-8 font-medium">
-              <a href={routes.home.href()} class="hover:text-primary transition-colors">Home</a>
-              <a href={routes.services.href()} class="hover:text-primary transition-colors">Services</a>
-              <a href={routes.about.href()} class="hover:text-primary transition-colors">About</a>
-              <a href={routes.contact.href()} class="px-5 py-2.5 bg-primary text-white rounded-full hover:bg-primary-light transition-colors shadow-lg shadow-primary/25">Contact Us</a>
+            <div class="flex-1">
+              <a href={routes.home.href()} class="inline-flex items-center gap-2">
+                <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto" />
+              </a>
+            </div>
+            
+            <nav class="hidden md:flex flex-1 justify-center items-stretch gap-10 text-[17px] font-bold text-surface-dark1 self-stretch">
+              {/* Services Dropdown */}
+              <div class="relative group flex items-center">
+                <a href={routes.services.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
+                  Services <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+                </a>
+                {/* Full-width fixed Dropdown Panel with scaleY dropdown animation */}
+                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                  <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-10">
+                    <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Left/Center Area (Grid of options) */}
+                      <div class="col-span-8">
+                        <div class="mb-6">
+                          <h3 class="text-2xl font-black text-surface-dark0 tracking-tight">Our Services</h3>
+                          <p class="text-sm text-text-secondary mt-1.5">Everything your brand needs to grow. One team. Every channel.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                          {/* Service Item 1 */}
+                          <a href="/services#social" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-heart"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Social Media</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Build loyal communities and brand engagement.</p>
+                            </div>
+                          </a>
+                          
+                          {/* Service Item 2 */}
+                          <a href="/services#performance" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-chart-line-up"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Performance Ads</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Maximize ROI with targeted, data-backed PPC ads.</p>
+                            </div>
+                          </a>
+
+                          {/* Service Item 3 */}
+                          <a href="/services#pr" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-megaphone"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Digital PR</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Amplify brand voice via influencer partnerships.</p>
+                            </div>
+                          </a>
+
+                          {/* Service Item 4 */}
+                          <a href="/services#production" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-red-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-play"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Production</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">High-quality promotional videos and photos.</p>
+                            </div>
+                          </a>
+
+                          {/* Service Item 5 */}
+                          <a href="/services#web" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-desktop"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Web Solutions</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Fast, conversion-focused responsive websites.</p>
+                            </div>
+                          </a>
+
+                          {/* Service Item 6 */}
+                          <a href="/services#design" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-bezier-curve"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Design & Copy</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Overhaul visual identities and sales copywriting.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Right Section (Sidebar Cards) */}
+                      <div class="col-span-4 flex flex-col gap-4">
+                        {/* View All services button card */}
+                        <a href="/services" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
+                          <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-secondary text-white flex items-center justify-center text-xl shadow-md shadow-secondary/20 shrink-0">
+                              <i class="ph ph-arrow-right"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0">View all services</h4>
+                              <p class="text-xs text-text-secondary mt-1">Explore our custom packages & creative roadmap.</p>
+                            </div>
+                          </div>
+                          <i class="ph ph-caret-right text-secondary text-lg group-hover/item:translate-x-0.5 transition-transform"></i>
+                        </a>
+
+                        {/* Help Card */}
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                          <div class="flex items-center gap-2 text-primary font-bold text-base">
+                            <i class="ph ph-phone text-secondary text-xl"></i>
+                            <span>Need help?</span>
+                          </div>
+                          <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>General Email:</span>
+                              <a href="mailto:hello@bellbeemedia.com" class="text-primary hover:underline">hello@bellbeemedia.com</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>Call Center:</span>
+                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                              <span>Support Hours:</span>
+                              <span class="text-surface-dark1">Mon-Fri 9AM-6PM</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Our Work Dropdown */}
+              <div class="relative group flex items-center">
+                <a href={routes.ourWork.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
+                  Our Work <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+                </a>
+                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                  <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
+                    <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Left/Center Area (Grid of options) */}
+                      <div class="col-span-8">
+                        <div class="mb-6">
+                          <h3 class="text-xl font-black text-surface-dark0 tracking-tight">Our Portfolio</h3>
+                          <p class="text-xs text-text-secondary mt-1">Real campaigns, hard numbers, and commercial growth.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                          {/* Work Item 1 */}
+                          <a href="/our-work" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-folder-open"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Case Studies</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Browse active campaigns across SEO, branding, and ads.</p>
+                            </div>
+                          </a>
+
+                          {/* Work Item 2 */}
+                          <a href="/our-work#results" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-chart-bar"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Client Results</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Hard ROI, conversion metrics, and traffic growth stats.</p>
+                            </div>
+                          </a>
+
+                          {/* Work Item 3 */}
+                          <a href="/our-work#success" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-sparkles"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Success Stories</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Read stories of brands we scaled from zero to millions.</p>
+                            </div>
+                          </a>
+
+                          {/* Work Item 4 */}
+                          <a href="/our-work#expertise" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-briefcase"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Industry Expertise</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">E-commerce, SaaS, and local business growth strategies.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Right Section (Sidebar Cards) */}
+                      <div class="col-span-4 flex flex-col gap-4">
+                        {/* View All work button card */}
+                        <a href="/our-work" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
+                          <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-secondary text-white flex items-center justify-center text-xl shadow-md shadow-secondary/20 shrink-0">
+                              <i class="ph ph-arrow-right"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0">View all case studies</h4>
+                              <p class="text-xs text-text-secondary mt-1">See how we deliver real business growth & revenue metrics.</p>
+                            </div>
+                          </div>
+                          <i class="ph ph-caret-right text-secondary text-lg group-hover/item:translate-x-0.5 transition-transform"></i>
+                        </a>
+
+                        {/* Help Card */}
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                          <div class="flex items-center gap-2 text-primary font-bold text-base">
+                            <i class="ph ph-phone text-secondary text-xl"></i>
+                            <span>Need help?</span>
+                          </div>
+                          <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>General Email:</span>
+                              <a href="mailto:hello@bellbeemedia.com" class="text-primary hover:underline">hello@bellbeemedia.com</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>Call Center:</span>
+                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                              <span>Support Hours:</span>
+                              <span class="text-surface-dark1">Mon-Fri 9AM-6PM</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <a href={routes.blogs.href()} class="hover:text-primary transition-colors flex items-center py-2">Blogs</a>
+
+              {/* About Us Dropdown */}
+              <div class="relative group flex items-center">
+                <a href={routes.aboutUs.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
+                  About Us <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+                </a>
+                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                  <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
+                    <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Left/Center Area (Grid of options) */}
+                      <div class="col-span-8">
+                        <div class="mb-6">
+                          <h3 class="text-xl font-black text-surface-dark0 tracking-tight">About Our Agency</h3>
+                          <p class="text-xs text-text-secondary mt-1">Dedicated to helping ambitious brands thrive in the digital age.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                          {/* About Item 1 */}
+                          <a href="/about-us" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-users"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Our Company</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Who we are, our expert team, and our story.</p>
+                            </div>
+                          </a>
+
+                          {/* About Item 2 */}
+                          <a href="/about-us#mission" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-orange-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-target"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Our Mission</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Our focus on transparency and data decisions.</p>
+                            </div>
+                          </a>
+
+                          {/* About Item 3 */}
+                          <a href="/about-us#why-choose" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-yellow-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-star"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Why Choose Us</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Discover our custom creative advantage.</p>
+                            </div>
+                          </a>
+
+                          {/* About Item 4 */}
+                          <a href="/about-us#careers" class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-2xl group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors duration-300">
+                              <i class="ph-fill ph-rocket"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0 group-hover/item:text-primary transition-colors duration-300">Careers</h4>
+                              <p class="text-sm text-text-secondary mt-1.5 font-normal leading-relaxed">Join our remote-first team of digital experts.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Right Section (Sidebar Cards) */}
+                      <div class="col-span-4 flex flex-col gap-4">
+                        {/* View All about button card */}
+                        <a href="/about-us" class="flex items-center justify-between p-5 rounded-2xl border border-secondary/20 hover:border-secondary bg-secondary/5 hover:bg-secondary/10 transition-all duration-300 group/item">
+                          <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-secondary text-white flex items-center justify-center text-xl shadow-md shadow-secondary/20 shrink-0">
+                              <i class="ph ph-arrow-right"></i>
+                            </div>
+                            <div>
+                              <h4 class="font-bold text-base text-surface-dark0">Learn more about us</h4>
+                              <p class="text-xs text-text-secondary mt-1">Meet the creators and strategists driving our success.</p>
+                            </div>
+                          </div>
+                          <i class="ph ph-caret-right text-secondary text-lg group-hover/item:translate-x-0.5 transition-transform"></i>
+                        </a>
+
+                        {/* Help Card */}
+                        <div class="bg-surface-1 border border-surface-2 p-6 rounded-2xl flex flex-col gap-4">
+                          <div class="flex items-center gap-2 text-primary font-bold text-base">
+                            <i class="ph ph-phone text-secondary text-xl"></i>
+                            <span>Need help?</span>
+                          </div>
+                          <div class="flex flex-col gap-3 text-sm text-text-secondary font-medium">
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>General Email:</span>
+                              <a href="mailto:hello@bellbeemedia.com" class="text-primary hover:underline">hello@bellbeemedia.com</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
+                              <span>Call Center:</span>
+                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                              <span>Support Hours:</span>
+                              <span class="text-surface-dark1">Mon-Fri 9AM-6PM</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </nav>
+
+            <div class="flex-grow-0 flex justify-end items-center gap-4">
+              <a href={routes.getProposal.href()} class="hidden md:inline-flex px-6 py-2.5 bg-primary text-white rounded-full hover:bg-primary-light transition-colors shadow-md shadow-primary/20 font-medium items-center">
+                Get a Quote
+              </a>
+              
+              {/* Mobile hamburger menu toggle */}
+              <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" />
+              <label for="mobile-menu-toggle" class="md:hidden cursor-pointer p-2 select-none flex flex-col gap-1.5 z-50">
+                <span class="line-1 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
+                <span class="line-2 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
+                <span class="line-3 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
+              </label>
+
+              {/* Mobile Drawer menu */}
+              <div class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-8 gap-8 overflow-y-auto border-t border-surface-2 shadow-xl">
+                <a href="/services" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
+                <a href="/our-work" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
+                <a href="/blogs" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
+                <a href="/about-us" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">About Us</a>
+                <div class="h-[1px] bg-surface-2 my-2"></div>
+                <a href={routes.getProposal.href()} class="w-full py-4 bg-primary text-white text-center font-bold rounded-2xl hover:bg-primary-light transition-colors shadow-md shadow-primary/20 flex items-center justify-center">
+                  Get a Quote
+                </a>
+              </div>
+              
+              <style>{`
+                #mobile-menu-toggle:checked ~ label .line-1 {
+                  transform: rotate(45deg) translate(5px, 5px);
+                }
+                #mobile-menu-toggle:checked ~ label .line-2 {
+                  opacity: 0;
+                }
+                #mobile-menu-toggle:checked ~ label .line-3 {
+                  transform: rotate(-45deg) translate(5px, -5px);
+                }
+              `}</style>
+            </div>
           </div>
         </header>
         
@@ -24,38 +397,49 @@ export function Layout() {
           {children}
         </main>
         
-        <footer class="bg-surface-dark0 text-white py-12 mt-auto">
-          <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <img src="/Logo.svg" alt="Bell Bee Media" class="h-12 w-auto mb-6 brightness-0 invert" />
-              <p class="text-surface-3 opacity-80">
-                Elevating your digital presence with premium marketing strategies.
+        <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
+          <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+              <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto mb-6" />
+              <p class="text-text-secondary max-w-sm mb-6">
+                Elevating your digital presence with premium marketing strategies, data-driven insights, and creative excellence.
               </p>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold mb-6">Quick Links</h3>
-              <ul class="flex flex-col gap-3 opacity-80">
-                <li><a href={routes.home.href()} class="hover:text-primary-light transition-colors">Home</a></li>
-                <li><a href={routes.services.href()} class="hover:text-primary-light transition-colors">Services</a></li>
-                <li><a href={routes.about.href()} class="hover:text-primary-light transition-colors">About Us</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold mb-6">Connect</h3>
               <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
                   <i class="ph ph-facebook-logo text-xl"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
                   <i class="ph ph-instagram-logo text-xl"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
                   <i class="ph ph-linkedin-logo text-xl"></i>
                 </a>
               </div>
             </div>
+            
+            <div>
+              <h4 class="font-bold text-surface-dark0 mb-6">Company</h4>
+              <ul class="flex flex-col gap-4 text-text-secondary">
+                <li><a href={routes.home.href()} class="hover:text-primary transition-colors">Home</a></li>
+                <li><a href={routes.aboutUs.href()} class="hover:text-primary transition-colors">About Us</a></li>
+                <li><a href={routes.services.href()} class="hover:text-primary transition-colors">Services</a></li>
+                <li><a href={routes.ourWork.href()} class="hover:text-primary transition-colors">Our Work</a></li>
+                <li><a href={routes.blogs.href()} class="hover:text-primary transition-colors">Blogs</a></li>
+                <li><a href={routes.getProposal.href()} class="hover:text-primary transition-colors">Get a Quote</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
+              <ul class="flex flex-col gap-4 text-text-secondary">
+                <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
+                <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +1 (555) 123-4567</li>
+                <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> 123 Digital Ave,<br/>San Francisco, CA</li>
+              </ul>
+            </div>
           </div>
-          <div class="container mx-auto px-4 mt-12 pt-8 border-t border-white/10 text-center opacity-60 text-sm">
+          
+          <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 text-center text-text-secondary text-sm">
             &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
           </div>
         </footer>
