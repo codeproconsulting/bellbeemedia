@@ -1,9 +1,13 @@
 import { type RemixNode } from 'remix/ui'
 
 export function PillBadge() {
-  return ({ icon, text }: { icon: string, text: string }) => (
-    <span class="pill-badge bg-primary/5 text-primary border-primary/10">
-      <i class={`ph-fill ${icon} text-primary`}></i> {text}
+  return ({ icon, text, dark }: { icon: string, text: string, dark?: boolean }) => (
+    <span class={`pill-badge ${
+      dark 
+        ? 'bg-white/10 text-white border-white/15' 
+        : 'bg-primary/5 text-primary border-primary/10'
+    }`}>
+      <i class={`ph-fill ${icon} ${dark ? 'text-white' : 'text-primary'}`}></i> {text}
     </span>
   )
 }
@@ -13,26 +17,25 @@ export function PillBadge() {
 ───────────────────────────────────────── */
 export function StatsBar() {
   return () => (
-    <section class="py-16 bg-surface-dark0 relative overflow-hidden">
-      {/* Subtle gradient overlay */}
-      <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 pointer-events-none"></div>
+    <section class="py-16 bg-gradient-to-r from-[#071324] via-primary to-[#071324] border-y border-white/5 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 pointer-events-none"></div>
       <div class="container mx-auto px-4 max-w-5xl relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors duration-300">80+</span>
-            <span class="text-sm font-medium text-white/50 uppercase tracking-widest">Brands Scaled</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">80+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Brands Scaled</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors duration-300">₹12Cr+</span>
-            <span class="text-sm font-medium text-white/50 uppercase tracking-widest">Ad Spend Managed</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">₹12Cr+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Ad Spend Managed</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors duration-300">4.2x</span>
-            <span class="text-sm font-medium text-white/50 uppercase tracking-widest">Avg. ROAS Delivered</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">4.2x</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Avg. ROAS Delivered</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary transition-colors duration-300">98%</span>
-            <span class="text-sm font-medium text-white/50 uppercase tracking-widest">Client Retention</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">98%</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Client Retention</span>
           </div>
         </div>
       </div>
@@ -98,35 +101,53 @@ const colorMap: Record<string, { bg: string; text: string; tag: string }> = {
 }
 
 export function ServicesGrid() {
-  return () => (
+  return ({ dark }: { dark?: boolean }) => (
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((s) => {
         const c = colorMap[s.color]
         return (
-          <div class="group relative bg-white border border-surface-2 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col gap-5">
+          <div class={`group relative rounded-3xl p-8 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col gap-5 ${
+            dark 
+              ? 'bg-white/[0.03] border border-white/10 hover:bg-white/[0.07] hover:border-primary-light/40 hover:shadow-2xl hover:shadow-primary/10 text-white' 
+              : 'bg-white border border-surface-2 hover:shadow-xl'
+          }`}>
             {/* Subtle corner glow on hover */}
-            <div class={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${c.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none`}></div>
+            <div class={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${
+              dark ? 'bg-primary-light/10' : c.bg
+            } opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none`}></div>
 
             {/* Icon */}
-            <div class={`w-14 h-14 rounded-2xl ${c.bg} ${c.text} flex items-center justify-center text-2xl shadow-sm flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+            <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm flex-shrink-0 group-hover:scale-110 transition-all duration-300 ${
+              dark 
+                ? 'bg-white/10 text-white border border-white/5 group-hover:bg-primary group-hover:text-white' 
+                : `${c.bg} ${c.text}`
+            }`}>
               <i class={`ph-fill ${s.icon}`}></i>
             </div>
 
             {/* Content */}
             <div class="flex flex-col gap-3 flex-grow">
-              <h3 class="text-xl font-bold text-surface-dark0 group-hover:text-primary transition-colors duration-300">{s.title}</h3>
-              <p class="text-text-secondary text-sm leading-relaxed">{s.desc}</p>
+              <h3 class={`text-xl font-bold transition-colors duration-300 ${
+                dark ? 'text-white group-hover:text-primary-light' : 'text-surface-dark0 group-hover:text-primary'
+              }`}>{s.title}</h3>
+              <p class={`text-sm leading-relaxed ${
+                dark ? 'text-white/60' : 'text-text-secondary'
+              }`}>{s.desc}</p>
             </div>
 
             {/* Tags */}
             <div class="flex flex-wrap gap-2 mt-auto">
               {s.tags.map((tag) => (
-                <span class={`text-xs font-semibold px-3 py-1 rounded-full ${c.tag}`}>{tag}</span>
+                <span class={`text-xs font-semibold px-3 py-1 rounded-full ${
+                  dark ? 'bg-white/10 text-white/90 border border-white/5' : c.tag
+                }`}>{tag}</span>
               ))}
             </div>
 
             {/* Arrow CTA */}
-            <div class="flex items-center gap-2 text-sm font-semibold text-text-secondary group-hover:text-primary transition-colors duration-300 mt-1">
+            <div class={`flex items-center gap-2 text-sm font-semibold transition-colors duration-300 mt-1 ${
+              dark ? 'text-white/70 group-hover:text-white' : 'text-text-secondary group-hover:text-primary'
+            }`}>
               Learn more <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform duration-300 inline-block"></i>
             </div>
           </div>
@@ -141,7 +162,7 @@ export function ServicesGrid() {
 ───────────────────────────────────────── */
 export function ProcessSection() {
   return () => (
-    <section class="py-24 bg-white border-t border-surface-2 relative overflow-hidden">
+    <section class="py-24 bg-gradient-to-b from-white via-primary/[0.02] to-white border-t border-surface-2 relative overflow-hidden">
       <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent pointer-events-none"></div>
 
       <div class="container mx-auto px-4 max-w-6xl">
@@ -293,7 +314,7 @@ export function ProcessSection() {
 ───────────────────────────────────────── */
 export function TestimonialsSection() {
   return () => (
-    <section class="py-24 bg-surface-1 border-t border-surface-2 relative overflow-hidden">
+    <section class="py-24 bg-gradient-to-tr from-primary/[0.04] via-white to-secondary/[0.03] border-t border-surface-2 relative overflow-hidden">
       <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
 

@@ -9,7 +9,7 @@ export function IndustryExpertisePage() {
       description="Bell Bee Media specialises in digital marketing for e-commerce, SaaS, and local businesses. Industry-specific strategies that drive measurable growth for your sector."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-emerald-900 via-emerald-700 to-teal-600 pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_40%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function IndustryExpertisePage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Deep Industry Expertise for Your Sector
               </h1>
-              <p class="text-xl text-emerald-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Generic marketing doesn't work. We bring sector-specific knowledge, channel expertise, and audience understanding to e-commerce, SaaS, and local business growth strategies.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-900 font-bold rounded-full hover:bg-emerald-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Discuss Your Industry <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -127,11 +127,11 @@ export function IndustryExpertisePage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-emerald-900 via-emerald-700 to-teal-600">
+      <section class="py-24 bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Work With an Agency That Knows Your Industry</h2>
-          <p class="text-xl text-emerald-100 mb-10">Tell us about your business and sector — we'll show you exactly how we'd approach your growth.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-emerald-900 font-bold text-lg rounded-full hover:bg-emerald-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Tell us about your business and sector — we'll show you exactly how we'd approach your growth.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Industry Strategy <i class="ph ph-arrow-right" />
           </a>
         </div>

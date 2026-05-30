@@ -124,24 +124,28 @@ export function HomePage() {
       <StatsBar />
 
       {/* ── Services ─────────────────────────────────────── */}
-      <section class="py-24 bg-surface-1 border-b border-surface-2 relative">
-        <div class="container mx-auto px-4 max-w-6xl">
+      <section class="py-24 bg-gradient-to-br from-[#0a1a2e] via-primary to-[#050d18] border-b border-white/5 relative overflow-hidden">
+        {/* Decorative subtle glows */}
+        <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-primary-light/10 blur-3xl pointer-events-none"></div>
+        
+        <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <div class="max-w-xl">
               <div class="mb-4">
-                <PillBadge icon="ph-squares-four" text="Our Services" />
+                <PillBadge icon="ph-squares-four" text="Our Services" dark={true} />
               </div>
-              <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight">
-                Everything your brand needs — <span class="text-gradient">one team</span>, every channel
+              <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+                Everything your brand needs — <span class="bg-clip-text text-transparent bg-gradient-to-r from-secondary to-secondary-light font-black">one team</span>, every channel
               </h2>
             </div>
             <div class="flex-shrink-0">
-              <p class="text-text-secondary leading-relaxed max-w-xs">
+              <p class="text-white/60 leading-relaxed max-w-xs">
                 Whether you need social growth, paid media, creative production, or a brand-new website — we've got the specialist for it.
               </p>
             </div>
           </div>
-          <ServicesGrid />
+          <ServicesGrid dark={true} />
         </div>
       </section>
 

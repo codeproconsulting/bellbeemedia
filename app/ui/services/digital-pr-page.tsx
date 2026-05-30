@@ -9,7 +9,7 @@ export function DigitalPrPage() {
       description="Amplify your brand with Bell Bee Media's Digital PR and influencer marketing services. Strategic media outreach, backlink building, and curated influencer campaigns that elevate your brand authority."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-purple-900 via-purple-700 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_60%_40%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,11 +22,11 @@ export function DigitalPrPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Digital PR That Builds Brand Authority & Backlinks
               </h1>
-              <p class="text-xl text-purple-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 We secure media coverage, earn high-authority backlinks, and partner with the right influencers to elevate your brand's reputation across digital channels.
               </p>
               <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-900 font-bold rounded-full hover:bg-purple-50 transition-colors shadow-xl">
+                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                   Start Your PR Campaign <i class="ph ph-arrow-right" />
                 </a>
                 <a href={routes.services.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors">
@@ -46,10 +46,10 @@ export function DigitalPrPage() {
       {/* Stats */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="800+" label="Media Placements Secured" color="purple" />
-          <StatBox value="DA 70+" label="Average Backlink Authority" color="purple" />
-          <StatBox value="250+" label="Influencer Partnerships" color="purple" />
-          <StatBox value="45%" label="Avg. Organic Traffic Lift" color="purple" />
+          <StatBox value="800+" label="Media Placements Secured" />
+          <StatBox value="DA 70+" label="Average Backlink Authority" />
+          <StatBox value="250+" label="Influencer Partnerships" />
+          <StatBox value="45%" label="Avg. Organic Traffic Lift" />
         </div>
       </section>
 
@@ -106,11 +106,11 @@ export function DigitalPrPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">How We Amplify Your Brand Story</h2>
           </div>
           <div class="flex flex-col gap-8">
-            <ProcessStep num={1} title="Brand & Audience Research" desc="We analyse your brand positioning, target audience demographics, and competitor PR landscape to craft the most compelling angles." color="purple" />
-            <ProcessStep num={2} title="Campaign Angle & Story Development" desc="We develop newsworthy story angles, data-led reports, or creative hooks that journalists and influencers want to engage with." color="purple" />
-            <ProcessStep num={3} title="Media & Influencer Outreach" desc="Our network of editorial contacts and influencer relationships means faster placements and higher acceptance rates." color="purple" />
-            <ProcessStep num={4} title="Content Delivery & Amplification" desc="We produce all required content — press releases, influencer briefs, graphics — and manage the full delivery process." color="purple" />
-            <ProcessStep num={5} title="Reporting & Ongoing Optimisation" desc="Monthly reports covering placements, DA of links earned, influencer performance, and estimated PR value." color="purple" />
+            <ProcessStep num={1} title="Brand & Audience Research" desc="We analyse your brand positioning, target audience demographics, and competitor PR landscape to craft the most compelling angles." />
+            <ProcessStep num={2} title="Campaign Angle & Story Development" desc="We develop newsworthy story angles, data-led reports, or creative hooks that journalists and influencers want to engage with." />
+            <ProcessStep num={3} title="Media & Influencer Outreach" desc="Our network of editorial contacts and influencer relationships means faster placements and higher acceptance rates." />
+            <ProcessStep num={4} title="Content Delivery & Amplification" desc="We produce all required content — press releases, influencer briefs, graphics — and manage the full delivery process." />
+            <ProcessStep num={5} title="Reporting & Ongoing Optimisation" desc="Monthly reports covering placements, DA of links earned, influencer performance, and estimated PR value." />
           </div>
         </div>
       </section>
@@ -138,9 +138,9 @@ export function DigitalPrPage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )
@@ -171,9 +171,9 @@ function BenefitCard() {
 }
 
 function ProcessStep() {
-  return ({ num, title, desc, color }: { num: number; title: string; desc: string; color: string }) => (
+  return ({ num, title, desc }: { num: number; title: string; desc: string }) => (
     <div class="flex gap-6 items-start">
-      <div class={`w-12 h-12 rounded-full bg-${color}-600 text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-${color}-200`}>
+      <div class="w-12 h-12 rounded-full bg-primary text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-primary/20">
         {num}
       </div>
       <div class="pt-2">
@@ -197,11 +197,11 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-purple-900 via-purple-700 to-primary">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
-        <p class="text-xl text-purple-100 mb-10">{sub}</p>
-        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-purple-900 font-bold text-lg rounded-full hover:bg-purple-50 transition-colors shadow-2xl">
+        <p class="text-xl text-white/80 mb-10">{sub}</p>
+        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
           Get Your Free Proposal <i class="ph ph-arrow-right" />
         </a>
       </div>

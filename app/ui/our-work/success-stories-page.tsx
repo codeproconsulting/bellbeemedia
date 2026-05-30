@@ -9,7 +9,7 @@ export function SuccessStoriesPage() {
       description="Read Bell Bee Media's client success stories — brands we scaled from zero to millions. Discover how our digital marketing strategies drove transformational growth across industries."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-purple-900 via-purple-700 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function SuccessStoriesPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Brands We Scaled From Zero to Millions
               </h1>
-              <p class="text-xl text-purple-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Every brand has a story. Here are the ones we helped write — from ambitious startups finding their voice to established businesses breaking into new markets.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-900 font-bold rounded-full hover:bg-purple-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Write Your Success Story <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -41,10 +41,10 @@ export function SuccessStoriesPage() {
       {/* Impact Banner */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="60+" label="Brands Grown" color="purple" />
-          <StatBox value="10M+" label="Combined Social Followers" color="indigo" />
-          <StatBox value="£2B+" label="Revenue Influenced" color="blue" />
-          <StatBox value="15+" label="Countries Reached" color="emerald" />
+          <StatBox value="60+" label="Brands Grown" />
+          <StatBox value="10M+" label="Combined Social Followers" />
+          <StatBox value="£2B+" label="Revenue Influenced" />
+          <StatBox value="15+" label="Countries Reached" />
         </div>
       </section>
 
@@ -97,11 +97,11 @@ export function SuccessStoriesPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-purple-900 via-purple-700 to-primary">
+      <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Your Story Starts Here</h2>
-          <p class="text-xl text-purple-100 mb-10">Whether you're launching, scaling, or pivoting — Bell Bee Media has the strategy and execution muscle to make it happen.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-purple-900 font-bold text-lg rounded-full hover:bg-purple-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Whether you're launching, scaling, or pivoting — Bell Bee Media has the strategy and execution muscle to make it happen.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -111,9 +111,9 @@ export function SuccessStoriesPage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-secondary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )

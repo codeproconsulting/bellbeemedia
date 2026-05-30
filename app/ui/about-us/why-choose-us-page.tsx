@@ -9,7 +9,7 @@ export function WhyChooseUsPage() {
       description="Discover why 60+ brands choose Bell Bee Media as their digital marketing partner. Data-driven strategies, creative excellence, transparent reporting, and a track record of measurable growth."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-yellow-800 via-amber-700 to-secondary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_40%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function WhyChooseUsPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 The Bell Bee Difference — Why Smart Brands Choose Us
               </h1>
-              <p class="text-xl text-yellow-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Not all agencies are built equal. Here's what makes Bell Bee Media a different kind of growth partner — and why the brands that choose us rarely leave.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-amber-900 font-bold rounded-full hover:bg-yellow-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 See Why For Yourself <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -41,10 +41,10 @@ export function WhyChooseUsPage() {
       {/* Client Trust Signals */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="98%" label="Client Retention Rate" color="yellow" />
-          <StatBox value="4.9/5" label="Average Client Rating" color="orange" />
-          <StatBox value="60+" label="Active Clients" color="amber" />
-          <StatBox value="7+" label="Years in Business" color="emerald" />
+          <StatBox value="98%" label="Client Retention Rate" />
+          <StatBox value="4.9/5" label="Average Client Rating" />
+          <StatBox value="60+" label="Active Clients" />
+          <StatBox value="7+" label="Years in Business" />
         </div>
       </section>
 
@@ -105,11 +105,11 @@ export function WhyChooseUsPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-yellow-800 via-amber-700 to-secondary">
+      <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Experience the Bell Bee Difference</h2>
-          <p class="text-xl text-yellow-100 mb-10">Get a no-obligation strategy session and see first-hand how we approach growth differently.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-amber-900 font-bold text-lg rounded-full hover:bg-yellow-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Get a no-obligation strategy session and see first-hand how we approach growth differently.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Book Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -119,9 +119,9 @@ export function WhyChooseUsPage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-secondary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )

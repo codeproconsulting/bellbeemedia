@@ -9,7 +9,7 @@ export function DesignCopyPage() {
       description="Transform your brand identity with Bell Bee Media's design and copywriting experts. Logo design, visual identity, sales copy, and content strategy that converts and resonates."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-emerald-900 via-emerald-700 to-teal-600 pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_40%_60%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,11 +22,11 @@ export function DesignCopyPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Design & Copy That Builds Brands People Remember
               </h1>
-              <p class="text-xl text-emerald-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 From logo design and visual identity to conversion-focused sales copy, we craft brand experiences that communicate your value instantly and compel action.
               </p>
               <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-900 font-bold rounded-full hover:bg-emerald-50 transition-colors shadow-xl">
+                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                   Get a Creative Quote <i class="ph ph-arrow-right" />
                 </a>
                 <a href={routes.services.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors">
@@ -140,7 +140,7 @@ export function DesignCopyPage() {
 function StatBox() {
   return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class="font-heading text-4xl font-bold text-emerald-600 mb-1">{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )
@@ -173,7 +173,7 @@ function BenefitCard() {
 function ProcessStep() {
   return ({ num, title, desc }: { num: number; title: string; desc: string }) => (
     <div class="flex gap-6 items-start">
-      <div class="w-12 h-12 rounded-full bg-emerald-600 text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-emerald-200">
+      <div class="w-12 h-12 rounded-full bg-primary text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-primary/20">
         {num}
       </div>
       <div class="pt-2">
@@ -197,11 +197,11 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-emerald-900 via-emerald-700 to-teal-600">
+    <section class="py-24 bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
-        <p class="text-xl text-emerald-100 mb-10">{sub}</p>
-        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-emerald-900 font-bold text-lg rounded-full hover:bg-emerald-50 transition-colors shadow-2xl">
+        <p class="text-xl text-white/80 mb-10">{sub}</p>
+        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
           Get Your Free Proposal <i class="ph ph-arrow-right" />
         </a>
       </div>

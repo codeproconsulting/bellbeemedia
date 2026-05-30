@@ -9,7 +9,7 @@ export function OurCompanyPage() {
       description="Learn about Bell Bee Media — a results-driven digital marketing agency. Discover our founding story, our expert team, and the values that drive everything we do."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function OurCompanyPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 A Digital Marketing Agency Built for Bold Brands
               </h1>
-              <p class="text-xl text-blue-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Bell Bee Media was founded with a single conviction: brands that tell the right stories to the right audiences grow faster, retain customers longer, and outcompete on value instead of price.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Work With Us <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -41,10 +41,10 @@ export function OurCompanyPage() {
       {/* Quick Stats */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="7+" label="Years in Business" color="blue" />
-          <StatBox value="60+" label="Active Clients" color="indigo" />
-          <StatBox value="25+" label="Team Members" color="purple" />
-          <StatBox value="15+" label="Countries Served" color="emerald" />
+          <StatBox value="7+" label="Years in Business" />
+          <StatBox value="60+" label="Active Clients" />
+          <StatBox value="25+" label="Team Members" />
+          <StatBox value="15+" label="Countries Served" />
         </div>
       </section>
 
@@ -106,11 +106,11 @@ export function OurCompanyPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-primary">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Join 60+ Brands Growing With Bell Bee</h2>
-          <p class="text-xl text-blue-100 mb-10">Get in touch and let's talk about your goals, challenges, and how our team can help you achieve them.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-900 font-bold text-lg rounded-full hover:bg-blue-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Get in touch and let's talk about your goals, challenges, and how our team can help you achieve them.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Proposal <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -120,9 +120,9 @@ export function OurCompanyPage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )

@@ -9,7 +9,7 @@ export function CareersPage() {
       description="Join Bell Bee Media's remote-first team of digital marketing experts. Explore open roles in social media, performance marketing, content, design, and web development."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-indigo-900 via-indigo-700 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_60%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function CareersPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Build Your Career at the Most Exciting Agency You Haven't Heard Of. Yet.
               </h1>
-              <p class="text-xl text-indigo-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 We're a team of 25+ remote-first digital marketing specialists who love what we do. If you're ambitious, data-obsessed, and creatively driven, you'll fit right in.
               </p>
-              <a href="mailto:careers@bellbeemedia.com" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-indigo-900 font-bold rounded-full hover:bg-indigo-50 transition-colors shadow-xl">
+              <a href="mailto:careers@bellbeemedia.com" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 View Open Roles <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -93,7 +93,7 @@ export function CareersPage() {
       </section>
 
       {/* Hiring Process */}
-      <section class="py-24 bg-gradient-to-br from-indigo-50 to-primary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/[0.03] to-[#0e2c50]/[0.05]">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="How We Hire" /></div>
@@ -111,11 +111,11 @@ export function CareersPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-indigo-900 via-indigo-700 to-primary">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Ready to Grow Your Career With Us?</h2>
-          <p class="text-xl text-indigo-100 mb-10">Browse our open roles or introduce yourself — we'd love to know who you are.</p>
-          <a href="mailto:careers@bellbeemedia.com" class="inline-flex items-center gap-2 px-10 py-5 bg-white text-indigo-900 font-bold text-lg rounded-full hover:bg-indigo-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Browse our open roles or introduce yourself — we'd love to know who you are.</p>
+          <a href="mailto:careers@bellbeemedia.com" class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Email Your Application <i class="ph ph-envelope" />
           </a>
         </div>
@@ -169,7 +169,7 @@ function TraitCard() {
 function HiringStep() {
   return ({ num, title, desc }: { num: number; title: string; desc: string }) => (
     <div class="flex gap-6 items-start">
-      <div class="w-12 h-12 rounded-full bg-indigo-600 text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-indigo-200">
+      <div class="w-12 h-12 rounded-full bg-primary text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-primary/20">
         {num}
       </div>
       <div class="pt-2">

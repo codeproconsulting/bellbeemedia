@@ -9,7 +9,7 @@ export function CaseStudiesPage() {
       description="Explore Bell Bee Media's digital marketing case studies. Real campaigns, transparent metrics, and proven strategies across SEO, social media, PPC, and brand building."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_60%_40%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function CaseStudiesPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Real Campaigns. Transparent Results.
               </h1>
-              <p class="text-xl text-blue-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Browse our portfolio of client campaigns across social media, performance ads, SEO, branding, and web development. Every case study includes the challenge, the strategy, and the measurable outcomes.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Start Your Success Story <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -41,10 +41,10 @@ export function CaseStudiesPage() {
       {/* Stats Bar */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="60+" label="Active Case Studies" color="blue" />
-          <StatBox value="14" label="Industries Covered" color="indigo" />
-          <StatBox value="£2B+" label="Client Revenue Influenced" color="purple" />
-          <StatBox value="98%" label="Client Satisfaction" color="emerald" />
+          <StatBox value="60+" label="Active Case Studies" />
+          <StatBox value="14" label="Industries Covered" />
+          <StatBox value="£2B+" label="Client Revenue Influenced" />
+          <StatBox value="98%" label="Client Satisfaction" />
         </div>
       </section>
 
@@ -94,9 +94,9 @@ export function CaseStudiesPage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )
@@ -131,11 +131,11 @@ function IndustryPill() {
 
 function CtaSection() {
   return () => (
-    <section class="py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-primary">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Ready to Become Our Next Success Story?</h2>
-        <p class="text-xl text-blue-100 mb-10">Tell us about your challenges and we'll map out a strategy to overcome them — with real metrics to back it up.</p>
-        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-900 font-bold text-lg rounded-full hover:bg-blue-50 transition-colors shadow-2xl">
+        <p class="text-xl text-white/80 mb-10">Tell us about your challenges and we'll map out a strategy to overcome them — with real metrics to back it up.</p>
+        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
           Get Your Free Proposal <i class="ph ph-arrow-right" />
         </a>
       </div>

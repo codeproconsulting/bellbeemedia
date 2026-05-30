@@ -9,7 +9,7 @@ export function WebSolutionsPage() {
       description="Get a fast, conversion-focused website built by Bell Bee Media. We design and develop custom responsive websites, landing pages, and e-commerce solutions that rank and convert."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-blue-900 via-blue-700 to-primary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_70%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,11 +22,11 @@ export function WebSolutionsPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Websites Engineered for Speed, SEO & Conversions
               </h1>
-              <p class="text-xl text-blue-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 We build custom websites that don't just look great — they load in under 2 seconds, rank on Google, and convert visitors into paying customers.
               </p>
               <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-colors shadow-xl">
+                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                   Get a Free Site Audit <i class="ph ph-arrow-right" />
                 </a>
                 <a href={routes.services.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors">
@@ -140,7 +140,7 @@ export function WebSolutionsPage() {
 function StatBox() {
   return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class="font-heading text-4xl font-bold text-blue-600 mb-1">{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )
@@ -173,7 +173,7 @@ function BenefitCard() {
 function ProcessStep() {
   return ({ num, title, desc }: { num: number; title: string; desc: string }) => (
     <div class="flex gap-6 items-start">
-      <div class="w-12 h-12 rounded-full bg-blue-600 text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-blue-200">
+      <div class="w-12 h-12 rounded-full bg-primary text-white font-heading font-bold text-lg flex items-center justify-center shrink-0 shadow-md shadow-primary/20">
         {num}
       </div>
       <div class="pt-2">
@@ -197,11 +197,11 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-blue-900 via-blue-700 to-primary">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
-        <p class="text-xl text-blue-100 mb-10">{sub}</p>
-        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-900 font-bold text-lg rounded-full hover:bg-blue-50 transition-colors shadow-2xl">
+        <p class="text-xl text-white/80 mb-10">{sub}</p>
+        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
           Get Your Free Proposal <i class="ph ph-arrow-right" />
         </a>
       </div>

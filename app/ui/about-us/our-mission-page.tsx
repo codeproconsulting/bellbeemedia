@@ -9,7 +9,7 @@ export function OurMissionPage() {
       description="Discover Bell Bee Media's mission: empowering businesses to reach their full potential through transparent, data-driven digital marketing strategies that deliver sustainable growth."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-orange-900 via-orange-700 to-secondary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_60%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function OurMissionPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Empowering Every Brand to Reach Its Full Digital Potential
               </h1>
-              <p class="text-xl text-orange-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Our mission is to give ambitious brands access to the same quality of strategic marketing that enterprise companies rely on — without the enterprise price tag or the bureaucratic slowness.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-900 font-bold rounded-full hover:bg-orange-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Partner With Us <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -50,6 +50,8 @@ export function OurMissionPage() {
           </p>
         </div>
       </section>
+
+
 
       {/* Pillars */}
       <section class="py-24 bg-surface-1">
@@ -93,7 +95,7 @@ export function OurMissionPage() {
       </section>
 
       {/* Commitments */}
-      <section class="py-24 bg-gradient-to-br from-orange-50 to-secondary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/[0.03] to-[#0e2c50]/[0.05]">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-handshake" text="Our Commitment" /></div>
@@ -111,11 +113,11 @@ export function OurMissionPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-orange-900 via-orange-700 to-secondary">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Aligned on Mission. Ready to Grow.</h2>
-          <p class="text-xl text-orange-100 mb-10">If our approach resonates with you, let's talk about how to apply it to your brand's growth challenges.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-orange-900 font-bold text-lg rounded-full hover:bg-orange-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">If our approach resonates with you, let's talk about how to apply it to your brand's growth challenges.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Proposal <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -163,9 +165,9 @@ function CommitmentItem() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label }: { value: string; label: string }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class="font-heading text-4xl font-bold text-primary mb-1">{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )

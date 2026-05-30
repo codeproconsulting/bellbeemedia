@@ -9,7 +9,7 @@ export function ClientResultsPage() {
       description="See the measurable results Bell Bee Media delivers for clients. Hard ROI figures, conversion metrics, traffic growth data, and revenue impact across digital marketing campaigns."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-orange-900 via-orange-700 to-secondary pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_70%_40%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -22,10 +22,10 @@ export function ClientResultsPage() {
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Hard Numbers, Not Vanity Metrics
               </h1>
-              <p class="text-xl text-orange-100 leading-relaxed mb-8 max-w-xl">
+              <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 We measure everything that matters — revenue, conversions, ROAS, and sustainable traffic growth. Here's what we've delivered for our clients.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-900 font-bold rounded-full hover:bg-orange-50 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Get Results Like These <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -102,11 +102,11 @@ export function ClientResultsPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-orange-900 via-orange-700 to-secondary">
+      <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Your Results Are Next</h2>
-          <p class="text-xl text-orange-100 mb-10">Let's talk about what meaningful growth looks like for your business — and how we'll get you there.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-orange-900 font-bold text-lg rounded-full hover:bg-orange-50 transition-colors shadow-2xl">
+          <p class="text-xl text-white/80 mb-10">Let's talk about what meaningful growth looks like for your business — and how we'll get you there.</p>
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>
         </div>
