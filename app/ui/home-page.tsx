@@ -1,7 +1,7 @@
 import { type RemixNode } from 'remix/ui'
 import { routes } from '../routes.ts'
 import { Layout } from './layout.tsx'
-import { PillBadge, ServicesGrid } from './shared.tsx'
+import { PillBadge, ServicesGrid, TestimonialsSection, ProcessSection } from './shared.tsx'
 
 export function HomePage() {
   return () => (
@@ -107,6 +107,10 @@ export function HomePage() {
           <ServicesGrid />
         </div>
       </section>
+
+      <ProcessSection />
+      
+      <TestimonialsSection />
 
       {/* CTA Section */}
       <section class="py-24 bg-white relative overflow-hidden border-t border-surface-2">

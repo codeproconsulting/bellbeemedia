@@ -135,3 +135,169 @@ export function ServicesGrid() {
     </div>
   )
 }
+
+export function TestimonialsSection() {
+  return () => (
+    <section class="py-24 bg-white border-t border-surface-2 relative overflow-hidden">
+      {/* Background gradients */}
+      <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl"></div>
+      
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="flex justify-center mb-4">
+            <span class="pill-badge bg-primary/5 text-primary border-primary/10">
+              <i class="ph-fill ph-chat-circle-text text-primary"></i> Client Reviews
+            </span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-surface-dark0 mb-4">What our clients say <span class="text-primary">about us</span></h2>
+          <p class="text-lg text-text-secondary">Discover how we help brands grow their digital footprint, build communities, and hit revenue goals.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Card 1 */}
+          <div class="bg-surface-1 border border-surface-2 p-8 rounded-3xl flex flex-col justify-between hover:shadow-xl transition-all duration-300 group hover:border-primary/20">
+            <div>
+              <div class="flex gap-1 text-secondary mb-6">
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+              </div>
+              <p class="text-surface-dark1 text-base leading-relaxed italic mb-8">
+                "Bell Bee Media completely transformed our social presence. Within 3 months, our organic reach grew by over 300% and we launched our first successful influencer campaigns that drove real sales."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-6 border-t border-surface-2/60">
+              <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-lg">
+                AR
+              </div>
+              <div>
+                <h4 class="font-bold text-surface-dark0 text-base">Ananya Roy</h4>
+                <p class="text-text-secondary text-xs font-medium">Founder, StyleCo E-commerce</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div class="bg-surface-1 border border-surface-2 p-8 rounded-3xl flex flex-col justify-between hover:shadow-xl transition-all duration-300 group hover:border-primary/20">
+            <div>
+              <div class="flex gap-1 text-secondary mb-6">
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+              </div>
+              <p class="text-surface-dark1 text-base leading-relaxed italic mb-8">
+                "Our performance marketing campaigns were struggling until we hired Bell Bee. Their data-backed PPC optimizations reduced our client acquisition cost by 42% while scaling our monthly lead volume."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-6 border-t border-surface-2/60">
+              <div class="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold text-lg">
+                VS
+              </div>
+              <div>
+                <h4 class="font-bold text-surface-dark0 text-base">Vikram Singh</h4>
+                <p class="text-text-secondary text-xs font-medium">CMO, FinTech Solutions</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div class="bg-surface-1 border border-surface-2 p-8 rounded-3xl flex flex-col justify-between hover:shadow-xl transition-all duration-300 group hover:border-primary/20">
+            <div>
+              <div class="flex gap-1 text-secondary mb-6">
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+                <i class="ph-fill ph-star"></i>
+              </div>
+              <p class="text-surface-dark1 text-base leading-relaxed italic mb-8">
+                "Their web solutions team is world-class. They built a custom, lightning-fast landing page optimized for mobile conversions. Our sign-up rate jumped from 3.5% to a steady 9.8% immediately."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-6 border-t border-surface-2/60">
+              <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                MD
+              </div>
+              <div>
+                <h4 class="font-bold text-surface-dark0 text-base">Meera Desai</h4>
+                <p class="text-text-secondary text-xs font-medium">Head of Growth, EduTech Global</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function ProcessSection() {
+  return () => (
+    <section class="py-24 bg-surface-1 border-t border-surface-2 relative overflow-hidden">
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="flex justify-center mb-4">
+            <span class="pill-badge bg-primary/5 text-primary border-primary/10">
+              <i class="ph-fill ph-projector-screen text-primary"></i> Roadmap
+            </span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-surface-dark0 mb-4">Our working <span class="text-primary">process</span></h2>
+          <p class="text-lg text-text-secondary">We believe in structured execution, transparent updates, and result-oriented iterations.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          {/* Connecting line for desktop */}
+          <div class="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-primary/10 via-primary/30 to-primary/10 -translate-y-[60px] z-0"></div>
+
+          {/* Step 1 */}
+          <div class="relative bg-white border border-surface-2 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-primary/20 z-10">
+            <div class="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-primary/20 group-hover:scale-110 transition-transform">
+              01
+            </div>
+            <h4 class="text-xl font-bold text-surface-dark0 mb-3 group-hover:text-primary transition-colors">Discovery & Audit</h4>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              We deep-dive into your existing branding, data analytics, audience profiles, and competitors to identify immediate wins.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div class="relative bg-white border border-surface-2 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-primary/20 z-10">
+            <div class="w-14 h-14 rounded-2xl bg-secondary text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-secondary/20 group-hover:scale-110 transition-transform">
+              02
+            </div>
+            <h4 class="text-xl font-bold text-surface-dark0 mb-3 group-hover:text-primary transition-colors">Strategic Blueprint</h4>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              We craft a custom channel-specific roadmap, defining marketing targets, timelines, media budgets, and specific KPI metrics.
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div class="relative bg-white border border-surface-2 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-primary/20 z-10">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-indigo-600/20 group-hover:scale-110 transition-transform">
+              03
+            </div>
+            <h4 class="text-xl font-bold text-surface-dark0 mb-3 group-hover:text-primary transition-colors">Execution & Launch</h4>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              Our specialists create assets, deploy campaigns, schedule content, and launch optimized funnels according to the plan.
+            </p>
+          </div>
+
+          {/* Step 4 */}
+          <div class="relative bg-white border border-surface-2 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-primary/20 z-10">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-emerald-600/20 group-hover:scale-110 transition-transform">
+              04
+            </div>
+            <h4 class="text-xl font-bold text-surface-dark0 mb-3 group-hover:text-primary transition-colors">Optimise & Scale</h4>
+            <p class="text-text-secondary text-sm leading-relaxed">
+              We monitor campaign analytics in real-time, prune underperforming budgets, and scale top performers for maximum returns.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

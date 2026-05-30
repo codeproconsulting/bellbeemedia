@@ -1,10 +1,10 @@
 import { Layout } from './layout.tsx'
-import { PillBadge, ServicesGrid } from './shared.tsx'
+import { PillBadge, ServicesGrid, ProcessSection, TestimonialsSection } from './shared.tsx'
 
 export function ServicesPage() {
   return () => (
     <Layout title="Services | Bell Bee Media">
-      <div class="bg-surface-1 min-h-screen pt-20 pb-24">
+      <div class="bg-surface-1 pt-20 pb-24 border-b border-surface-2">
         <div class="container mx-auto px-4">
           <div class="text-center max-w-3xl mx-auto mb-20">
             <div class="flex justify-center mb-6">
@@ -20,6 +20,10 @@ export function ServicesPage() {
           <ServicesGrid />
         </div>
       </div>
+      
+      <ProcessSection />
+      
+      <TestimonialsSection />
     </Layout>
   )
 }
