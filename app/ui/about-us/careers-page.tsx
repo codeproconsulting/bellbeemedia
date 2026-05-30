@@ -47,12 +47,12 @@ export function CareersPage() {
             <p class="text-text-secondary mt-4 max-w-2xl mx-auto">We've built a culture where great work gets recognised, growth is continuous, and the people around you make you better.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <CultureCard icon="ph-laptop" color="indigo" title="Remote-First Forever" desc="Work from anywhere in the world. We care about the quality of your work, not the postcode you live in." />
-            <CultureCard icon="ph-trend-up" color="blue" title="Grow Fast, Learn Faster" desc="Weekly knowledge-sharing sessions, conference budgets, and a library of courses to keep your skills sharp." />
-            <CultureCard icon="ph-currency-pound" color="emerald" title="Competitive Compensation" desc="Market-rate salaries, performance bonuses, and equity options for senior team members who grow with us." />
-            <CultureCard icon="ph-calendar-blank" color="orange" title="Flexible Hours" desc="We operate async-first. As long as you're hitting your goals, your schedule is yours to manage." />
-            <CultureCard icon="ph-users-three" color="purple" title="Collaborative Culture" desc="Ego-free collaboration across disciplines. The best idea wins — regardless of seniority or role." />
-            <CultureCard icon="ph-shield-check" color="red" title="Wellbeing Matters" desc="Mental health days, generous holiday allowance, and a team that respects your boundaries." />
+            <CultureCard icon="ph-laptop" title="Remote-First Forever" desc="Work from anywhere in the world. We care about the quality of your work, not the postcode you live in." />
+            <CultureCard icon="ph-trend-up" secondary={true} title="Grow Fast, Learn Faster" desc="Weekly knowledge-sharing sessions, conference budgets, and a library of courses to keep your skills sharp." />
+            <CultureCard icon="ph-currency-pound" title="Competitive Compensation" desc="Market-rate salaries, performance bonuses, and equity options for senior team members who grow with us." />
+            <CultureCard icon="ph-calendar-blank" secondary={true} title="Flexible Hours" desc="We operate async-first. As long as you're hitting your goals, your schedule is yours to manage." />
+            <CultureCard icon="ph-users-three" title="Collaborative Culture" desc="Ego-free collaboration across disciplines. The best idea wins — regardless of seniority or role." />
+            <CultureCard icon="ph-shield-check" secondary={true} title="Wellbeing Matters" desc="Mental health days, generous holiday allowance, and a team that respects your boundaries." />
           </div>
         </div>
       </section>
@@ -125,9 +125,9 @@ export function CareersPage() {
 }
 
 function CultureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, secondary, title, desc }: { icon: string; secondary?: boolean; title: string; desc: string }) => (
     <div class="flex flex-col p-8 rounded-3xl border border-surface-2 bg-surface-1 hover:shadow-xl transition-shadow group">
-      <div class={`w-14 h-14 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform`}>
+      <div class={`w-14 h-14 rounded-2xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <h3 class="font-bold text-xl text-surface-dark0 mb-3">{title}</h3>
@@ -144,7 +144,7 @@ function RoleCard() {
         <div class="flex flex-wrap gap-2 mt-2">
           <span class="text-xs bg-surface-1 border border-surface-2 text-text-secondary px-3 py-1 rounded-full">{dept}</span>
           <span class="text-xs bg-surface-1 border border-surface-2 text-text-secondary px-3 py-1 rounded-full"><i class="ph ph-map-pin mr-1" />{location}</span>
-          <span class="text-xs bg-indigo-50 border border-indigo-100 text-indigo-700 px-3 py-1 rounded-full">{type}</span>
+          <span class="text-xs bg-primary/5 border border-primary/10 text-primary px-3 py-1 rounded-full">{type}</span>
         </div>
       </div>
       <a href="mailto:careers@bellbeemedia.com" class="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-full hover:bg-primary-light transition-colors text-sm shrink-0">

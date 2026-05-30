@@ -9,7 +9,7 @@ export function SuccessStoriesPage() {
       description="Read Bell Bee Media's client success stories — brands we scaled from zero to millions. Discover how our digital marketing strategies drove transformational growth across industries."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -25,7 +25,7 @@ export function SuccessStoriesPage() {
               <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 Every brand has a story. Here are the ones we helped write — from ambitious startups finding their voice to established businesses breaking into new markets.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Write Your Success Story <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -58,7 +58,6 @@ export function SuccessStoriesPage() {
           <div class="flex flex-col gap-12">
             <StoryCard
               tag="Social Media + Production"
-              tagColor="indigo"
               title="Zero to 500K: How We Built a Fashion Brand's Digital Empire"
               challenge="A UK fashion startup with no social presence and minimal budget needed to establish brand recognition and drive online sales fast."
               strategy="We developed a TikTok-first content strategy with weekly UGC-style videos, micro-influencer activations, and targeted Meta ads to retarget engaged viewers."
@@ -66,7 +65,7 @@ export function SuccessStoriesPage() {
             />
             <StoryCard
               tag="SEO + Web Development"
-              tagColor="blue"
+              secondary={true}
               title="How a B2B SaaS Company Went from Page 10 to #1 on Google"
               challenge="A project management SaaS tool was invisible on search engines, relying entirely on paid ads for customer acquisition — an unsustainable and expensive model."
               strategy="We rebuilt their website with a technical SEO foundation, executed a 12-month content strategy targeting 80+ commercial keywords, and earned 200+ editorial backlinks."
@@ -74,7 +73,6 @@ export function SuccessStoriesPage() {
             />
             <StoryCard
               tag="Performance Ads + Digital PR"
-              tagColor="orange"
               title="Launching a Health Brand to £500K Revenue in 90 Days"
               challenge="A new wellness supplement brand needed rapid market entry, brand credibility, and sales volume simultaneously — without the luxury of a slow organic build."
               strategy="Parallel tracks: aggressive Meta and Google ad campaigns for immediate revenue, combined with a Digital PR blitz securing 40+ health publication features for credibility."
@@ -97,11 +95,11 @@ export function SuccessStoriesPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Your Story Starts Here</h2>
           <p class="text-xl text-white/80 mb-10">Whether you're launching, scaling, or pivoting — Bell Bee Media has the strategy and execution muscle to make it happen.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -120,18 +118,18 @@ function StatBox() {
 }
 
 function StoryCard() {
-  return ({ tag, tagColor, title, challenge, strategy, results }: {
+  return ({ tag, secondary, title, challenge, strategy, results }: {
     tag: string
-    tagColor: string
+    secondary?: boolean
     title: string
     challenge: string
     strategy: string
     results: string[]
   }) => (
     <div class="bg-white rounded-3xl border border-surface-2 overflow-hidden hover:shadow-xl transition-shadow">
-      <div class={`h-2 bg-${tagColor}-600`} />
+      <div class={`h-2 ${secondary ? 'bg-secondary' : 'bg-primary'}`} />
       <div class="p-10">
-        <span class={`text-xs font-bold text-${tagColor}-600 bg-${tagColor}-50 px-3 py-1.5 rounded-full`}>{tag}</span>
+        <span class={`text-xs font-bold ${secondary ? 'text-secondary bg-secondary/5' : 'text-primary bg-primary/5'} px-3 py-1.5 rounded-full`}>{tag}</span>
         <h3 class="font-heading font-bold text-2xl text-surface-dark0 mt-6 mb-8">{title}</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>

@@ -71,10 +71,10 @@ export function DigitalPrPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-newspaper" color="purple" title="Media Outreach" desc="Pitching your brand story to journalists, editors, and online publications for editorial coverage." />
-              <ServiceFeatureCard icon="ph-link" color="indigo" title="Link Building" desc="Earning contextual, high-DA backlinks that improve domain authority and organic search rankings." />
-              <ServiceFeatureCard icon="ph-star" color="yellow" title="Influencer Matching" desc="Curated influencer selection across Instagram, TikTok, and YouTube with full campaign management." />
-              <ServiceFeatureCard icon="ph-chart-bar" color="emerald" title="PR Analytics" desc="Coverage tracking, brand mention monitoring, backlink auditing, and monthly authority reports." />
+              <ServiceFeatureCard icon="ph-newspaper" title="Media Outreach" desc="Pitching your brand story to journalists, editors, and online publications for editorial coverage." />
+              <ServiceFeatureCard icon="ph-link" secondary={true} title="Link Building" desc="Earning contextual, high-DA backlinks that improve domain authority and organic search rankings." />
+              <ServiceFeatureCard icon="ph-star" title="Influencer Matching" desc="Curated influencer selection across Instagram, TikTok, and YouTube with full campaign management." />
+              <ServiceFeatureCard icon="ph-chart-bar" secondary={true} title="PR Analytics" desc="Coverage tracking, brand mention monitoring, backlink auditing, and monthly authority reports." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function DigitalPrPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Why Digital PR Delivers Long-Term ROI</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-arrow-up-right" color="purple" title="Boosts SEO Rankings" desc="Editorial backlinks from authoritative publications signal trust to Google and lift your organic rankings." />
-            <BenefitCard icon="ph-seal-check" color="indigo" title="Builds Brand Credibility" desc="Being featured in respected publications creates a halo of trust that advertising alone cannot buy." />
-            <BenefitCard icon="ph-users" color="blue" title="Expands Audience Reach" desc="Influencer partnerships and media features introduce your brand to entirely new, relevant audiences." />
-            <BenefitCard icon="ph-trend-up" color="emerald" title="Compounding Returns" desc="Unlike paid ads, earned media and backlinks continue to deliver value long after the campaign ends." />
-            <BenefitCard icon="ph-shield-check" color="orange" title="Crisis Management Ready" desc="A strong digital PR presence gives you authority and goodwill to weather brand challenges." />
-            <BenefitCard icon="ph-handshake" color="pink" title="Authentic Partnerships" desc="We only work with influencers whose values and audiences genuinely align with your brand." />
+            <BenefitCard icon="ph-arrow-up-right" title="Boosts SEO Rankings" desc="Editorial backlinks from authoritative publications signal trust to Google and lift your organic rankings." />
+            <BenefitCard icon="ph-seal-check" secondary={true} title="Builds Brand Credibility" desc="Being featured in respected publications creates a halo of trust that advertising alone cannot buy." />
+            <BenefitCard icon="ph-users" title="Expands Audience Reach" desc="Influencer partnerships and media features introduce your brand to entirely new, relevant audiences." />
+            <BenefitCard icon="ph-trend-up" secondary={true} title="Compounding Returns" desc="Unlike paid ads, earned media and backlinks continue to deliver value long after the campaign ends." />
+            <BenefitCard icon="ph-shield-check" title="Crisis Management Ready" desc="A strong digital PR presence gives you authority and goodwill to weather brand challenges." />
+            <BenefitCard icon="ph-handshake" secondary={true} title="Authentic Partnerships" desc="We only work with influencers whose values and audiences genuinely align with your brand." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-purple-50 to-primary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -147,9 +147,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -157,9 +157,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>

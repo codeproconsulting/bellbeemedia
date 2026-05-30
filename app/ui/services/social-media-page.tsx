@@ -71,10 +71,10 @@ export function SocialMediaPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-pencil" color="indigo" title="Content Creation" desc="Platform-optimized posts, reels, stories, and carousels crafted for your audience." />
-              <ServiceFeatureCard icon="ph-chart-line-up" color="blue" title="Growth Strategy" desc="Data-led audience growth plans designed to reach the right people at the right time." />
-              <ServiceFeatureCard icon="ph-chat-circle-dots" color="purple" title="Community Management" desc="Timely replies, DMs, and comment moderation to keep your community engaged." />
-              <ServiceFeatureCard icon="ph-megaphone" color="pink" title="Influencer Campaigns" desc="Curated micro and macro influencer partnerships that match your brand values." />
+              <ServiceFeatureCard icon="ph-pencil" title="Content Creation" desc="Platform-optimized posts, reels, stories, and carousels crafted for your audience." />
+              <ServiceFeatureCard icon="ph-chart-line-up" secondary={true} title="Growth Strategy" desc="Data-led audience growth plans designed to reach the right people at the right time." />
+              <ServiceFeatureCard icon="ph-chat-circle-dots" title="Community Management" desc="Timely replies, DMs, and comment moderation to keep your community engaged." />
+              <ServiceFeatureCard icon="ph-megaphone" secondary={true} title="Influencer Campaigns" desc="Curated micro and macro influencer partnerships that match your brand values." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function SocialMediaPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">What You Gain With Bell Bee Media</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-trending-up" color="indigo" title="Organic Reach Growth" desc="Algorithm-friendly content strategies that expand your organic reach without inflated ad spend." />
-            <BenefitCard icon="ph-users-three" color="blue" title="Loyal Brand Communities" desc="Deep community building that transforms passive followers into active brand advocates." />
-            <BenefitCard icon="ph-chart-bar" color="purple" title="Transparent Analytics" desc="Monthly performance reports with clear KPIs — impressions, reach, saves, and conversions." />
-            <BenefitCard icon="ph-clock" color="emerald" title="Time Back For You" desc="Full account management so you focus on running your business while we grow your online presence." />
-            <BenefitCard icon="ph-palette" color="orange" title="On-Brand Creativity" desc="Every asset reflects your brand guidelines — colors, tone of voice, and visual identity." />
-            <BenefitCard icon="ph-currency-dollar" color="red" title="Social Commerce Ready" desc="Instagram and TikTok shop integration, shoppable posts, and social-to-sale tracking." />
+            <BenefitCard icon="ph-trending-up" title="Organic Reach Growth" desc="Algorithm-friendly content strategies that expand your organic reach without inflated ad spend." />
+            <BenefitCard icon="ph-users-three" secondary={true} title="Loyal Brand Communities" desc="Deep community building that transforms passive followers into active brand advocates." />
+            <BenefitCard icon="ph-chart-bar" title="Transparent Analytics" desc="Monthly performance reports with clear KPIs — impressions, reach, saves, and conversions." />
+            <BenefitCard icon="ph-clock" secondary={true} title="Time Back For You" desc="Full account management so you focus on running your business while we grow your online presence." />
+            <BenefitCard icon="ph-palette" title="On-Brand Creativity" desc="Every asset reflects your brand guidelines — colors, tone of voice, and visual identity." />
+            <BenefitCard icon="ph-currency-dollar" secondary={true} title="Social Commerce Ready" desc="Instagram and TikTok shop integration, shoppable posts, and social-to-sale tracking." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-indigo-50 to-primary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -148,9 +148,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -158,9 +158,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>

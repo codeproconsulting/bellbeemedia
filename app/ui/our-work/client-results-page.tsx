@@ -9,7 +9,7 @@ export function ClientResultsPage() {
       description="See the measurable results Bell Bee Media delivers for clients. Hard ROI figures, conversion metrics, traffic growth data, and revenue impact across digital marketing campaigns."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_70%_40%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -25,7 +25,7 @@ export function ClientResultsPage() {
               <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
                 We measure everything that matters — revenue, conversions, ROAS, and sustainable traffic growth. Here's what we've delivered for our clients.
               </p>
-              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
+              <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Get Results Like These <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -46,10 +46,10 @@ export function ClientResultsPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Combined Results Across All Client Accounts</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <BigStatCard value="£2B+" label="Client Revenue Influenced" icon="ph-currency-pound" color="emerald" />
-            <BigStatCard value="4.2x" label="Average Client ROAS" icon="ph-chart-line-up" color="orange" />
-            <BigStatCard value="380%" label="Avg. Organic Traffic Growth" icon="ph-trend-up" color="blue" />
-            <BigStatCard value="52%" label="Avg. Conversion Rate Lift" icon="ph-cursor-click" color="purple" />
+            <BigStatCard value="£2B+" label="Client Revenue Influenced" icon="ph-currency-pound" />
+            <BigStatCard value="4.2x" label="Average Client ROAS" icon="ph-chart-line-up" secondary={true} />
+            <BigStatCard value="380%" label="Avg. Organic Traffic Growth" icon="ph-trend-up" />
+            <BigStatCard value="52%" label="Avg. Conversion Rate Lift" icon="ph-cursor-click" secondary={true} />
           </div>
         </div>
       </section>
@@ -62,22 +62,22 @@ export function ClientResultsPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Performance Metrics by Marketing Channel</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ChannelCard channel="Social Media Marketing" icon="ph-heart" color="indigo" metrics={[
+            <ChannelCard channel="Social Media Marketing" icon="ph-heart" metrics={[
               { label: 'Average engagement rate increase', value: '3.2x' },
               { label: 'Average monthly follower growth', value: '+18%' },
               { label: 'Average reach expansion', value: '+285%' },
             ]} />
-            <ChannelCard channel="Performance Advertising" icon="ph-chart-line-up" color="orange" metrics={[
+            <ChannelCard channel="Performance Advertising" icon="ph-chart-line-up" secondary={true} metrics={[
               { label: 'Average ROAS across accounts', value: '4.1x' },
               { label: 'Average CPC reduction', value: '-38%' },
               { label: 'Average CPA improvement', value: '-44%' },
             ]} />
-            <ChannelCard channel="SEO & Web" icon="ph-magnifying-glass" color="blue" metrics={[
+            <ChannelCard channel="SEO & Web" icon="ph-magnifying-glass" metrics={[
               { label: 'Average organic traffic growth', value: '+380%' },
               { label: 'Average keyword ranking improvement', value: 'Top 3' },
               { label: 'Average conversion rate lift post-rebuild', value: '+52%' },
             ]} />
-            <ChannelCard channel="Digital PR" icon="ph-megaphone" color="purple" metrics={[
+            <ChannelCard channel="Digital PR" icon="ph-megaphone" secondary={true} metrics={[
               { label: 'Average media placements per month', value: '12' },
               { label: 'Average domain authority increase', value: '+18 DA' },
               { label: 'Average organic visibility lift', value: '+45%' },
@@ -102,11 +102,11 @@ export function ClientResultsPage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Your Results Are Next</h2>
           <p class="text-xl text-white/80 mb-10">Let's talk about what meaningful growth looks like for your business — and how we'll get you there.</p>
-          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
+          <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>
         </div>
@@ -116,22 +116,22 @@ export function ClientResultsPage() {
 }
 
 function BigStatCard() {
-  return ({ value, label, icon, color }: { value: string; label: string; icon: string; color: string }) => (
-    <div class={`flex flex-col items-center text-center p-8 rounded-3xl bg-${color}-50 border border-${color}-100 hover:shadow-xl transition-shadow`}>
-      <div class={`w-16 h-16 rounded-2xl bg-${color}-600 text-white flex items-center justify-center text-3xl mb-6 shadow-lg shadow-${color}-200`}>
+  return ({ value, label, icon, secondary }: { value: string; label: string; icon: string; secondary?: boolean }) => (
+    <div class="flex flex-col items-center text-center p-8 rounded-3xl bg-surface-1 border border-surface-2 hover:shadow-xl transition-shadow">
+      <div class={`w-16 h-16 rounded-2xl ${secondary ? 'bg-secondary text-white shadow-secondary/15' : 'bg-primary text-white shadow-primary/15'} flex items-center justify-center text-3xl mb-6 shadow-lg`}>
         <i class={`ph-fill ${icon}`} />
       </div>
-      <div class={`font-heading text-5xl font-bold text-${color}-700 mb-2`}>{value}</div>
+      <div class={`font-heading text-5xl font-bold ${secondary ? 'text-secondary' : 'text-primary'} mb-2`}>{value}</div>
       <div class="text-text-secondary font-medium text-sm leading-relaxed">{label}</div>
     </div>
   )
 }
 
 function ChannelCard() {
-  return ({ channel, icon, color, metrics }: { channel: string; icon: string; color: string; metrics: { label: string; value: string }[] }) => (
+  return ({ channel, icon, secondary, metrics }: { channel: string; icon: string; secondary?: boolean; metrics: { label: string; value: string }[] }) => (
     <div class="p-8 rounded-3xl border border-surface-2 bg-white hover:shadow-xl transition-shadow">
       <div class="flex items-center gap-4 mb-6">
-        <div class={`w-14 h-14 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center text-2xl`}>
+        <div class={`w-14 h-14 rounded-2xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center text-2xl`}>
           <i class={`ph-fill ${icon}`} />
         </div>
         <h3 class="font-heading font-bold text-xl text-surface-dark0">{channel}</h3>
@@ -140,7 +140,7 @@ function ChannelCard() {
         {metrics.map(m => (
           <div class="flex justify-between items-center py-3 border-b border-surface-2 last:border-0">
             <span class="text-text-secondary text-sm">{m.label}</span>
-            <span class={`font-heading font-bold text-${color}-600 text-lg`}>{m.value}</span>
+            <span class={`font-heading font-bold ${secondary ? 'text-secondary' : 'text-primary'} text-lg`}>{m.value}</span>
           </div>
         ))}
       </div>

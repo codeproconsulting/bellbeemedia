@@ -9,7 +9,7 @@ export function IndustryExpertisePage() {
       description="Bell Bee Media specialises in digital marketing for e-commerce, SaaS, and local businesses. Industry-specific strategies that drive measurable growth for your sector."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_40%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -49,7 +49,6 @@ export function IndustryExpertisePage() {
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <IndustryDeepDive
               icon="ph-shopping-bag"
-              color="orange"
               title="E-Commerce"
               overview="From Shopify startups to multi-million pound online retailers, we understand what makes e-commerce brands grow: the right product-market fit, the right creative, the right margins."
               services={["Social commerce (Instagram & TikTok Shop)", "Google Shopping & Meta ROAS campaigns", "Product photography & video", "Email & SMS retention marketing", "Conversion rate optimisation"]}
@@ -57,7 +56,7 @@ export function IndustryExpertisePage() {
             />
             <IndustryDeepDive
               icon="ph-code"
-              color="blue"
+              secondary={true}
               title="SaaS & Technology"
               overview="B2B SaaS requires a different playbook — longer sales cycles, product-led growth mechanics, and LinkedIn-heavy ABM strategies. We've helped dozens of SaaS companies reduce CAC and grow MRR."
               services={["SEO & technical content marketing", "LinkedIn demand generation", "Product demo campaigns", "Case study production", "MQL-optimised landing pages"]}
@@ -65,7 +64,6 @@ export function IndustryExpertisePage() {
             />
             <IndustryDeepDive
               icon="ph-map-pin"
-              color="emerald"
               title="Local Business"
               overview="Local businesses compete in one of the toughest arenas — limited budgets, high competition, and real-world reputation at stake. We help local brands dominate their area digitally."
               services={["Google Business Profile optimisation", "Local SEO & citation building", "Hyper-targeted local Meta ads", "Review generation campaigns", "Local social media management"]}
@@ -81,6 +79,12 @@ export function IndustryExpertisePage() {
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-grid-four" text="Also Active In" /></div>
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">11 Other Sectors We're Active In</h2>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16">
+            <StatBox value="60+" label="Brands Grown" />
+            <StatBox value="10M+" label="Combined Social Followers" secondary={true} />
+            <StatBox value="£2B+" label="Revenue Influenced" />
+            <StatBox value="15+" label="Countries Reached" secondary={true} />
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <SecondaryIndustry icon="ph-first-aid" label="Health & Wellness" />
@@ -110,7 +114,7 @@ export function IndustryExpertisePage() {
               </p>
               <div class="flex flex-col gap-4">
                 <AdvantagePoint icon="ph-clock" title="Faster Ramp-Up" desc="Industry-specific knowledge eliminates the learning curve and delivers results faster." />
-                <AdvantagePoint icon="ph-target" title="Sharper Targeting" desc="We know your ideal customer profile before your first brief — we've built campaigns for them before." />
+                <AdvantagePoint icon="ph-target" secondary={true} title="Sharper Targeting" desc="We know your ideal customer profile before your first brief — we've built campaigns for them before." />
                 <AdvantagePoint icon="ph-shield-check" title="Fewer Costly Mistakes" desc="Sector experience means we avoid common pitfalls that generic agencies stumble into." />
               </div>
             </div>
@@ -127,7 +131,7 @@ export function IndustryExpertisePage() {
       </section>
 
       {/* CTA */}
-      <section class="py-24 bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828]">
+      <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Work With an Agency That Knows Your Industry</h2>
           <p class="text-xl text-white/80 mb-10">Tell us about your business and sector — we'll show you exactly how we'd approach your growth.</p>
@@ -141,27 +145,27 @@ export function IndustryExpertisePage() {
 }
 
 function StatBox() {
-  return ({ value, label, color }: { value: string; label: string; color: string }) => (
+  return ({ value, label, secondary }: { value: string; label: string; secondary?: boolean }) => (
     <div class="flex flex-col items-center">
-      <span class={`font-heading text-4xl font-bold text-${color}-600 mb-1`}>{value}</span>
+      <span class={`font-heading text-4xl font-bold ${secondary ? 'text-secondary' : 'text-primary'} mb-1`}>{value}</span>
       <span class="text-text-secondary text-sm">{label}</span>
     </div>
   )
 }
 
 function IndustryDeepDive() {
-  return ({ icon, color, title, overview, services, metric }: {
+  return ({ icon, secondary, title, overview, services, metric }: {
     icon: string
-    color: string
+    secondary?: boolean
     title: string
     overview: string
     services: string[]
     metric: string
   }) => (
-    <div class={`flex flex-col bg-white rounded-3xl border border-surface-2 overflow-hidden hover:shadow-xl transition-shadow`}>
-      <div class={`h-2 bg-${color}-500`} />
+    <div class="flex flex-col bg-white rounded-3xl border border-surface-2 overflow-hidden hover:shadow-xl transition-shadow">
+      <div class={`h-2 ${secondary ? 'bg-secondary' : 'bg-primary'}`} />
       <div class="p-8 flex-1 flex flex-col">
-        <div class={`w-14 h-14 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center text-2xl mb-6`}>
+        <div class={`w-14 h-14 rounded-2xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center text-2xl mb-6`}>
           <i class={`ph-fill ${icon}`} />
         </div>
         <h3 class="font-heading font-bold text-2xl text-surface-dark0 mb-4">{title}</h3>
@@ -169,11 +173,11 @@ function IndustryDeepDive() {
         <div class="flex flex-col gap-2 flex-1">
           {services.map(s => (
             <div class="flex items-center gap-2 text-sm text-text-secondary">
-              <i class={`ph-fill ph-check-circle text-${color}-500 shrink-0`} /> {s}
+              <i class={`ph-fill ph-check-circle ${secondary ? 'text-secondary' : 'text-primary'} shrink-0`} /> {s}
             </div>
           ))}
         </div>
-        <div class={`mt-6 pt-6 border-t border-surface-2 text-sm font-bold text-${color}-600`}>
+        <div class={`mt-6 pt-6 border-t border-surface-2 text-sm font-bold ${secondary ? 'text-secondary' : 'text-primary'}`}>
           <i class="ph-fill ph-chart-line-up mr-1" /> {metric}
         </div>
       </div>
@@ -191,9 +195,9 @@ function SecondaryIndustry() {
 }
 
 function AdvantagePoint() {
-  return ({ icon, title, desc }: { icon: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-4 items-start">
-      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xl">
+      <div class={`w-10 h-10 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-xl`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>

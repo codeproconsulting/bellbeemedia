@@ -9,7 +9,7 @@ export function ProductionPage() {
       description="Elevate your brand with Bell Bee Media's professional video and photo production. From brand films to product shoots, we create high-impact visual content that converts."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_60%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -71,10 +71,10 @@ export function ProductionPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-film-reel" color="red" title="Brand Films" desc="Cinematic storytelling that communicates your brand's mission, values, and personality." />
-              <ServiceFeatureCard icon="ph-device-mobile-camera" color="orange" title="Social Content" desc="Vertical-first, thumb-stopping videos and photos optimised for Instagram, TikTok, and YouTube Shorts." />
-              <ServiceFeatureCard icon="ph-shopping-bag" color="yellow" title="Product Photography" desc="Studio and lifestyle product imagery that elevates your e-commerce listings and ads." />
-              <ServiceFeatureCard icon="ph-presentation-chart" color="blue" title="Explainer Videos" desc="Animated or live-action explainer videos that simplify complex products and drive conversions." />
+              <ServiceFeatureCard icon="ph-film-reel" title="Brand Films" desc="Cinematic storytelling that communicates your brand's mission, values, and personality." />
+              <ServiceFeatureCard icon="ph-device-mobile-camera" secondary={true} title="Social Content" desc="Vertical-first, thumb-stopping videos and photos optimised for Instagram, TikTok, and YouTube Shorts." />
+              <ServiceFeatureCard icon="ph-shopping-bag" title="Product Photography" desc="Studio and lifestyle product imagery that elevates your e-commerce listings and ads." />
+              <ServiceFeatureCard icon="ph-presentation-chart" secondary={true} title="Explainer Videos" desc="Animated or live-action explainer videos that simplify complex products and drive conversions." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function ProductionPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Why Our Production Drives Better Marketing Results</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-strategy" color="red" title="Strategy-Led Creative" desc="Every piece of content is planned around your marketing funnel, not just visual aesthetics." />
-            <BenefitCard icon="ph-lightning" color="orange" title="Fast Turnaround" desc="48–72 hour editing turnarounds available for urgent campaign needs without sacrificing quality." />
-            <BenefitCard icon="ph-devices" color="blue" title="Multi-Platform Delivery" desc="We export in every format required — 9:16, 16:9, 1:1 — for all platforms out of the box." />
-            <BenefitCard icon="ph-subtitles" color="purple" title="Captions & Accessibility" desc="All videos include accurate captions and subtitles for accessibility and silent autoplay performance." />
-            <BenefitCard icon="ph-arrows-counter-clockwise" color="emerald" title="Unlimited Revisions" desc="We iterate until you love it. Our revision process is smooth, fast, and collaborative." />
-            <BenefitCard icon="ph-lock" color="gray" title="Full IP Ownership" desc="You own every asset we produce — no licensing fees, no usage restrictions, forever." />
+            <BenefitCard icon="ph-strategy" title="Strategy-Led Creative" desc="Every piece of content is planned around your marketing funnel, not just visual aesthetics." />
+            <BenefitCard icon="ph-lightning" secondary={true} title="Fast Turnaround" desc="48–72 hour editing turnarounds available for urgent campaign needs without sacrificing quality." />
+            <BenefitCard icon="ph-devices" title="Multi-Platform Delivery" desc="We export in every format required — 9:16, 16:9, 1:1 — for all platforms out of the box." />
+            <BenefitCard icon="ph-subtitles" secondary={true} title="Captions & Accessibility" desc="All videos include accurate captions and subtitles for accessibility and silent autoplay performance." />
+            <BenefitCard icon="ph-arrows-counter-clockwise" title="Unlimited Revisions" desc="We iterate until you love it. Our revision process is smooth, fast, and collaborative." />
+            <BenefitCard icon="ph-lock" secondary={true} title="Full IP Ownership" desc="You own every asset we produce — no licensing fees, no usage restrictions, forever." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-red-50 to-orange-50">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -147,9 +147,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -157,9 +157,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>
@@ -197,7 +197,7 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828]">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
         <p class="text-xl text-white/80 mb-10">{sub}</p>

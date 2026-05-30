@@ -61,9 +61,9 @@ export function OurMissionPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Three Pillars That Drive Our Mission</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <PillarCard num={1} icon="ph-shield-check" color="blue" title="Transparency" desc="We believe every client deserves to understand exactly what we're doing, why we're doing it, and what impact it's having. No hidden metrics, no spin, no jargon. Just clear, honest reporting." />
-            <PillarCard num={2} icon="ph-chart-line-up" color="orange" title="Data-Driven Decisions" desc="Gut feelings have no place in growth strategy. Every recommendation we make, every budget we allocate, every channel we choose is backed by evidence, testing, and clear attribution." />
-            <PillarCard num={3} icon="ph-users-three" color="emerald" title="Genuine Partnerships" desc="The agencies we respect most treat their clients like business partners, not line items. That's the relationship we build — invested in your success, present in your challenges, and celebrating your wins." />
+            <PillarCard num={1} icon="ph-shield-check" title="Transparency" desc="We believe every client deserves to understand exactly what we're doing, why we're doing it, and what impact it's having. No hidden metrics, no spin, no jargon. Just clear, honest reporting." />
+            <PillarCard num={2} icon="ph-chart-line-up" secondary={true} title="Data-Driven Decisions" desc="Gut feelings have no place in growth strategy. Every recommendation we make, every budget we allocate, every channel we choose is backed by evidence, testing, and clear attribution." />
+            <PillarCard num={3} icon="ph-users-three" title="Genuine Partnerships" desc="The agencies we respect most treat their clients like business partners, not line items. That's the relationship we build — invested in your success, present in your challenges, and celebrating your wins." />
           </div>
         </div>
       </section>
@@ -86,9 +86,9 @@ export function OurMissionPage() {
               </p>
             </div>
             <div class="flex flex-col gap-6">
-              <VisionPoint icon="ph-globe" color="blue" title="Global Reach, Local Insight" desc="Expanding our expertise to serve brands in 30+ countries with market-specific local knowledge." />
-              <VisionPoint icon="ph-robot" color="purple" title="AI-Augmented Strategy" desc="Integrating cutting-edge AI tools to enhance campaign performance and forecasting accuracy." />
-              <VisionPoint icon="ph-graduation-cap" color="orange" title="Industry Education" desc="Building free resources, guides, and training to democratise access to marketing knowledge." />
+              <VisionPoint icon="ph-globe" title="Global Reach, Local Insight" desc="Expanding our expertise to serve brands in 30+ countries with market-specific local knowledge." />
+              <VisionPoint icon="ph-robot" secondary={true} title="AI-Augmented Strategy" desc="Integrating cutting-edge AI tools to enhance campaign performance and forecasting accuracy." />
+              <VisionPoint icon="ph-graduation-cap" title="Industry Education" desc="Building free resources, guides, and training to democratise access to marketing knowledge." />
             </div>
           </div>
         </div>
@@ -103,11 +103,11 @@ export function OurMissionPage() {
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <CommitmentItem icon="ph-clock" text="Response within 24 hours on all communication during business hours" />
-            <CommitmentItem icon="ph-chart-bar" text="Monthly performance reports with transparent metrics and honest analysis" />
+            <CommitmentItem icon="ph-chart-bar" secondary={true} text="Monthly performance reports with transparent metrics and honest analysis" />
             <CommitmentItem icon="ph-users" text="A dedicated account manager who knows your business, not a rotating team" />
-            <CommitmentItem icon="ph-lock-key" text="Full ownership of all creative assets, accounts, and data produced for your brand" />
+            <CommitmentItem icon="ph-lock-key" secondary={true} text="Full ownership of all creative assets, accounts, and data produced for your brand" />
             <CommitmentItem icon="ph-trending-up" text="Proactive recommendations — not waiting to be asked" />
-            <CommitmentItem icon="ph-handshake" text="No long-term lock-in contracts. We earn your business every month." />
+            <CommitmentItem icon="ph-handshake" secondary={true} text="No long-term lock-in contracts. We earn your business every month." />
           </div>
         </div>
       </section>
@@ -127,12 +127,12 @@ export function OurMissionPage() {
 }
 
 function PillarCard() {
-  return ({ num, icon, color, title, desc }: { num: number; icon: string; color: string; title: string; desc: string }) => (
+  return ({ num, icon, secondary, title, desc }: { num: number; icon: string; secondary?: boolean; title: string; desc: string }) => (
     <div class="flex flex-col bg-white p-10 rounded-3xl border border-surface-2 hover:shadow-xl transition-shadow">
-      <div class={`w-16 h-16 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center text-3xl mb-6`}>
+      <div class={`w-16 h-16 rounded-2xl ${secondary ? 'bg-secondary text-white shadow-secondary/15' : 'bg-primary text-white shadow-primary/15'} flex items-center justify-center text-3xl mb-6 shadow-lg`}>
         <i class={`ph-fill ${icon}`} />
       </div>
-      <div class={`font-heading text-6xl font-bold text-${color}-100 mb-4 -mt-4`}>{num < 10 ? `0${num}` : num}</div>
+      <div class={`font-heading text-6xl font-bold ${secondary ? 'text-secondary/10' : 'text-primary/10'} mb-4 -mt-4`}>{num < 10 ? `0${num}` : num}</div>
       <h3 class="font-heading font-bold text-2xl text-surface-dark0 mb-4">{title}</h3>
       <p class="text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -140,9 +140,9 @@ function PillarCard() {
 }
 
 function VisionPoint() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, secondary, title, desc }: { icon: string; secondary?: boolean; title: string; desc: string }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>
@@ -154,9 +154,9 @@ function VisionPoint() {
 }
 
 function CommitmentItem() {
-  return ({ icon, text }: { icon: string; text: string }) => (
+  return ({ icon, text, secondary }: { icon: string; text: string; secondary?: boolean }) => (
     <div class="flex items-start gap-4 p-5 rounded-2xl border border-surface-2 bg-white hover:shadow-md transition-shadow">
-      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xl">
+      <div class={`w-10 h-10 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-xl`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <p class="text-surface-dark1 leading-relaxed text-sm pt-2">{text}</p>

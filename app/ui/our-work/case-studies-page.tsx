@@ -57,12 +57,12 @@ export function CaseStudiesPage() {
             <p class="text-text-secondary mt-4 max-w-2xl mx-auto">From early-stage startups to established brands, we've driven measurable growth across every digital marketing discipline.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <CaseStudyCard tag="Social Media" color="indigo" metric="+320%" metricLabel="Engagement Rate" title="E-Commerce Brand Growth" desc="Scaled an online fashion retailer from 5K to 85K Instagram followers in 6 months with a content-led social strategy and influencer activations." />
-            <CaseStudyCard tag="Performance Ads" color="orange" metric="4.8x ROAS" metricLabel="Return on Ad Spend" title="D2C Product Launch" desc="Launched a new health supplement brand with Google and Meta ads, achieving profitability in week 3 of a 6-week campaign." />
-            <CaseStudyCard tag="Web & SEO" color="blue" metric="+415%" metricLabel="Organic Traffic Growth" title="B2B SaaS SEO Overhaul" desc="Redesigned and rebuilt a SaaS company's website with technical SEO foundations, growing monthly visits from 2K to 10K in 4 months." />
-            <CaseStudyCard tag="Digital PR" color="purple" metric="180+" metricLabel="Media Placements Secured" title="Consumer Brand Awareness" desc="Ran a 6-month Digital PR campaign for a consumer goods brand, securing coverage in Forbes, The Guardian, and 30+ niche publications." />
-            <CaseStudyCard tag="Brand Design" color="emerald" metric="2.1x" metricLabel="Conversion Rate Improvement" title="Full Brand Rebrand" desc="Rebranded a 10-year-old retail business with a new visual identity, tone of voice, and website, resulting in doubled conversions." />
-            <CaseStudyCard tag="Production" color="red" metric="5.2M" metricLabel="Video Views in 30 Days" title="Viral Product Video" desc="Produced a short-form product video series for a food brand that generated over 5 million organic views across TikTok and YouTube." />
+            <CaseStudyCard tag="Social Media" metric="+320%" metricLabel="Engagement Rate" title="E-Commerce Brand Growth" desc="Scaled an online fashion retailer from 5K to 85K Instagram followers in 6 months with a content-led social strategy and influencer activations." />
+            <CaseStudyCard tag="Performance Ads" secondary={true} metric="4.8x ROAS" metricLabel="Return on Ad Spend" title="D2C Product Launch" desc="Launched a new health supplement brand with Google and Meta ads, achieving profitability in week 3 of a 6-week campaign." />
+            <CaseStudyCard tag="Web & SEO" metric="+415%" metricLabel="Organic Traffic Growth" title="B2B SaaS SEO Overhaul" desc="Redesigned and rebuilt a SaaS company's website with technical SEO foundations, growing monthly visits from 2K to 10K in 4 months." />
+            <CaseStudyCard tag="Digital PR" secondary={true} metric="180+" metricLabel="Media Placements Secured" title="Consumer Brand Awareness" desc="Ran a 6-month Digital PR campaign for a consumer goods brand, securing coverage in Forbes, The Guardian, and 30+ niche publications." />
+            <CaseStudyCard tag="Brand Design" metric="2.1x" metricLabel="Conversion Rate Improvement" title="Full Brand Rebrand" desc="Rebranded a 10-year-old retail business with a new visual identity, tone of voice, and website, resulting in doubled conversions." />
+            <CaseStudyCard tag="Production" secondary={true} metric="5.2M" metricLabel="Video Views in 30 Days" title="Viral Product Video" desc="Produced a short-form product video series for a food brand that generated over 5 million organic views across TikTok and YouTube." />
           </div>
         </div>
       </section>
@@ -103,16 +103,16 @@ function StatBox() {
 }
 
 function CaseStudyCard() {
-  return ({ tag, color, metric, metricLabel, title, desc }: { tag: string; color: string; metric: string; metricLabel: string; title: string; desc: string }) => (
+  return ({ tag, secondary, metric, metricLabel, title, desc }: { tag: string; secondary?: boolean; metric: string; metricLabel: string; title: string; desc: string }) => (
     <div class="flex flex-col bg-white rounded-3xl border border-surface-2 overflow-hidden hover:shadow-xl transition-shadow group">
-      <div class={`h-48 bg-gradient-to-br from-${color}-50 to-${color}-100 flex items-center justify-center relative`}>
+      <div class={`h-48 ${secondary ? 'bg-gradient-to-br from-secondary/5 to-secondary/10' : 'bg-gradient-to-br from-primary/5 to-primary/10'} flex items-center justify-center relative`}>
         <div class="text-center">
-          <div class={`font-heading text-5xl font-bold text-${color}-700 mb-1`}>{metric}</div>
-          <div class={`text-sm text-${color}-600 font-medium`}>{metricLabel}</div>
+          <div class={`font-heading text-5xl font-bold ${secondary ? 'text-secondary' : 'text-primary'} mb-1`}>{metric}</div>
+          <div class={`text-sm ${secondary ? 'text-secondary/80' : 'text-primary/80'} font-medium`}>{metricLabel}</div>
         </div>
       </div>
       <div class="p-6 flex-1 flex flex-col">
-        <span class={`text-xs font-bold text-${color}-600 bg-${color}-50 px-3 py-1 rounded-full self-start mb-3`}>{tag}</span>
+        <span class={`text-xs font-bold ${secondary ? 'text-secondary bg-secondary/5' : 'text-primary bg-primary/5'} px-3 py-1 rounded-full self-start mb-3`}>{tag}</span>
         <h3 class="font-bold text-lg text-surface-dark0 mb-3 group-hover:text-primary transition-colors">{title}</h3>
         <p class="text-sm text-text-secondary leading-relaxed flex-1">{desc}</p>
       </div>

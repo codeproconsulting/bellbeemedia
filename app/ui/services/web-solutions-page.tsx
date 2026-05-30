@@ -71,10 +71,10 @@ export function WebSolutionsPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-layout" color="blue" title="Custom Web Design" desc="Bespoke, brand-consistent layouts designed in Figma and built pixel-perfect." />
-              <ServiceFeatureCard icon="ph-shopping-cart" color="emerald" title="E-Commerce" desc="Shopify, WooCommerce, and custom storefronts built for high AOV and low cart abandonment." />
-              <ServiceFeatureCard icon="ph-funnel" color="orange" title="Landing Pages" desc="High-converting campaign pages optimised for PPC and lead generation." />
-              <ServiceFeatureCard icon="ph-magnifying-glass" color="purple" title="Technical SEO" desc="On-page SEO, schema markup, Core Web Vitals, and crawlability baked into every build." />
+              <ServiceFeatureCard icon="ph-layout" title="Custom Web Design" desc="Bespoke, brand-consistent layouts designed in Figma and built pixel-perfect." />
+              <ServiceFeatureCard icon="ph-shopping-cart" secondary={true} title="E-Commerce" desc="Shopify, WooCommerce, and custom storefronts built for high AOV and low cart abandonment." />
+              <ServiceFeatureCard icon="ph-funnel" title="Landing Pages" desc="High-converting campaign pages optimised for PPC and lead generation." />
+              <ServiceFeatureCard icon="ph-magnifying-glass" secondary={true} title="Technical SEO" desc="On-page SEO, schema markup, Core Web Vitals, and crawlability baked into every build." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function WebSolutionsPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Built for Performance, Not Just Looks</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-rocket-launch" color="blue" title="Blazing Fast" desc="Sub-2-second load times via optimised code, modern hosting, and CDN delivery — core to SEO and UX." />
-            <BenefitCard icon="ph-device-mobile" color="purple" title="Mobile-First" desc="Every site is designed for mobile first, then enhanced for desktop. Fully responsive across all devices." />
-            <BenefitCard icon="ph-magnifying-glass" color="orange" title="SEO-Ready from Launch" desc="Clean semantic HTML, schema markup, meta tags, sitemaps, and robots.txt configured on day one." />
-            <BenefitCard icon="ph-lock" color="emerald" title="Secure & Reliable" desc="SSL certificates, regular security updates, automated backups, and 99.9% uptime hosting solutions." />
-            <BenefitCard icon="ph-pencil" color="red" title="Easy to Update" desc="CMS integration (WordPress, Sanity, or custom) so your team can manage content without a developer." />
-            <BenefitCard icon="ph-handshake" color="indigo" title="Post-Launch Support" desc="We offer ongoing maintenance plans so your site stays fast, secure, and up to date after launch." />
+            <BenefitCard icon="ph-rocket-launch" title="Blazing Fast" desc="Sub-2-second load times via optimised code, modern hosting, and CDN delivery — core to SEO and UX." />
+            <BenefitCard icon="ph-device-mobile" secondary={true} title="Mobile-First" desc="Every site is designed for mobile first, then enhanced for desktop. Fully responsive across all devices." />
+            <BenefitCard icon="ph-magnifying-glass" title="SEO-Ready from Launch" desc="Clean semantic HTML, schema markup, meta tags, sitemaps, and robots.txt configured on day one." />
+            <BenefitCard icon="ph-lock" secondary={true} title="Secure & Reliable" desc="SSL certificates, regular security updates, automated backups, and 99.9% uptime hosting solutions." />
+            <BenefitCard icon="ph-pencil" title="Easy to Update" desc="CMS integration (WordPress, Sanity, or custom) so your team can manage content without a developer." />
+            <BenefitCard icon="ph-handshake" secondary={true} title="Post-Launch Support" desc="We offer ongoing maintenance plans so your site stays fast, secure, and up to date after launch." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-blue-50 to-primary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -147,9 +147,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -157,9 +157,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>

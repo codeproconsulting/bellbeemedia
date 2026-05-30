@@ -9,7 +9,7 @@ export function DesignCopyPage() {
       description="Transform your brand identity with Bell Bee Media's design and copywriting experts. Logo design, visual identity, sales copy, and content strategy that converts and resonates."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_40%_60%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -71,10 +71,10 @@ export function DesignCopyPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-crown" color="emerald" title="Brand Identity" desc="Logo design, colour palettes, typography systems, and full brand guidelines." />
-              <ServiceFeatureCard icon="ph-file-text" color="teal" title="Sales Copywriting" desc="Website copy, landing pages, email sequences, and ad scripts that convert." />
-              <ServiceFeatureCard icon="ph-pencil-line" color="blue" title="Content Strategy" desc="Blog content, thought leadership, and SEO content planned for long-term organic growth." />
-              <ServiceFeatureCard icon="ph-image" color="purple" title="Marketing Collateral" desc="Brochures, pitch decks, social templates, and campaign assets across all formats." />
+              <ServiceFeatureCard icon="ph-crown" title="Brand Identity" desc="Logo design, colour palettes, typography systems, and full brand guidelines." />
+              <ServiceFeatureCard icon="ph-file-text" secondary={true} title="Sales Copywriting" desc="Website copy, landing pages, email sequences, and ad scripts that convert." />
+              <ServiceFeatureCard icon="ph-pencil-line" title="Content Strategy" desc="Blog content, thought leadership, and SEO content planned for long-term organic growth." />
+              <ServiceFeatureCard icon="ph-image" secondary={true} title="Marketing Collateral" desc="Brochures, pitch decks, social templates, and campaign assets across all formats." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function DesignCopyPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Why Our Creative Approach Delivers Results</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-strategy" color="emerald" title="Strategy Comes First" desc="Every design and copy decision flows from a deep understanding of your audience, competitors, and positioning." />
-            <BenefitCard icon="ph-lock-key" color="teal" title="Brand Consistency" desc="A cohesive brand system across every touchpoint — digital and print — builds recognition and trust faster." />
-            <BenefitCard icon="ph-cursor-click" color="blue" title="Conversion-Optimised Copy" desc="We write with intent. Every word is designed to guide your reader toward a specific, measurable action." />
-            <BenefitCard icon="ph-magnifying-glass" color="purple" title="SEO Content Writing" desc="Long-form content, blog posts, and landing page copy structured to rank for your target keywords." />
-            <BenefitCard icon="ph-arrows-counter-clockwise" color="orange" title="Iterative Creative Process" desc="We collaborate, present concepts, gather feedback, and refine until the result is exactly right." />
-            <BenefitCard icon="ph-file-arrow-down" color="red" title="Brand Guidelines Included" desc="Every brand identity project includes a full digital style guide for consistent internal and external use." />
+            <BenefitCard icon="ph-strategy" title="Strategy Comes First" desc="Every design and copy decision flows from a deep understanding of your audience, competitors, and positioning." />
+            <BenefitCard icon="ph-lock-key" secondary={true} title="Brand Consistency" desc="A cohesive brand system across every touchpoint — digital and print — builds recognition and trust faster." />
+            <BenefitCard icon="ph-cursor-click" title="Conversion-Optimised Copy" desc="We write with intent. Every word is designed to guide your reader toward a specific, measurable action." />
+            <BenefitCard icon="ph-magnifying-glass" secondary={true} title="SEO Content Writing" desc="Long-form content, blog posts, and landing page copy structured to rank for your target keywords." />
+            <BenefitCard icon="ph-arrows-counter-clockwise" title="Iterative Creative Process" desc="We collaborate, present concepts, gather feedback, and refine until the result is exactly right." />
+            <BenefitCard icon="ph-file-arrow-down" secondary={true} title="Brand Guidelines Included" desc="Every brand identity project includes a full digital style guide for consistent internal and external use." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-emerald-50 to-teal-50">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -147,9 +147,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -157,9 +157,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>
@@ -197,7 +197,7 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-[#7b172a] via-[#154476] to-[#0c1828]">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
         <p class="text-xl text-white/80 mb-10">{sub}</p>

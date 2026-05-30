@@ -81,10 +81,10 @@ export function OurCompanyPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">The Principles That Guide Everything We Do</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ValueCard icon="ph-eye" color="blue" title="Radical Transparency" desc="We tell you the truth — good news and bad. Our reporting is clear, our metrics are real, and we never hide behind jargon or spin." />
-            <ValueCard icon="ph-chart-line-up" color="orange" title="Results Before Recognition" desc="We measure our success by your growth metrics, not industry awards. Every decision is evaluated by its potential impact on your revenue." />
-            <ValueCard icon="ph-users-three" color="purple" title="Partnership Over Transactionalism" desc="We invest in understanding your business deeply and become an extension of your team — not just a vendor you invoice monthly." />
-            <ValueCard icon="ph-flask" color="emerald" title="Continuous Improvement" desc="We test constantly, learn from data, and apply those learnings to your campaigns. Stagnation is our enemy; iteration is our default." />
+            <ValueCard icon="ph-eye" title="Radical Transparency" desc="We tell you the truth — good news and bad. Our reporting is clear, our metrics are real, and we never hide behind jargon or spin." />
+            <ValueCard icon="ph-chart-line-up" secondary={true} title="Results Before Recognition" desc="We measure our success by your growth metrics, not industry awards. Every decision is evaluated by its potential impact on your revenue." />
+            <ValueCard icon="ph-users-three" title="Partnership Over Transactionalism" desc="We invest in understanding your business deeply and become an extension of your team — not just a vendor you invoice monthly." />
+            <ValueCard icon="ph-flask" secondary={true} title="Continuous Improvement" desc="We test constantly, learn from data, and apply those learnings to your campaigns. Stagnation is our enemy; iteration is our default." />
           </div>
         </div>
       </section>
@@ -98,9 +98,9 @@ export function OurCompanyPage() {
             <p class="text-text-secondary mt-4 max-w-2xl mx-auto">Our team of 25+ specialists brings expertise across social media, paid advertising, SEO, content, design, development, and production.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TeamDepartment icon="ph-megaphone" color="indigo" dept="Strategy & Account Management" size={8} />
-            <TeamDepartment icon="ph-palette" color="purple" dept="Creative & Production" size={9} />
-            <TeamDepartment icon="ph-chart-bar" color="orange" dept="Performance & Analytics" size={6} />
+            <TeamDepartment icon="ph-megaphone" dept="Strategy & Account Management" size={8} />
+            <TeamDepartment icon="ph-palette" secondary={true} dept="Creative & Production" size={9} />
+            <TeamDepartment icon="ph-chart-bar" dept="Performance & Analytics" size={6} />
           </div>
         </div>
       </section>
@@ -129,9 +129,9 @@ function StatBox() {
 }
 
 function ValueCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, secondary, title, desc }: { icon: string; secondary?: boolean; title: string; desc: string }) => (
     <div class="flex gap-6 p-8 rounded-3xl border border-surface-2 bg-surface-1 hover:shadow-xl transition-shadow group">
-      <div class={`w-14 h-14 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-14 h-14 rounded-2xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>
@@ -143,13 +143,13 @@ function ValueCard() {
 }
 
 function TeamDepartment() {
-  return ({ icon, color, dept, size }: { icon: string; color: string; dept: string; size: number }) => (
-    <div class={`p-8 rounded-3xl bg-${color}-50 border border-${color}-100 text-center flex flex-col items-center gap-4`}>
-      <div class={`w-16 h-16 rounded-2xl bg-${color}-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-${color}-200`}>
+  return ({ icon, secondary, dept, size }: { icon: string; secondary?: boolean; dept: string; size: number }) => (
+    <div class="p-8 rounded-3xl bg-surface-1 border border-surface-2 text-center flex flex-col items-center gap-4">
+      <div class={`w-16 h-16 rounded-2xl ${secondary ? 'bg-secondary text-white shadow-secondary/15' : 'bg-primary text-white shadow-primary/15'} flex items-center justify-center text-3xl shadow-lg`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <h3 class="font-bold text-surface-dark0">{dept}</h3>
-      <div class={`font-heading text-4xl font-bold text-${color}-700`}>{size}</div>
+      <div class={`font-heading text-4xl font-bold ${secondary ? 'text-secondary' : 'text-primary'}`}>{size}</div>
       <div class="text-sm text-text-secondary">specialists</div>
     </div>
   )

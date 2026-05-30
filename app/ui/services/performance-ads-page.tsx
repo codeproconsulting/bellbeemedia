@@ -9,7 +9,7 @@ export function PerformanceAdsPage() {
       description="Maximise ROI with Bell Bee Media's data-driven performance marketing. Expert Google Ads, Meta Ads, and PPC campaigns that cut wasteful spend and scale profitable growth."
     >
       {/* Hero */}
-      <section class="relative bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08] pt-28 pb-24 overflow-hidden">
+      <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_70%_50%,#fff_0%,transparent_60%)]" />
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row items-center gap-12">
@@ -26,7 +26,7 @@ export function PerformanceAdsPage() {
                 We build and manage data-driven paid advertising campaigns across Google, Meta, TikTok, and LinkedIn — engineering profitable growth through continuous testing and optimisation.
               </p>
               <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
+                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                   Get a Free Audit <i class="ph ph-arrow-right" />
                 </a>
                 <a href={routes.services.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors">
@@ -71,10 +71,10 @@ export function PerformanceAdsPage() {
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <ServiceFeatureCard icon="ph-google-logo" color="orange" title="Google Ads" desc="Search, Shopping, Display, YouTube, and Performance Max campaigns optimised for ROAS." />
-              <ServiceFeatureCard icon="ph-facebook-logo" color="blue" title="Meta Ads" desc="Facebook and Instagram ad campaigns with advanced audience segmentation and creative testing." />
-              <ServiceFeatureCard icon="ph-tiktok-logo" color="red" title="TikTok Ads" desc="Spark Ads, TopView, and In-Feed campaigns for brands targeting the Gen Z and Millennial markets." />
-              <ServiceFeatureCard icon="ph-linkedin-logo" color="indigo" title="LinkedIn Ads" desc="B2B lead generation and demand generation campaigns with job title and company targeting." />
+              <ServiceFeatureCard icon="ph-google-logo" title="Google Ads" desc="Google Search, Shopping, Display, YouTube, and Performance Max campaigns optimised for ROAS." />
+              <ServiceFeatureCard icon="ph-facebook-logo" secondary={true} title="Meta Ads" desc="Facebook and Instagram ad campaigns with advanced audience segmentation and creative testing." />
+              <ServiceFeatureCard icon="ph-tiktok-logo" title="TikTok Ads" desc="Spark Ads, TopView, and In-Feed campaigns for brands targeting the Gen Z and Millennial markets." />
+              <ServiceFeatureCard icon="ph-linkedin-logo" secondary={true} title="LinkedIn Ads" desc="B2B lead generation and demand generation campaigns with job title and company targeting." />
             </div>
           </div>
         </div>
@@ -88,18 +88,18 @@ export function PerformanceAdsPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Why Bell Bee Outperforms In-House Teams</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <BenefitCard icon="ph-currency-dollar" color="orange" title="Revenue-First Focus" desc="Every campaign is measured against revenue metrics, not just clicks. We care about your bottom line." />
-            <BenefitCard icon="ph-flask" color="blue" title="Continuous A/B Testing" desc="Creative fatigue kills campaigns. We test new ad angles, copy, and visuals weekly to stay ahead." />
-            <BenefitCard icon="ph-eye" color="purple" title="Full Transparency" desc="Real-time dashboard access so you always know where every pound of ad spend is going." />
-            <BenefitCard icon="ph-robot" color="emerald" title="AI-Enhanced Bidding" desc="We combine machine learning bidding strategies with manual oversight for optimal cost efficiency." />
-            <BenefitCard icon="ph-funnel" color="red" title="Funnel Optimisation" desc="We audit and improve landing pages, CTAs, and checkout flows to lift conversion rates alongside ads." />
-            <BenefitCard icon="ph-clock" color="yellow" title="Rapid Launch" desc="Most campaigns go live within 72 hours of kickoff — no lengthy delays holding back your revenue." />
+            <BenefitCard icon="ph-currency-dollar" title="Revenue-First Focus" desc="Every campaign is measured against revenue metrics, not just clicks. We care about your bottom line." />
+            <BenefitCard icon="ph-flask" secondary={true} title="Continuous A/B Testing" desc="Creative fatigue kills campaigns. We test new ad angles, copy, and visuals weekly to stay ahead." />
+            <BenefitCard icon="ph-eye" title="Full Transparency" desc="Real-time dashboard access so you always know where every pound of ad spend is going." />
+            <BenefitCard icon="ph-robot" secondary={true} title="AI-Enhanced Bidding" desc="We combine machine learning bidding strategies with manual oversight for optimal cost efficiency." />
+            <BenefitCard icon="ph-funnel" title="Funnel Optimisation" desc="We audit and improve landing pages, CTAs, and checkout flows to lift conversion rates alongside ads." />
+            <BenefitCard icon="ph-clock" secondary={true} title="Rapid Launch" desc="Most campaigns go live within 72 hours of kickoff — no lengthy delays holding back your revenue." />
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section class="py-24 bg-gradient-to-br from-orange-50 to-secondary/5">
+      <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div class="container mx-auto px-4 max-w-4xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-path" text="Our Process" /></div>
@@ -147,9 +147,9 @@ function StatBox() {
 }
 
 function ServiceFeatureCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
-    <div class={`p-5 rounded-2xl border border-surface-2 bg-${color}-50 hover:shadow-lg transition-shadow`}>
-      <i class={`ph-fill ${icon} text-${color}-600 text-2xl mb-3 block`} />
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
+    <div class="p-5 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow">
+      <i class={`ph-fill ${icon} ${secondary ? 'text-secondary' : 'text-primary'} text-2xl mb-3 block`} />
       <h3 class="font-bold text-surface-dark0 mb-2">{title}</h3>
       <p class="text-sm text-text-secondary leading-relaxed">{desc}</p>
     </div>
@@ -157,9 +157,9 @@ function ServiceFeatureCard() {
 }
 
 function BenefitCard() {
-  return ({ icon, color, title, desc }: { icon: string; color: string; title: string; desc: string }) => (
+  return ({ icon, title, desc, secondary }: { icon: string; title: string; desc: string; secondary?: boolean }) => (
     <div class="flex gap-5 p-6 rounded-2xl border border-surface-2 bg-surface-1 hover:shadow-lg transition-shadow group">
-      <div class={`w-12 h-12 rounded-xl bg-${color}-50 text-${color}-600 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
+      <div class={`w-12 h-12 rounded-xl ${secondary ? 'bg-secondary/5 text-secondary' : 'bg-primary/5 text-primary'} flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
       <div>
@@ -197,11 +197,11 @@ function FaqItem() {
 
 function CtaSection() {
   return ({ headline, sub }: { headline: string; sub: string }) => (
-    <section class="py-24 bg-gradient-to-br from-secondary via-[#a03d15] to-[#1f0f08]">
+    <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">{headline}</h2>
         <p class="text-xl text-white/80 mb-10">{sub}</p>
-        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-secondary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
+        <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
           Get Your Free Audit <i class="ph ph-arrow-right" />
         </a>
       </div>
