@@ -295,7 +295,7 @@ export function TestimonialsSection() {
             <p class="text-text-secondary leading-relaxed">Real brands. Real numbers. No fluff — just the outcomes we delivered.</p>
           </div>
           {/* Aggregate rating badge */}
-          <div class="flex-shrink-0 bg-white border border-surface-2 rounded-2xl p-5 flex flex-col items-center gap-1 shadow-sm min-w-[140px]">
+          <a href="https://clutch.co" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 bg-white border border-surface-2 rounded-2xl p-5 flex flex-col items-center gap-1 shadow-sm min-w-[140px] hover:border-primary/40 hover:shadow-md transition-all duration-300 group">
             <div class="flex gap-0.5 text-secondary text-xl">
               <i class="ph-fill ph-star"></i>
               <i class="ph-fill ph-star"></i>
@@ -303,10 +303,12 @@ export function TestimonialsSection() {
               <i class="ph-fill ph-star"></i>
               <i class="ph-fill ph-star"></i>
             </div>
-            <div class="text-3xl font-black text-surface-dark0">4.9</div>
+            <div class="text-3xl font-black text-surface-dark0 group-hover:text-primary transition-colors">4.9</div>
             <div class="text-xs text-text-secondary font-medium">Avg. Rating</div>
-            <div class="text-xs text-text-secondary">from 60+ reviews</div>
-          </div>
+            <div class="text-[11px] text-primary font-semibold flex items-center gap-1 mt-0.5">
+              Verify on Clutch <i class="ph ph-arrow-square-out"></i>
+            </div>
+          </a>
         </div>
 
         {/* Featured large testimonial + 2 side cards */}

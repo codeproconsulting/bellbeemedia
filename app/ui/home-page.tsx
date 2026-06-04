@@ -4,8 +4,41 @@ import { PillBadge, TestimonialsSection, ProcessSection, StatsBar } from './shar
 import { InteractiveServicesShowcase } from '../assets/interactive-services-showcase.tsx'
 
 export function HomePage() {
+  const schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "BellBee Media",
+    "url": "https://bellbeemedia.com",
+    "logo": "https://bellbeemedia.com/Logo.svg",
+    "image": "https://bellbeemedia.com/og-image.jpg",
+    "description": "Next-Gen Digital Marketing Agency scaling brands through data-led marketing.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Digital Ave",
+      "addressLocality": "San Francisco",
+      "addressRegion": "CA",
+      "postalCode": "94107",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-555-123-4567",
+    "email": "hello@bellbeemedia.com",
+    "priceRange": "$$$",
+    "sameAs": [
+      "https://www.facebook.com/bellbeemedia",
+      "https://www.instagram.com/bellbeemedia",
+      "https://www.linkedin.com/company/bellbeemedia"
+    ]
+  };
+
   return () => (
-    <Layout title="Bell Bee Media | Next-Gen Digital Marketing Agency">
+    <Layout
+      title="Bell Bee Media | Next-Gen Digital Marketing Agency"
+      head={
+        <script type="application/ld+json">
+          {JSON.stringify(schemaJson)}
+        </script>
+      }
+    >
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section class="relative bg-white pt-28 pb-20 overflow-hidden">
@@ -201,6 +234,9 @@ export function HomePage() {
       {/* ── Testimonials ─────────────────────────────────── */}
       <TestimonialsSection />
 
+      {/* ── FAQ Section ──────────────────────────────────── */}
+      <FaqSection />
+
       {/* ── Premium CTA ──────────────────────────────────── */}
       <section class="py-24 bg-white relative overflow-hidden">
         <div class="container mx-auto px-4 max-w-5xl">
@@ -239,5 +275,81 @@ export function HomePage() {
       </section>
 
     </Layout>
+  )
+}
+
+function FaqSection() {
+  return () => (
+    <section class="py-24 bg-surface-1 border-t border-surface-2 relative overflow-hidden">
+      {/* Decorative subtle glows */}
+      <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+      <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
+
+      <div class="container mx-auto px-4 max-w-4xl relative z-10">
+        {/* Header */}
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="flex justify-center mb-4">
+            <PillBadge icon="ph-question" text="Common Questions" />
+          </div>
+          <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 mb-4 tracking-tight">
+            Frequently Asked <span class="text-gradient">Questions</span>
+          </h2>
+          <p class="text-text-secondary leading-relaxed">
+            Everything you need to know about our data-led marketing process, onboarding timelines, and campaign optimization.
+          </p>
+        </div>
+
+        {/* FAQs using details/summary for clean SEO structure */}
+        <div class="flex flex-col gap-4">
+          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
+              <h3>How does BellBee Media deliver data-led marketing results?</h3>
+              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+                <i class="ph ph-caret-down"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
+              We deliver results by combining real-time performance analytics with native customer insights. We audit your brand positioning and competitor gap matrix to engineer high-converting funnel pipelines, leading to an average ROAS of 4.2x across Meta, Google, and programmatic platforms.
+            </div>
+          </details>
+
+          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
+              <h3>What is the typical timeline to launch a new campaign?</h3>
+              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+                <i class="ph ph-caret-down"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
+              Our standard campaign onboarding takes two to three weeks. Week one focuses on a discovery brand positioning audit and competitor gap analysis. Week two establishes the strategic blueprint and tracking KPIs. By week three, all creative production is built, approved, and launched.
+            </div>
+          </details>
+
+          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
+              <h3>How does the client onboarding process work?</h3>
+              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+                <i class="ph ph-caret-down"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
+              Onboarding starts with a free 30-minute discovery call where we map your customer personas and budget allocations. Once agreed, we design a customized 30/60/90-day roadmap. Our creative production and media teams then launch the campaigns after your complete approval.
+            </div>
+          </details>
+
+          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
+              <h3>Do you offer performance guarantees or fixed contracts?</h3>
+              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+                <i class="ph ph-caret-down"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
+              We offer flexible, results-driven partnerships. We set clear performance KPIs and success metrics upfront so that you know exactly what outcomes to expect. Our monthly rolling agreements ensure we continuously optimize and scale your campaigns based on real commercial growth.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
   )
 }

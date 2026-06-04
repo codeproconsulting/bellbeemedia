@@ -23,4 +23,6 @@ export const routes = route({
   aboutUsCareers: get('/about-us/careers'),
   getProposal: get('/get-proposal'),
   contact: get('/contact'),
+  privacy: get('/privacy'),
+  terms: get('/terms'),
 })

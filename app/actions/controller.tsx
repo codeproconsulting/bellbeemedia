@@ -11,6 +11,8 @@ import { ContactPage } from '../ui/contact-page.tsx'
 import { OurWorkPage } from '../ui/our-work-page.tsx'
 import { BlogsPage } from '../ui/blogs-page.tsx'
 import { GetProposalPage } from '../ui/get-proposal-page.tsx'
+import { PrivacyPage } from '../ui/privacy-page.tsx'
+import { TermsPage } from '../ui/terms-page.tsx'
 
 // Service sub-pages
 import { SocialMediaPage } from '../ui/services/social-media-page.tsx'
@@ -101,6 +103,12 @@ export default createController(routes, {
     },
     contact() {
       return redirect(routes.getProposal.href())
+    },
+    privacy(context) {
+      return context.render(<PrivacyPage />)
+    },
+    terms(context) {
+      return context.render(<TermsPage />)
     },
   },
 })

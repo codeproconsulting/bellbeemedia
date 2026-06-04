@@ -3,8 +3,8 @@ import { routes } from '../routes.ts'
 import { Document } from './document.tsx'
 
 export function Layout() {
-  return ({ children, title, description }: { children: RemixNode; title?: string; description?: string }) => (
-    <Document title={title} description={description}>
+  return ({ children, title, description, head }: { children: RemixNode; title?: string; description?: string; head?: RemixNode }) => (
+    <Document title={title} description={description} head={head}>
       <div class="flex flex-col min-h-screen bg-white">
         <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2">
           <div class="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -439,8 +439,14 @@ export function Layout() {
             </div>
           </div>
           
-          <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 text-center text-text-secondary text-sm">
-            &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
+          <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary text-sm">
+            <div>
+              &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
+            </div>
+            <div class="flex gap-6">
+              <a href={routes.privacy.href()} class="hover:text-primary transition-colors">Privacy Policy</a>
+              <a href={routes.terms.href()} class="hover:text-primary transition-colors">Terms of Service</a>
+            </div>
           </div>
         </footer>
       </div>
