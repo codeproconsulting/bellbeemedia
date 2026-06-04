@@ -89,4 +89,19 @@
     animation: marquee 25s linear infinite;
     will-change: transform;
   }
+
+  /* SVG Drawing Animations */
+  @keyframes draw-circle {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 15; }
+  }
+  @keyframes draw-path {
+    from { stroke-dashoffset: 200; }
+    to { stroke-dashoffset: 0; }
+  }
+  .animate-draw-path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw-path 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
 }

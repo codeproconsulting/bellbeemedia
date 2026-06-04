@@ -1,7 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "app/**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.jsx",
+    "app/**/*.js",
+    "./app/**/*.tsx",
+    "./app/**/*.ts",
+    "./app/**/*.jsx",
+    "./app/**/*.js",
+    "f:/BellBee Media/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "F:/BellBee Media/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "f:/BellBee Media/app/**/*.tsx",
+    "F:/BellBee Media/app/**/*.tsx"
   ],
   theme: {
     extend: {

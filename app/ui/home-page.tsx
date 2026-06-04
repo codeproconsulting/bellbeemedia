@@ -1,6 +1,7 @@
 import { routes } from '../routes.ts'
 import { Layout } from './layout.tsx'
-import { PillBadge, ServicesGrid, TestimonialsSection, ProcessSection, StatsBar } from './shared.tsx'
+import { PillBadge, TestimonialsSection, ProcessSection, StatsBar } from './shared.tsx'
+import { InteractiveServicesShowcase } from '../assets/interactive-services-showcase.tsx'
 
 export function HomePage() {
   return () => (
@@ -145,7 +146,52 @@ export function HomePage() {
               </p>
             </div>
           </div>
-          <ServicesGrid />
+          <InteractiveServicesShowcase
+            services={[
+              {
+                icon: 'ph-heart',
+                title: 'Social Media Management',
+                desc: 'Platform-native strategies, community management, and viral content that builds loyal audiences and turns followers into brand evangelists.',
+                tags: ['Instagram', 'TikTok', 'LinkedIn'],
+                href: routes.servicesSocialMedia.href(),
+              },
+              {
+                icon: 'ph-chart-line-up',
+                title: 'Performance Marketing',
+                desc: 'ROI-obsessed PPC campaigns engineered to drive qualified leads and revenue at scale — from Meta Ads to Google Search to programmatic.',
+                tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
+                href: routes.servicesPerformanceAds.href(),
+              },
+              {
+                icon: 'ph-megaphone',
+                title: 'Digital PR & Influencer',
+                desc: 'Strategic media placements, editorial outreach, and curated influencer partnerships that make your brand impossible to ignore.',
+                tags: ['Media Coverage', 'Influencer Seeding', 'Brand Colabs'],
+                href: routes.servicesDigitalPr.href(),
+              },
+              {
+                icon: 'ph-film-slate',
+                title: 'Creative Production',
+                desc: 'Premium video shoots, branded photography, and motion graphics that stop the scroll and make every pixel of your content count.',
+                tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
+                href: routes.servicesProduction.href(),
+              },
+              {
+                icon: 'ph-desktop',
+                title: 'Web & Landing Pages',
+                desc: 'Conversion-engineered websites and high-speed landing pages that turn traffic into customers — built for both humans and search engines.',
+                tags: ['CRO', 'SEO', 'E-commerce'],
+                href: routes.servicesWebSolutions.href(),
+              },
+              {
+                icon: 'ph-bezier-curve',
+                title: 'Design & Copywriting',
+                desc: 'Visual brand identities, ad creatives, and sharp sales copy that communicates your value proposition with clarity and authority.',
+                tags: ['Branding', 'Ad Creatives', 'UX Copy'],
+                href: routes.servicesDesignCopy.href(),
+              },
+            ]}
+          />
         </div>
       </section>
 
