@@ -62,7 +62,7 @@ export function PrivacyPage() {
               <p>If you have any questions regarding this Privacy Policy, you may contact us at:</p>
               <p class="font-bold text-surface-dark0">
                 Email: hello@bellbeemedia.com<br />
-                Address: 123 Digital Ave, San Francisco, CA
+                Address: Office #204, Vista Building, I8 Markaz, Islamabad
               </p>
             </section>
           </div>

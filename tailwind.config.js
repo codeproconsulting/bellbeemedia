@@ -38,7 +38,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         heading: ['Inter', 'sans-serif'],
-        conthrax: ['Conthrax', 'sans-serif'],
+        conthrax: ['"Space Grotesk"', 'sans-serif'],
       },
     },
   },

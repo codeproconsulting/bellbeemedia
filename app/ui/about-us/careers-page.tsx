@@ -1,12 +1,18 @@
 import { Layout } from '../layout.tsx'
 import { PillBadge } from '../shared.tsx'
-import { routes } from '../../routes.ts'
+import { type Handle } from 'remix/ui'
+import { type WPJob } from '../../data/wordpress.ts'
 
-export function CareersPage() {
+interface CareersPageProps {
+  jobs: WPJob[]
+}
+
+export function CareersPage(handle: Handle<CareersPageProps>) {
+  const { jobs } = handle.props
   return () => (
     <Layout
       title="Careers at Bell Bee Media — Join Our Digital Marketing Team"
-      description="Join Bell Bee Media's remote-first team of digital marketing experts. Explore open roles in social media, performance marketing, content, design, and web development."
+      description="Join Bell Bee Media's team of digital marketing experts. Explore open roles in social media, performance marketing, content, design, and web development."
     >
       {/* Hero */}
       <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
@@ -23,9 +29,9 @@ export function CareersPage() {
                 Build Your Career at the Most Exciting Agency You Haven't Heard Of. Yet.
               </h1>
               <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
-                We're a team of 25+ remote-first digital marketing specialists who love what we do. If you're ambitious, data-obsessed, and creatively driven, you'll fit right in.
+                We're a close-knit team of 5 specialist experts who love what we do. If you're ambitious, data-obsessed, and creatively driven, you'll fit right in.
               </p>
-              <a href="mailto:careers@bellbeemedia.com" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
+              <a href="#open-roles" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 View Open Roles <i class="ph ph-arrow-right" />
               </a>
             </div>
@@ -47,18 +53,18 @@ export function CareersPage() {
             <p class="text-text-secondary mt-4 max-w-2xl mx-auto">We've built a culture where great work gets recognised, growth is continuous, and the people around you make you better.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <CultureCard icon="ph-laptop" title="Remote-First Forever" desc="Work from anywhere in the world. We care about the quality of your work, not the postcode you live in." />
-            <CultureCard icon="ph-trend-up" secondary={true} title="Grow Fast, Learn Faster" desc="Weekly knowledge-sharing sessions, conference budgets, and a library of courses to keep your skills sharp." />
-            <CultureCard icon="ph-currency-pound" title="Competitive Compensation" desc="Market-rate salaries, performance bonuses, and equity options for senior team members who grow with us." />
-            <CultureCard icon="ph-calendar-blank" secondary={true} title="Flexible Hours" desc="We operate async-first. As long as you're hitting your goals, your schedule is yours to manage." />
-            <CultureCard icon="ph-users-three" title="Collaborative Culture" desc="Ego-free collaboration across disciplines. The best idea wins — regardless of seniority or role." />
-            <CultureCard icon="ph-shield-check" secondary={true} title="Wellbeing Matters" desc="Mental health days, generous holiday allowance, and a team that respects your boundaries." />
+            <CultureCard icon="ph-laptop" title="Flexible Working" desc="Work in a way that suits you. We care about the quality of your work, not the hours you clock." />
+            <CultureCard icon="ph-trend-up" secondary={true} title="Grow Fast, Learn Faster" desc="Knowledge-sharing sessions, course budgets, and a culture of continuous learning." />
+            <CultureCard icon="ph-currency-dollar" title="Competitive Pay" desc="Fair, market-rate compensation that reflects the impact you make." />
+            <CultureCard icon="ph-calendar-blank" secondary={true} title="Flexible Hours" desc="We operate results-first. As long as you're hitting your goals, your schedule is yours to manage." />
+            <CultureCard icon="ph-users-three" title="Collaborative Culture" desc="Ego-free collaboration across disciplines. The best idea wins — regardless of seniority." />
+            <CultureCard icon="ph-shield-check" secondary={true} title="Wellbeing Matters" desc="A team that respects your time, energy, and ambitions." />
           </div>
         </div>
       </section>
 
       {/* Open Roles */}
-      <section class="py-24 bg-surface-1">
+      <section id="open-roles" class="py-24 bg-surface-1">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="text-center mb-16">
             <div class="flex justify-center mb-4"><PillBadge icon="ph-briefcase" text="Open Roles" /></div>
@@ -66,12 +72,25 @@ export function CareersPage() {
             <p class="text-text-secondary mt-4">Don't see your perfect role? We always want to hear from exceptional people.</p>
           </div>
           <div class="flex flex-col gap-6">
-            <RoleCard title="Senior Social Media Strategist" dept="Social Media" location="Remote" type="Full-Time" />
-            <RoleCard title="Performance Marketing Manager" dept="Paid Advertising" location="Remote" type="Full-Time" />
-            <RoleCard title="SEO Content Writer" dept="Content & SEO" location="Remote" type="Full-Time / Part-Time" />
-            <RoleCard title="Brand & UI Designer" dept="Creative" location="Remote" type="Full-Time" />
-            <RoleCard title="Video Editor & Motion Designer" dept="Production" location="Remote" type="Full-Time" />
-            <RoleCard title="Account Manager" dept="Client Services" location="Remote" type="Full-Time" />
+            {jobs.length > 0 ? (
+              jobs.map(job => (
+                <RoleCard
+                  title={job.title}
+                  dept={job.department}
+                  location={job.location}
+                  type={job.type}
+                  applyUrl={job.applyUrl}
+                />
+              ))
+            ) : (
+              <div class="text-center py-16 text-text-secondary">
+                <i class="ph ph-briefcase text-5xl mb-4 block opacity-30"></i>
+                <p class="text-lg">No open roles right now. Check back soon or send us your CV!</p>
+                <a href="mailto:careers@bellbeemedia.com" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-light transition-colors">
+                  Send Your CV <i class="ph ph-envelope" />
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -101,10 +120,10 @@ export function CareersPage() {
             <p class="text-text-secondary mt-4">We keep it transparent, fast, and fair. No excessive rounds, no ghosting.</p>
           </div>
           <div class="flex flex-col gap-8">
-            <HiringStep num={1} title="Application" desc="Submit your CV, portfolio, and a short note about why Bell Bee Media resonates with you. No cover letter essays required." />
-            <HiringStep num={2} title="Initial Chat" desc="A 30-minute video call with our People team to learn about you and share more about the role, culture, and expectations." />
-            <HiringStep num={3} title="Skills Challenge" desc="A practical, paid challenge relevant to your role. We value your time and expertise — it's always compensated." />
-            <HiringStep num={4} title="Team Interview" desc="Meet the people you'd work with directly. A collaborative conversation, not an interrogation." />
+            <HiringStep num={1} title="Application" desc="Submit your CV and a short note about why Bell Bee Media resonates with you." />
+            <HiringStep num={2} title="Initial Chat" desc="A 30-minute video call to learn about you and share more about the role and culture." />
+            <HiringStep num={3} title="Skills Challenge" desc="A practical, paid challenge relevant to your role. We value your time and expertise." />
+            <HiringStep num={4} title="Team Interview" desc="Meet the people you'd work with. A collaborative conversation, not an interrogation." />
             <HiringStep num={5} title="Offer" desc="Fast decisions. If we love you, you'll know within 48 hours of your final interview." />
           </div>
         </div>
@@ -137,7 +156,7 @@ function CultureCard() {
 }
 
 function RoleCard() {
-  return ({ title, dept, location, type }: { title: string; dept: string; location: string; type: string }) => (
+  return ({ title, dept, location, type, applyUrl }: { title: string; dept: string; location: string; type: string; applyUrl: string }) => (
     <div class="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-2xl border border-surface-2 bg-white hover:border-primary/30 hover:shadow-lg transition-all group">
       <div>
         <h3 class="font-bold text-lg text-surface-dark0 group-hover:text-primary transition-colors mb-1">{title}</h3>
@@ -147,7 +166,7 @@ function RoleCard() {
           <span class="text-xs bg-primary/5 border border-primary/10 text-primary px-3 py-1 rounded-full">{type}</span>
         </div>
       </div>
-      <a href="mailto:careers@bellbeemedia.com" class="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-full hover:bg-primary-light transition-colors text-sm shrink-0">
+      <a href={applyUrl} class="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-full hover:bg-primary-light transition-colors text-sm shrink-0">
         Apply <i class="ph ph-arrow-right" />
       </a>
     </div>

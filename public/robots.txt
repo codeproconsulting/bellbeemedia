@@ -1,0 +1,24 @@
+# Web Robots configuration for Bell Bee Media (http://bellbeemedia.com)
+# Document Updated: 2026-06-06
+
+User-agent: *
+Allow: /
+Disallow: /assets/   # Block indexing raw client bundle entry scripts
+Disallow: /contact?  # Block queries on redirect forms
+
+# Block aggressive AI crawlers from scraping data for commercial training without attribution
+# while keeping standard search crawlers (Google, Bing, DuckDuckGo) fully allowed.
+User-agent: CCBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Direct crawlers to sitemap
+Sitemap: https://bellbeemedia.com/sitemap.xml

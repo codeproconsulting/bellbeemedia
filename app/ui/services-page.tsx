@@ -3,7 +3,10 @@ import { PillBadge, ServicesGrid, ProcessSection, TestimonialsSection } from './
 
 export function ServicesPage() {
   return () => (
-    <Layout title="Services | Bell Bee Media">
+    <Layout
+      title="Paid Media, Social & Design Services | Bell Bee Media"
+      description="Explore Bell Bee Media's growth services: performance marketing (Google & Meta Ads), organic social media management, creative production, and web solutions."
+    >
       <div class="relative bg-surface-1 pt-28 pb-24 border-b border-surface-2 overflow-hidden">
         {/* Decorative subtle glows */}
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>

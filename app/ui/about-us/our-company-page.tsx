@@ -6,7 +6,7 @@ export function OurCompanyPage() {
   return () => (
     <Layout
       title="About Bell Bee Media — Our Story, Team & Values"
-      description="Learn about Bell Bee Media — a results-driven digital marketing agency. Discover our founding story, our expert team, and the values that drive everything we do."
+      description="Meet the team behind Bell Bee Media — 5 seasoned digital marketing experts who spent years mastering their crafts independently, now united to deliver full-service growth for ambitious brands."
     >
       {/* Hero */}
       <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] pt-28 pb-24 overflow-hidden">
@@ -20,10 +20,10 @@ export function OurCompanyPage() {
                 </span>
               </div>
               <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                A Digital Marketing Agency Built for Bold Brands
+                Five Experts. One Agency. Limitless Growth.
               </h1>
               <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-xl">
-                Bell Bee Media was founded with a single conviction: brands that tell the right stories to the right audiences grow faster, retain customers longer, and outcompete on value instead of price.
+                Bell Bee Media was born when five seasoned marketing professionals — each a specialist in their own right — decided to stop working in isolation and start building something greater together.
               </p>
               <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-surface-1 transition-colors shadow-xl">
                 Work With Us <i class="ph ph-arrow-right" />
@@ -41,10 +41,10 @@ export function OurCompanyPage() {
       {/* Quick Stats */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="7+" label="Years in Business" />
-          <StatBox value="60+" label="Active Clients" />
-          <StatBox value="25+" label="Team Members" />
-          <StatBox value="15+" label="Countries Served" />
+          <StatBox value="5" label="Core Specialists" />
+          <StatBox value="20+" label="Combined Yrs Experience" />
+          <StatBox value="4.2x" label="Avg. ROAS Delivered" />
+          <StatBox value="100%" label="Dedicated to Results" />
         </div>
       </section>
 
@@ -58,15 +58,15 @@ export function OurCompanyPage() {
             </div>
             <div>
               <div class="flex mb-4"><PillBadge icon="ph-book-open" text="Our Story" /></div>
-              <h2 class="font-heading text-4xl font-bold text-surface-dark0 mb-6">From Small Agency to Full-Service Growth Partner</h2>
+              <h2 class="font-heading text-4xl font-bold text-surface-dark0 mb-6">From Solo Hustlers to a Unified Team of Experts</h2>
               <p class="text-lg text-text-secondary leading-relaxed mb-4">
-                Bell Bee Media started as a social media consultancy for independent brands in need of a voice online. We saw firsthand how businesses with genuinely great products were being outmarketed by inferior competitors with bigger budgets and louder channels.
+                For years, each of us built our expertise independently — one mastering paid media, another dominating social strategy, another crafting high-converting copy, another building stunning digital experiences, and one becoming the analytics mind every campaign needs.
               </p>
               <p class="text-lg text-text-secondary leading-relaxed mb-4">
-                We built Bell Bee Media to level that playing field. Over seven years, we've grown into a full-service digital marketing agency — adding performance advertising, SEO, Digital PR, web development, and production to our arsenal.
+                We watched brands struggle because they were forced to patch together multiple freelancers and agencies — losing time, consistency, and money in the gaps between them. That problem is exactly why Bell Bee Media exists.
               </p>
               <p class="text-lg text-text-secondary leading-relaxed">
-                Today, we work with 60+ brands across 15 countries, from ambitious startups to established multi-million pound businesses. What hasn't changed is our founding commitment: every campaign we run is designed to deliver real, measurable growth.
+                By uniting our individual strengths under one roof, we now offer brands a seamless, end-to-end marketing powerhouse. No silos. No handoff chaos. Just five specialists working in perfect sync — fully focused on scaling your brand.
               </p>
             </div>
           </div>
@@ -89,18 +89,33 @@ export function OurCompanyPage() {
         </div>
       </section>
 
-      {/* Team Teaser */}
+      {/* Team Section */}
       <section class="py-24 bg-surface-1">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="text-center mb-16">
-            <div class="flex justify-center mb-4"><PillBadge icon="ph-users" text="Our Team" /></div>
-            <h2 class="font-heading text-4xl font-bold text-surface-dark0">The Experts Behind Your Growth</h2>
-            <p class="text-text-secondary mt-4 max-w-2xl mx-auto">Our team of 25+ specialists brings expertise across social media, paid advertising, SEO, content, design, development, and production.</p>
+            <div class="flex justify-center mb-4"><PillBadge icon="ph-users" text="Meet the Team" /></div>
+            <h2 class="font-heading text-4xl font-bold text-surface-dark0">The Five Minds Behind Your Growth</h2>
+            <p class="text-text-secondary mt-4 max-w-2xl mx-auto">
+              We're not a generic agency with rotating account managers. We're five seasoned experts who have each spent years mastering their craft — now working together with one shared mission: to grow your brand.
+            </p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TeamDepartment icon="ph-megaphone" dept="Strategy & Account Management" size={8} />
-            <TeamDepartment icon="ph-palette" secondary={true} dept="Creative & Production" size={9} />
-            <TeamDepartment icon="ph-chart-bar" dept="Performance & Analytics" size={6} />
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <ExpertCard icon="ph-chart-line-up" role="Performance Marketing" desc="Paid ads specialist — Google, Meta, and programmatic campaigns engineered for maximum ROAS." />
+            <ExpertCard icon="ph-heart" secondary={true} role="Social Media Strategy" desc="Platform-native content strategist who turns followers into loyal communities and paying customers." />
+            <ExpertCard icon="ph-pencil-line" role="Copywriting & Brand Voice" desc="Sharp, conversion-focused writer who makes every word earn its place and every headline land." />
+            <ExpertCard icon="ph-desktop" secondary={true} role="Web & Digital Design" desc="UI/UX designer and developer building landing pages and websites that convert traffic into revenue." />
+            <ExpertCard icon="ph-chart-bar" role="Analytics & Insights" desc="Data analyst who translates campaign numbers into clear decisions and continuous growth signals." />
+          </div>
+
+          {/* Unification message */}
+          <div class="mt-16 bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 rounded-3xl p-10 text-center">
+            <i class="ph-fill ph-lightning text-4xl text-secondary mb-4 block" />
+            <h3 class="font-heading text-2xl font-bold text-surface-dark0 mb-3">
+              Individually skilled. Collectively unstoppable.
+            </h3>
+            <p class="text-text-secondary leading-relaxed max-w-2xl mx-auto">
+              What makes Bell Bee Media different isn't just that we have specialists — it's that those specialists have spent years learning to collaborate across disciplines. Your strategy, creative, distribution, and analytics aren't siloed workstreams. They're one integrated engine, built to compound your results every single month.
+            </p>
           </div>
         </div>
       </section>
@@ -108,8 +123,8 @@ export function OurCompanyPage() {
       {/* CTA */}
       <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
-          <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Join 60+ Brands Growing With Bell Bee</h2>
-          <p class="text-xl text-white/80 mb-10">Get in touch and let's talk about your goals, challenges, and how our team can help you achieve them.</p>
+          <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Ready to Work With Our Expert Team?</h2>
+          <p class="text-xl text-white/80 mb-10">Book a free strategy call and let's talk about your goals, your challenges, and exactly how our five-specialist team can accelerate your growth.</p>
           <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Get Your Free Proposal <i class="ph ph-arrow-right" />
           </a>
@@ -142,15 +157,14 @@ function ValueCard() {
   )
 }
 
-function TeamDepartment() {
-  return ({ icon, secondary, dept, size }: { icon: string; secondary?: boolean; dept: string; size: number }) => (
-    <div class="p-8 rounded-3xl bg-surface-1 border border-surface-2 text-center flex flex-col items-center gap-4">
-      <div class={`w-16 h-16 rounded-2xl ${secondary ? 'bg-secondary text-white shadow-secondary/15' : 'bg-primary text-white shadow-primary/15'} flex items-center justify-center text-3xl shadow-lg`}>
+function ExpertCard() {
+  return ({ icon, secondary, role, desc }: { icon: string; secondary?: boolean; role: string; desc: string }) => (
+    <div class="p-6 rounded-3xl bg-white border border-surface-2 text-center flex flex-col items-center gap-4 hover:shadow-xl hover:border-primary/20 transition-all group">
+      <div class={`w-16 h-16 rounded-2xl ${secondary ? 'bg-secondary/10 text-secondary' : 'bg-primary/10 text-primary'} flex items-center justify-center text-3xl group-hover:scale-110 transition-transform`}>
         <i class={`ph-fill ${icon}`} />
       </div>
-      <h3 class="font-bold text-surface-dark0">{dept}</h3>
-      <div class={`font-heading text-4xl font-bold ${secondary ? 'text-secondary' : 'text-primary'}`}>{size}</div>
-      <div class="text-sm text-text-secondary">specialists</div>
+      <h3 class="font-bold text-surface-dark0 text-sm leading-snug">{role}</h3>
+      <p class="text-xs text-text-secondary leading-relaxed">{desc}</p>
     </div>
   )
 }

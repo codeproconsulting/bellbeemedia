@@ -24,7 +24,7 @@ const projects: Project[] = [
     icon: "ph-shopping-cart"
   },
   {
-    title: "Organic Growth Dominance",
+    title: "Search Traffic Scale-Up",
     client: "Fintech Leaders Inc.",
     category: "Digital Marketing",
     metric: "1.2M",
@@ -44,7 +44,7 @@ const projects: Project[] = [
     icon: "ph-sparkles"
   },
   {
-    title: "Next-Gen SaaS Web Engineering",
+    title: "High-Performance SaaS Web Design",
     client: "TaskFlow Platform",
     category: "Web Solutions",
     metric: "45%",
@@ -77,7 +77,10 @@ const projects: Project[] = [
 
 export function OurWorkPage() {
   return () => (
-    <Layout title="Our Work | Bell Bee Media">
+    <Layout
+      title="Our Portfolio & Client Case Studies | Bell Bee Media"
+      description="Browse the marketing campaigns, ad creative production, and conversion websites we built for D2C brands. Real numbers, verified scaling results."
+    >
       <div class="bg-surface-1 min-h-screen pt-20 pb-24">
         <div class="container mx-auto px-4">
           {/* Header */}

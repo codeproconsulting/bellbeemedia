@@ -1,4 +1,5 @@
 import { type RemixNode } from 'remix/ui'
+import { routes } from '../routes.ts'
 
 export function PillBadge() {
   return ({ icon, text, dark }: { icon: string, text: string, dark?: boolean }) => (
@@ -22,20 +23,20 @@ export function StatsBar() {
       <div class="container mx-auto px-4 max-w-5xl relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">80+</span>
-            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Brands Scaled</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">5</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Expert Specialists</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">₹12Cr+</span>
-            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Ad Spend Managed</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">10+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Combined Yrs Experience</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
             <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">4.2x</span>
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Avg. ROAS Delivered</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">98%</span>
-            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Client Retention</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">12+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Active Scale Cases</span>
           </div>
         </div>
       </div>
@@ -50,38 +51,44 @@ const services = [
   {
     icon: 'ph-heart',
     title: 'Social Media Management',
-    desc: 'Platform-native strategies, community management, and viral content that builds loyal audiences and turns followers into brand evangelists.',
+    desc: 'Organic platform strategies, copy, native vertical video, community management, and audience growth across channels.',
     tags: ['Instagram', 'TikTok', 'LinkedIn'],
+    href: routes.servicesSocialMedia.href(),
   },
   {
     icon: 'ph-chart-line-up',
     title: 'Performance Marketing',
-    desc: 'ROI-obsessed PPC campaigns engineered to drive qualified leads and revenue at scale — from Meta Ads to Google Search to programmatic.',
+    desc: 'Paid media buying across Meta, Google Search, Shopping, and Programmatic. We write, execute, test, and optimize in-house.',
     tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
+    href: routes.servicesPerformanceAds.href(),
   },
   {
     icon: 'ph-megaphone',
     title: 'Digital PR & Influencer',
-    desc: 'Strategic media placements, editorial outreach, and curated influencer partnerships that make your brand impossible to ignore.',
-    tags: ['Media Coverage', 'Influencer Seeding', 'Brand Colabs'],
+    desc: 'Curated influencer gifting/campaign partnerships and securing strategic press coverage to build authority and drive referral traffic.',
+    tags: ['Media Coverage', 'Influencer Gifting', 'Brand Colabs'],
+    href: routes.servicesDigitalPr.href(),
   },
   {
     icon: 'ph-film-slate',
     title: 'Creative Production',
-    desc: 'Premium video shoots, branded photography, and motion graphics that stop the scroll and make every pixel of your content count.',
+    desc: 'High-quality video shoots, scroll-stopping social ad creatives, product photography, and motion graphics.',
     tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
+    href: routes.servicesProduction.href(),
   },
   {
     icon: 'ph-desktop',
     title: 'Web & Landing Pages',
-    desc: 'Conversion-engineered websites and high-speed landing pages that turn traffic into customers — built for both humans and search engines.',
+    desc: 'High-speed, mobile-first websites, Shopify stores, and custom landing pages optimized for maximum conversion rate.',
     tags: ['CRO', 'SEO', 'E-commerce'],
+    href: routes.servicesWebSolutions.href(),
   },
   {
     icon: 'ph-bezier-curve',
     title: 'Design & Copywriting',
-    desc: 'Visual brand identities, ad creatives, and sharp sales copy that communicates your value proposition with clarity and authority.',
+    desc: 'Visual brand guidelines, digital ad asset designs, and persuasive sales copywriting for email flows and landing pages.',
     tags: ['Branding', 'Ad Creatives', 'UX Copy'],
+    href: routes.servicesDesignCopy.href(),
   },
 ]
 
@@ -89,7 +96,7 @@ export function ServicesGrid() {
   return () => (
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((s) => (
-        <div class="group relative rounded-3xl p-8 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col gap-5 bg-white border border-surface-2 hover:shadow-xl hover:border-primary/20">
+        <a href={s.href} class="group relative rounded-3xl p-8 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col gap-5 bg-white border border-surface-2 hover:shadow-xl hover:border-primary/20">
           {/* Subtle corner glow on hover */}
           <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"></div>
 
@@ -115,157 +122,83 @@ export function ServicesGrid() {
           <div class="flex items-center gap-2 text-sm font-semibold transition-colors duration-300 mt-1 text-text-secondary group-hover:text-primary">
             Learn more <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform duration-300 inline-block"></i>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   )
 }
 
-/* ─────────────────────────────────────────
-   PROCESS SECTION
-───────────────────────────────────────── */
 export function ProcessSection() {
-  return () => (
-    <section class="py-24 bg-gradient-to-br from-[#0a1a2e] via-primary to-[#050d18] text-white border-t border-white/5 relative overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
+  const steps = [
+    {
+      num: '01',
+      badge: 'Week 1',
+      title: 'Discovery & Audit',
+      desc: 'We audit your brand voice, analyze competitor gaps, and find leverage points to establish a solid baseline.',
+      icon: 'ph-binoculars',
+      color: 'text-secondary bg-secondary/10 border-secondary/20',
+    },
+    {
+      num: '02',
+      badge: 'Week 1–2',
+      title: 'Strategic Blueprint',
+      desc: 'We map out a custom 30/60/90-day growth roadmap, KPI framework, and dynamic budget allocation.',
+      icon: 'ph-map-trifold',
+      color: 'text-primary-light bg-primary-light/10 border-primary-light/20',
+    },
+    {
+      num: '03',
+      badge: 'Week 2–3',
+      title: 'Execution & Launch',
+      desc: 'Our creative and technical teams produce ad creatives, set up tracking QA, and go live.',
+      icon: 'ph-airplane-takeoff',
+      color: 'text-secondary bg-secondary/10 border-secondary/20',
+    },
+    {
+      num: '04',
+      badge: 'Ongoing',
+      title: 'Optimize & Scale',
+      desc: 'We run creative A/B tests, analyze performance metrics daily, and scale successful campaigns.',
+      icon: 'ph-chart-line-up',
+      color: 'text-primary-light bg-primary-light/10 border-primary-light/20',
+    },
+  ]
 
+  return () => (
+    <section class="py-24 bg-surface-dark0 text-white relative overflow-hidden border-t border-white/5">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(21,68,118,0.1)_0,transparent_60%)] pointer-events-none"></div>
+      
       <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        
         {/* Header */}
-        <div class="text-center max-w-3xl mx-auto mb-20">
-          <div class="flex justify-center mb-4">
-            <PillBadge icon="ph-path" text="How We Work" dark={true} />
-          </div>
-          <h2 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
-            From brief to <span class="text-secondary">breakthrough</span> — our process
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+            From brief to <span class="text-gradient">breakthrough</span>
           </h2>
-          <p class="text-lg text-white/70 leading-relaxed">
-            No guesswork. No templated strategies. Every engagement starts with understanding your business deeply and ends with measurable results.
+          <p class="text-white/60 leading-relaxed text-base md:text-lg">
+            We follow a highly-structured, data-proven execution plan to transition your brand to predictable, compounding growth.
           </p>
         </div>
 
-        {/* Process Steps — alternating layout */}
-        <div class="flex flex-col gap-8 max-w-4xl mx-auto">
-
-          {/* Step 1 */}
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div class="md:col-span-5 order-2 md:order-1 bg-white/[0.03] rounded-3xl p-8 flex items-center justify-center h-48 border border-white/10 group-hover:border-white/20 transition-colors">
-              <div class="flex items-center gap-6">
-                <div class="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center text-3xl shadow-md border border-white/5 flex-shrink-0">
-                  <i class="ph-fill ph-magnifying-glass-plus"></i>
+        {/* 4-Column Grid */}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((s) => (
+            <div class="group relative rounded-3xl p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <div class={`w-12 h-12 rounded-xl flex items-center justify-center text-xl border ${s.color}`}>
+                  <i class={`ph-fill ${s.icon}`}></i>
                 </div>
-                <div>
-                  <div class="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Week 1</div>
-                  <div class="font-bold text-white">Deep brand audit complete</div>
-                  <div class="text-xs text-white/60 mt-1">Competitor gaps identified. Positioning locked.</div>
-                </div>
+                <span class="text-sm font-bold text-white/40">{s.num}</span>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-secondary mb-1 block">{s.badge}</span>
+                <h3 class="text-lg font-bold text-white mb-2">{s.title}</h3>
+                <p class="text-sm text-white/50 leading-relaxed">{s.desc}</p>
               </div>
             </div>
-            <div class="md:col-span-7 order-1 md:order-2 flex flex-col gap-4">
-              <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-black text-base flex-shrink-0 shadow-md shadow-secondary/20">01</span>
-                <h3 class="text-2xl font-black text-white group-hover:text-secondary transition-colors">Discovery & Deep Audit</h3>
-              </div>
-              <p class="text-white/70 leading-relaxed pl-13">We analyse your brand positioning, current marketing data, audience personas, and competitor landscape — identifying high-leverage opportunities that others miss.</p>
-              <ul class="flex flex-col gap-2 pl-13">
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Brand voice & positioning audit</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Competitor gap analysis</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Audience persona mapping</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-          {/* Step 2 */}
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div class="md:col-span-7 flex flex-col gap-4">
-              <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-black text-base flex-shrink-0 shadow-md shadow-secondary/20">02</span>
-                <h3 class="text-2xl font-black text-white group-hover:text-secondary transition-colors">Strategic Blueprint</h3>
-              </div>
-              <p class="text-white/70 leading-relaxed pl-13">A bespoke, channel-specific strategy built around your KPIs — not a copy-paste template. We set targets, define timelines, allocate budgets, and agree on success metrics upfront.</p>
-              <ul class="flex flex-col gap-2 pl-13">
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> 30/60/90 day growth roadmap</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> KPI frameworks & tracking setup</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Budget allocation strategy</li>
-              </ul>
-            </div>
-            <div class="md:col-span-5 bg-white/[0.03] rounded-3xl p-8 flex items-center justify-center h-48 border border-white/10 group-hover:border-white/20 transition-colors">
-              <div class="flex items-center gap-6">
-                <div class="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center text-3xl shadow-md border border-white/5 flex-shrink-0">
-                  <i class="ph-fill ph-strategy"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Week 1–2</div>
-                  <div class="font-bold text-white">Strategy sign-off</div>
-                  <div class="text-xs text-white/60 mt-1">Roadmap tailored. Targets set.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-          {/* Step 3 */}
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div class="md:col-span-5 order-2 md:order-1 bg-white/[0.03] rounded-3xl p-8 flex items-center justify-center h-48 border border-white/10 group-hover:border-white/20 transition-colors">
-              <div class="flex items-center gap-6">
-                <div class="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center text-3xl shadow-md border border-white/5 flex-shrink-0">
-                  <i class="ph-fill ph-rocket-launch"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Week 2–3</div>
-                  <div class="font-bold text-white">Campaigns go live</div>
-                  <div class="text-xs text-white/60 mt-1">Assets built. Content live. Data flowing.</div>
-                </div>
-              </div>
-            </div>
-            <div class="md:col-span-7 order-1 md:order-2 flex flex-col gap-4">
-              <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-black text-base flex-shrink-0 shadow-md shadow-secondary/20">03</span>
-                <h3 class="text-2xl font-black text-white group-hover:text-secondary transition-colors">Execution & Launch</h3>
-              </div>
-              <p class="text-white/70 leading-relaxed pl-13">Our production and media teams build every asset, configure every campaign, and launch every funnel with precision — fully approved by you before anything goes live.</p>
-              <ul class="flex flex-col gap-2 pl-13">
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Creative production & approval</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Campaign setup & QA</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Funnel & tracking deployment</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-          {/* Step 4 */}
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div class="md:col-span-7 flex flex-col gap-4">
-              <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-black text-base flex-shrink-0 shadow-md shadow-secondary/20">04</span>
-                <h3 class="text-2xl font-black text-white group-hover:text-secondary transition-colors">Optimise, Report & Scale</h3>
-              </div>
-              <p class="text-white/70 leading-relaxed pl-13">Real-time monitoring, weekly performance calls, and monthly deep-dive reports. We cut what doesn't work and double down on what does — continuously compounding your results.</p>
-              <ul class="flex flex-col gap-2 pl-13">
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Weekly performance dashboards</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> A/B testing & iteration</li>
-                <li class="flex items-center gap-2 text-sm text-white/70"><i class="ph-fill ph-check-circle text-secondary text-base"></i> Scaling winning campaigns</li>
-              </ul>
-            </div>
-            <div class="md:col-span-5 bg-white/[0.03] rounded-3xl p-8 flex items-center justify-center h-48 border border-white/10 group-hover:border-white/20 transition-colors">
-              <div class="flex items-center gap-6">
-                <div class="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center text-3xl shadow-md border border-white/5 flex-shrink-0">
-                  <i class="ph-fill ph-trend-up"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Ongoing</div>
-                  <div class="font-bold text-white">Continuous growth</div>
-                  <div class="text-xs text-white/60 mt-1">Results compound month on month.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          ))}
         </div>
+
       </div>
     </section>
   )
@@ -284,11 +217,6 @@ export function TestimonialsSection() {
         {/* Header */}
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div class="max-w-xl">
-            <div class="mb-4">
-              <span class="pill-badge bg-primary/5 text-primary border-primary/10">
-                <i class="ph-fill ph-chat-circle-text text-primary"></i> Client Stories
-              </span>
-            </div>
             <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 mb-3 tracking-tight">
               Results our clients <span class="text-gradient">can't stop</span> talking about
             </h2>

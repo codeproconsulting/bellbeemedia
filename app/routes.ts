@@ -15,7 +15,8 @@ export const routes = route({
   ourWorkClientResults: get('/our-work/client-results'),
   ourWorkSuccessStories: get('/our-work/success-stories'),
   ourWorkIndustryExpertise: get('/our-work/industry-expertise'),
-  blogs: '/blogs',
+  blogs: get('/blogs'),
+  blogPost: get('/blogs/:slug'),
   aboutUs: '/about-us',
   aboutUsOurCompany: get('/about-us/our-company'),
   aboutUsOurMission: get('/about-us/our-mission'),
@@ -25,4 +26,6 @@ export const routes = route({
   contact: get('/contact'),
   privacy: get('/privacy'),
   terms: get('/terms'),
+  locationPakistanIslamabad: get('/locations/pakistan/islamabad'),
 })
+

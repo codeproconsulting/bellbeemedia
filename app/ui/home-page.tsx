@@ -11,16 +11,16 @@ export function HomePage() {
     "url": "https://bellbeemedia.com",
     "logo": "https://bellbeemedia.com/Logo.svg",
     "image": "https://bellbeemedia.com/og-image.jpg",
-    "description": "Next-Gen Digital Marketing Agency scaling brands through data-led marketing.",
+    "description": "Paid Media, Social & Creative agency driving measurable revenue for growing brands.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Digital Ave",
-      "addressLocality": "San Francisco",
-      "addressRegion": "CA",
-      "postalCode": "94107",
-      "addressCountry": "US"
+      "streetAddress": "Office #204, Vista Building",
+      "addressLocality": "Islamabad",
+      "addressRegion": "I8 Markaz",
+      "postalCode": "44000",
+      "addressCountry": "PK"
     },
-    "telephone": "+1-555-123-4567",
+    "telephone": "+923701902120",
     "email": "hello@bellbeemedia.com",
     "priceRange": "$$$",
     "sameAs": [
@@ -32,7 +32,8 @@ export function HomePage() {
 
   return () => (
     <Layout
-      title="Bell Bee Media | Next-Gen Digital Marketing Agency"
+      title="Bell Bee Media | Paid Media, Social & Creative Agency"
+      description="Paid Media, Social & Creative agency driving measurable revenue for growing consumer brands. No fluff, just revenue."
       head={
         <script type="application/ld+json">
           {JSON.stringify(schemaJson)}
@@ -50,15 +51,12 @@ export function HomePage() {
 
             {/* Left Copy */}
             <div class="lg:col-span-7 flex flex-col items-start text-left">
-              <div class="mb-6">
-                <PillBadge icon="ph-sparkle" text="Bell Bee Media Agency" />
-              </div>
               <h1 class="text-4xl md:text-6xl font-black text-surface-dark0 tracking-tight leading-[1.1] mb-6">
-                We Scale Brands<br/>
-                Through <span class="text-gradient font-black">Data-Led Marketing</span>
+                Paid Media, Social <br/>
+                & Creative <span class="text-gradient font-black">Built for Growth</span>
               </h1>
               <p class="text-lg md:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl">
-                Gain deeper social insights, unlock exponential growth, optimize campaigns, and connect with your audience like never before.
+                We manage paid acquisition, organic social channels, and high-performance creative assets for growing consumer brands. No fluff, just revenue.
               </p>
               <div class="flex flex-wrap gap-4">
                 <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primary-light transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]">
@@ -130,30 +128,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── Marquee Ticker ────────────────────────────────── */}
-      <section class="py-10 bg-white border-y border-surface-2 overflow-hidden w-full">
-        <div class="container mx-auto px-4 text-center mb-5">
-          <p class="text-[11px] text-text-secondary uppercase tracking-[0.2em] font-bold">Trusted by leading brands worldwide</p>
-        </div>
-        <div class="relative flex overflow-hidden w-full select-none">
-          <div class="animate-marquee flex gap-20 items-center whitespace-nowrap">
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-sketch-logo text-2xl text-primary/40"></i> Rise Co</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-figma-logo text-2xl text-secondary/40"></i> Vertigo</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-framer-logo text-2xl text-indigo-600/40"></i> Minty</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-github-logo text-2xl text-surface-dark0/40"></i> Glossy</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-dribbble-logo text-2xl text-pink-600/40"></i> Waveless</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-slack-logo text-2xl text-emerald-600/40"></i> NextLevel</div>
-            {/* Duplicate for seamless loop */}
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-sketch-logo text-2xl text-primary/40"></i> Rise Co</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-figma-logo text-2xl text-secondary/40"></i> Vertigo</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-framer-logo text-2xl text-indigo-600/40"></i> Minty</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-github-logo text-2xl text-surface-dark0/40"></i> Glossy</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-dribbble-logo text-2xl text-pink-600/40"></i> Waveless</div>
-            <div class="flex items-center gap-2 text-xl font-black text-surface-dark2/40"><i class="ph-bold ph-slack-logo text-2xl text-emerald-600/40"></i> NextLevel</div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Stats Bar ────────────────────────────────────── */}
       <StatsBar />
 
@@ -166,16 +140,13 @@ export function HomePage() {
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <div class="max-w-xl">
-              <div class="mb-4">
-                <PillBadge icon="ph-squares-four" text="Our Services" />
-              </div>
               <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight">
-                Everything your brand needs — <span class="text-gradient">one team</span>, every channel
+                Search, Social & Creative. <br/><span class="text-gradient">Fully Integrated.</span>
               </h2>
             </div>
             <div class="flex-shrink-0">
               <p class="text-text-secondary leading-relaxed max-w-xs">
-                Whether you need social growth, paid media, creative production, or a brand-new website — we've got the specialist for it.
+                We manage paid acquisition, organic social, and conversion assets under one roof to drive cohesive brand growth.
               </p>
             </div>
           </div>
@@ -184,42 +155,42 @@ export function HomePage() {
               {
                 icon: 'ph-heart',
                 title: 'Social Media Management',
-                desc: 'Platform-native strategies, community management, and viral content that builds loyal audiences and turns followers into brand evangelists.',
+                desc: 'Organic platform strategies, copy, native vertical video, community management, and audience growth across channels.',
                 tags: ['Instagram', 'TikTok', 'LinkedIn'],
                 href: routes.servicesSocialMedia.href(),
               },
               {
                 icon: 'ph-chart-line-up',
                 title: 'Performance Marketing',
-                desc: 'ROI-obsessed PPC campaigns engineered to drive qualified leads and revenue at scale — from Meta Ads to Google Search to programmatic.',
+                desc: 'Paid media buying across Meta, Google Search, Shopping, and Programmatic. We write, execute, test, and optimize in-house.',
                 tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
                 href: routes.servicesPerformanceAds.href(),
               },
               {
                 icon: 'ph-megaphone',
                 title: 'Digital PR & Influencer',
-                desc: 'Strategic media placements, editorial outreach, and curated influencer partnerships that make your brand impossible to ignore.',
-                tags: ['Media Coverage', 'Influencer Seeding', 'Brand Colabs'],
+                desc: 'Curated influencer gifting/campaign partnerships and securing strategic press coverage to build authority and drive referral traffic.',
+                tags: ['Media Coverage', 'Influencer Gifting', 'Brand Colabs'],
                 href: routes.servicesDigitalPr.href(),
               },
               {
                 icon: 'ph-film-slate',
                 title: 'Creative Production',
-                desc: 'Premium video shoots, branded photography, and motion graphics that stop the scroll and make every pixel of your content count.',
+                desc: 'High-quality video shoots, scroll-stopping social ad creatives, product photography, and motion graphics.',
                 tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
                 href: routes.servicesProduction.href(),
               },
               {
                 icon: 'ph-desktop',
                 title: 'Web & Landing Pages',
-                desc: 'Conversion-engineered websites and high-speed landing pages that turn traffic into customers — built for both humans and search engines.',
+                desc: 'High-speed, mobile-first websites, Shopify stores, and custom landing pages optimized for maximum conversion rate.',
                 tags: ['CRO', 'SEO', 'E-commerce'],
                 href: routes.servicesWebSolutions.href(),
               },
               {
                 icon: 'ph-bezier-curve',
                 title: 'Design & Copywriting',
-                desc: 'Visual brand identities, ad creatives, and sharp sales copy that communicates your value proposition with clarity and authority.',
+                desc: 'Visual brand guidelines, digital ad asset designs, and persuasive sales copywriting for email flows and landing pages.',
                 tags: ['Branding', 'Ad Creatives', 'UX Copy'],
                 href: routes.servicesDesignCopy.href(),
               },
@@ -288,14 +259,11 @@ function FaqSection() {
       <div class="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
         <div class="text-center max-w-2xl mx-auto mb-16">
-          <div class="flex justify-center mb-4">
-            <PillBadge icon="ph-question" text="Common Questions" />
-          </div>
           <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 mb-4 tracking-tight">
             Frequently Asked <span class="text-gradient">Questions</span>
           </h2>
           <p class="text-text-secondary leading-relaxed">
-            Everything you need to know about our data-led marketing process, onboarding timelines, and campaign optimization.
+            Everything you need to know about our workflow, onboarding timelines, and campaign optimization.
           </p>
         </div>
 

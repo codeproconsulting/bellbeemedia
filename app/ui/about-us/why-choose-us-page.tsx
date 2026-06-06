@@ -41,10 +41,10 @@ export function WhyChooseUsPage() {
       {/* Client Trust Signals */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="98%" label="Client Retention Rate" />
-          <StatBox value="4.9/5" label="Average Client Rating" />
-          <StatBox value="60+" label="Active Clients" />
-          <StatBox value="7+" label="Years in Business" />
+          <StatBox value="5" label="Core Specialists" />
+          <StatBox value="20+" label="Combined Yrs Experience" />
+          <StatBox value="4.2x" label="Avg. ROAS Delivered" />
+          <StatBox value="100%" label="Dedicated to You" />
         </div>
       </section>
 
@@ -108,7 +108,7 @@ export function WhyChooseUsPage() {
       <section class="py-24 bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120]">
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Experience the Bell Bee Difference</h2>
-          <p class="text-xl text-white/80 mb-10">Get a no-obligation strategy session and see first-hand how we approach growth differently.</p>
+          <p class="text-xl text-white/80 mb-10">Book a free strategy session and see first-hand how five specialists working in sync can deliver what a dozen-person agency never could.</p>
           <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary font-bold text-lg rounded-full hover:bg-surface-1 transition-colors shadow-2xl">
             Book Your Free Strategy Session <i class="ph ph-arrow-right" />
           </a>

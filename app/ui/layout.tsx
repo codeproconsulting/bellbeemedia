@@ -24,12 +24,14 @@ export function Layout() {
                 <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-10">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Header spans the full width */}
+                      <div class="col-span-12">
+                        <h3 class="text-2xl font-black text-surface-dark0 tracking-tight">Our Services</h3>
+                        <p class="text-sm text-text-secondary mt-1.5">Everything your brand needs to grow. One team. Every channel.</p>
+                      </div>
+
                       {/* Left/Center Area (Grid of options) */}
                       <div class="col-span-8">
-                        <div class="mb-6">
-                          <h3 class="text-2xl font-black text-surface-dark0 tracking-tight">Our Services</h3>
-                          <p class="text-sm text-text-secondary mt-1.5">Everything your brand needs to grow. One team. Every channel.</p>
-                        </div>
                         <div class="grid grid-cols-3 gap-4">
                           {/* Service Item 1 */}
                           <a href={routes.servicesSocialMedia.href()} class="flex gap-3 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
@@ -128,7 +130,7 @@ export function Layout() {
                             </div>
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
                               <span>Call Center:</span>
-                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                              <a href="tel:+923701902120" class="text-primary hover:underline">+92 370 190 2120</a>
                             </div>
                             <div class="flex justify-between items-center py-1">
                               <span>Support Hours:</span>
@@ -150,12 +152,14 @@ export function Layout() {
                 <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Header spans full width */}
+                      <div class="col-span-12">
+                        <h3 class="text-xl font-black text-surface-dark0 tracking-tight">Our Portfolio</h3>
+                        <p class="text-xs text-text-secondary mt-1">Real campaigns, hard numbers, and commercial growth.</p>
+                      </div>
+
                       {/* Left/Center Area (Grid of options) */}
                       <div class="col-span-8">
-                        <div class="mb-6">
-                          <h3 class="text-xl font-black text-surface-dark0 tracking-tight">Our Portfolio</h3>
-                          <p class="text-xs text-text-secondary mt-1">Real campaigns, hard numbers, and commercial growth.</p>
-                        </div>
                         <div class="grid grid-cols-2 gap-4">
                           {/* Work Item 1 */}
                           <a href={routes.ourWorkCaseStudies.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
@@ -232,7 +236,7 @@ export function Layout() {
                             </div>
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
                               <span>Call Center:</span>
-                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                              <a href="tel:+923701902120" class="text-primary hover:underline">+92 370 190 2120</a>
                             </div>
                             <div class="flex justify-between items-center py-1">
                               <span>Support Hours:</span>
@@ -256,12 +260,14 @@ export function Layout() {
                 <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
+                      {/* Header spans full width */}
+                      <div class="col-span-12">
+                        <h3 class="text-xl font-black text-surface-dark0 tracking-tight">About Our Agency</h3>
+                        <p class="text-xs text-text-secondary mt-1">Dedicated to helping ambitious brands thrive in the digital age.</p>
+                      </div>
+
                       {/* Left/Center Area (Grid of options) */}
                       <div class="col-span-8">
-                        <div class="mb-6">
-                          <h3 class="text-xl font-black text-surface-dark0 tracking-tight">About Our Agency</h3>
-                          <p class="text-xs text-text-secondary mt-1">Dedicated to helping ambitious brands thrive in the digital age.</p>
-                        </div>
                         <div class="grid grid-cols-2 gap-4">
                           {/* About Item 1 */}
                           <a href={routes.aboutUsOurCompany.href()} class="flex gap-4 p-5 rounded-2xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-lg hover:shadow-surface-3/10 transition-all duration-300 group/item">
@@ -338,7 +344,7 @@ export function Layout() {
                             </div>
                             <div class="flex justify-between items-center py-1 border-b border-surface-2/60">
                               <span>Call Center:</span>
-                              <a href="tel:+15551234567" class="text-primary hover:underline">+1 (555) 123-4567</a>
+                              <a href="tel:+923701902120" class="text-primary hover:underline">+92 370 190 2120</a>
                             </div>
                             <div class="flex justify-between items-center py-1">
                               <span>Support Hours:</span>
@@ -398,7 +404,7 @@ export function Layout() {
         </main>
         
         <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
-          <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12">
             <div class="md:col-span-2">
               <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto mb-6" />
               <p class="text-text-secondary max-w-sm mb-6">
@@ -428,13 +434,24 @@ export function Layout() {
                 <li><a href={routes.getProposal.href()} class="hover:text-primary transition-colors">Get a Quote</a></li>
               </ul>
             </div>
+
+            <div>
+              <h4 class="font-bold text-surface-dark0 mb-6">Locations Served</h4>
+              <ul class="flex flex-col gap-4 text-text-secondary">
+                <li>
+                  <a href={routes.locationPakistanIslamabad.href()} class="hover:text-primary transition-colors inline-flex items-center gap-1.5">
+                    <span>🇵🇰</span> Islamabad, Pakistan
+                  </a>
+                </li>
+              </ul>
+            </div>
             
             <div>
               <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
               <ul class="flex flex-col gap-4 text-text-secondary">
                 <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
-                <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +1 (555) 123-4567</li>
-                <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> 123 Digital Ave,<br/>San Francisco, CA</li>
+                <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +92 370 190 2120</li>
+                <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br/>I8 Markaz, Islamabad</li>
               </ul>
             </div>
           </div>

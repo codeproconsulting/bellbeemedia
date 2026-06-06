@@ -1,8 +1,15 @@
 import { Layout } from '../layout.tsx'
 import { PillBadge } from '../shared.tsx'
 import { routes } from '../../routes.ts'
+import { type Handle } from 'remix/ui'
+import { type WPCaseStudy } from '../../data/wordpress.ts'
 
-export function CaseStudiesPage() {
+interface CaseStudiesPageProps {
+  caseStudies: WPCaseStudy[]
+}
+
+export function CaseStudiesPage(handle: Handle<CaseStudiesPageProps>) {
+  const { caseStudies } = handle.props
   return () => (
     <Layout
       title="Digital Marketing Case Studies | Bell Bee Media"
@@ -41,14 +48,14 @@ export function CaseStudiesPage() {
       {/* Stats Bar */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="60+" label="Active Case Studies" />
+          <StatBox value={`${caseStudies.length}+`} label="Active Case Studies" />
           <StatBox value="14" label="Industries Covered" />
           <StatBox value="£2B+" label="Client Revenue Influenced" />
           <StatBox value="98%" label="Client Satisfaction" />
         </div>
       </section>
 
-      {/* Featured Case Studies */}
+      {/* Case Studies Grid */}
       <section class="py-24 bg-surface-1">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="text-center mb-16">
@@ -57,12 +64,16 @@ export function CaseStudiesPage() {
             <p class="text-text-secondary mt-4 max-w-2xl mx-auto">From early-stage startups to established brands, we've driven measurable growth across every digital marketing discipline.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <CaseStudyCard tag="Social Media" metric="+320%" metricLabel="Engagement Rate" title="E-Commerce Brand Growth" desc="Scaled an online fashion retailer from 5K to 85K Instagram followers in 6 months with a content-led social strategy and influencer activations." />
-            <CaseStudyCard tag="Performance Ads" secondary={true} metric="4.8x ROAS" metricLabel="Return on Ad Spend" title="D2C Product Launch" desc="Launched a new health supplement brand with Google and Meta ads, achieving profitability in week 3 of a 6-week campaign." />
-            <CaseStudyCard tag="Web & SEO" metric="+415%" metricLabel="Organic Traffic Growth" title="B2B SaaS SEO Overhaul" desc="Redesigned and rebuilt a SaaS company's website with technical SEO foundations, growing monthly visits from 2K to 10K in 4 months." />
-            <CaseStudyCard tag="Digital PR" secondary={true} metric="180+" metricLabel="Media Placements Secured" title="Consumer Brand Awareness" desc="Ran a 6-month Digital PR campaign for a consumer goods brand, securing coverage in Forbes, The Guardian, and 30+ niche publications." />
-            <CaseStudyCard tag="Brand Design" metric="2.1x" metricLabel="Conversion Rate Improvement" title="Full Brand Rebrand" desc="Rebranded a 10-year-old retail business with a new visual identity, tone of voice, and website, resulting in doubled conversions." />
-            <CaseStudyCard tag="Production" secondary={true} metric="5.2M" metricLabel="Video Views in 30 Days" title="Viral Product Video" desc="Produced a short-form product video series for a food brand that generated over 5 million organic views across TikTok and YouTube." />
+            {caseStudies.map((cs, i) => (
+              <CaseStudyCard
+                tag={cs.tag}
+                secondary={i % 2 !== 0}
+                metric={cs.metric}
+                metricLabel={cs.metricLabel}
+                title={cs.title}
+                desc={cs.description}
+              />
+            ))}
           </div>
         </div>
       </section>

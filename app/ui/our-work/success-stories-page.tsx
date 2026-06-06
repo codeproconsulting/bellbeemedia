@@ -1,8 +1,15 @@
 import { Layout } from '../layout.tsx'
 import { PillBadge } from '../shared.tsx'
 import { routes } from '../../routes.ts'
+import { type Handle } from 'remix/ui'
+import { type WPSuccessStory } from '../../data/wordpress.ts'
 
-export function SuccessStoriesPage() {
+interface SuccessStoriesPageProps {
+  stories: WPSuccessStory[]
+}
+
+export function SuccessStoriesPage(handle: Handle<SuccessStoriesPageProps>) {
+  const { stories } = handle.props
   return () => (
     <Layout
       title="Client Success Stories | Bell Bee Media"
@@ -56,28 +63,16 @@ export function SuccessStoriesPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Transformational Growth Stories</h2>
           </div>
           <div class="flex flex-col gap-12">
-            <StoryCard
-              tag="Social Media + Production"
-              title="Zero to 500K: How We Built a Fashion Brand's Digital Empire"
-              challenge="A UK fashion startup with no social presence and minimal budget needed to establish brand recognition and drive online sales fast."
-              strategy="We developed a TikTok-first content strategy with weekly UGC-style videos, micro-influencer activations, and targeted Meta ads to retarget engaged viewers."
-              results={["500K TikTok followers in 12 months", "£1.2M in attributable social commerce revenue", "3.8% average engagement rate (industry avg: 1.1%)"]}
-            />
-            <StoryCard
-              tag="SEO + Web Development"
-              secondary={true}
-              title="How a B2B SaaS Company Went from Page 10 to #1 on Google"
-              challenge="A project management SaaS tool was invisible on search engines, relying entirely on paid ads for customer acquisition — an unsustainable and expensive model."
-              strategy="We rebuilt their website with a technical SEO foundation, executed a 12-month content strategy targeting 80+ commercial keywords, and earned 200+ editorial backlinks."
-              results={["#1 ranking for primary keyword within 8 months", "415% organic traffic growth", "CAC reduced by 65% through organic channel"]}
-            />
-            <StoryCard
-              tag="Performance Ads + Digital PR"
-              title="Launching a Health Brand to £500K Revenue in 90 Days"
-              challenge="A new wellness supplement brand needed rapid market entry, brand credibility, and sales volume simultaneously — without the luxury of a slow organic build."
-              strategy="Parallel tracks: aggressive Meta and Google ad campaigns for immediate revenue, combined with a Digital PR blitz securing 40+ health publication features for credibility."
-              results={["£500K in verified revenue within 90 days", "40+ editorial features in health publications", "Profitable from day 18 of ad launch"]}
-            />
+            {stories.map((story, i) => (
+              <StoryCard
+                tag={story.tag}
+                secondary={i % 2 !== 0}
+                title={story.title}
+                challenge={story.challenge}
+                strategy={story.strategy}
+                results={story.results}
+              />
+            ))}
           </div>
         </div>
       </section>

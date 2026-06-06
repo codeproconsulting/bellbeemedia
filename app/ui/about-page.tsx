@@ -2,8 +2,39 @@ import { Layout } from './layout.tsx'
 import { PillBadge } from './shared.tsx'
 
 export function AboutPage() {
+  const schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Bell Bee Media",
+    "description": "Meet Bell Bee Media — a team of digital marketing experts, creative designers, and media buyers dedicated to driving revenue and scaling consumer brands.",
+    "url": "https://bellbeemedia.com/about-us",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "BellBee Media",
+      "url": "https://bellbeemedia.com",
+      "logo": "https://bellbeemedia.com/Logo.svg",
+      "image": "https://bellbeemedia.com/og-image.jpg",
+      "description": "Paid Media, Social & Creative agency driving measurable revenue for growing brands.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Office #204, Vista Building, I-8 Markaz",
+        "addressLocality": "Islamabad",
+        "postalCode": "44000",
+        "addressCountry": "PK"
+      }
+    }
+  };
+
   return () => (
-    <Layout title="About Us | Bell Bee Media">
+    <Layout
+      title="About Us | Paid Media, Social & Creative Agency | Bell Bee Media"
+      description="Meet Bell Bee Media — a team of digital marketing experts, creative designers, and media buyers dedicated to driving revenue and scaling consumer brands."
+      head={
+        <script type="application/ld+json">
+          {JSON.stringify(schemaJson)}
+        </script>
+      }
+    >
       <div class="bg-white min-h-screen pt-20 pb-24">
         <div class="container mx-auto px-4 max-w-5xl">
           <div class="text-center mb-20">

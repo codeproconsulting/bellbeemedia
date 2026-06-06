@@ -7,7 +7,7 @@ import { clientEntry, on, type Handle, type SerializableProps } from 'remix/ui'
 
 function WidgetSocialMedia() {
   return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
+    <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
       {/* Follower Growth Tracker */}
       <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden">
         <div class="flex justify-between items-center mb-2">
@@ -23,7 +23,7 @@ function WidgetSocialMedia() {
         </div>
         
         {/* Animated Line Graph */}
-        <div class="h-20 mt-4 relative">
+        <div class="h-14 lg:h-20 mt-4 relative">
           <svg class="w-full h-full overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
             <defs>
               <linearGradient id="glow-social" x1="0" y1="0" x2="0" y2="1">
@@ -71,12 +71,12 @@ function WidgetSocialMedia() {
 
 function WidgetPerformanceMarketing() {
   return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
+    <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
       <div class="grid grid-cols-2 gap-4">
         {/* Circle ROAS gauge */}
         <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md flex flex-col items-center justify-center text-center relative overflow-hidden">
           <div class="text-[9px] font-semibold uppercase tracking-wider text-white/50 mb-2">Average ROAS</div>
-          <div class="relative w-20 h-20 flex items-center justify-center">
+          <div class="relative w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center">
             <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
               <path
                 class="text-white/10"
@@ -98,7 +98,7 @@ function WidgetPerformanceMarketing() {
               />
             </svg>
             <div class="absolute flex flex-col items-center">
-              <span class="text-xl font-bold font-conthrax text-white">5.1x</span>
+              <span class="text-lg lg:text-xl font-bold font-conthrax text-white">5.1x</span>
               <span class="text-[7px] text-white/50">Delivered</span>
             </div>
           </div>
@@ -117,7 +117,7 @@ function WidgetPerformanceMarketing() {
             </div>
             <div>
               <div class="text-[8px] text-green-400 font-bold">BellBee Optimized</div>
-              <div class="text-xl font-extrabold text-green-400">₹249</div>
+              <div class="text-lg lg:text-xl font-extrabold text-green-400">₹249</div>
             </div>
           </div>
           <div class="text-[8px] text-white/30 font-medium">Based on ₹12Cr+ spend</div>
@@ -134,12 +134,12 @@ function WidgetPerformanceMarketing() {
             <span class="w-1 h-1 rounded-full bg-secondary/10"></span>
           </div>
         </div>
-        <div class="flex items-end h-12 gap-2 pt-2">
-          <div class="w-full bg-secondary/20 rounded-sm h-[30%]"></div>
-          <div class="w-full bg-secondary/30 rounded-sm h-[45%]"></div>
-          <div class="w-full bg-secondary/50 rounded-sm h-[60%]"></div>
-          <div class="w-full bg-secondary/70 rounded-sm h-[80%]"></div>
-          <div class="w-full bg-secondary rounded-sm h-[100%] shadow-[0_0_8px_rgba(229,96,38,0.4)]"></div>
+        <div class="flex items-end h-10 lg:h-12 gap-2 pt-2">
+          <div class="flex-1 bg-secondary/20 rounded-sm h-[30%]"></div>
+          <div class="flex-1 bg-secondary/30 rounded-sm h-[45%]"></div>
+          <div class="flex-1 bg-secondary/50 rounded-sm h-[60%]"></div>
+          <div class="flex-1 bg-secondary/70 rounded-sm h-[80%]"></div>
+          <div class="flex-1 bg-secondary rounded-sm h-full shadow-[0_0_8px_rgba(229,96,38,0.4)]"></div>
         </div>
       </div>
     </div>
@@ -148,24 +148,24 @@ function WidgetPerformanceMarketing() {
 
 function WidgetDigitalPR() {
   return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
+    <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
       {/* Media Placements Grid */}
       <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden">
         <div class="text-[10px] font-semibold uppercase tracking-wider text-white/50 mb-3">Top Tier Placements</div>
         <div class="grid grid-cols-2 gap-2.5">
-          <div class="bg-white/5 border border-white/5 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
+          <div class="bg-white/5 border border-white/10 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
             <i class="ph-bold ph-sketch-logo text-xs text-primary-light"></i>
             <span class="text-[9px] font-black tracking-wider text-white/80">FORBES</span>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
+          <div class="bg-white/5 border border-white/10 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
             <i class="ph-bold ph-figma-logo text-xs text-secondary"></i>
             <span class="text-[9px] font-black tracking-wider text-white/80">TC</span>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
+          <div class="bg-white/5 border border-white/10 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
             <i class="ph-bold ph-framer-logo text-xs text-indigo-400"></i>
             <span class="text-[9px] font-black tracking-wider text-white/80">BLOOMBERG</span>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
+          <div class="bg-white/5 border border-white/10 rounded-lg py-1.5 px-2 flex items-center justify-center gap-1">
             <i class="ph-bold ph-slack-logo text-xs text-emerald-400"></i>
             <span class="text-[9px] font-black tracking-wider text-white/80">VOGUE</span>
           </div>
@@ -182,9 +182,9 @@ function WidgetDigitalPR() {
         </div>
         <div class="flex-grow">
           <div class="text-[11px] font-bold text-white">Ananya Roy (Creator)</div>
-          <div class="text-[9px] text-white/50">2.4M Reach • 8.2% Engagement</div>
+          <div class="text-[9px] text-white/50 font-sans">2.4M Reach • 8.2% Engagement</div>
         </div>
-        <div class="text-right">
+        <div class="text-right shrink-0">
           <div class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 inline-block">
             3.4x ROI
           </div>
@@ -196,7 +196,7 @@ function WidgetDigitalPR() {
 
 function WidgetCreativeProduction() {
   return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
+    <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
       {/* Video Monitor Frame */}
       <div class="bg-white/5 border border-white/10 rounded-2xl p-2.5 backdrop-blur-md relative overflow-hidden">
         <div class="aspect-video bg-black rounded-lg relative overflow-hidden flex items-center justify-center border border-white/5">
@@ -260,9 +260,9 @@ function WidgetCreativeProduction() {
 
 function WidgetWebSolutions() {
   return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
+    <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
       {/* Browser Frame */}
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-md relative overflow-hidden flex-grow flex flex-col mb-3">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-md relative overflow-hidden flex flex-col">
         <div class="flex items-center gap-1 pb-1.5 border-b border-white/5 mb-3 shrink-0">
           <span class="w-1.5 h-1.5 rounded-full bg-red-400/80"></span>
           <span class="w-1.5 h-1.5 rounded-full bg-yellow-400/80"></span>
@@ -272,11 +272,11 @@ function WidgetWebSolutions() {
           </div>
         </div>
         
-        <div class="flex-grow flex items-center justify-around gap-2.5">
+        <div class="flex items-center justify-around gap-2.5 py-2">
           <div class="flex flex-col items-center gap-1">
-            <div class="w-16 h-16 rounded-full border-4 border-emerald-500/20 flex items-center justify-center relative shadow-[0_0_12px_rgba(16,185,129,0.15)] bg-emerald-500/5">
+            <div class="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-4 border-emerald-500/20 flex items-center justify-center relative shadow-[0_0_12px_rgba(16,185,129,0.15)] bg-emerald-500/5">
               <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-emerald-500 animate-spin"></div>
-              <span class="text-xl font-black text-emerald-400 font-conthrax">99</span>
+              <span class="text-lg lg:text-xl font-black text-emerald-400 font-conthrax">99</span>
             </div>
             <span class="text-[8px] font-bold text-emerald-400 tracking-wider">PERFORMANCE</span>
           </div>
@@ -289,7 +289,7 @@ function WidgetWebSolutions() {
               <i class="ph-fill ph-check-circle text-emerald-400"></i> LCP: <span class="font-bold text-emerald-400">1.1s</span>
             </div>
             <div class="flex items-center gap-1.5 text-[9px] font-medium text-white/80">
-              <i class="ph-fill ph-check-circle text-emerald-400"></i> SEO & CRO: <span class="font-bold text-emerald-400">Optimised</span>
+              <i class="ph-fill ph-check-circle text-emerald-400"></i> SEO &amp; CRO: <span class="font-bold text-emerald-400">Optimised</span>
             </div>
           </div>
         </div>
@@ -315,64 +315,7 @@ function WidgetWebSolutions() {
   )
 }
 
-function WidgetDesignCopy(handle: Handle<{ parentHandle: Handle<any> }>) {
-  let activeColorIndex = 0
-
-  return () => (
-    <div class="w-full h-full flex flex-col justify-between p-6 text-left">
-      {/* Design Board / Color Swatches */}
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden">
-        <div class="flex justify-between items-center mb-3.5">
-          <span class="text-[10px] font-semibold uppercase tracking-wider text-white/50">Brand Canvas</span>
-          <span class="text-[8px] text-white/40 font-mono">1920x1080px</span>
-        </div>
-        <div class="flex justify-around items-center py-1.5 bg-black/20 rounded-xl border border-white/5">
-          {[
-            { hex: '#154476', name: 'Primary' },
-            { hex: '#E56026', name: 'Secondary' },
-            { hex: '#FDB517', name: 'Accent' },
-            { hex: '#2CBCEE', name: 'Cyan' },
-            { hex: '#0F172A', name: 'Slate' }
-          ].map((color, i) => (
-            <button
-              key={i}
-              mix={on('click', () => {
-                activeColorIndex = i
-                handle.props.parentHandle.update()
-              })}
-              class="flex flex-col items-center gap-1 focus:outline-none group"
-            >
-              <div
-                class={`w-7 h-7 rounded-full border-2 transition-all duration-300 ${
-                  activeColorIndex === i 
-                    ? 'border-white scale-110 shadow-lg shadow-white/20' 
-                    : 'border-transparent group-hover:scale-105'
-                }`}
-                style={{ backgroundColor: color.hex }}
-              />
-              <span class="text-[7px] font-mono text-white/50">{color.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Copy Editor card */}
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden">
-        <div class="text-[9px] font-semibold uppercase tracking-wider text-white/40 mb-2">High-Converting Copy</div>
-        <div class="flex flex-col gap-1.5">
-          <div class="p-2 rounded bg-red-500/5 border border-red-500/10 flex items-start gap-1.5">
-            <i class="ph ph-x-circle text-red-400 mt-0.5 shrink-0 text-xs"></i>
-            <div class="text-[9px] text-white/50 font-medium line-through leading-tight">We are a next-gen digital marketing agency providing services.</div>
-          </div>
-          <div class="p-2 rounded bg-emerald-500/5 border border-emerald-500/10 flex items-start gap-1.5">
-            <i class="ph-fill ph-check-circle text-emerald-400 mt-0.5 shrink-0 text-xs"></i>
-            <div class="text-[9px] text-white font-bold leading-tight">We Scale Brands Through Data-Led Marketing & Conversion Funnels.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+// WidgetDesignCopy is defined inline inside InteractiveServicesShowcase to close over state.
 
 /* ─────────────────────────────────────────
    INTERACTIVE SERVICES SHOWCASE
@@ -394,6 +337,74 @@ export const InteractiveServicesShowcase = clientEntry(
   import.meta.url,
   function InteractiveServicesShowcase(handle: Handle<InteractiveServicesShowcaseProps>) {
     let activeIndex = 0
+    let activeColorIndex = 0
+
+    function WidgetDesignCopy() {
+      const colors = [
+        { hex: '#154476', name: 'Primary' },
+        { hex: '#E56026', name: 'Secondary' },
+        { hex: '#FDB517', name: 'Accent' },
+        { hex: '#2CBCEE', name: 'Cyan' },
+        { hex: '#0F172A', name: 'Slate' }
+      ]
+      return () => {
+        const activeColor = colors[activeColorIndex]?.hex ?? '#154476'
+        return (
+          <div class="w-full h-full flex flex-col justify-center gap-4 lg:gap-6 p-4 lg:p-8 text-left">
+            {/* Design Board / Color Swatches */}
+            <div 
+              class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden transition-all duration-300"
+              style={{ borderColor: `${activeColor}30`, boxShadow: `0 4px 20px ${activeColor}15` }}
+            >
+              <div class="flex justify-between items-center mb-3.5">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-white/50">Brand Canvas</span>
+                <span class="text-[8px] text-white/40 font-mono">1920x1080px</span>
+              </div>
+              <div class="flex justify-around items-center py-1.5 bg-black/20 rounded-xl border border-white/5">
+                {colors.map((color, i) => (
+                  <button
+                    key={i}
+                    mix={on('click', () => {
+                      activeColorIndex = i
+                      handle.update()
+                    })}
+                    class="flex flex-col items-center gap-1 focus:outline-none group"
+                  >
+                    <div
+                      class={`w-7 h-7 rounded-full border-2 transition-all duration-300 ${
+                        activeColorIndex === i 
+                          ? 'border-white scale-110 shadow-lg shadow-white/20' 
+                          : 'border-transparent group-hover:scale-105'
+                      }`}
+                      style={{ backgroundColor: color.hex }}
+                    />
+                    <span class="text-[7px] font-mono text-white/50">{color.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Copy Editor card */}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md relative overflow-hidden">
+              <div class="text-[9px] font-semibold uppercase tracking-wider text-white/40 mb-2 font-sans">High-Converting Copy</div>
+              <div class="flex flex-col gap-1.5">
+                <div class="p-2 rounded bg-red-500/5 border border-red-500/10 flex items-start gap-1.5">
+                  <i class="ph ph-x-circle text-red-400 mt-0.5 shrink-0 text-xs"></i>
+                  <div class="text-[9px] text-white/50 font-medium line-through leading-tight font-sans">We are a next-gen digital marketing agency providing full-service synergized growth.</div>
+                </div>
+                <div 
+                  class="p-2 rounded bg-emerald-500/5 border border-emerald-500/10 flex items-start gap-1.5 transition-all duration-300"
+                  style={{ borderColor: `${activeColor}40` }}
+                >
+                  <i class="ph-fill ph-check-circle mt-0.5 shrink-0 text-xs" style={{ color: activeColor }}></i>
+                  <div class="text-[9px] text-white font-bold leading-tight font-sans">We run paid search, social media, and Shopify design for consumer brands.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    }
 
     return () => {
       const servicesList = handle.props.services
@@ -409,7 +420,7 @@ export const InteractiveServicesShowcase = clientEntry(
             .iss-grid { grid-template-columns: 5fr 7fr; }
             .iss-right { display: block; position: sticky; top: 7rem; height: 480px;
               background: #0f172a; border-radius: 32px; border: 1px solid #334155;
-              box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); overflow: hidden; position: sticky; }
+              box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); overflow: hidden; }
             .iss-accordion { display: none !important; }
           }
           .iss-btn { width: 100%; text-align: left; border-radius: 1rem; padding: 1.25rem; border: 1px solid;
@@ -508,7 +519,7 @@ export const InteractiveServicesShowcase = clientEntry(
                         {index === 2 && <WidgetDigitalPR />}
                         {index === 3 && <WidgetCreativeProduction />}
                         {index === 4 && <WidgetWebSolutions />}
-                        {index === 5 && <WidgetDesignCopy parentHandle={handle} />}
+                        {index === 5 && <WidgetDesignCopy />}
                       </div>
 
                       <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -539,7 +550,7 @@ export const InteractiveServicesShowcase = clientEntry(
                     {index === 2 && <WidgetDigitalPR />}
                     {index === 3 && <WidgetCreativeProduction />}
                     {index === 4 && <WidgetWebSolutions />}
-                    {index === 5 && <WidgetDesignCopy parentHandle={handle} />}
+                    {index === 5 && <WidgetDesignCopy />}
                   </div>
                 )
               })}

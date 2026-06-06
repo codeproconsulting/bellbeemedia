@@ -3,7 +3,10 @@ import { PillBadge } from './shared.tsx'
 
 export function ContactPage() {
   return () => (
-    <Layout title="Contact Us | Bell Bee Media">
+    <Layout
+      title="Contact Us | Bell Bee Media"
+      description="Get in touch with Bell Bee Media. Reach hello@bellbeemedia.com, call +92 370 190 2120, or book a free 30-minute growth strategy consultation call."
+    >
       <div class="bg-surface-1 min-h-screen pt-20 pb-24">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -35,7 +38,7 @@ export function ContactPage() {
                   </div>
                   <div>
                     <h3 class="text-lg font-bold text-surface-dark0 mb-1">Call Us</h3>
-                    <p class="text-text-secondary text-lg">+1 (555) 123-4567</p>
+                    <p class="text-text-secondary text-lg">+92 370 190 2120</p>
                   </div>
                 </div>
                 
@@ -45,7 +48,7 @@ export function ContactPage() {
                   </div>
                   <div>
                     <h3 class="text-lg font-bold text-surface-dark0 mb-1">Visit Us</h3>
-                    <p class="text-text-secondary text-lg">123 Digital Ave, Suite 400<br/>San Francisco, CA 94107</p>
+                    <p class="text-text-secondary text-lg">Office #204, Vista Building,<br/>I8 Markaz, Islamabad</p>
                   </div>
                 </div>
               </div>
