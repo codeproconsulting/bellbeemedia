@@ -24,6 +24,7 @@ import { GetProposalPage } from '../ui/get-proposal-page.tsx'
 import { PrivacyPage } from '../ui/privacy-page.tsx'
 import { TermsPage } from '../ui/terms-page.tsx'
 import { IslamabadPage } from '../ui/locations/pakistan/islamabad-page.tsx'
+import { LocationsPage } from '../ui/locations/locations-page.tsx'
 
 // Service sub-pages
 import { SocialMediaPage } from '../ui/services/social-media-page.tsx'
@@ -165,6 +166,10 @@ export default createController(routes, {
       return context.render(<GetProposalPage bookingUrl={bookingUrl} result={result} />, {
         status: result.success ? 200 : 500,
       })
+    },
+
+    locations(context) {
+      return context.render(<LocationsPage />)
     },
 
     contact(context) {

@@ -1,14 +1,10 @@
 const path = require('path');
 
-const contentPaths = [
-  path.join(__dirname, 'app/**/*.tsx'),
-  path.join(__dirname, 'app/**/*.ts'),
-  path.join(__dirname, 'app/**/*.js'),
-].map(p => p.replace(/\\/g, '/'));
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: contentPaths,
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./app/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       colors: {

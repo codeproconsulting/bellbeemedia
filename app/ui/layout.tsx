@@ -6,7 +6,7 @@ export function Layout() {
   return ({ children, title, description, head }: { children: RemixNode; title?: string; description?: string; head?: RemixNode }) => (
     <Document title={title} description={description} head={head}>
       <div class="flex flex-col min-h-screen bg-white">
-        <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2">
+        <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2 overflow-visible">
           <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <div class="flex-1">
               <a href={routes.home.href()} class="inline-flex items-center gap-2">
@@ -16,12 +16,12 @@ export function Layout() {
             
             <nav class="hidden md:flex flex-1 justify-center items-stretch gap-10 text-[17px] font-bold text-surface-dark1 self-stretch">
               {/* Services Dropdown */}
-              <div class="relative group flex items-center">
+              <div class="group flex items-center">
                 <a href={routes.services.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
                   Services <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
                 </a>
-                {/* Full-width fixed Dropdown Panel with scaleY dropdown animation */}
-                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                {/* Full-width Dropdown Panel */}
+                <div class="absolute top-full left-0 w-full opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-10">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
                       {/* Header spans the full width */}
@@ -145,11 +145,11 @@ export function Layout() {
               </div>
 
               {/* Our Work Dropdown */}
-              <div class="relative group flex items-center">
+              <div class="group flex items-center">
                 <a href={routes.ourWork.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
                   Our Work <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
                 </a>
-                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                <div class="absolute top-full left-0 w-full opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
                       {/* Header spans full width */}
@@ -253,11 +253,11 @@ export function Layout() {
               <a href={routes.blogs.href()} class="hover:text-primary transition-colors flex items-center py-2">Blogs</a>
 
               {/* About Us Dropdown */}
-              <div class="relative group flex items-center">
+              <div class="group flex items-center">
                 <a href={routes.aboutUs.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2">
                   About Us <i class="ph ph-caret-down text-sm inline-block group-hover:rotate-180 transition-transform duration-300"></i>
                 </a>
-                <div class="fixed left-0 w-screen top-20 opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
+                <div class="absolute top-full left-0 w-full opacity-0 transform scale-y-0 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 border-t border-surface-2 shadow-2xl">
                   <div class="bg-white/95 backdrop-blur-md border-b border-surface-2 py-8">
                     <div class="max-w-6xl mx-auto px-8 grid grid-cols-12 gap-8">
                       {/* Header spans full width */}
@@ -436,11 +436,11 @@ export function Layout() {
             </div>
 
             <div>
-              <h4 class="font-bold text-surface-dark0 mb-6">Locations Served</h4>
+              <h4 class="font-bold text-surface-dark0 mb-6">Service Locations</h4>
               <ul class="flex flex-col gap-4 text-text-secondary">
                 <li>
-                  <a href={routes.locationPakistanIslamabad.href()} class="hover:text-primary transition-colors inline-flex items-center gap-1.5">
-                    <span>🇵🇰</span> Islamabad, Pakistan
+                  <a href="/locations" class="hover:text-primary transition-colors inline-flex items-center gap-1.5">
+                    <i class="ph ph-map-pin text-primary"></i> View All Locations
                   </a>
                 </li>
               </ul>

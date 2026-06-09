@@ -26,6 +26,7 @@ export const routes = route({
   contact: get('/contact'),
   privacy: get('/privacy'),
   terms: get('/terms'),
+  locations: get('/locations'),
   locationPakistanIslamabad: get('/locations/pakistan/islamabad'),
 })
 
