@@ -47,7 +47,7 @@ export function PerformanceAdsPage() {
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="4.1x" label="Average ROAS Achieved" />
-          <StatBox value="£50M+" label="Ad Spend Managed" />
+          <StatBox value="10+ Yrs" label="Combined Experience" />
           <StatBox value="38%" label="Avg. CPC Reduction" />
           <StatBox value="120+" label="Campaigns Launched" />
         </div>

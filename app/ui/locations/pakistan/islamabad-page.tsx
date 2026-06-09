@@ -263,8 +263,8 @@ export function IslamabadPage(handle: Handle<IslamabadPageProps>) {
                     <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Avg. ROAS</span>
                   </div>
                   <div class="flex flex-col items-center gap-2 group py-8 px-4">
-                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">Rs. 5M+</span>
-                    <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Local Ad Spend</span>
+                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">5</span>
+                    <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Expert Specialists</span>
                   </div>
                   <div class="flex flex-col items-center gap-2 group py-8 px-4">
                     <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">10+</span>
