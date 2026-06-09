@@ -6,6 +6,8 @@ export function Layout() {
   return ({ children, title, description, head }: { children: RemixNode; title?: string; description?: string; head?: RemixNode }) => (
     <Document title={title} description={description} head={head}>
       <div class="flex flex-col min-h-screen bg-white">
+        {/* Mobile menu toggle input at the root level to avoid containing block issues */}
+        <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" />
         <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-surface-2 overflow-visible">
           <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <div class="flex-1">
@@ -365,39 +367,41 @@ export function Layout() {
               </a>
               
               {/* Mobile hamburger menu toggle */}
-              <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" />
               <label for="mobile-menu-toggle" class="md:hidden cursor-pointer p-2 select-none flex flex-col gap-1.5 z-50">
                 <span class="line-1 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
                 <span class="line-2 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
                 <span class="line-3 block w-6 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
               </label>
-
-              {/* Mobile Drawer menu */}
-              <div class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-8 gap-8 overflow-y-auto border-t border-surface-2 shadow-xl">
-                <a href="/services" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
-                <a href="/our-work" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
-                <a href="/blogs" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
-                <a href="/about-us" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">About Us</a>
-                <div class="h-[1px] bg-surface-2 my-2"></div>
-                <a href={routes.getProposal.href()} class="w-full py-4 bg-primary text-white text-center font-bold rounded-2xl hover:bg-primary-light transition-colors shadow-md shadow-primary/20 flex items-center justify-center">
-                  Get a Quote
-                </a>
-              </div>
               
               <style>{`
-                #mobile-menu-toggle:checked ~ label .line-1 {
+                body:has(#mobile-menu-toggle:checked) {
+                  overflow: hidden;
+                }
+                #mobile-menu-toggle:checked ~ header label .line-1 {
                   transform: rotate(45deg) translate(5px, 5px);
                 }
-                #mobile-menu-toggle:checked ~ label .line-2 {
+                #mobile-menu-toggle:checked ~ header label .line-2 {
                   opacity: 0;
                 }
-                #mobile-menu-toggle:checked ~ label .line-3 {
+                #mobile-menu-toggle:checked ~ header label .line-3 {
                   transform: rotate(-45deg) translate(5px, -5px);
                 }
               `}</style>
             </div>
           </div>
         </header>
+
+        {/* Mobile Drawer menu outside the header containing block */}
+        <div class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-8 gap-8 overflow-y-auto border-t border-surface-2 shadow-xl">
+          <a href="/services" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
+          <a href="/our-work" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
+          <a href="/blogs" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
+          <a href="/about-us" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">About Us</a>
+          <div class="h-[1px] bg-surface-2 my-2"></div>
+          <a href={routes.getProposal.href()} class="w-full py-4 bg-primary text-white text-center font-bold rounded-2xl hover:bg-primary-light transition-colors shadow-md shadow-primary/20 flex items-center justify-center">
+            Get a Quote
+          </a>
+        </div>
         
         <main class="flex-grow">
           {children}

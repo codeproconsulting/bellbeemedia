@@ -28,7 +28,10 @@ export function Document() {
         <title>{title}</title>
         {head}
         <link rel="stylesheet" href="/tailwind.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <link rel="preconnect" href="https://unpkg.com" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
       </head>
       <body mix={css({ margin: 0 })}>
         {children}
