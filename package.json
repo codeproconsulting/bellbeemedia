@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch --import remix/node-tsx server.ts",
+    "dev:css": "tailwindcss -i ./app/input.css -o ./public/tailwind.css --watch",
+    "build:css": "tailwindcss -i ./app/input.css -o ./public/tailwind.css --minify",
     "start": "node --import remix/node-tsx server.ts",
     "test": "node --import remix/node-tsx --test",
     "typecheck": "tsc --noEmit"
