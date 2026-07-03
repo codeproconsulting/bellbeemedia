@@ -402,16 +402,6 @@ export function Layout() {
             Get a Quote
           </a>
         </div>
-        {/* Close mobile menu on any link tap inside the drawer */}
-        <script>{`
-          document.addEventListener('click', function(e) {
-            var drawer = document.getElementById('mobile-drawer');
-            var toggle = document.getElementById('mobile-menu-toggle');
-            if (drawer && toggle && drawer.contains(e.target) && e.target.closest('a')) {
-              toggle.checked = false;
-            }
-          });
-        `}</script>
         
         <main class="flex-grow">
           {children}

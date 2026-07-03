@@ -36,6 +36,7 @@ export function Document() {
       <body mix={css({ margin: 0 })}>
         {children}
         <script type="module" src={routes.assets.href({ path: 'app/assets/entry.ts' })}></script>
+        <script type="module" src={routes.assets.href({ path: 'app/assets/mobile-nav.ts' })}></script>
       </body>
     </html>
   )
