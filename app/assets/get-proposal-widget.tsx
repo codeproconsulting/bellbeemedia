@@ -65,7 +65,7 @@ export const ProposalBookingWidget = clientEntry(
           </div>
         )}
 
-        <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl shadow-surface-3/30 border border-surface-2 relative overflow-hidden">
+        <div class="bg-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-surface-3/30 border border-surface-2 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full"></div>
 
           {submitted ? (
@@ -86,7 +86,7 @@ export const ProposalBookingWidget = clientEntry(
                     width="100%" 
                     height="420" 
                     frameborder="0" 
-                    style="min-width: 320px; height: 420px;"
+                    style="width: 100%; height: 420px;"
                   ></iframe>
                 </div>
               ) : (
@@ -130,7 +130,7 @@ export const ProposalBookingWidget = clientEntry(
                     width="100%" 
                     height="440" 
                     frameborder="0" 
-                    style="min-width: 320px; height: 440px;"
+                    style="width: 100%; height: 440px;"
                   ></iframe>
                 </div>
               ) : (

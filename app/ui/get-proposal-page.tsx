@@ -21,10 +21,10 @@ export function GetProposalPage(handle: Handle<GetProposalPageProps>) {
         <div class="absolute bottom-[-10%] right-[-10%] w-[50%] aspect-square rounded-full bg-secondary/5 blur-[120px] pointer-events-none" aria-hidden="true"></div>
 
         <div class="container mx-auto px-4 max-w-6xl relative z-10 w-full">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-stretch">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-stretch">
 
             {/* Left Column: Info & Value Props */}
-            <div class="lg:col-span-5 flex flex-col justify-between py-2">
+            <div class="lg:col-span-5 flex flex-col justify-between py-2 order-2 lg:order-1">
               <div>
                 <div class="flex mb-4">
                   <PillBadge icon="ph-lightbulb" text="Bespoke Strategy" />
@@ -74,7 +74,7 @@ export function GetProposalPage(handle: Handle<GetProposalPageProps>) {
             </div>
 
             {/* Right Column: Interactive Proposal & Booking Widget */}
-            <div class="lg:col-span-7 flex flex-col justify-center">
+            <div class="lg:col-span-7 flex flex-col justify-center order-1 lg:order-2">
               <ProposalBookingWidget result={result} submitted={submitted} bookingUrl={bookingUrl} />
             </div>
 
