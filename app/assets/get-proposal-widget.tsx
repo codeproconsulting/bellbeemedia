@@ -70,32 +70,32 @@ export const ProposalBookingWidget = clientEntry(
 
           {submitted ? (
             // ── Success State ──
-            <div class="relative z-10 flex flex-col items-center text-center py-6">
-              <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mb-4">
+            <div class="relative z-10 flex flex-col items-center text-center py-4">
+              <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-3">
                 <i class="ph-fill ph-check-circle"></i>
               </div>
-              <h2 class="text-3xl font-bold text-surface-dark0 mb-2">Request Received!</h2>
-              <p class="text-base text-text-secondary mb-8 max-w-md leading-relaxed">
+              <h2 class="text-2xl font-bold text-surface-dark0 mb-1.5">Request Received!</h2>
+              <p class="text-sm text-text-secondary mb-6 max-w-md leading-relaxed">
                 {result?.message ?? "Thank you! Our team will reach out within 24 hours. To secure your slot immediately, you can also book a call directly on our calendar below:"}
               </p>
               
               {isEmbeddable ? (
-                <div class="w-full rounded-2xl overflow-hidden border border-surface-2 bg-surface-1 min-h-[500px] mb-8 relative">
+                <div class="w-full rounded-2xl overflow-hidden border border-surface-2 bg-surface-1 min-h-[420px] mb-6 relative">
                   <iframe 
                     src={finalBookingUrl} 
                     width="100%" 
-                    height="500" 
+                    height="420" 
                     frameborder="0" 
-                    style="min-width: 320px; height: 500px;"
+                    style="min-width: 320px; height: 420px;"
                   ></iframe>
                 </div>
               ) : (
-                <div class="w-full p-8 mb-8 border border-primary/20 bg-primary/5 rounded-2xl text-center flex flex-col items-center gap-4">
-                  <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center text-2xl">
+                <div class="w-full p-6 mb-6 border border-primary/20 bg-primary/5 rounded-2xl text-center flex flex-col items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl">
                     <i class="ph ph-video-camera"></i>
                   </div>
                   <div>
-                    <h3 class="font-bold text-surface-dark0 text-base">Your Google Meet Link</h3>
+                    <h3 class="font-bold text-surface-dark0 text-sm">Your Google Meet Link</h3>
                     <p class="text-xs text-text-secondary max-w-sm mt-1">
                       Click below to access the scheduled meeting room directly or configure your calendar slot.
                     </p>
@@ -104,43 +104,43 @@ export const ProposalBookingWidget = clientEntry(
                     href={finalBookingUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md text-sm hover:scale-[1.01]"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md text-xs hover:scale-[1.01]"
                   >
                     Open Google Meet / Booking <i class="ph ph-arrow-square-out"></i>
                   </a>
                 </div>
               )}
               
-              <a href="/" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary-light transition-all shadow-lg">
+              <a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md text-sm">
                 Back to Home <i class="ph ph-arrow-right"></i>
               </a>
             </div>
           ) : activeTab === 'call' ? (
             // ── Calendly/Google Calendar Booking Tab ──
-            <div class="relative z-10 flex flex-col gap-6">
-              <h2 class="text-3xl font-bold text-surface-dark0">Book Your Strategy Call</h2>
-              <p class="text-text-secondary text-sm leading-relaxed">
+            <div class="relative z-10 flex flex-col gap-4">
+              <h2 class="text-2xl font-bold text-surface-dark0">Book Your Strategy Call</h2>
+              <p class="text-text-secondary text-xs leading-relaxed">
                 Select a time slot below that works best for you. Our team will prepare a brief audit of your market space before the call.
               </p>
               
               {isEmbeddable ? (
-                <div class="rounded-2xl overflow-hidden border border-surface-2 bg-surface-1 min-h-[600px] relative">
+                <div class="rounded-2xl overflow-hidden border border-surface-2 bg-surface-1 min-h-[440px] relative">
                   <iframe 
                     src={finalBookingUrl} 
                     width="100%" 
-                    height="600" 
+                    height="440" 
                     frameborder="0" 
-                    style="min-width: 320px; height: 600px;"
+                    style="min-width: 320px; height: 440px;"
                   ></iframe>
                 </div>
               ) : (
-                <div class="py-12 border-2 border-dashed border-primary/20 bg-primary/5 rounded-3xl text-center flex flex-col items-center gap-6 px-6">
-                  <div class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center text-3xl">
+                <div class="py-8 border-2 border-dashed border-primary/20 bg-primary/5 rounded-2xl text-center flex flex-col items-center gap-4 px-4">
+                  <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center text-2xl">
                     <i class="ph ph-video-camera"></i>
                   </div>
                   <div>
-                    <h3 class="text-xl font-bold text-surface-dark0 mb-2">Join Google Meet Strategy Call</h3>
-                    <p class="text-sm text-text-secondary max-w-sm">
+                    <h3 class="text-lg font-bold text-surface-dark0 mb-1">Join Google Meet Strategy Call</h3>
+                    <p class="text-xs text-text-secondary max-w-sm">
                       We conduct our growth consultations via Google Meet. Click the button below to join the room or schedule your slot directly.
                     </p>
                   </div>
@@ -148,7 +148,7 @@ export const ProposalBookingWidget = clientEntry(
                     href={finalBookingUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary-light transition-all shadow-lg text-base hover:scale-[1.02]"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md text-sm hover:scale-[1.01]"
                   >
                     Open Google Meet / Booking <i class="ph ph-arrow-square-out"></i>
                   </a>
