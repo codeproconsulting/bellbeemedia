@@ -3,7 +3,7 @@ import { routes } from '../routes.ts'
 import { Document } from './document.tsx'
 
 export function Layout() {
-  return ({ children, title, description, head }: { children: RemixNode; title?: string; description?: string; head?: RemixNode }) => (
+  return ({ children, title, description, head, hideFooter }: { children: RemixNode; title?: string; description?: string; head?: RemixNode; hideFooter?: boolean }) => (
     <Document title={title} description={description} head={head}>
       <div class="flex flex-col min-h-screen bg-white">
         {/* Mobile menu toggle input at the root level to avoid containing block issues */}
@@ -407,69 +407,71 @@ export function Layout() {
           {children}
         </main>
         
-        <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
-          <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12">
-            <div class="md:col-span-2">
-              <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto mb-6" />
-              <p class="text-text-secondary max-w-sm mb-6">
-                Elevating your digital presence with premium marketing strategies, data-driven insights, and creative excellence.
-              </p>
-              <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                  <i class="ph ph-facebook-logo text-xl"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                  <i class="ph ph-instagram-logo text-xl"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                  <i class="ph ph-linkedin-logo text-xl"></i>
-                </a>
+        {!hideFooter && (
+          <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12">
+              <div class="md:col-span-2">
+                <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto mb-6" />
+                <p class="text-text-secondary max-w-sm mb-6">
+                  Elevating your digital presence with premium marketing strategies, data-driven insights, and creative excellence.
+                </p>
+                <div class="flex gap-4">
+                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
+                    <i class="ph ph-facebook-logo text-xl"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
+                    <i class="ph ph-instagram-logo text-xl"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
+                    <i class="ph ph-linkedin-logo text-xl"></i>
+                  </a>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-bold text-surface-dark0 mb-6">Company</h4>
+                <ul class="flex flex-col gap-4 text-text-secondary">
+                  <li><a href={routes.home.href()} class="hover:text-primary transition-colors">Home</a></li>
+                  <li><a href={routes.aboutUs.href()} class="hover:text-primary transition-colors">About Us</a></li>
+                  <li><a href={routes.services.href()} class="hover:text-primary transition-colors">Services</a></li>
+                  <li><a href={routes.ourWork.href()} class="hover:text-primary transition-colors">Our Work</a></li>
+                  <li><a href={routes.blogs.href()} class="hover:text-primary transition-colors">Blogs</a></li>
+                  <li><a href={routes.getProposal.href()} class="hover:text-primary transition-colors">Get a Quote</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-surface-dark0 mb-6">Service Locations</h4>
+                <ul class="flex flex-col gap-4 text-text-secondary">
+                  <li>
+                    <a href="/locations" class="hover:text-primary transition-colors inline-flex items-center gap-1.5">
+                      <i class="ph ph-map-pin text-primary"></i> View All Locations
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
+                <ul class="flex flex-col gap-4 text-text-secondary">
+                  <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
+                  <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +92 370 190 2120</li>
+                  <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br/>I8 Markaz, Islamabad</li>
+                </ul>
               </div>
             </div>
             
-            <div>
-              <h4 class="font-bold text-surface-dark0 mb-6">Company</h4>
-              <ul class="flex flex-col gap-4 text-text-secondary">
-                <li><a href={routes.home.href()} class="hover:text-primary transition-colors">Home</a></li>
-                <li><a href={routes.aboutUs.href()} class="hover:text-primary transition-colors">About Us</a></li>
-                <li><a href={routes.services.href()} class="hover:text-primary transition-colors">Services</a></li>
-                <li><a href={routes.ourWork.href()} class="hover:text-primary transition-colors">Our Work</a></li>
-                <li><a href={routes.blogs.href()} class="hover:text-primary transition-colors">Blogs</a></li>
-                <li><a href={routes.getProposal.href()} class="hover:text-primary transition-colors">Get a Quote</a></li>
-              </ul>
+            <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary text-sm">
+              <div>
+                &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
+              </div>
+              <div class="flex gap-6">
+                <a href={routes.privacy.href()} class="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href={routes.terms.href()} class="hover:text-primary transition-colors">Terms of Service</a>
+              </div>
             </div>
-
-            <div>
-              <h4 class="font-bold text-surface-dark0 mb-6">Service Locations</h4>
-              <ul class="flex flex-col gap-4 text-text-secondary">
-                <li>
-                  <a href="/locations" class="hover:text-primary transition-colors inline-flex items-center gap-1.5">
-                    <i class="ph ph-map-pin text-primary"></i> View All Locations
-                  </a>
-                </li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
-              <ul class="flex flex-col gap-4 text-text-secondary">
-                <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
-                <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +92 370 190 2120</li>
-                <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br/>I8 Markaz, Islamabad</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary text-sm">
-            <div>
-              &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
-            </div>
-            <div class="flex gap-6">
-              <a href={routes.privacy.href()} class="hover:text-primary transition-colors">Privacy Policy</a>
-              <a href={routes.terms.href()} class="hover:text-primary transition-colors">Terms of Service</a>
-            </div>
-          </div>
-        </footer>
+          </footer>
+        )}
       </div>
     </Document>
   )
