@@ -27,7 +27,7 @@ export function Document() {
 
         <title>{title}</title>
         {head}
-        <link rel="stylesheet" href="/tailwind.css?v=4" />
+        <link rel="stylesheet" href="/tailwind.css?v=5" />
         <link rel="preconnect" href="https://unpkg.com" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
