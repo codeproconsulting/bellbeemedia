@@ -4,95 +4,82 @@ import { PillBadge, TestimonialsSection } from './shared.tsx'
 
 const services = [
   {
-    icon: 'ph-chart-line-up',
-    label: '01',
-    title: 'Performance Marketing',
-    desc: 'Paid media buying across Meta, Google Search, Shopping & Programmatic — written, executed, tested and optimised in-house for maximum ROAS.',
-    tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
-    href: routes.servicesPerformanceAds.href(),
-    featured: true,
-    metric: '3.4× avg ROAS',
-  },
-  {
-    icon: 'ph-heart',
-    label: '02',
-    title: 'Social Media Management',
-    desc: 'Organic platform strategies, short-form video, community management, and audience growth built for compounding reach.',
-    tags: ['Instagram', 'TikTok', 'LinkedIn'],
-    href: routes.servicesSocialMedia.href(),
-    featured: false,
-    metric: null,
-  },
-  {
-    icon: 'ph-megaphone',
-    label: '03',
-    title: 'Digital PR & Influencer',
-    desc: 'Curated influencer partnerships and strategic press coverage that build authority and drive referral traffic.',
-    tags: ['Media Coverage', 'Influencer Gifting', 'Brand Collabs'],
-    href: routes.servicesDigitalPr.href(),
-    featured: false,
-    metric: null,
-  },
-  {
-    icon: 'ph-film-slate',
-    label: '04',
-    title: 'Creative Production',
-    desc: 'High-quality video shoots, scroll-stopping ad creatives, product photography, and motion graphics — everything your campaigns need.',
-    tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
-    href: routes.servicesProduction.href(),
-    featured: false,
-    metric: null,
-  },
-  {
-    icon: 'ph-desktop',
-    label: '05',
-    title: 'Web & Landing Pages',
-    desc: 'High-speed, mobile-first websites, Shopify stores, and conversion-optimised landing pages built to rank and convert.',
-    tags: ['CRO', 'SEO', 'E-commerce'],
-    href: routes.servicesWebSolutions.href(),
-    featured: false,
-    metric: null,
-  },
-  {
-    icon: 'ph-bezier-curve',
-    label: '06',
-    title: 'Design & Copywriting',
-    desc: 'Visual brand identity, ad asset design, and persuasive sales copy for email flows, landing pages, and social ads.',
-    tags: ['Branding', 'Ad Creatives', 'UX Copy'],
-    href: routes.servicesDesignCopy.href(),
-    featured: false,
-    metric: null,
-  },
-]
-
-const steps = [
-  {
     num: '01',
-    badge: 'Week 1',
-    title: 'Discovery & Audit',
-    desc: 'We audit your brand voice, analyse competitor gaps, and find the leverage points that matter.',
-    icon: 'ph-binoculars',
+    icon: 'ph-chart-line-up',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
+    accent: 'from-secondary/20 to-transparent',
+    title: 'Performance Marketing',
+    subtitle: 'Google · Meta · Programmatic',
+    desc: 'Paid media buying across Meta, Google Search, Shopping & Programmatic — written, executed, A/B-tested and optimised in-house. We own the entire funnel: creative, copy, audience, bid strategy, and landing page.',
+    bullets: ['Google Ads & Shopping', 'Meta & Instagram Ads', 'Audience & Retargeting', 'Creative A/B Testing'],
+    metric: '3.4× avg ROAS',
+    href: routes.servicesPerformanceAds.href(),
   },
   {
     num: '02',
-    badge: 'Week 1–2',
-    title: 'Strategic Blueprint',
-    desc: 'A custom 30/60/90-day growth roadmap, KPI framework, and dynamic budget allocation.',
-    icon: 'ph-map-trifold',
+    icon: 'ph-heart',
+    color: 'text-pink-500',
+    bg: 'bg-pink-500/10',
+    accent: 'from-pink-500/15 to-transparent',
+    title: 'Social Media Management',
+    subtitle: 'Instagram · TikTok · LinkedIn',
+    desc: 'Organic platform strategies built for compounding reach — not vanity metrics. We handle content calendars, short-form video production, community management, and audience growth across every channel.',
+    bullets: ['Content Strategy & Calendar', 'Short-form Video (Reels / TikTok)', 'Community Management', 'Follower Growth Campaigns'],
+    metric: '280K followers in 6 mo.',
+    href: routes.servicesSocialMedia.href(),
   },
   {
     num: '03',
-    badge: 'Week 2–3',
-    title: 'Execution & Launch',
-    desc: 'Creative production, tracking QA, and campaigns go live. Fully managed, zero guesswork.',
-    icon: 'ph-airplane-takeoff',
+    icon: 'ph-megaphone',
+    color: 'text-violet-500',
+    bg: 'bg-violet-500/10',
+    accent: 'from-violet-500/15 to-transparent',
+    title: 'Digital PR & Influencer',
+    subtitle: 'Media · Creators · Backlinks',
+    desc: 'Curated influencer partnerships and strategic press coverage that build domain authority, brand trust, and referral traffic. We source, brief, manage, and report on every collaboration.',
+    bullets: ['Influencer Gifting & Campaigns', 'Media Outreach & Coverage', 'Brand Collaborations', 'Backlink Building'],
+    metric: null,
+    href: routes.servicesDigitalPr.href(),
   },
   {
     num: '04',
-    badge: 'Ongoing',
-    title: 'Optimise & Scale',
-    desc: 'Creative A/B tests, daily performance analysis, and aggressive scaling of winning campaigns.',
-    icon: 'ph-chart-line-up',
+    icon: 'ph-film-slate',
+    color: 'text-orange-500',
+    bg: 'bg-orange-500/10',
+    accent: 'from-orange-500/15 to-transparent',
+    title: 'Creative Production',
+    subtitle: 'Video · Photo · Motion',
+    desc: 'High-quality video shoots, scroll-stopping ad creatives, product photography, and motion graphics — everything your campaigns need, produced by our in-house studio team.',
+    bullets: ['Brand & Product Video', 'Social Ad Creatives', 'Product Photography', 'Motion Graphics & Reels'],
+    metric: null,
+    href: routes.servicesProduction.href(),
+  },
+  {
+    num: '05',
+    icon: 'ph-desktop',
+    color: 'text-emerald-500',
+    bg: 'bg-emerald-500/10',
+    accent: 'from-emerald-500/15 to-transparent',
+    title: 'Web & Landing Pages',
+    subtitle: 'CRO · SEO · E-commerce',
+    desc: 'High-speed, mobile-first websites, Shopify stores, and conversion-optimised landing pages built to rank and convert. We design, develop, and continuously optimise for maximum revenue per visitor.',
+    bullets: ['Custom Website Development', 'Shopify & E-commerce', 'Landing Page CRO', 'Technical SEO'],
+    metric: null,
+    href: routes.servicesWebSolutions.href(),
+  },
+  {
+    num: '06',
+    icon: 'ph-bezier-curve',
+    color: 'text-primary-light',
+    bg: 'bg-primary/10',
+    accent: 'from-primary/15 to-transparent',
+    title: 'Design & Copywriting',
+    subtitle: 'Brand · Copy · Identity',
+    desc: 'Visual brand identity, ad asset design, and persuasive sales copy for email flows, landing pages, and social ads. Every word and pixel is crafted to move people toward a purchase decision.',
+    bullets: ['Brand Identity & Guidelines', 'Ad Creative Design', 'Sales & Email Copywriting', 'UX & Landing Page Copy'],
+    metric: null,
+    href: routes.servicesDesignCopy.href(),
   },
 ]
 
@@ -104,222 +91,163 @@ export function ServicesPage() {
     >
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section class="relative bg-surface-dark0 overflow-hidden pt-28 pb-14">
-        {/* Background texture */}
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,rgba(21,68,118,0.35)_0,transparent_60%)] pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_100%,rgba(255,140,0,0.1)_0,transparent_55%)] pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 64px 64px;" aria-hidden="true"></div>
+      <section class="relative bg-surface-dark0 overflow-hidden pt-28 pb-16">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(21,68,118,0.5)_0,transparent_70%)] pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 48px 48px;" aria-hidden="true"></div>
 
-        <div class="container mx-auto px-4 max-w-6xl relative z-10">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="container mx-auto px-4 max-w-5xl text-center relative z-10">
+          <div class="flex justify-center mb-5">
+            <PillBadge icon="ph-squares-four" text="What We Do" dark={true} />
+          </div>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-5 tracking-tight leading-[1.05]">
+            Six services.<br class="hidden sm:block" /> One revenue engine.
+          </h1>
+          <p class="text-base md:text-lg text-white/55 max-w-2xl mx-auto leading-relaxed mb-10">
+            Every service we offer is designed to connect to the others. No siloed agencies, no dropped handoffs — just a single integrated team working toward your growth number.
+          </p>
 
-            {/* Left: Copy */}
-            <div class="lg:col-span-7">
-              <div class="flex mb-4">
-                <PillBadge icon="ph-squares-four" text="What We Do" dark={true} />
-              </div>
-              <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight leading-[1.05]">
-                Everything your brand needs to <span class="text-gradient">scale fast.</span>
-              </h1>
-              <p class="text-base text-white/60 leading-relaxed mb-7 max-w-lg">
-                Paid media, organic social, creative production, and conversion-focused web — all under one roof, aligned to a single revenue goal.
-              </p>
-              <div class="flex flex-wrap gap-3">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-lg shadow-secondary/30 hover:scale-[1.02] text-sm">
-                  Get a Free Strategy Call <i class="ph ph-arrow-right"></i>
-                </a>
-                <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-6 py-3 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 transition-all text-sm">
-                  See Our Results
-                </a>
-              </div>
+          {/* Inline Stats */}
+          <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-10">
+            <div class="bg-white/[0.05] border border-white/10 rounded-2xl py-4 px-3 text-center">
+              <div class="text-2xl font-black text-white">3.4×</div>
+              <div class="text-[11px] text-white/45 font-medium mt-0.5">Avg ROAS</div>
             </div>
-
-            {/* Right: Floating metric cards */}
-            <div class="lg:col-span-5 relative hidden lg:flex flex-col gap-3">
-              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center text-xl flex-shrink-0">
-                  <i class="ph-fill ph-trend-up"></i>
-                </div>
-                <div>
-                  <div class="text-2xl font-black text-white">3.4×</div>
-                  <div class="text-xs text-white/50 font-medium">Average ROAS across all clients</div>
-                </div>
-              </div>
-              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl bg-primary/30 text-primary-light flex items-center justify-center text-xl flex-shrink-0">
-                  <i class="ph-fill ph-users-three"></i>
-                </div>
-                <div>
-                  <div class="text-2xl font-black text-white">35+</div>
-                  <div class="text-xs text-white/50 font-medium">Years of combined specialist experience</div>
-                </div>
-              </div>
-              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0">
-                  <i class="ph-fill ph-check-circle"></i>
-                </div>
-                <div>
-                  <div class="text-2xl font-black text-white">12+</div>
-                  <div class="text-xs text-white/50 font-medium">Active brand scaling partnerships</div>
-                </div>
-              </div>
+            <div class="bg-white/[0.05] border border-white/10 rounded-2xl py-4 px-3 text-center">
+              <div class="text-2xl font-black text-white">35+</div>
+              <div class="text-[11px] text-white/45 font-medium mt-0.5">Yrs Combined XP</div>
             </div>
+            <div class="bg-white/[0.05] border border-white/10 rounded-2xl py-4 px-3 text-center">
+              <div class="text-2xl font-black text-white">12+</div>
+              <div class="text-[11px] text-white/45 font-medium mt-0.5">Active Clients</div>
+            </div>
+          </div>
 
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-lg shadow-secondary/30 hover:scale-[1.02] text-sm">
+              Get a Free Strategy Call <i class="ph ph-arrow-right"></i>
+            </a>
+            <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-6 py-3 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 transition-all text-sm">
+              See Our Work
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES GRID ────────────────────────────────────── */}
-      <section class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" aria-hidden="true"></div>
-
+      {/* ── SERVICES LIST ─────────────────────────────────────── */}
+      <section class="py-6 bg-white">
         <div class="container mx-auto px-4 max-w-6xl">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight mb-4">
-              Six disciplines. <span class="text-gradient">One integrated team.</span>
-            </h2>
-            <p class="text-text-secondary max-w-xl mx-auto leading-relaxed">
-              We don't hand off work between agencies. Every channel is managed in-house by specialists who collaborate daily around your growth targets.
-            </p>
-          </div>
-
-          {/* Featured card + grid */}
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-
-            {/* Featured: Performance Marketing */}
-            <a href={services[0].href} class="group lg:col-span-5 relative rounded-3xl p-8 md:p-10 bg-surface-dark0 overflow-hidden flex flex-col gap-6 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300">
-              <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-secondary/15 blur-3xl pointer-events-none" aria-hidden="true"></div>
-              <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
-
-              <div class="flex items-start justify-between relative z-10">
-                <div class="w-16 h-16 rounded-2xl bg-secondary/20 text-secondary flex items-center justify-center text-3xl">
-                  <i class="ph-fill ph-chart-line-up"></i>
-                </div>
-                <span class="text-white/20 font-black text-4xl">01</span>
-              </div>
-
-              <div class="relative z-10 flex-grow">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary/20 text-secondary text-xs font-bold rounded-full mb-4">
-                  <i class="ph-fill ph-star"></i> Most Popular
-                </div>
-                <h3 class="text-2xl md:text-3xl font-black text-white mb-3 group-hover:text-secondary-light transition-colors">Performance Marketing</h3>
-                <p class="text-white/55 leading-relaxed text-sm md:text-base">
-                  Paid media buying across Meta, Google Search, Shopping & Programmatic — written, executed, tested and optimised in-house for maximum ROAS.
-                </p>
-              </div>
-
-              <div class="relative z-10">
-                <div class="flex flex-wrap gap-2 mb-6">
-                  {['Google Ads', 'Meta Ads', 'Retargeting'].map(tag => (
-                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-white/70">{tag}</span>
-                  ))}
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl">
-                  <i class="ph-fill ph-trend-up text-secondary text-xl"></i>
-                  <span class="text-white font-bold text-sm">3.4× average ROAS delivered</span>
-                </div>
-              </div>
-
-              <div class="relative z-10 flex items-center gap-2 text-secondary font-bold text-sm group-hover:gap-3 transition-all">
-                Explore service <i class="ph ph-arrow-right"></i>
-              </div>
-            </a>
-
-            {/* Right: 5 remaining services in grid */}
-            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {services.slice(1).map((s) => (
-                <a href={s.href} class="group relative rounded-3xl p-6 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col gap-4 bg-surface-1 border border-surface-2 hover:shadow-xl hover:border-primary/25 hover:bg-white">
-                  <div class="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none" aria-hidden="true"></div>
-                  <div class="flex items-start justify-between">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-primary/8 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <i class={`ph-fill ${s.icon}`}></i>
-                    </div>
-                    <span class="text-surface-3 font-black text-2xl group-hover:text-primary/20 transition-colors">{s.label}</span>
+          <div class="flex flex-col divide-y divide-surface-2">
+            {services.map((s, i) => (
+              <a
+                href={s.href}
+                class="group grid grid-cols-1 lg:grid-cols-12 gap-6 py-10 hover:bg-surface-1 transition-colors duration-200 px-4 -mx-4 rounded-2xl"
+              >
+                {/* Left: Number + Icon */}
+                <div class="lg:col-span-1 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-3 lg:pt-1">
+                  <span class="text-xs font-black text-text-secondary/40 tracking-widest">{s.num}</span>
+                  <div class={`w-10 h-10 rounded-xl ${s.bg} ${s.color} flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                    <i class={`ph-fill ${s.icon}`}></i>
                   </div>
-                  <div class="flex-grow">
-                    <h3 class="text-base font-bold text-surface-dark0 mb-2 group-hover:text-primary transition-colors">{s.title}</h3>
-                    <p class="text-xs text-text-secondary leading-relaxed">{s.desc}</p>
+                </div>
+
+                {/* Middle: Title + desc + bullets */}
+                <div class="lg:col-span-7 flex flex-col gap-3">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-text-secondary/60 mb-1">{s.subtitle}</p>
+                    <h2 class={`text-2xl font-black text-surface-dark0 group-hover:${s.color} transition-colors duration-200`}>{s.title}</h2>
                   </div>
-                  <div class="flex flex-wrap gap-1.5 mt-auto">
-                    {s.tags.map(tag => (
-                      <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-primary/5 text-primary">{tag}</span>
+                  <p class="text-sm text-text-secondary leading-relaxed max-w-xl">{s.desc}</p>
+                  <ul class="grid grid-cols-2 gap-x-6 gap-y-1.5 mt-1">
+                    {s.bullets.map(b => (
+                      <li class="flex items-center gap-2 text-xs text-text-secondary font-medium">
+                        <span class={`w-1.5 h-1.5 rounded-full ${s.bg} ${s.color} flex-shrink-0`} style="min-width:6px"></span>
+                        {b}
+                      </li>
                     ))}
+                  </ul>
+                </div>
+
+                {/* Right: CTA + optional metric */}
+                <div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-between gap-4">
+                  {s.metric && (
+                    <div class={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl ${s.bg} ${s.color} text-sm font-bold`}>
+                      <i class="ph-fill ph-trend-up text-base"></i>
+                      {s.metric}
+                    </div>
+                  )}
+                  <div class={`mt-auto inline-flex items-center gap-2 text-sm font-bold ${s.color} opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:gap-3`}>
+                    Explore service <i class="ph ph-arrow-right"></i>
                   </div>
-                  <div class="flex items-center gap-1.5 text-xs font-semibold text-text-secondary group-hover:text-primary transition-colors">
-                    Learn more <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform inline-block"></i>
-                  </div>
-                </a>
-              ))}
-            </div>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── HOW WE WORK ──────────────────────────────────────── */}
-      <section class="py-24 bg-surface-dark0 relative overflow-hidden border-t border-white/5">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(21,68,118,0.2)_0,transparent_60%)] pointer-events-none" aria-hidden="true"></div>
-
+      <section class="py-20 bg-surface-dark0 relative overflow-hidden border-t border-white/5">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(21,68,118,0.25)_0,transparent_60%)] pointer-events-none" aria-hidden="true"></div>
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
-          <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+          <div class="text-center max-w-2xl mx-auto mb-14">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight">
               From brief to <span class="text-gradient">breakthrough</span>
             </h2>
-            <p class="text-white/55 leading-relaxed">
+            <p class="text-white/50 leading-relaxed text-sm">
               A structured, data-proven launch sequence that transitions your brand to predictable, compounding growth.
             </p>
           </div>
 
-          {/* Horizontal steps with connecting line */}
-          <div class="relative">
-            {/* Connector line (desktop only) */}
-            <div class="hidden lg:block absolute top-10 left-[calc(12.5%+28px)] right-[calc(12.5%+28px)] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden="true"></div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {steps.map((s, i) => (
-                <div class="group relative flex flex-col gap-5">
-                  {/* Step node */}
-                  <div class="relative flex-shrink-0 w-20 h-20 rounded-2xl border border-white/10 bg-white/[0.03] flex flex-col items-center justify-center gap-1 group-hover:border-secondary/40 group-hover:bg-secondary/10 transition-all duration-300">
-                    <i class={`ph-fill ${s.icon} text-2xl text-white/40 group-hover:text-secondary transition-colors`}></i>
-                    <span class="text-[10px] font-black text-white/25 group-hover:text-secondary/60 transition-colors">{s.num}</span>
-                  </div>
-                  <div>
-                    <span class="inline-block text-xs font-bold uppercase tracking-widest text-secondary mb-2">{s.badge}</span>
-                    <h3 class="text-lg font-bold text-white mb-2">{s.title}</h3>
-                    <p class="text-sm text-white/45 leading-relaxed">{s.desc}</p>
-                  </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Connector line desktop */}
+            <div class="hidden lg:block absolute top-9 left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden="true"></div>
+            {[
+              { num:'01', badge:'Week 1', title:'Discovery & Audit', desc:'We audit your brand, analyse competitor gaps, and find leverage points.', icon:'ph-binoculars' },
+              { num:'02', badge:'Week 1–2', title:'Strategic Blueprint', desc:'Custom 30/60/90-day roadmap, KPI framework, and budget allocation.', icon:'ph-map-trifold' },
+              { num:'03', badge:'Week 2–3', title:'Execution & Launch', desc:'Creative production, tracking QA, and campaigns go live. Fully managed.', icon:'ph-airplane-takeoff' },
+              { num:'04', badge:'Ongoing', title:'Optimise & Scale', desc:'Daily analysis, creative A/B tests, aggressive scaling of winners.', icon:'ph-chart-line-up' },
+            ].map(s => (
+              <div class="group flex flex-col gap-4">
+                <div class="relative w-[72px] h-[72px] rounded-2xl border border-white/10 bg-white/[0.03] flex flex-col items-center justify-center group-hover:border-secondary/50 group-hover:bg-secondary/10 transition-all duration-300">
+                  <i class={`ph-fill ${s.icon} text-2xl text-white/35 group-hover:text-secondary transition-colors`}></i>
                 </div>
-              ))}
-            </div>
+                <div>
+                  <span class="text-[11px] font-black uppercase tracking-widest text-secondary block mb-1.5">{s.badge}</span>
+                  <h3 class="text-base font-bold text-white mb-1.5">{s.title}</h3>
+                  <p class="text-sm text-white/40 leading-relaxed">{s.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA STRIP ────────────────────────────────────────── */}
-      <section class="py-20 bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-secondary/20 blur-[80px] pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-primary-light/10 blur-[80px] pointer-events-none" aria-hidden="true"></div>
-        <div class="container mx-auto px-4 max-w-4xl text-center relative z-10">
-          <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/40 mb-6">
+      <section class="py-16 bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-secondary/20 blur-[80px] pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primary-light/10 blur-[80px] pointer-events-none" aria-hidden="true"></div>
+        <div class="container mx-auto px-4 max-w-3xl text-center relative z-10">
+          <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/35 mb-4">
             <i class="ph-fill ph-lightning"></i> Limited slots open this month
           </span>
-          <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
-            Ready to turn spend<br />into scalable revenue?
+          <h2 class="text-2xl md:text-4xl font-black text-white mb-4 leading-tight">
+            Ready to turn spend into scalable revenue?
           </h2>
-          <p class="text-white/55 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p class="text-white/50 text-sm mb-8 max-w-xl mx-auto leading-relaxed">
             Book a free 30-minute strategy call. We'll audit your current marketing and show you exactly how we'd scale you.
           </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-xl shadow-secondary/30 hover:scale-[1.02]">
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-xl shadow-secondary/30 hover:scale-[1.02] text-sm">
               Book Your Free Strategy Call <i class="ph ph-arrow-right"></i>
             </a>
-            <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 transition-all">
+            <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-6 py-3 border border-white/15 text-white/75 rounded-full font-semibold hover:bg-white/10 transition-all text-sm">
               See Client Results
             </a>
           </div>
-          <div class="flex flex-wrap justify-center gap-6 mt-8 text-xs text-white/30 font-medium">
-            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> No commitment required</span>
-            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> 30-minute discovery call</span>
-            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> Free custom growth plan</span>
+          <div class="flex flex-wrap justify-center gap-5 mt-6 text-xs text-white/30 font-medium">
+            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> No commitment</span>
+            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> 30-min call</span>
+            <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> Free growth plan</span>
           </div>
         </div>
       </section>
