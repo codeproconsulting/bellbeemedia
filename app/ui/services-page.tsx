@@ -104,64 +104,63 @@ export function ServicesPage() {
     >
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section class="relative bg-surface-dark0 overflow-hidden pt-36 pb-24">
+      <section class="relative bg-surface-dark0 overflow-hidden pt-28 pb-14">
         {/* Background texture */}
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,rgba(21,68,118,0.35)_0,transparent_60%)] pointer-events-none" aria-hidden="true"></div>
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_100%,rgba(255,140,0,0.1)_0,transparent_55%)] pointer-events-none" aria-hidden="true"></div>
-        {/* Subtle grid lines */}
         <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 64px 64px;" aria-hidden="true"></div>
 
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
             {/* Left: Copy */}
             <div class="lg:col-span-7">
-              <div class="flex mb-6">
+              <div class="flex mb-4">
                 <PillBadge icon="ph-squares-four" text="What We Do" dark={true} />
               </div>
-              <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[1.05]">
-                Everything your brand<br />needs to <span class="text-gradient">scale fast.</span>
+              <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight leading-[1.05]">
+                Everything your brand needs to <span class="text-gradient">scale fast.</span>
               </h1>
-              <p class="text-lg text-white/60 leading-relaxed mb-10 max-w-xl">
+              <p class="text-base text-white/60 leading-relaxed mb-7 max-w-lg">
                 Paid media, organic social, creative production, and conversion-focused web — all under one roof, aligned to a single revenue goal.
               </p>
-              <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-lg shadow-secondary/30 hover:scale-[1.02]">
+              <div class="flex flex-wrap gap-3">
+                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-lg shadow-secondary/30 hover:scale-[1.02] text-sm">
                   Get a Free Strategy Call <i class="ph ph-arrow-right"></i>
                 </a>
-                <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 transition-all">
+                <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-6 py-3 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 transition-all text-sm">
                   See Our Results
                 </a>
               </div>
             </div>
 
             {/* Right: Floating metric cards */}
-            <div class="lg:col-span-5 relative hidden lg:flex flex-col gap-4">
-              <div class="bg-white/[0.04] border border-white/10 rounded-3xl p-6 flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-secondary/20 text-secondary flex items-center justify-center text-2xl flex-shrink-0">
+            <div class="lg:col-span-5 relative hidden lg:flex flex-col gap-3">
+              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center text-xl flex-shrink-0">
                   <i class="ph-fill ph-trend-up"></i>
                 </div>
                 <div>
-                  <div class="text-3xl font-black text-white">3.4×</div>
-                  <div class="text-sm text-white/50 font-medium">Average ROAS across all clients</div>
+                  <div class="text-2xl font-black text-white">3.4×</div>
+                  <div class="text-xs text-white/50 font-medium">Average ROAS across all clients</div>
                 </div>
               </div>
-              <div class="bg-white/[0.04] border border-white/10 rounded-3xl p-6 flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-primary/30 text-primary-light flex items-center justify-center text-2xl flex-shrink-0">
+              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-primary/30 text-primary-light flex items-center justify-center text-xl flex-shrink-0">
                   <i class="ph-fill ph-users-three"></i>
                 </div>
                 <div>
-                  <div class="text-3xl font-black text-white">35+</div>
-                  <div class="text-sm text-white/50 font-medium">Years of combined specialist experience</div>
+                  <div class="text-2xl font-black text-white">35+</div>
+                  <div class="text-xs text-white/50 font-medium">Years of combined specialist experience</div>
                 </div>
               </div>
-              <div class="bg-white/[0.04] border border-white/10 rounded-3xl p-6 flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl flex-shrink-0">
+              <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0">
                   <i class="ph-fill ph-check-circle"></i>
                 </div>
                 <div>
-                  <div class="text-3xl font-black text-white">12+</div>
-                  <div class="text-sm text-white/50 font-medium">Active brand scaling partnerships</div>
+                  <div class="text-2xl font-black text-white">12+</div>
+                  <div class="text-xs text-white/50 font-medium">Active brand scaling partnerships</div>
                 </div>
               </div>
             </div>
