@@ -15,7 +15,7 @@ export function GetProposalPage(handle: Handle<GetProposalPageProps>) {
 
   return () => (
     <Layout title="Get a Free Proposal | Bell Bee Media" description="Share your goals and our team will build a bespoke digital marketing strategy for your brand — free, fast, and with no commitment." hideFooter={true}>
-      <div class="bg-surface-1 min-h-screen lg:h-screen flex items-center pt-24 pb-12 relative overflow-hidden">
+      <div class="bg-surface-1 min-h-screen lg:min-h-0 lg:h-[calc(100vh-80px)] flex items-center pt-20 pb-12 lg:py-0 relative overflow-hidden">
         {/* Dynamic Background Glows */}
         <div class="absolute top-[-10%] left-[-10%] w-[50%] aspect-square rounded-full bg-primary/5 blur-[120px] pointer-events-none" aria-hidden="true"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[50%] aspect-square rounded-full bg-secondary/5 blur-[120px] pointer-events-none" aria-hidden="true"></div>
