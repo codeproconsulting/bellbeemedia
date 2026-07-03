@@ -42,8 +42,8 @@ export function WhyChooseUsPage() {
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="5" label="Core Specialists" />
-          <StatBox value="20+" label="Combined Yrs Experience" />
-          <StatBox value="4.2x" label="Avg. ROAS Delivered" />
+          <StatBox value="35+" label="Combined Yrs Experience" />
+          <StatBox value="3.4x" label="Avg. ROAS Delivered" />
           <StatBox value="100%" label="Dedicated to You" />
         </div>
       </section>
@@ -98,7 +98,7 @@ export function WhyChooseUsPage() {
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <TestimonialCard name="Emma L." role="Head of Marketing, E-Commerce" stars={5} quote="Switched from a bigger agency and can't believe the difference. Bell Bee actually understood our business within weeks, not months." />
-            <TestimonialCard name="David K." role="Founder, B2B Tech" stars={5} quote="The transparency alone is worth it. I finally know exactly what's working and why. Our CAC dropped 58% in 6 months." />
+            <TestimonialCard name="David K." role="Founder, B2B Tech" stars={5} quote="The transparency alone is worth it. I finally know exactly what's working and why. Our CAC dropped 45% in 6 months." />
             <TestimonialCard name="Aisha R." role="Digital Director, Retail" stars={5} quote="No long-term contract was a risk we didn't need to take — they earned our continued business in the first month." />
           </div>
         </div>

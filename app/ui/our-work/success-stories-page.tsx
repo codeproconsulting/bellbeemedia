@@ -49,8 +49,8 @@ export function SuccessStoriesPage(handle: Handle<SuccessStoriesPageProps>) {
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="60+" label="Brands Grown" />
-          <StatBox value="10M+" label="Combined Social Followers" />
-          <StatBox value="£2B+" label="Revenue Influenced" />
+          <StatBox value="3M+" label="Combined Social Followers" />
+          <StatBox value="£35M+" label="Revenue Influenced" />
           <StatBox value="15+" label="Countries Reached" />
         </div>
       </section>

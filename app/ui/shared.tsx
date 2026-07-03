@@ -27,11 +27,11 @@ export function StatsBar() {
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Expert Specialists</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">10+</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">35+</span>
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Combined Yrs Experience</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">4.2x</span>
+            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">3.4x</span>
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Avg. ROAS Delivered</span>
           </div>
           <div class="flex flex-col items-center gap-2 group">
@@ -248,7 +248,7 @@ export function TestimonialsSection() {
             <div>
               <i class="ph-fill ph-quotes text-secondary text-5xl mb-6 block opacity-60"></i>
               <p class="text-white text-lg leading-relaxed font-medium mb-8">
-                Bell Bee didn't just run our ads — they rewired how we think about digital. Within 90 days, our CAC dropped by 48%, our ROAS hit 5.1x, and we crossed ₹1Cr/month in direct social revenue for the first time ever. They're not a vendor, they're a growth partner.
+                Bell Bee didn't just run our ads — they rewired how we think about digital. Within 90 days, our CAC dropped by 48%, our ROAS hit 4.5x, and we crossed ₹1Cr/month in direct social revenue for the first time ever. They're not a vendor, they're a growth partner.
               </p>
             </div>
             <div class="flex items-center gap-4 pt-6 border-t border-white/10">

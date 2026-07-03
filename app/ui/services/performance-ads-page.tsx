@@ -46,9 +46,9 @@ export function PerformanceAdsPage() {
       {/* Stats */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="4.1x" label="Average ROAS Achieved" />
-          <StatBox value="10+ Yrs" label="Combined Experience" />
-          <StatBox value="38%" label="Avg. CPC Reduction" />
+          <StatBox value="3.4x" label="Average ROAS Achieved" />
+          <StatBox value="35+ Yrs" label="Combined Experience" />
+          <StatBox value="25%" label="Avg. CPC Reduction" />
           <StatBox value="120+" label="Campaigns Launched" />
         </div>
       </section>

@@ -46,10 +46,10 @@ export function ClientResultsPage() {
             <h2 class="font-heading text-4xl font-bold text-surface-dark0">Combined Results Across All Client Accounts</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <BigStatCard value="£2B+" label="Client Revenue Influenced" icon="ph-currency-pound" />
-            <BigStatCard value="4.2x" label="Average Client ROAS" icon="ph-chart-line-up" secondary={true} />
-            <BigStatCard value="380%" label="Avg. Organic Traffic Growth" icon="ph-trend-up" />
-            <BigStatCard value="52%" label="Avg. Conversion Rate Lift" icon="ph-cursor-click" secondary={true} />
+            <BigStatCard value="£35M+" label="Client Revenue Influenced" icon="ph-currency-pound" />
+            <BigStatCard value="3.4x" label="Average Client ROAS" icon="ph-chart-line-up" secondary={true} />
+            <BigStatCard value="180%" label="Avg. Organic Traffic Growth" icon="ph-trend-up" />
+            <BigStatCard value="35%" label="Avg. Conversion Rate Lift" icon="ph-cursor-click" secondary={true} />
           </div>
         </div>
       </section>
@@ -63,23 +63,23 @@ export function ClientResultsPage() {
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <ChannelCard channel="Social Media Marketing" icon="ph-heart" metrics={[
-              { label: 'Average engagement rate increase', value: '3.2x' },
-              { label: 'Average monthly follower growth', value: '+18%' },
-              { label: 'Average reach expansion', value: '+285%' },
+              { label: 'Average engagement rate increase', value: '2.2x' },
+              { label: 'Average monthly follower growth', value: '+12%' },
+              { label: 'Average reach expansion', value: '+145%' },
             ]} />
             <ChannelCard channel="Performance Advertising" icon="ph-chart-line-up" secondary={true} metrics={[
-              { label: 'Average ROAS across accounts', value: '4.1x' },
-              { label: 'Average CPC reduction', value: '-38%' },
-              { label: 'Average CPA improvement', value: '-44%' },
+              { label: 'Average ROAS across accounts', value: '3.4x' },
+              { label: 'Average CPC reduction', value: '-25%' },
+              { label: 'Average CPA improvement', value: '-30%' },
             ]} />
             <ChannelCard channel="SEO & Web" icon="ph-magnifying-glass" metrics={[
-              { label: 'Average organic traffic growth', value: '+380%' },
+              { label: 'Average organic traffic growth', value: '+180%' },
               { label: 'Average keyword ranking improvement', value: 'Top 3' },
-              { label: 'Average conversion rate lift post-rebuild', value: '+52%' },
+              { label: 'Average conversion rate lift post-rebuild', value: '+35%' },
             ]} />
             <ChannelCard channel="Digital PR" icon="ph-megaphone" secondary={true} metrics={[
               { label: 'Average media placements per month', value: '12' },
-              { label: 'Average domain authority increase', value: '+18 DA' },
+              { label: 'Average domain authority increase', value: '+12 DA' },
               { label: 'Average organic visibility lift', value: '+45%' },
             ]} />
           </div>

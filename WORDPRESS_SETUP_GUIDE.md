@@ -12,7 +12,55 @@ This guide walks you through setting up WordPress as the headless CMS that power
 
 ---
 
-## Step 1 — Install the WPGraphQL Plugin
+## Step 1 — Set Up Hostinger Subdomain & Install WordPress
+
+This section covers setting up your WordPress instance on Hostinger. Because we are custom-coding the frontend with Remix and utilizing WPGraphQL, we recommend hosting the WordPress CMS on a dedicated subdomain (e.g., `cms.bellbeemedia.com` or `wp.bellbeemedia.com`).
+
+### 1a. Create the Subdomain in Hostinger
+1. Log in to your **Hostinger hPanel**.
+2. Click on **Websites** in the top navigation bar.
+3. Click **Manage** next to your domain (`bellbeemedia.com`).
+4. In the left sidebar, search for **Subdomains** (under the **Domains** section).
+5. Under **Create a New Subdomain**:
+   - In the **Subdomain** field, enter your prefix (e.g., `cms`).
+   - Check **"Use custom folder for subdomain"** if you want to specify a custom directory (e.g., `public_html/cms`), or leave it unchecked to let Hostinger create the default path.
+   - Click **Create**.
+
+### 1b. Install WordPress on the Subdomain
+1. In the left sidebar of hPanel, search for **Auto Installer** (under the **Website** section).
+2. Under **WordPress**, click **Select**.
+3. In the installation details window:
+   - **Website Title:** e.g., `Bell Bee Media CMS`
+   - **Administrator Email / Username / Password:** Set these and keep them stored securely.
+   - Click **Advanced** to expand:
+     - Under **Installation Path / URL**, click the dropdown and select your new subdomain (e.g. `https://cms.bellbeemedia.com/`).
+     - Leave the subfolder input box **completely empty** so WordPress installs directly on the subdomain root.
+     - Leave database settings on automatic.
+   - Click **Next**.
+   - Select the recommended **PHP Version** (PHP 8.1 or 8.2 is recommended).
+   - Under **Update Flow**, select **Update only to minor versions** (safest option).
+   - Click **Install**.
+
+### 1c. Secure with Let's Encrypt SSL
+1. Go to **Security → SSL** in the left sidebar of your Hostinger dashboard.
+2. If SSL was not auto-installed, locate the SSL list, click **Install SSL**, select your subdomain (`cms.bellbeemedia.com`), and click **Install**.
+3. Once active, verify you can access `https://cms.bellbeemedia.com/wp-admin` securely.
+
+### 1d. DNS Configuration (If using external DNS)
+- **If your domain uses Hostinger Nameservers:** DNS records are configured automatically. No action is required.
+- **If your domain points to a third-party DNS (e.g., Cloudflare):**
+  1. In Hostinger hPanel, locate your **Server IP Address** (shown on your hosting plan dashboard).
+  2. Log in to your external DNS manager (e.g., Cloudflare).
+  3. Add a new **A** record:
+     - **Type:** `A`
+     - **Name:** `cms` (or matching subdomain prefix)
+     - **IPv4 address:** [Your Hostinger Server IP]
+     - **Proxy status:** DNS Only (gray cloud) is recommended for GraphQL APIs to prevent proxy timeout issues.
+     - **TTL:** `Auto` or `3600`
+
+---
+
+## Step 2 — Install the WPGraphQL Plugin
 
 WPGraphQL exposes your WordPress content as a GraphQL API.
 
@@ -25,7 +73,7 @@ WPGraphQL exposes your WordPress content as a GraphQL API.
 
 ---
 
-## Step 2 — Install Advanced Custom Fields (ACF) Pro
+## Step 3 — Install Advanced Custom Fields (ACF) Pro
 
 ACF is used to add structured fields to your Custom Post Types.
 
@@ -35,7 +83,7 @@ ACF is used to add structured fields to your Custom Post Types.
 
 ---
 
-## Step 3 — Install WPGraphQL for ACF
+## Step 4 — Install WPGraphQL for ACF
 
 This makes your ACF fields available in the GraphQL API.
 
@@ -44,7 +92,7 @@ This makes your ACF fields available in the GraphQL API.
 
 ---
 
-## Step 4 — Register Custom Post Types
+## Step 5 — Register Custom Post Types
 
 Add this code to your theme's `functions.php` or a custom plugin:
 
@@ -109,11 +157,11 @@ add_action('init', 'bellbee_register_post_types');
 
 ---
 
-## Step 5 — Create ACF Field Groups
+## Step 6 — Create ACF Field Groups
 
 Go to **Custom Fields → Add New** for each group below:
 
-### 5a. Blog Post Fields (`blogFields`)
+### 6a. Blog Post Fields (`blogFields`)
 **Location:** Post Type = `post`
 
 | Field Name  | Field Key      | Type     | Notes                          |
@@ -125,7 +173,7 @@ Go to **Custom Fields → Add New** for each group below:
 
 ---
 
-### 5b. Case Study Fields (`caseStudyFields`)
+### 6b. Case Study Fields (`caseStudyFields`)
 **Location:** Post Type = `case_study`
 
 | Field Name   | Field Key      | Type     | Notes                          |
@@ -139,7 +187,7 @@ Go to **Custom Fields → Add New** for each group below:
 
 ---
 
-### 5c. Success Story Fields (`successStoryFields`)
+### 6c. Success Story Fields (`successStoryFields`)
 **Location:** Post Type = `success_story`
 
 | Field Name | Field Key   | Type     | Notes                                  |
@@ -153,7 +201,7 @@ Go to **Custom Fields → Add New** for each group below:
 
 ---
 
-### 5d. Job Opening Fields (`jobFields`)
+### 6d. Job Opening Fields (`jobFields`)
 **Location:** Post Type = `job_opening`
 
 | Field Name  | Field Key    | Type | Notes                                          |
@@ -168,7 +216,7 @@ Go to **Custom Fields → Add New** for each group below:
 
 ---
 
-## Step 6 — Register the Proposal Submission Mutation
+## Step 7 — Register the Proposal Submission Mutation
 
 Add this to your `functions.php` or a custom plugin to allow the website to submit proposal forms via GraphQL:
 
@@ -238,7 +286,7 @@ add_action('graphql_register_types', function () {
 
 ---
 
-## Step 7 — Set Environment Variables
+## Step 8 — Set Environment Variables
 
 In your Remix app's `.env` file (create it in the project root if it doesn't exist):
 
@@ -265,7 +313,7 @@ WORDPRESS_AUTH_TOKEN=your_username:generated_app_password_base64_encoded
 
 ---
 
-## Step 8 — Create Content in WordPress
+## Step 9 — Create Content in WordPress
 
 ### Blogs
 - Go to **Posts → Add New**
@@ -289,7 +337,7 @@ WORDPRESS_AUTH_TOKEN=your_username:generated_app_password_base64_encoded
 
 ---
 
-## Step 9 — Verify the Integration
+## Step 10 — Verify the Integration
 
 After setting up, test each GraphQL query in the WPGraphQL IDE at `https://your-site.com/graphql`:
 

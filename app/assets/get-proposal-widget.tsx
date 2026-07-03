@@ -29,9 +29,10 @@ export const ProposalBookingWidget = clientEntry(
                           finalBookingUrl.includes('calendar.app.google')
 
     let activeTab = 'form' // 'form' | 'call'
+    let currentStep = (result && !result.success) ? 2 : 1
 
     return () => (
-      <div class="flex flex-col gap-6 w-full">
+      <div class="flex flex-col gap-4 w-full">
         {/* Tab Selector - Hide when already submitted */}
         {!submitted && (
           <div class="flex bg-surface-2 p-1.5 rounded-2xl border border-surface-3/50 max-w-md">
@@ -64,7 +65,7 @@ export const ProposalBookingWidget = clientEntry(
           </div>
         )}
 
-        <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-surface-3/30 border border-surface-2 relative overflow-hidden">
+        <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl shadow-surface-3/30 border border-surface-2 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full"></div>
 
           {submitted ? (
@@ -159,65 +160,122 @@ export const ProposalBookingWidget = clientEntry(
             <>
               {/* Error message if WP returned an error */}
               {result && !result.success && (
-                <div class="relative z-10 mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-sm">
+                <div class="relative z-10 mb-4 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-sm">
                   <i class="ph ph-warning-circle mr-2"></i>{result.message}
                 </div>
               )}
 
-              <h2 class="text-3xl font-bold text-surface-dark0 mb-8 relative z-10">Request a growth proposal</h2>
+              {/* Progress Indicator */}
+              <div class="relative z-10 mb-4">
+                <div class="flex justify-between text-xs font-bold text-text-secondary uppercase tracking-wider mb-1.5">
+                  <span>Step {currentStep} of 2</span>
+                  <span>{currentStep === 1 ? 'Services & Goals' : 'Contact Details'}</span>
+                </div>
+                <div class="w-full h-1.5 bg-surface-2 rounded-full overflow-hidden">
+                  <div 
+                    class="h-full bg-gradient-to-r from-primary to-primary-light transition-all duration-300 ease-out" 
+                    style={{ width: currentStep === 1 ? '50%' : '100%' }}
+                  ></div>
+                </div>
+              </div>
 
-              <form method="post" action="/get-proposal" class="flex flex-col gap-6 relative z-10">
-                {/* Name and Email Row */}
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <h2 class="text-2xl font-bold text-surface-dark0 mb-4 relative z-10">
+                {currentStep === 1 ? 'What do you need help with?' : 'How can we reach you?'}
+              </h2>
+
+              <form method="post" action="/get-proposal" class="flex flex-col gap-4 relative z-10">
+                
+                {/* STEP 1 CONTAINER */}
+                <div 
+                  class="flex flex-col gap-4" 
+                  style={{ display: currentStep === 1 ? 'flex' : 'none' }}
+                >
+                  {/* Service Choice Chips */}
                   <div class="flex flex-col gap-2">
-                    <label for="fullName" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" required placeholder="John Doe" class="px-5 py-4 rounded-2xl border-2 border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-lg font-medium text-surface-dark0" />
+                    <span class="text-xs font-bold text-surface-dark2 uppercase tracking-wide block">Services You're Interested In</span>
+                    <div class="flex flex-wrap gap-2" role="group" aria-label="Select services">
+                      {SERVICE_OPTIONS.map((opt) => (
+                        <label class="cursor-pointer select-none">
+                          <input type="checkbox" name="services" value={opt.value} class="peer hidden" />
+                          <span class="border border-surface-2 bg-surface-1 px-3 py-1.5 rounded-xl text-xs font-semibold hover:border-primary-light transition-all inline-block text-surface-dark1 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary">
+                            {opt.label}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                  <div class="flex flex-col gap-2">
-                    <label for="email" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">Email Address *</label>
-                    <input type="email" id="email" name="email" required placeholder="you@company.com" class="px-5 py-4 rounded-2xl border-2 border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-lg font-medium text-surface-dark0" />
+
+                  {/* Message Details */}
+                  <div class="flex flex-col gap-1.5">
+                    <label for="details" class="text-xs font-bold text-surface-dark2 uppercase tracking-wide">Project Details <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
+                    <textarea id="details" name="details" rows={3} placeholder="Tell us about your goals, timeline, budget..." class="px-4 py-3 rounded-xl border border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all resize-none text-sm font-medium text-surface-dark0"></textarea>
+                  </div>
+
+                  {/* Next Button */}
+                  <div class="mt-2">
+                    <button 
+                      type="button" 
+                      mix={on('click', () => {
+                        currentStep = 2
+                        handle.update()
+                      })}
+                      class="w-full py-3.5 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md shadow-primary/20 text-sm flex items-center justify-center gap-2 group"
+                    >
+                      Next: Contact Details <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </button>
                   </div>
                 </div>
 
-                {/* Company and Phone Row */}
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div class="flex flex-col gap-2">
-                    <label for="company" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">Company <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
-                    <input type="text" id="company" name="company" placeholder="Your company name" class="px-5 py-4 rounded-2xl border-2 border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-lg font-medium text-surface-dark0" />
+                {/* STEP 2 CONTAINER */}
+                <div 
+                  class="flex flex-col gap-4" 
+                  style={{ display: currentStep === 2 ? 'flex' : 'none' }}
+                >
+                  {/* Name and Email Row */}
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                      <label for="fullName" class="text-xs font-bold text-surface-dark2 uppercase tracking-wide">Full Name *</label>
+                      <input type="text" id="fullName" name="fullName" required placeholder="John Doe" class="px-4 py-3 rounded-xl border border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-sm font-medium text-surface-dark0" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <label for="email" class="text-xs font-bold text-surface-dark2 uppercase tracking-wide">Email Address *</label>
+                      <input type="email" id="email" name="email" required placeholder="you@company.com" class="px-4 py-3 rounded-xl border border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-sm font-medium text-surface-dark0" />
+                    </div>
                   </div>
-                  <div class="flex flex-col gap-2">
-                    <label for="phone" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">Phone Number <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
-                    <input type="tel" id="phone" name="phone" placeholder="+92 300 0000000" class="px-5 py-4 rounded-2xl border-2 border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-lg font-medium text-surface-dark0" />
+
+                  {/* Company and Phone Row */}
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                      <label for="company" class="text-xs font-bold text-surface-dark2 uppercase tracking-wide">Company <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
+                      <input type="text" id="company" name="company" placeholder="Your company name" class="px-4 py-3 rounded-xl border border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-sm font-medium text-surface-dark0" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <label for="phone" class="text-xs font-bold text-surface-dark2 uppercase tracking-wide">Phone Number <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
+                      <input type="tel" id="phone" name="phone" placeholder="+92 300 0000000" class="px-4 py-3 rounded-xl border border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all text-sm font-medium text-surface-dark0" />
+                    </div>
                   </div>
-                </div>
 
-                {/* Service Choice Chips */}
-                <div class="flex flex-col gap-3">
-                  <span class="text-sm font-bold text-surface-dark2 uppercase tracking-wide block">Services You're Interested In</span>
-                  <div class="flex flex-wrap gap-3" role="group" aria-label="Select services">
-                    {SERVICE_OPTIONS.map((opt) => (
-                      <label class="cursor-pointer select-none">
-                        <input type="checkbox" name="services" value={opt.value} class="peer hidden" />
-                        <span class="border-2 border-surface-2 bg-surface-1 px-4 py-2.5 rounded-2xl text-sm font-medium hover:border-primary-light transition-all inline-block text-surface-dark1 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary">
-                          {opt.label}
-                        </span>
-                      </label>
-                    ))}
+                  {/* Navigation & Submit */}
+                  <div class="grid grid-cols-3 gap-3 mt-2">
+                    <button 
+                      type="button" 
+                      mix={on('click', () => {
+                        currentStep = 1
+                        handle.update()
+                      })}
+                      class="py-3.5 bg-surface-2 text-surface-dark0 font-bold rounded-xl hover:bg-surface-3 transition-all border border-surface-3 text-sm flex items-center justify-center gap-1"
+                    >
+                      ← Back
+                    </button>
+                    <button 
+                      type="submit" 
+                      id="submit-proposal" 
+                      class="col-span-2 py-3.5 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-all shadow-md shadow-primary/20 text-sm flex items-center justify-center gap-2 group"
+                    >
+                      Submit Request <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </button>
                   </div>
-                </div>
-
-                {/* Message Details */}
-                <div class="flex flex-col gap-2">
-                  <label for="details" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">Project Details <span class="text-text-secondary/50 font-normal lowercase">(optional)</span></label>
-                  <textarea id="details" name="details" rows={4} placeholder="Tell us about your goals, timeline, budget..." class="px-5 py-4 rounded-2xl border-2 border-surface-2 bg-surface-1 focus:outline-none focus:bg-white focus:border-primary transition-all resize-none text-lg font-medium text-surface-dark0"></textarea>
-                </div>
-
-                {/* Submit */}
-                <div class="mt-4">
-                  <button type="submit" id="submit-proposal" class="w-full py-5 bg-primary text-white font-bold rounded-2xl hover:bg-primary-light transition-all shadow-lg shadow-primary/30 text-lg flex items-center justify-center gap-2 group">
-                    Request Consultation <span class="group-hover:translate-x-1 transition-transform">→</span>
-                  </button>
-                  <p class="text-center text-xs text-text-secondary mt-3">
+                  <p class="text-center text-[10px] text-text-secondary mt-1">
                     🔒 We respect your privacy — no spam, ever.
                   </p>
                 </div>

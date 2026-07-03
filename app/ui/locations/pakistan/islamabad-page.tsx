@@ -105,7 +105,7 @@ export function IslamabadPage(handle: Handle<IslamabadPageProps>) {
                 </li>
                 <li class="flex items-center gap-3">
                   <span class="w-6 h-6 rounded-full bg-emerald-500/25 text-emerald-400 flex items-center justify-center text-xs shrink-0">✓</span>
-                  <span><strong>ROAS Driven</strong>: Average 4.2x ROAS generated for our scaling clients</span>
+                  <span><strong>ROAS Driven</strong>: Average 3.4x ROAS generated for our scaling clients</span>
                 </li>
               </ul>
             </div>
@@ -259,7 +259,7 @@ export function IslamabadPage(handle: Handle<IslamabadPageProps>) {
                     <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Scaling Brands</span>
                   </div>
                   <div class="flex flex-col items-center gap-2 group py-8 px-4">
-                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">4.2x</span>
+                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">3.4x</span>
                     <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Avg. ROAS</span>
                   </div>
                   <div class="flex flex-col items-center gap-2 group py-8 px-4">
@@ -267,7 +267,7 @@ export function IslamabadPage(handle: Handle<IslamabadPageProps>) {
                     <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Expert Specialists</span>
                   </div>
                   <div class="flex flex-col items-center gap-2 group py-8 px-4">
-                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">10+</span>
+                    <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">35+</span>
                     <span class="text-xs font-medium text-white/60 uppercase tracking-widest">Combined Yrs Exp.</span>
                   </div>
                 </div>

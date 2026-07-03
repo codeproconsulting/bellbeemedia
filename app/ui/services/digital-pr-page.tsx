@@ -47,7 +47,7 @@ export function DigitalPrPage() {
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="800+" label="Media Placements Secured" />
-          <StatBox value="DA 70+" label="Average Backlink Authority" />
+          <StatBox value="DA 50+" label="Average Backlink Authority" />
           <StatBox value="250+" label="Influencer Partnerships" />
           <StatBox value="45%" label="Avg. Organic Traffic Lift" />
         </div>

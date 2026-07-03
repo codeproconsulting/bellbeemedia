@@ -46,7 +46,7 @@ export function SocialMediaPage() {
       {/* Stats */}
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <StatBox value="3.2x" label="Average Engagement Lift" />
+          <StatBox value="2.2x" label="Average Engagement Lift" />
           <StatBox value="500K+" label="Monthly Reach Delivered" />
           <StatBox value="98%" label="Content Approval Rate" />
           <StatBox value="60+" label="Brands Grown" />

@@ -48,8 +48,8 @@ export function DesignCopyPage() {
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="200+" label="Brand Identities Created" />
           <StatBox value="5M+" label="Words Written & Published" />
-          <StatBox value="42%" label="Avg. Conversion Rate Lift" />
-          <StatBox value="100%" label="Client Satisfaction Rate" />
+          <StatBox value="35%" label="Avg. Conversion Rate Lift" />
+          <StatBox value="98%" label="Client Satisfaction Rate" />
         </div>
       </section>
 

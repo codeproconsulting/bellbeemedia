@@ -50,7 +50,7 @@ export function CaseStudiesPage(handle: Handle<CaseStudiesPageProps>) {
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value={`${caseStudies.length}+`} label="Active Case Studies" />
           <StatBox value="14" label="Industries Covered" />
-          <StatBox value="£2B+" label="Client Revenue Influenced" />
+          <StatBox value="£35M+" label="Client Revenue Influenced" />
           <StatBox value="98%" label="Client Satisfaction" />
         </div>
       </section>

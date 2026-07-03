@@ -42,8 +42,8 @@ export function OurCompanyPage() {
       <section class="bg-white border-b border-surface-2 py-12">
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="5" label="Core Specialists" />
-          <StatBox value="20+" label="Combined Yrs Experience" />
-          <StatBox value="4.2x" label="Avg. ROAS Delivered" />
+          <StatBox value="35+" label="Combined Yrs Experience" />
+          <StatBox value="3.4x" label="Avg. ROAS Delivered" />
           <StatBox value="100%" label="Dedicated to Results" />
         </div>
       </section>

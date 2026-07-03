@@ -48,7 +48,7 @@ export function WebSolutionsPage() {
         <div class="container mx-auto px-4 max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatBox value="<2s" label="Average Load Time" />
           <StatBox value="95+" label="Average Lighthouse Score" />
-          <StatBox value="300%" label="Avg. Conversion Lift" />
+          <StatBox value="45%" label="Avg. Conversion Lift" />
           <StatBox value="80+" label="Sites Launched" />
         </div>
       </section>

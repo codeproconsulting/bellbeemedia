@@ -52,7 +52,7 @@ export function IndustryExpertisePage() {
               title="E-Commerce"
               overview="From Shopify startups to multi-million pound online retailers, we understand what makes e-commerce brands grow: the right product-market fit, the right creative, the right margins."
               services={["Social commerce (Instagram & TikTok Shop)", "Google Shopping & Meta ROAS campaigns", "Product photography & video", "Email & SMS retention marketing", "Conversion rate optimisation"]}
-              metric="Average 4.8x ROAS across e-commerce clients"
+              metric="Average 3.8x ROAS across e-commerce clients"
             />
             <IndustryDeepDive
               icon="ph-code"
@@ -60,14 +60,14 @@ export function IndustryExpertisePage() {
               title="SaaS & Technology"
               overview="B2B SaaS requires a different playbook — longer sales cycles, product-led growth mechanics, and LinkedIn-heavy ABM strategies. We've helped dozens of SaaS companies reduce CAC and grow MRR."
               services={["SEO & technical content marketing", "LinkedIn demand generation", "Product demo campaigns", "Case study production", "MQL-optimised landing pages"]}
-              metric="Average 65% CAC reduction through organic channels"
+              metric="Average 45% CAC reduction through organic channels"
             />
             <IndustryDeepDive
               icon="ph-map-pin"
               title="Local Business"
               overview="Local businesses compete in one of the toughest arenas — limited budgets, high competition, and real-world reputation at stake. We help local brands dominate their area digitally."
               services={["Google Business Profile optimisation", "Local SEO & citation building", "Hyper-targeted local Meta ads", "Review generation campaigns", "Local social media management"]}
-              metric="Average 3x increase in local lead volume"
+              metric="Average 2.2x increase in local lead volume"
             />
           </div>
         </div>
@@ -82,8 +82,8 @@ export function IndustryExpertisePage() {
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16">
             <StatBox value="60+" label="Brands Grown" />
-            <StatBox value="10M+" label="Combined Social Followers" secondary={true} />
-            <StatBox value="£2B+" label="Revenue Influenced" />
+            <StatBox value="3M+" label="Combined Social Followers" secondary={true} />
+            <StatBox value="£35M+" label="Revenue Influenced" />
             <StatBox value="15+" label="Countries Reached" secondary={true} />
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">

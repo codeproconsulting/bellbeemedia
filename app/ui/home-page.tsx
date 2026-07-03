@@ -103,7 +103,7 @@ export function HomePage() {
                     <div class="text-[10px] text-text-secondary">Latest Campaign</div>
                   </div>
                 </div>
-                <div class="text-lg font-black text-surface-dark0 text-green-600">5.1×</div>
+                <div class="text-lg font-black text-surface-dark0 text-green-600">4.5×</div>
               </div>
 
               {/* Floating Widget 2 */}
@@ -277,7 +277,7 @@ function FaqSection() {
               </span>
             </summary>
             <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
-              We deliver results by combining real-time performance analytics with native customer insights. We audit your brand positioning and competitor gap matrix to engineer high-converting funnel pipelines, leading to an average ROAS of 4.2x across Meta, Google, and programmatic platforms.
+              We deliver results by combining real-time performance analytics with native customer insights. We audit your brand positioning and competitor gap matrix to engineer high-converting funnel pipelines, leading to an average ROAS of 3.4x across Meta, Google, and programmatic platforms.
             </div>
           </details>
 

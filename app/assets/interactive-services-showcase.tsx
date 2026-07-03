@@ -98,7 +98,7 @@ function WidgetPerformanceMarketing() {
               />
             </svg>
             <div class="absolute flex flex-col items-center">
-              <span class="text-lg lg:text-xl font-bold font-conthrax text-white">5.1x</span>
+              <span class="text-lg lg:text-xl font-bold font-conthrax text-white">3.4x</span>
               <span class="text-[7px] text-white/50">Delivered</span>
             </div>
           </div>

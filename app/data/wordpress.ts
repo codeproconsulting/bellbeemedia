@@ -597,13 +597,13 @@ const FALLBACK_CASE_STUDIES: WPCaseStudy[] = [
   },
   {
     id: '2', slug: 'd2c-product-launch', title: 'D2C Product Launch',
-    tag: 'Performance Ads', metric: '4.8x ROAS', metricLabel: 'Return on Ad Spend',
+    tag: 'Performance Ads', metric: '3.8x ROAS', metricLabel: 'Return on Ad Spend',
     description: 'Launched a health supplement brand with Google and Meta ads, achieving profitability in week 3 of a 6-week campaign.',
     featuredImageUrl: null,
   },
   {
     id: '3', slug: 'b2b-saas-seo-overhaul', title: 'B2B SaaS SEO Overhaul',
-    tag: 'Web & SEO', metric: '+415%', metricLabel: 'Organic Traffic Growth',
+    tag: 'Web & SEO', metric: '+180%', metricLabel: 'Organic Traffic Growth',
     description: 'Rebuilt a SaaS company\'s website with technical SEO foundations, growing monthly visits from 2K to 10K in 4 months.',
     featuredImageUrl: null,
   },
@@ -638,7 +638,7 @@ const FALLBACK_SUCCESS_STORIES: WPSuccessStory[] = [
     id: '2', slug: 'b2b-saas-page-10-to-1', title: 'How a B2B SaaS Company Went from Page 10 to #1 on Google', tag: 'SEO + Web Development',
     challenge: 'A project management SaaS tool was invisible on search engines, relying entirely on paid ads for customer acquisition.',
     strategy: 'We rebuilt their website with a technical SEO foundation, executed a 12-month content strategy targeting 80+ commercial keywords, and earned 200+ editorial backlinks.',
-    results: ['#1 ranking for primary keyword within 8 months', '415% organic traffic growth', 'CAC reduced by 65% through organic channel'],
+    results: ['#1 ranking for primary keyword within 8 months', '240% organic traffic growth', 'CAC reduced by 45% through organic channel'],
   },
   {
     id: '3', slug: 'health-brand-500k-in-90-days', title: 'Launching a Health Brand to £500K Revenue in 90 Days', tag: 'Performance Ads + Digital PR',
