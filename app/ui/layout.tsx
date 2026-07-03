@@ -392,7 +392,7 @@ export function Layout() {
         </header>
 
         {/* Mobile Drawer menu outside the header containing block */}
-        <div class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-8 gap-8 overflow-y-auto border-t border-surface-2 shadow-xl">
+        <div id="mobile-drawer" class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-8 gap-8 overflow-y-auto border-t border-surface-2 shadow-xl">
           <a href="/services" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
           <a href="/our-work" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
           <a href="/blogs" class="text-xl font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
@@ -402,6 +402,16 @@ export function Layout() {
             Get a Quote
           </a>
         </div>
+        {/* Close mobile menu on any link tap inside the drawer */}
+        <script>{`
+          document.addEventListener('click', function(e) {
+            var drawer = document.getElementById('mobile-drawer');
+            var toggle = document.getElementById('mobile-menu-toggle');
+            if (drawer && toggle && drawer.contains(e.target) && e.target.closest('a')) {
+              toggle.checked = false;
+            }
+          });
+        `}</script>
         
         <main class="flex-grow">
           {children}
