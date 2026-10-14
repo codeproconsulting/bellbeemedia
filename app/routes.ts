@@ -37,5 +37,10 @@ export const routes = route({
   locationPakistanRawalpindi: get('/locations/pakistan/rawalpindi'),
   servicesSeoIslamabad: '/services/seo-services-in-islamabad',
   seoServicesIslamabad: '/seo-services-in-islamabad',
+  admin: '/admin',
+  adminLogin: '/admin/login',
+  adminLogout: get('/admin/logout'),
+  adminLeads: '/admin/leads',
+  adminLeadsExport: get('/admin/leads/export'),
 })
 

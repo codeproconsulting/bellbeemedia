@@ -53,6 +53,26 @@ import { CareersPage } from '../ui/about-us/careers-page.tsx'
 // Blog post page
 import { BlogPostPage } from '../ui/blog-post-page.tsx'
 
+// Admin pages & data modules
+import { LoginPage } from '../ui/admin/login-page.tsx'
+import { DashboardPage } from '../ui/admin/dashboard-page.tsx'
+import {
+  getAllLeads,
+  filterLeads,
+  updateLead,
+  updateBulkStatus,
+  deleteLeads,
+  generateLeadsCsv,
+  type LeadStatus,
+} from '../data/leads.ts'
+import {
+  verifyPassword,
+  generateSessionToken,
+  isAuthenticated,
+  getSessionCookieHeader,
+  getLogoutCookieHeader,
+} from '../data/auth.ts'
+
 export default createController(routes, {
   actions: {
     async assets(context) {
@@ -249,6 +269,138 @@ export default createController(routes, {
     },
     async locationPakistanRawalpindi(context) {
       return handleLocationRequest(context, RawalpindiPage, 'Rawalpindi')
+    },
+
+    admin(context) {
+      if (isAuthenticated(context.request)) {
+        return redirect('/admin/leads')
+      }
+      return redirect('/admin/login')
+    },
+
+    async adminLogin(context) {
+      if (context.request.method !== 'POST') {
+        if (isAuthenticated(context.request)) {
+          return redirect('/admin/leads')
+        }
+        return context.render(<LoginPage />)
+      }
+
+      const formData = await context.request.formData()
+      const password = formData.get('password')?.toString() ?? ''
+      const redirectUrl = formData.get('redirectUrl')?.toString() || '/admin/leads'
+
+      if (verifyPassword(password)) {
+        const token = generateSessionToken()
+        return redirect(redirectUrl, {
+          headers: {
+            'Set-Cookie': getSessionCookieHeader(token),
+          },
+        })
+      }
+
+      return context.render(
+        <LoginPage error="Incorrect master password. Please verify and try again." redirectUrl={redirectUrl} />,
+        { status: 401 },
+      )
+    },
+
+    adminLogout() {
+      return redirect('/admin/login', {
+        headers: {
+          'Set-Cookie': getLogoutCookieHeader(),
+        },
+      })
+    },
+
+    async adminLeads(context) {
+      if (!isAuthenticated(context.request)) {
+        return redirect('/admin/login')
+      }
+
+      if (context.request.method === 'POST') {
+        const formData = await context.request.formData()
+        const actionType = formData.get('actionType')?.toString()
+        const leadIds = formData.get('leadIds')?.toString() || ''
+        const ids = leadIds.split(',').map((id) => id.trim()).filter(Boolean)
+
+        if (actionType === 'updateStatus') {
+          const status = formData.get('status')?.toString() as LeadStatus
+          if (status && ids.length) {
+            await updateBulkStatus(ids, status)
+          }
+        } else if (actionType === 'updateNotes') {
+          const notes = formData.get('notes')?.toString() ?? ''
+          if (ids.length) {
+            await updateLead(ids[0], { notes })
+          }
+        } else if (actionType === 'delete') {
+          if (ids.length) {
+            await deleteLeads(ids)
+          }
+        }
+
+        const referer = context.request.headers.get('referer')
+        return redirect(referer || '/admin/leads')
+      }
+
+      const url = new URL(context.request.url)
+      const filters = {
+        search: url.searchParams.get('search') || '',
+        status: url.searchParams.get('status') || 'All',
+        source: url.searchParams.get('source') || 'All',
+        dateRange: url.searchParams.get('dateRange') || 'All',
+        dateFrom: url.searchParams.get('dateFrom') || '',
+        dateTo: url.searchParams.get('dateTo') || '',
+      }
+
+      const allLeads = await getAllLeads()
+      const filteredLeads = filterLeads(allLeads, filters)
+
+      return context.render(
+        <DashboardPage
+          leads={filteredLeads}
+          allLeadsCount={allLeads.length}
+          filters={filters}
+        />,
+      )
+    },
+
+    async adminLeadsExport(context) {
+      if (!isAuthenticated(context.request)) {
+        return redirect('/admin/login')
+      }
+
+      const url = new URL(context.request.url)
+      const idsParam = url.searchParams.get('ids')
+      const allLeads = await getAllLeads()
+      let leadsToExport = allLeads
+
+      if (idsParam) {
+        const ids = idsParam.split(',').map((id) => id.trim()).filter(Boolean)
+        leadsToExport = allLeads.filter((l) => ids.includes(l.id))
+      } else {
+        const filters = {
+          search: url.searchParams.get('search') || '',
+          status: url.searchParams.get('status') || 'All',
+          source: url.searchParams.get('source') || 'All',
+          dateRange: url.searchParams.get('dateRange') || 'All',
+          dateFrom: url.searchParams.get('dateFrom') || '',
+          dateTo: url.searchParams.get('dateTo') || '',
+        }
+        leadsToExport = filterLeads(allLeads, filters)
+      }
+
+      const csvContent = generateLeadsCsv(leadsToExport)
+      const filename = `bellbee_leads_${new Date().toISOString().slice(0, 10)}.csv`
+
+      return new Response(csvContent, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/csv; charset=utf-8',
+          'Content-Disposition': `attachment; filename="${filename}"`,
+        },
+      })
     },
   },
 })

@@ -10,6 +10,8 @@
  * static placeholder data so the site renders without a live WordPress instance.
  */
 
+import { saveLead } from './leads.ts'
+
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
 // ──────────────────────────────────────────────────────────────────────────────
@@ -493,6 +495,19 @@ export type ProposalSubmissionResult = {
 }
 
 export async function submitProposal(data: ProposalFormData): Promise<ProposalSubmissionResult> {
+  try {
+    await saveLead({
+      fullName: data.fullName,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      services: data.services,
+      details: data.details,
+    })
+  } catch (err) {
+    console.error('[Leads] Error saving lead to local store:', err)
+  }
+
   if (!process.env.WORDPRESS_GRAPHQL_URL) {
     // Dev mode: simulate success
     console.log('[WordPress] Proposal (dev mode, not sent):', data)
