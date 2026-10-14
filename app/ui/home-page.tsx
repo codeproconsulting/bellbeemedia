@@ -42,7 +42,7 @@ export function HomePage() {
     >
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section class="relative bg-white pt-28 pb-20 overflow-hidden">
+      <section class="relative bg-white pt-28 pb-20 overflow-hidden bb-noise">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <div class="absolute top-[20%] left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
@@ -51,34 +51,60 @@ export function HomePage() {
 
             {/* Left Copy */}
             <div class="lg:col-span-7 flex flex-col items-start text-left">
-              <h1 class="text-4xl md:text-6xl font-black text-surface-dark0 tracking-tight leading-[1.1] mb-6">
+              <h1 class="bb-stage text-4xl md:text-6xl font-black text-surface-dark0 tracking-tight leading-[1.1] mb-6" style="animation-delay:0.1s">
                 Paid Media, Social <br/>
-                & Creative <span class="text-gradient font-black">Built for Growth</span>
+                & Creative <span class="bb-shimmer-text font-black">Built for Growth</span>
               </h1>
-              <p class="text-lg md:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl">
+              <p class="bb-stage text-lg md:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl" style="animation-delay:0.25s">
                 We manage paid acquisition, organic social channels, and high-performance creative assets for growing consumer brands. No fluff, just revenue.
               </p>
-              <div class="flex flex-wrap gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primary-light transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]">
+              <div class="bb-stage flex flex-wrap gap-4" style="animation-delay:0.4s">
+                <a href={routes.getProposal.href()} data-glow-btn class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primary-light transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]">
                   Get a Free Strategy Session <i class="ph ph-arrow-right"></i>
                 </a>
                 <a href={routes.services.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-surface-3 text-surface-dark1 rounded-full font-semibold hover:bg-surface-1 transition-all">
                   Our Services
                 </a>
               </div>
+
+              {/* Hero Testimonial Strip */}
+              <div class="bb-stage mt-10 p-4 rounded-2xl bg-surface-1/80 border border-surface-2 flex items-center gap-4 max-w-xl backdrop-blur-sm shadow-sm" style="animation-delay:0.5s">
+                <div class="w-11 h-11 rounded-full bg-secondary/15 text-secondary font-black flex items-center justify-center text-sm shrink-0 border border-secondary/20">
+                  RP
+                </div>
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-amber-500 text-xs">
+                      <i class="ph-fill ph-star"></i>
+                      <i class="ph-fill ph-star"></i>
+                      <i class="ph-fill ph-star"></i>
+                      <i class="ph-fill ph-star"></i>
+                      <i class="ph-fill ph-star"></i>
+                    </div>
+                    <span class="text-xs font-bold text-surface-dark0">4.9/5 Verified Client Feedback</span>
+                  </div>
+                  <p class="text-xs text-text-secondary italic">
+                    "CAC dropped 48% and ROAS hit 4.5x within 90 days of working with Bell Bee."
+                  </p>
+                  <span class="text-[11px] text-surface-dark1 font-semibold">— Rahul Patel, CEO @ FabFashion</span>
+                </div>
+              </div>
             </div>
 
             {/* Right Graphic */}
-            <div class="lg:col-span-5 relative w-full h-[420px] flex items-center justify-center">
+            <div class="bb-stage lg:col-span-5 relative w-full h-[420px] flex items-center justify-center" style="animation-delay:0.5s">
               <div class="absolute w-[300px] h-[300px] rounded-full bg-secondary/15 blur-[60px] pointer-events-none"></div>
-              <div class="w-full max-w-[380px] bg-surface-dark0 rounded-3xl border border-surface-dark2 p-6 shadow-2xl relative z-10 flex flex-col gap-6">
+              <div data-tilt class="bb-border-beam w-full max-w-[380px] bg-surface-dark0 rounded-3xl border border-surface-dark2 p-6 shadow-2xl relative z-10 flex flex-col gap-6">
                 <div class="flex justify-between items-center pb-4 border-b border-surface-dark2/60">
                   <div class="flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
                   </div>
-                  <div class="text-[10px] text-white/30 font-mono tracking-wider">LIVE ANALYTICS</div>
+                  <div class="flex items-center gap-1.5 text-[10px] text-white/30 font-mono tracking-wider">
+                    <span class="bb-live-dot"></span>
+                    LIVE ANALYTICS
+                  </div>
                 </div>
                 <div class="flex justify-between items-end h-24 gap-3 bg-surface-dark1 p-4 rounded-xl border border-surface-dark2/40">
                   <div class="w-full bg-primary/20 rounded-md h-[40%]"></div>
@@ -94,8 +120,8 @@ export function HomePage() {
                 </div>
               </div>
 
-              {/* Floating Widget 1 */}
-              <div class="absolute -top-4 -left-4 w-48 bg-white p-4 rounded-2xl shadow-xl border border-surface-2 z-20 animate-float-slow">
+              {/* Floating Widget 1 — ROAS badge */}
+              <div class="bb-float-a absolute -top-4 -left-4 w-48 bg-white p-4 rounded-2xl shadow-xl border border-surface-2 z-20">
                 <div class="flex items-center gap-3 mb-2">
                   <div class="w-8 h-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center text-lg"><i class="ph-fill ph-trend-up"></i></div>
                   <div>
@@ -103,11 +129,11 @@ export function HomePage() {
                     <div class="text-[10px] text-text-secondary">Latest Campaign</div>
                   </div>
                 </div>
-                <div class="text-lg font-black text-surface-dark0 text-green-600">4.5×</div>
+                <div class="text-lg font-black text-green-600">4.5×</div>
               </div>
 
-              {/* Floating Widget 2 */}
-              <div class="absolute -bottom-4 -right-4 w-52 bg-white p-4 rounded-2xl shadow-xl border border-surface-2 z-20 animate-float-medium">
+              {/* Floating Widget 2 — Reach this month */}
+              <div class="bb-float-b absolute -bottom-4 -right-4 w-52 bg-white p-4 rounded-2xl shadow-xl border border-surface-2 z-20">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center text-lg"><i class="ph-fill ph-lightning"></i></div>
                   <div>
@@ -132,7 +158,7 @@ export function HomePage() {
       <StatsBar />
 
       {/* ── Services ─────────────────────────────────────── */}
-      <section class="py-24 bg-surface-1 border-b border-surface-2 relative overflow-hidden">
+      <section class="py-24 bg-surface-1 border-b border-surface-2 relative overflow-hidden" data-reveal>
         {/* Decorative subtle glows */}
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
@@ -140,12 +166,12 @@ export function HomePage() {
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <div class="max-w-xl">
-              <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight">
-                Search, Social & Creative. <br/><span class="text-gradient">Fully Integrated.</span>
+              <h2 data-reveal class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight">
+                Search, Social & Creative. <br/><span class="bb-shimmer-text">Fully Integrated.</span>
               </h2>
             </div>
             <div class="flex-shrink-0">
-              <p class="text-text-secondary leading-relaxed max-w-xs">
+              <p data-reveal data-reveal-delay="150" class="text-text-secondary leading-relaxed max-w-xs">
                 We manage paid acquisition, organic social, and conversion assets under one roof to drive cohesive brand growth.
               </p>
             </div>
@@ -211,7 +237,7 @@ export function HomePage() {
       {/* ── Premium CTA ──────────────────────────────────── */}
       <section class="py-24 bg-white relative overflow-hidden">
         <div class="container mx-auto px-4 max-w-5xl">
-          <div class="bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 p-10 md:p-20 rounded-[40px] text-white overflow-hidden relative shadow-2xl">
+          <div data-reveal="scale" class="bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 p-10 md:p-20 rounded-[40px] text-white overflow-hidden relative shadow-2xl">
             <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-secondary/25 blur-[80px] pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-primary-light/15 blur-[80px] pointer-events-none"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/[0.02] border border-white/5 pointer-events-none"></div>
@@ -227,7 +253,7 @@ export function HomePage() {
                 Book a free 30-minute strategy call. We'll audit your current marketing, identify the biggest growth levers, and show you exactly how we'd scale you.
               </p>
               <div class="flex flex-wrap justify-center gap-4">
-                <a href={routes.getProposal.href()} class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-xl shadow-secondary/30 hover:scale-[1.02] active:scale-[0.98]">
+                <a href={routes.getProposal.href()} data-glow-btn class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-xl shadow-secondary/30 hover:scale-[1.02] active:scale-[0.98]">
                   Book Your Free Strategy Call <i class="ph ph-arrow-right"></i>
                 </a>
                 <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 hover:text-white transition-all">
@@ -259,10 +285,10 @@ function FaqSection() {
       <div class="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
         <div class="text-center max-w-2xl mx-auto mb-16">
-          <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 mb-4 tracking-tight">
-            Frequently Asked <span class="text-gradient">Questions</span>
+          <h2 data-reveal class="text-4xl md:text-5xl font-black text-surface-dark0 mb-4 tracking-tight">
+            Frequently Asked <span class="bb-shimmer-text">Questions</span>
           </h2>
-          <p class="text-text-secondary leading-relaxed">
+          <p data-reveal data-reveal-delay="100" class="text-text-secondary leading-relaxed">
             Everything you need to know about our workflow, onboarding timelines, and campaign optimization.
           </p>
         </div>

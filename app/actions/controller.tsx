@@ -24,6 +24,9 @@ import { GetProposalPage } from '../ui/get-proposal-page.tsx'
 import { PrivacyPage } from '../ui/privacy-page.tsx'
 import { TermsPage } from '../ui/terms-page.tsx'
 import { IslamabadPage } from '../ui/locations/pakistan/islamabad-page.tsx'
+import { LahorePage } from '../ui/locations/pakistan/lahore-page.tsx'
+import { KarachiPage } from '../ui/locations/pakistan/karachi-page.tsx'
+import { RawalpindiPage } from '../ui/locations/pakistan/rawalpindi-page.tsx'
 import { LocationsPage } from '../ui/locations/locations-page.tsx'
 
 // Service sub-pages
@@ -172,8 +175,37 @@ export default createController(routes, {
       return context.render(<LocationsPage />)
     },
 
-    contact(context) {
-      return redirect(routes.getProposal.href())
+    async contact(context) {
+      // GET — show the contact page
+      if (context.request.method === 'GET') {
+        return context.render(<ContactPage />)
+      }
+
+      // POST — process contact form submission
+      const formData = await context.request.formData()
+      const firstName = formData.get('firstName')?.toString() ?? ''
+      const lastName = formData.get('lastName')?.toString() ?? ''
+      const email = formData.get('email')?.toString() ?? ''
+      const service = formData.get('service')?.toString() ?? ''
+      const message = formData.get('message')?.toString() ?? ''
+
+      if (!firstName || !lastName || !email || !message) {
+        return context.render(
+          <ContactPage result={{ success: false, message: 'Please fill in all required fields.' }} />,
+          { status: 400 },
+        )
+      }
+
+      const result = await submitProposal({
+        fullName: `${firstName} ${lastName}`,
+        email,
+        services: service,
+        details: `Contact Form Message:\n${message}`,
+      })
+
+      return context.render(<ContactPage result={result} />, {
+        status: result.success ? 200 : 500,
+      })
     },
 
     privacy(context) {
@@ -184,32 +216,60 @@ export default createController(routes, {
       return context.render(<TermsPage />)
     },
 
+    async locationIslamabad(context) {
+      return handleLocationRequest(context, IslamabadPage, 'Islamabad')
+    },
     async locationPakistanIslamabad(context) {
-      const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
-      
-      if (context.request.method === 'GET') {
-        return context.render(<IslamabadPage bookingUrl={bookingUrl} />)
-      }
+      return handleLocationRequest(context, IslamabadPage, 'Islamabad')
+    },
 
-      const formData = await context.request.formData()
-      const fullName = formData.get('fullName')?.toString() ?? ''
-      const email = formData.get('email')?.toString() ?? ''
+    async locationLahore(context) {
+      return handleLocationRequest(context, LahorePage, 'Lahore')
+    },
+    async locationPakistanLahore(context) {
+      return handleLocationRequest(context, LahorePage, 'Lahore')
+    },
 
-      if (!fullName || !email) {
-        return context.render(
-          <IslamabadPage bookingUrl={bookingUrl} result={{ success: false, message: 'Please fill in your name and email.' }} />,
-          { status: 400 },
-        )
-      }
+    async locationKarachi(context) {
+      return handleLocationRequest(context, KarachiPage, 'Karachi')
+    },
+    async locationPakistanKarachi(context) {
+      return handleLocationRequest(context, KarachiPage, 'Karachi')
+    },
 
-      const phone = formData.get('phone')?.toString()
-      const details = `Contact from Islamabad Landing Page. Details: ${formData.get('details')?.toString() || 'None'}`
-
-      const result = await submitProposal({ fullName, email, phone, details })
-
-      return context.render(<IslamabadPage bookingUrl={bookingUrl} result={result} />, {
-        status: result.success ? 200 : 500,
-      })
+    async locationRawalpindi(context) {
+      return handleLocationRequest(context, RawalpindiPage, 'Rawalpindi')
+    },
+    async locationPakistanRawalpindi(context) {
+      return handleLocationRequest(context, RawalpindiPage, 'Rawalpindi')
     },
   },
 })
+
+async function handleLocationRequest(context: any, Component: any, cityName: string) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+  
+  if (context.request.method === 'GET') {
+    return context.render(<Component bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const email = formData.get('email')?.toString() ?? ''
+
+  if (!fullName || !email) {
+    return context.render(
+      <Component bookingUrl={bookingUrl} result={{ success: false, message: 'Please fill in your name and email.' }} />,
+      { status: 400 },
+    )
+  }
+
+  const phone = formData.get('phone')?.toString()
+  const details = `Contact from ${cityName} Landing Page. Details: ${formData.get('details')?.toString() || 'None'}`
+
+  const result = await submitProposal({ fullName, email, phone, details })
+
+  return context.render(<Component bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}

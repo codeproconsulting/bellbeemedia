@@ -10,6 +10,11 @@
     --text-secondary: #64748b;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
+    --bb-primary: #154476;
+    --bb-secondary: #e56026;
+    --bb-primary-glow: rgba(21,68,118,0.25);
+    --bb-secondary-glow: rgba(229,96,38,0.25);
+    --bb-easing: cubic-bezier(0.16,1,0.3,1);
   }
 
   body {
@@ -74,4 +79,368 @@
     stroke-dashoffset: 200;
     animation: draw-path 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     SCROLL REVEAL SYSTEM
+     Add data-reveal to any element, data-reveal-delay="200" for offset
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+      opacity 0.65s var(--bb-easing),
+      transform 0.65s var(--bb-easing);
+    will-change: opacity, transform;
+  }
+
+  .bb-reveal[data-reveal="left"] {
+    transform: translateX(-40px);
+  }
+  .bb-reveal[data-reveal="right"] {
+    transform: translateX(40px);
+  }
+  .bb-reveal[data-reveal="scale"] {
+    transform: scale(0.92) translateY(20px);
+  }
+  .bb-reveal[data-reveal="fade"] {
+    transform: none;
+  }
+
+  .bb-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     FLOATING ANIMATIONS (stat cards, proof badges, hero accents)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-float-a {
+    animation: bb-float-a 6s ease-in-out infinite;
+  }
+  .bb-float-b {
+    animation: bb-float-b 8s ease-in-out infinite 0.5s;
+  }
+  .bb-float-c {
+    animation: bb-float-c 5s ease-in-out infinite 1s;
+  }
+  .bb-float-slow {
+    animation: bb-float-a 10s ease-in-out infinite;
+  }
+  .bb-float-icon {
+    animation: bb-float-b 4s ease-in-out infinite;
+  }
+
+  @keyframes bb-float-a {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-14px); }
+  }
+  @keyframes bb-float-b {
+    0%,100% { transform: translateY(-6px) rotate(1deg); }
+    50%      { transform: translateY(10px) rotate(-1deg); }
+  }
+  @keyframes bb-float-c {
+    0%,100% { transform: translateY(0px) scale(1); }
+    50%      { transform: translateY(-10px) scale(1.02); }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     PAGE LOAD ENTRANCE
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-stage {
+    opacity: 0;
+    animation: bb-stage-in 0.7s var(--bb-easing) forwards;
+  }
+
+  @keyframes bb-stage-in {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .bb-stage-scale {
+    opacity: 0;
+    animation: bb-stage-scale-in 0.8s var(--bb-easing) forwards;
+  }
+
+  @keyframes bb-stage-scale-in {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     GLOWING HOVER SHADOW (brand-specific, navy & orange)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-hover-glow-navy {
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
+  }
+  .bb-hover-glow-navy:hover {
+    box-shadow: 0 24px 60px -12px var(--bb-primary-glow);
+    transform: translateY(-3px);
+  }
+
+  .bb-hover-glow-orange {
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
+  }
+  .bb-hover-glow-orange:hover {
+    box-shadow: 0 24px 60px -12px var(--bb-secondary-glow);
+    transform: translateY(-3px);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     INFINITE MARQUEE (tech stack ticker / client logos)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: bb-marquee 28s linear infinite;
+  }
+  .bb-marquee-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes bb-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .bb-marquee-reverse {
+    animation: bb-marquee-reverse 32s linear infinite;
+  }
+  @keyframes bb-marquee-reverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     PULSING GLOW DOT (live indicator)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-pulse-dot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: bb-pulse-ring 2s ease-out infinite;
+  }
+  @keyframes bb-pulse-ring {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(2.8); opacity: 0; }
+  }
+
+  /* Standalone ping dot */
+  .bb-live-dot {
+    position: relative;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+  }
+  .bb-live-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: bb-pulse-ring 2s ease-out infinite;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     GRADIENT TEXT SHIMMER (heading accent)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-shimmer-text {
+    background: linear-gradient(
+      135deg,
+      var(--bb-primary) 0%,
+      #2cbcee 40%,
+      var(--bb-secondary) 60%,
+      var(--bb-primary) 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bb-shimmer 5s linear infinite;
+  }
+
+  @keyframes bb-shimmer {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+
+  /* Orange-only shimmer for CTA text */
+  .bb-shimmer-orange {
+    background: linear-gradient(
+      135deg,
+      var(--bb-secondary) 0%,
+      #fbbf24 40%,
+      var(--bb-secondary) 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bb-shimmer 4s linear infinite;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     BORDER BEAM (animated border on hero cards)
+  ───────────────────────────────────────────────────────────────────────── */
+  @property --bb-beam-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  .bb-border-beam {
+    position: relative;
+    isolation: isolate;
+  }
+  .bb-border-beam::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--bb-beam-angle),
+      transparent 0%,
+      var(--bb-primary) 20%,
+      var(--bb-secondary) 50%,
+      var(--bb-primary) 80%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: bb-beam-rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .bb-border-beam:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes bb-beam-rotate {
+    to { --bb-beam-angle: 360deg; }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     NOISE TEXTURE OVERLAY (hero depth)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    z-index: 0;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     STAT COUNT CELLS (number entrance)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-stat-reveal {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transition: opacity 0.5s var(--bb-easing), transform 0.5s var(--bb-easing);
+  }
+  .bb-stat-reveal.bb-revealed {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     STAGGER CHILDREN UTILITY
+  ───────────────────────────────────────────────────────────────────────── */
+  [data-stagger-item] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.55s var(--bb-easing),
+      transform 0.55s var(--bb-easing);
+  }
+  [data-stagger-item].bb-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  [data-stagger-item].bb-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     GLOW BUTTON (interactive cursor-following glow)
+  ───────────────────────────────────────────────────────────────────────── */
+  [data-glow-btn] {
+    --glow-x: 50%;
+    --glow-y: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  [data-glow-btn]::before {
+    content: '';
+    position: absolute;
+    left: var(--glow-x);
+    top: var(--glow-y);
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  [data-glow-btn]:hover::before {
+    opacity: 1;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     TYPING CURSOR (for hero headline)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-cursor::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--bb-secondary);
+    animation: bb-blink 1s step-end infinite;
+  }
+  @keyframes bb-blink {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0; }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     SLIDE-UP PILL BADGE (section headers)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-pill-enter {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+    animation: bb-pill-in 0.5s var(--bb-easing) forwards;
+  }
+  @keyframes bb-pill-in {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     CARD TILT (set by JS, but transition defined here)
+  ───────────────────────────────────────────────────────────────────────── */
+  [data-tilt] {
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     UTILITY DELAY CLASSES (used with bb-stage/bb-reveal)
+  ───────────────────────────────────────────────────────────────────────── */
+  .bb-delay-100 { animation-delay: 100ms; transition-delay: 100ms; }
+  .bb-delay-200 { animation-delay: 200ms; transition-delay: 200ms; }
+  .bb-delay-300 { animation-delay: 300ms; transition-delay: 300ms; }
+  .bb-delay-400 { animation-delay: 400ms; transition-delay: 400ms; }
+  .bb-delay-500 { animation-delay: 500ms; transition-delay: 500ms; }
+  .bb-delay-600 { animation-delay: 600ms; transition-delay: 600ms; }
+  .bb-delay-700 { animation-delay: 700ms; transition-delay: 700ms; }
+  .bb-delay-800 { animation-delay: 800ms; transition-delay: 800ms; }
 }

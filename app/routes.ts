@@ -23,10 +23,17 @@ export const routes = route({
   aboutUsWhyChooseUs: get('/about-us/why-choose-us'),
   aboutUsCareers: get('/about-us/careers'),
   getProposal: get('/get-proposal'),
-  contact: get('/contact'),
+  contact: '/contact',
   privacy: get('/privacy'),
   terms: get('/terms'),
   locations: get('/locations'),
+  locationIslamabad: get('/locations/islamabad'),
+  locationLahore: get('/locations/lahore'),
+  locationKarachi: get('/locations/karachi'),
+  locationRawalpindi: get('/locations/rawalpindi'),
   locationPakistanIslamabad: get('/locations/pakistan/islamabad'),
+  locationPakistanLahore: get('/locations/pakistan/lahore'),
+  locationPakistanKarachi: get('/locations/pakistan/karachi'),
+  locationPakistanRawalpindi: get('/locations/pakistan/rawalpindi'),
 })
 

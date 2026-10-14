@@ -21,22 +21,22 @@ export function StatsBar() {
     <section class="py-16 bg-gradient-to-r from-[#071324] via-primary to-[#071324] border-y border-white/5 relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 pointer-events-none"></div>
       <div class="container mx-auto px-4 max-w-5xl relative z-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">5</span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" data-stagger-group>
+          <div class="flex flex-col items-center gap-2 group" data-stagger-item>
+            <span data-count="5" class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">5</span>
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Expert Specialists</span>
           </div>
-          <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">35+</span>
-            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Combined Yrs Experience</span>
+          <div class="flex flex-col items-center gap-2 group" data-stagger-item>
+            <span data-count="5+" class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">5+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Years Experience</span>
           </div>
-          <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">3.4x</span>
+          <div class="flex flex-col items-center gap-2 group" data-stagger-item>
+            <span data-count="3.4x" class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">3.4x</span>
             <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Avg. ROAS Delivered</span>
           </div>
-          <div class="flex flex-col items-center gap-2 group">
-            <span class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">12+</span>
-            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Active Scale Cases</span>
+          <div class="flex flex-col items-center gap-2 group" data-stagger-item>
+            <span data-count="100+" class="text-4xl md:text-5xl font-black text-white group-hover:text-secondary-light transition-colors duration-300">100+</span>
+            <span class="text-sm font-medium text-white/60 uppercase tracking-widest">Campaigns Delivered</span>
           </div>
         </div>
       </div>

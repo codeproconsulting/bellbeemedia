@@ -142,8 +142,8 @@ export function ServicesPage() {
                   <i class="ph-fill ph-users-three"></i>
                 </div>
                 <div>
-                  <div class="text-2xl font-black text-white">35+</div>
-                  <div class="text-xs text-white/45 font-medium">Years of combined specialist experience</div>
+                  <div class="text-2xl font-black text-white">5+</div>
+                  <div class="text-xs text-white/45 font-medium">Years of specialist experience</div>
                 </div>
               </div>
               <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:border-emerald-500/30 transition-colors">

@@ -11,7 +11,7 @@
 Just ask the AI naturally. These phrases all trigger the skill automatically:
 
 ```
-"perform seo analysis on http://localhost:44100"
+"perform seo analysis on http://localhost:5173"
 "run seo audit on bellbeemedia.com"
 "check technical seo for /services"
 "analyze seo" / "audit seo" / "review schema"
@@ -88,23 +88,23 @@ All findings use consistent severity levels:
 
 ### Run a full site audit
 ```
-seo audit http://localhost:44100
+seo audit http://localhost:5173
 ```
 Produces `FULL-AUDIT-REPORT.md` + `ACTION-PLAN.md` in the current directory.
 
 ### Check only the homepage on-page SEO
 ```
-seo page http://localhost:44100
+seo page http://localhost:5173
 ```
 
 ### Validate structured data on the services page
 ```
-seo schema http://localhost:44100/services
+seo schema http://localhost:5173/services
 ```
 
 ### Check if AI crawlers can index the site
 ```
-seo geo http://localhost:44100
+seo geo http://localhost:5173
 ```
 Checks `robots.txt` for `GPTBot`, `ClaudeBot`, `PerplexityBot`, `Applebot-Extended`, `Google-Extended`, `Bytespider`, `CCBot`.
 
@@ -115,13 +115,13 @@ seo github codeproconsulting/bellbeemedia
 
 ### Get a strategic SEO plan (Agency template auto-detected)
 ```
-seo plan http://localhost:44100
+seo plan http://localhost:5173
 ```
 Detects BellBee Media as an Agency and loads the agency-specific SEO template.
 
 ### Analyze a blog post before publishing
 ```
-seo article http://localhost:44100/blogs/your-post-slug
+seo article http://localhost:5173/blogs/your-post-slug
 ```
 
 ---

@@ -20,6 +20,15 @@ export function Document() {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {description && <meta name="description" content={description} />}
         
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCXZ19KB1R"></script>
+        <script>
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GCXZ19KB1R');`}
+        </script>
+        
         {/* Load Google Fonts (Inter & Space Grotesk) for clean, premium typography */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -37,6 +46,7 @@ export function Document() {
         {children}
         <script type="module" src={routes.assets.href({ path: 'app/assets/entry.ts' })}></script>
         <script type="module" src={routes.assets.href({ path: 'app/assets/mobile-nav.ts' })}></script>
+        <script type="module" src={routes.assets.href({ path: 'app/assets/animations.ts' })}></script>
       </body>
     </html>
   )
