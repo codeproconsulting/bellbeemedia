@@ -36,6 +36,7 @@ import { DigitalPrPage } from '../ui/services/digital-pr-page.tsx'
 import { ProductionPage } from '../ui/services/production-page.tsx'
 import { WebSolutionsPage } from '../ui/services/web-solutions-page.tsx'
 import { DesignCopyPage } from '../ui/services/design-copy-page.tsx'
+import { SeoIslamabadPage } from '../ui/services/seo-islamabad-page.tsx'
 
 // Our Work sub-pages
 import { CaseStudiesPage } from '../ui/our-work/case-studies-page.tsx'
@@ -84,6 +85,12 @@ export default createController(routes, {
     },
     servicesDesignCopy(context) {
       return context.render(<DesignCopyPage />)
+    },
+    async servicesSeoIslamabad(context) {
+      return handleSeoIslamabadRequest(context)
+    },
+    async seoServicesIslamabad(context) {
+      return handleSeoIslamabadRequest(context)
     },
 
     ourWork(context) {
@@ -249,7 +256,7 @@ export default createController(routes, {
 async function handleLocationRequest(context: any, Component: any, cityName: string) {
   const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
   
-  if (context.request.method === 'GET') {
+  if (context.request.method !== 'POST') {
     return context.render(<Component bookingUrl={bookingUrl} />)
   }
 
@@ -273,3 +280,50 @@ async function handleLocationRequest(context: any, Component: any, cityName: str
     status: result.success ? 200 : 500,
   })
 }
+
+async function handleSeoIslamabadRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<SeoIslamabadPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const email = formData.get('email')?.toString() ?? ''
+  const website = formData.get('website')?.toString() ?? ''
+
+  if (!fullName || !email || !website) {
+    return context.render(
+      <SeoIslamabadPage
+        bookingUrl={bookingUrl}
+        result={{ success: false, message: 'Please provide your full name, email, and website URL.' }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const phone = formData.get('phone')?.toString()
+  const goal = formData.get('goal')?.toString() || 'General SEO growth'
+  const budget = formData.get('budget')?.toString() || 'Flexible'
+  const notes = formData.get('notes')?.toString() || 'None'
+
+  const details = `SEO Audit Request (Islamabad):
+Website: ${website}
+Primary Objective: ${goal}
+Estimated Budget: ${budget}
+Notes / Keywords: ${notes}`
+
+  const result = await submitProposal({
+    fullName,
+    email,
+    phone,
+    services: 'SEO Services in Islamabad',
+    details,
+  })
+
+  return context.render(<SeoIslamabadPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
