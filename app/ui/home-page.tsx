@@ -52,7 +52,7 @@ export function HomePage() {
             {/* Left Copy */}
             <div class="lg:col-span-7 flex flex-col items-start text-left">
               <h1 class="bb-stage text-4xl md:text-6xl font-black text-surface-dark0 tracking-tight leading-[1.1] mb-6" style="animation-delay:0.1s">
-                Paid Media, Social <br/>
+                Paid Media, Social <br />
                 & Creative <span class="bb-shimmer-text font-black">Built for Growth</span>
               </h1>
               <p class="bb-stage text-lg md:text-xl text-text-secondary leading-relaxed mb-8 max-w-xl" style="animation-delay:0.25s">
@@ -158,70 +158,17 @@ export function HomePage() {
       <StatsBar />
 
       {/* ── Services ─────────────────────────────────────── */}
-      <section class="py-24 bg-surface-1 border-b border-surface-2 relative overflow-hidden" data-reveal>
-        {/* Decorative subtle glows */}
-        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
-        
-        <div class="container mx-auto px-4 max-w-6xl relative z-10">
-          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
-            <div class="max-w-xl">
-              <h2 data-reveal class="text-4xl md:text-5xl font-black text-surface-dark0 tracking-tight">
-                Search, Social & Creative. <br/><span class="bb-shimmer-text">Fully Integrated.</span>
-              </h2>
-            </div>
-            <div class="flex-shrink-0">
-              <p data-reveal data-reveal-delay="150" class="text-text-secondary leading-relaxed max-w-xs">
-                We manage paid acquisition, organic social, and conversion assets under one roof to drive cohesive brand growth.
-              </p>
-            </div>
+      <section class="py-[84px] px-4 md:px-6 pb-[88px] bg-[#0b4a94] relative overflow-hidden" data-reveal>
+        <div class="max-w-[1180px] mx-auto relative z-10">
+          <div class="flex justify-between gap-9 flex-wrap items-end mb-9">
+            <h2 class="text-[clamp(32px,4.4vw,52px)] leading-[1.06] font-extrabold tracking-[-0.03em] max-w-[640px] text-white">
+              Search, Social &amp; Creative. <em class="not-italic text-[#ffa24a]">Fully Integrated.</em>
+            </h2>
+            <p class="text-[15.5px] leading-[1.65] text-[#c4daf3] max-w-[370px]">
+              We manage paid acquisition, organic social, and conversion assets under one roof to drive cohesive brand growth.
+            </p>
           </div>
-          <InteractiveServicesShowcase
-            services={[
-              {
-                icon: 'ph-heart',
-                title: 'Social Media Management',
-                desc: 'Organic platform strategies, copy, native vertical video, community management, and audience growth across channels.',
-                tags: ['Instagram', 'TikTok', 'LinkedIn'],
-                href: routes.servicesSocialMedia.href(),
-              },
-              {
-                icon: 'ph-chart-line-up',
-                title: 'Performance Marketing',
-                desc: 'Paid media buying across Meta, Google Search, Shopping, and Programmatic. We write, execute, test, and optimize in-house.',
-                tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
-                href: routes.servicesPerformanceAds.href(),
-              },
-              {
-                icon: 'ph-megaphone',
-                title: 'Digital PR & Influencer',
-                desc: 'Curated influencer gifting/campaign partnerships and securing strategic press coverage to build authority and drive referral traffic.',
-                tags: ['Media Coverage', 'Influencer Gifting', 'Brand Colabs'],
-                href: routes.servicesDigitalPr.href(),
-              },
-              {
-                icon: 'ph-film-slate',
-                title: 'Creative Production',
-                desc: 'High-quality video shoots, scroll-stopping social ad creatives, product photography, and motion graphics.',
-                tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
-                href: routes.servicesProduction.href(),
-              },
-              {
-                icon: 'ph-desktop',
-                title: 'Web & Landing Pages',
-                desc: 'High-speed, mobile-first websites, Shopify stores, and custom landing pages optimized for maximum conversion rate.',
-                tags: ['CRO', 'SEO', 'E-commerce'],
-                href: routes.servicesWebSolutions.href(),
-              },
-              {
-                icon: 'ph-bezier-curve',
-                title: 'Design & Copywriting',
-                desc: 'Visual brand guidelines, digital ad asset designs, and persuasive sales copywriting for email flows and landing pages.',
-                tags: ['Branding', 'Ad Creatives', 'UX Copy'],
-                href: routes.servicesDesignCopy.href(),
-              },
-            ]}
-          />
+          <InteractiveServicesShowcase />
         </div>
       </section>
 
