@@ -172,24 +172,35 @@ export function Layout() {
                     <div class="flex justify-between items-center border-b border-surface-2 pb-4 mb-4">
                       <div>
                         <h3 class="text-lg font-black text-surface-dark0 tracking-tight flex items-center gap-2">
-                          <span class="text-xl">🇵🇰</span> Service Locations in Pakistan
+                          <span class="text-xl">🇵🇰</span> Service Locations & Regional Hubs
                         </h3>
-                        <p class="text-xs text-text-secondary mt-0.5">Dedicated performance marketing & creative teams across major hubs.</p>
+                        <p class="text-xs text-text-secondary mt-0.5">Dedicated performance marketing & creative teams across Pakistan & UK.</p>
                       </div>
-                      <a href={routes.locations.href()} class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-                        View All Locations <i class="ph ph-arrow-right"></i>
-                      </a>
+                      <div class="flex items-center gap-3">
+                        <a href={routes.locationsPakistan.href()} class="text-xs font-bold px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors">
+                          🇵🇰 Pakistan Cities
+                        </a>
+                        <a href={routes.locationsUk.href()} class="text-xs font-bold px-3 py-1.5 rounded-full bg-surface-2 text-surface-dark1 border border-surface-3 hover:bg-surface-3 transition-colors">
+                          🇬🇧 UK Hubs
+                        </a>
+                        <a href={routes.locations.href()} class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                          All Regions <i class="ph ph-arrow-right"></i>
+                        </a>
+                      </div>
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">
-                      <a href={routes.locationIslamabad.href()} class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
+                      <a href="/locations/pakistan/islamabad" class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary bg-white hover:shadow-md transition-all group/item">
                         <div class="flex items-center gap-2">
-                          <div class="w-8 h-8 rounded-lg bg-green-50 text-green-700 flex items-center justify-center text-sm group-hover/item:bg-green-600 group-hover/item:text-white transition-colors">
+                          <div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm group-hover/item:bg-primary group-hover/item:text-white transition-colors">
                             <i class="ph-fill ph-buildings"></i>
                           </div>
-                          <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Islamabad</h4>
+                          <div>
+                            <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Islamabad</h4>
+                            <span class="text-[10px] font-bold text-primary">Flagship HQ</span>
+                          </div>
                         </div>
-                        <p class="text-[11px] text-text-secondary leading-normal">Head office in I-8 Markaz.</p>
+                        <p class="text-[11px] text-text-secondary leading-normal">Office #204, Vista Bldg, I-8 Markaz.</p>
                       </a>
 
                       <a href={routes.locationLahore.href()} class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
@@ -321,13 +332,21 @@ export function Layout() {
           <div class="flex flex-col gap-2">
             <a href="/locations" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors flex items-center justify-between">
               <span>Locations</span>
-              <span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Pakistan</span>
+              <span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">All Hubs</span>
             </a>
-            <div class="grid grid-cols-2 gap-2 pl-2">
-              <a href={routes.locationIslamabad.href()} class="text-xs text-text-secondary hover:text-primary py-1 font-medium">📍 Islamabad</a>
-              <a href={routes.locationLahore.href()} class="text-xs text-text-secondary hover:text-primary py-1 font-medium">📍 Lahore</a>
-              <a href={routes.locationKarachi.href()} class="text-xs text-text-secondary hover:text-primary py-1 font-medium">📍 Karachi</a>
-              <a href={routes.locationRawalpindi.href()} class="text-xs text-text-secondary hover:text-primary py-1 font-medium">📍 Rawalpindi</a>
+            <div class="flex flex-col gap-1 pl-2">
+              <a href={routes.locationsPakistan.href()} class="text-xs font-bold text-primary hover:text-primary-light py-1 flex items-center gap-1.5">
+                🇵🇰 Pakistan Service Locations &rarr;
+              </a>
+              <div class="grid grid-cols-2 gap-2 pl-3 pb-1">
+                <a href="/locations/pakistan/islamabad" class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Islamabad Hub</a>
+                <a href={routes.locationLahore.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Lahore</a>
+                <a href={routes.locationKarachi.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Karachi</a>
+                <a href={routes.locationRawalpindi.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Rawalpindi</a>
+              </div>
+              <a href={routes.locationsUk.href()} class="text-xs font-bold text-text-secondary hover:text-primary py-1 flex items-center gap-1.5">
+                🇬🇧 United Kingdom Hub &rarr;
+              </a>
             </div>
           </div>
 
@@ -380,13 +399,15 @@ export function Layout() {
 
               <div>
                 <h4 class="font-bold text-surface-dark0 mb-6">Service Locations</h4>
-                <ul class="flex flex-col gap-3 text-text-secondary text-sm font-medium">
-                  <li><a href={routes.locationIslamabad.href()} class="hover:text-primary transition-colors">Islamabad</a></li>
-                  <li><a href={routes.locationLahore.href()} class="hover:text-primary transition-colors">Lahore</a></li>
-                  <li><a href={routes.locationKarachi.href()} class="hover:text-primary transition-colors">Karachi</a></li>
-                  <li><a href={routes.locationRawalpindi.href()} class="hover:text-primary transition-colors">Rawalpindi</a></li>
+                <ul class="flex flex-col gap-2.5 text-text-secondary text-sm font-medium">
+                  <li><a href={routes.locationsPakistan.href()} class="hover:text-primary font-semibold text-surface-dark0 flex items-center gap-1.5">🇵🇰 Pakistan Hubs</a></li>
+                  <li class="pl-3"><a href="/locations/pakistan/seo-services-islamabad" class="hover:text-primary transition-colors text-xs">Islamabad (Flagship HQ)</a></li>
+                  <li class="pl-3"><a href={routes.locationLahore.href()} class="hover:text-primary transition-colors text-xs">Lahore Hub</a></li>
+                  <li class="pl-3"><a href={routes.locationKarachi.href()} class="hover:text-primary transition-colors text-xs">Karachi Hub</a></li>
+                  <li class="pl-3"><a href={routes.locationRawalpindi.href()} class="hover:text-primary transition-colors text-xs">Rawalpindi Hub</a></li>
+                  <li class="pt-1"><a href={routes.locationsUk.href()} class="hover:text-primary font-semibold text-surface-dark0 flex items-center gap-1.5">🇬🇧 United Kingdom Hub</a></li>
                   <li class="pt-2">
-                    <a href={routes.locations.href()} class="text-primary hover:underline font-bold inline-flex items-center gap-1">
+                    <a href={routes.locations.href()} class="text-primary hover:underline font-bold inline-flex items-center gap-1 text-xs">
                       View All Locations <i class="ph ph-arrow-right"></i>
                     </a>
                   </li>

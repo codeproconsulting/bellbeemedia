@@ -77,6 +77,25 @@ export function PerformanceAdsPage() {
               <ServiceFeatureCard icon="ph-linkedin-logo" secondary={true} title="LinkedIn Ads" desc="B2B lead generation and demand generation campaigns with job title and company targeting." />
             </div>
           </div>
+
+          {/* Regional Spotlight for Islamabad Meta Ads */}
+          <div class="mt-12 p-6 rounded-2xl bg-surface-dark0 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg border border-surface-dark2">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-secondary/20 text-secondary-light flex items-center justify-center text-xl shrink-0">
+                <i class="ph-bold ph-lightning"></i>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-white">Looking for Meta Ads Services in Islamabad?</p>
+                <p class="text-xs text-white/70">Get a free 24-hour ad account teardown from our I-8 Markaz media team.</p>
+              </div>
+            </div>
+            <a
+              href="/meta-ads-islamabad"
+              class="px-5 py-2.5 rounded-xl bg-secondary hover:bg-secondary-light text-white text-xs font-bold uppercase tracking-wider transition-colors shrink-0"
+            >
+              Islamabad Meta Ads Hub &rarr;
+            </a>
+          </div>
         </div>
       </section>
 

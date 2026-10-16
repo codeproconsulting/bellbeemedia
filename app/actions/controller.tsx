@@ -28,6 +28,8 @@ import { LahorePage } from '../ui/locations/pakistan/lahore-page.tsx'
 import { KarachiPage } from '../ui/locations/pakistan/karachi-page.tsx'
 import { RawalpindiPage } from '../ui/locations/pakistan/rawalpindi-page.tsx'
 import { LocationsPage } from '../ui/locations/locations-page.tsx'
+import { PakistanHubPage } from '../ui/locations/pakistan/pakistan-hub-page.tsx'
+import { UkHubPage } from '../ui/locations/uk/uk-hub-page.tsx'
 
 // Service sub-pages
 import { SocialMediaPage } from '../ui/services/social-media-page.tsx'
@@ -37,6 +39,7 @@ import { ProductionPage } from '../ui/services/production-page.tsx'
 import { WebSolutionsPage } from '../ui/services/web-solutions-page.tsx'
 import { DesignCopyPage } from '../ui/services/design-copy-page.tsx'
 import { SeoIslamabadPage } from '../ui/services/seo-islamabad-page.tsx'
+import { MetaAdsIslamabadPage } from '../ui/services/meta-ads-islamabad-page.tsx'
 
 // Our Work sub-pages
 import { CaseStudiesPage } from '../ui/our-work/case-studies-page.tsx'
@@ -111,6 +114,33 @@ export default createController(routes, {
     },
     async seoServicesIslamabad(context) {
       return handleSeoIslamabadRequest(context)
+    },
+    async seoServicesIslamabadExact(context) {
+      return handleSeoIslamabadRequest(context)
+    },
+    async seoServicesIslamabadNested(context) {
+      return handleSeoIslamabadRequest(context)
+    },
+    async locationPakistanIslamabadSeo(context) {
+      return handleSeoIslamabadRequest(context)
+    },
+    async locationPakistanIslamabadMetaAds(context) {
+      return handleMetaAdsIslamabadRequest(context)
+    },
+    async locationIslamabadSeo(context) {
+      return handleSeoIslamabadRequest(context)
+    },
+    async locationIslamabadMetaAds(context) {
+      return handleMetaAdsIslamabadRequest(context)
+    },
+    async metaAdsIslamabad(context) {
+      return handleMetaAdsIslamabadRequest(context)
+    },
+    async metaAdsServicesIslamabad(context) {
+      return handleMetaAdsIslamabadRequest(context)
+    },
+    async servicesMetaAdsIslamabad(context) {
+      return handleMetaAdsIslamabadRequest(context)
     },
 
     ourWork(context) {
@@ -200,6 +230,35 @@ export default createController(routes, {
 
     locations(context) {
       return context.render(<LocationsPage />)
+    },
+
+    async locationsPakistan(context) {
+      const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+      if (context.request.method === 'POST') {
+        const formData = await context.request.formData()
+        const fullName = formData.get('fullName')?.toString() ?? ''
+        const email = formData.get('email')?.toString() ?? ''
+        const phone = formData.get('phone')?.toString()
+        const details = `Contact from Pakistan Hub Page. Target City: ${formData.get('details')?.toString() || 'Pakistan'}`
+
+        if (!fullName || !email) {
+          return context.render(
+            <PakistanHubPage bookingUrl={bookingUrl} result={{ success: false, message: 'Please provide both your name and email.' }} />,
+            { status: 400 },
+          )
+        }
+
+        const result = await submitProposal({ fullName, email, phone, details, services: 'Pakistan Regional Operations' })
+        return context.render(<PakistanHubPage bookingUrl={bookingUrl} result={result} />, {
+          status: result.success ? 200 : 500,
+        })
+      }
+      return context.render(<PakistanHubPage bookingUrl={bookingUrl} />)
+    },
+
+    locationsUk(context) {
+      const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+      return context.render(<UkHubPage bookingUrl={bookingUrl} />)
     },
 
     async contact(context) {
@@ -478,4 +537,52 @@ Notes / Keywords: ${notes}`
     status: result.success ? 200 : 500,
   })
 }
+
+async function handleMetaAdsIslamabadRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<MetaAdsIslamabadPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const phone = formData.get('phone')?.toString() ?? ''
+  const pageOrWebsite = formData.get('pageOrWebsite')?.toString() ?? ''
+  const budget = formData.get('budget')?.toString() || '50k–200k'
+  const goal = formData.get('goal')?.toString() || 'more WhatsApp chats'
+
+  if (!fullName || !phone || !pageOrWebsite) {
+    return context.render(
+      <MetaAdsIslamabadPage
+        bookingUrl={bookingUrl}
+        result={{ success: false, message: 'Please provide your full name, WhatsApp number, and Facebook/Instagram page or website link.' }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const details = `Meta Ads 24-Hour Teardown Request (Islamabad):
+WhatsApp (delivery): ${phone}
+Page / Website Link: ${pageOrWebsite}
+Monthly Ad Budget: ${budget}
+Main Goal: ${goal}`
+
+  const email = pageOrWebsite.includes('@')
+    ? pageOrWebsite
+    : `${phone.replace(/\D/g, '') || 'lead'}@meta-ads.bellbeemedia.com`
+
+  const result = await submitProposal({
+    fullName,
+    email,
+    phone,
+    services: 'Meta Ads Services Islamabad',
+    details,
+  })
+
+  return context.render(<MetaAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
 

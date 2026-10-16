@@ -20,10 +20,10 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
         '@type': 'LocalBusiness',
         '@id': 'https://bellbeemedia.com/#localbusiness',
         name: 'BellBee Media — SEO Services in Islamabad',
-        url: 'https://bellbeemedia.com/services/seo-services-in-islamabad',
+        url: 'https://bellbeemedia.com/seo-services-islamabad',
         logo: 'https://bellbeemedia.com/Logo.svg',
         image: 'https://bellbeemedia.com/Logo.svg',
-        description: 'Elite, revenue-focused SEO services in Islamabad, Pakistan. Technical SEO audits, E-E-A-T topical authority, high-authority link acquisition, and Google Maps ranking.',
+        description: 'Bellbee Media provides SEO services in Islamabad that help your business show up on Google when customers are searching, and turn those visits into enquiries and sales.',
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'Office #204, Vista Building, I-8 Markaz',
@@ -49,7 +49,7 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
       },
       {
         '@type': 'Service',
-        '@id': 'https://bellbeemedia.com/services/seo-services-in-islamabad#service',
+        '@id': 'https://bellbeemedia.com/seo-services-islamabad#service',
         name: 'SEO Services in Islamabad',
         provider: {
           '@id': 'https://bellbeemedia.com/#localbusiness',
@@ -60,42 +60,32 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
           { '@type': 'City', name: 'Rawalpindi' },
           { '@type': 'Country', name: 'Pakistan' },
         ],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'SEO Solutions',
-          itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Technical SEO Audits & Core Web Vitals' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'E-E-A-T Content Engineering & Semantic Keyword Architecture' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'High-Authority Editorial Link Building & Digital PR' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Local SEO & Google Business Profile Optimization' } },
-          ],
-        },
       },
       {
         '@type': 'FAQPage',
         mainEntity: [
           {
             '@type': 'Question',
-            name: 'How long does SEO take to produce measurable revenue in Islamabad?',
+            name: 'How long does SEO take to show results?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Initial technical fixes and low-hanging keyword wins typically show noticeable traffic spikes in 60 to 90 days. Sustainable, competitive rankings that drive consistent revenue materialize between months 4 and 6.',
+              text: 'On average, 3-6 months depending on competition, site state and how much work is needed.',
             },
           },
           {
             '@type': 'Question',
-            name: 'Do you guarantee #1 rankings on Google?',
+            name: 'How much do SEO services in Islamabad cost?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'No honest, Google-compliant agency can guarantee a static #1 rank because Google\'s algorithmic factors fluctuate. However, we guarantee strict adherence to white-hat E-E-A-T standards, verified monthly growth milestones, and full transparency.',
+              text: 'It depends on your goals and competition. We provide custom packages based on your services, goals, and budget.',
             },
           },
           {
             '@type': 'Question',
-            name: 'How does BellBee Media\'s E-E-A-T approach protect against Google core updates?',
+            name: 'Do you offer local SEO?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'We never deploy link schemes or automated thin content. We build real brand signals, first-party original data, author credentials, structured semantic schema, and tier-1 editorial media coverage that Google algorithms reward.',
+              text: 'Yes. We make sure your Google Business Profile shows up, your citations are correct and your reviews are positive.',
             },
           },
         ],
@@ -103,266 +93,196 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
     ],
   }
 
-  const seoTools = [
+  // 1. What We Deliver (8 Core Deliverables from Document)
+  const deliverables = [
     {
-      name: 'Google Search Console',
-      badge: 'Official Google',
-      desc: 'First-party indexation, crawl errors & search query analytics',
-      color: '#4285F4',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#4285F4"/>
-        </svg>
-      ),
+      title: 'Keyword Research',
+      desc: 'Targeted keywords your customers actually search, chosen by volume, intent and how realistic they are to rank for.',
+      icon: 'ph-magnifying-glass',
+      color: 'text-blue-500 bg-blue-500/10 border-blue-500/20',
     },
     {
-      name: 'Ahrefs',
-      badge: 'Backlink Authority',
-      desc: 'Backlink profile health, keyword difficulty & competitor gap discovery',
-      color: '#FF642D',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#1C1E26"/>
-          <path d="M7 17L12 7L17 17H14.5L12 11.5L9.5 17H7Z" fill="#FF642D"/>
-          <path d="M9.8 14H14.2" stroke="#FF642D" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      ),
+      title: 'On-Page SEO',
+      desc: 'Optimised titles, meta descriptions, headings, content and internal links on every important page.',
+      icon: 'ph-article',
+      color: 'text-indigo-500 bg-indigo-500/10 border-indigo-500/20',
     },
     {
-      name: 'Semrush',
-      badge: 'Competitive Intel',
-      desc: 'Market share analysis, SERP intent mapping & paid vs. organic overlap',
-      color: '#FF642D',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#FF642D"/>
-          <path d="M12 6L14.5 10.5L19 12L14.5 13.5L12 18L9.5 13.5L5 12L9.5 10.5L12 6Z" fill="#FFFFFF"/>
-        </svg>
-      ),
+      title: 'Technical SEO',
+      desc: 'Site speed, mobile-friendliness, crawl errors, indexing, sitemap and structured data fixed.',
+      icon: 'ph-cpu',
+      color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
     },
     {
-      name: 'Screaming Frog',
-      badge: 'Technical Spider',
-      desc: 'Exhaustive bot crawls for 301 redirect chains, 404s & canonical errors',
-      color: '#28A745',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#28A745"/>
-          <path d="M8 14C8.5 15.5 10.1 16.5 12 16.5C13.9 16.5 15.5 15.5 16 14" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="9" cy="10" r="1.5" fill="#FFFFFF"/>
-          <circle cx="15" cy="10" r="1.5" fill="#FFFFFF"/>
-        </svg>
-      ),
+      title: 'Local SEO',
+      desc: 'Google Business Profile setup, local citations and review strategy to rank in Islamabad and Maps.',
+      icon: 'ph-map-pin',
+      color: 'text-rose-500 bg-rose-500/10 border-rose-500/20',
     },
     {
-      name: 'Google Analytics 4',
-      badge: 'Revenue Tracking',
-      desc: 'End-to-end attribution, user purchase journeys & engagement duration',
-      color: '#F9AB00',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#F9AB00"/>
-          <rect x="6" y="13" width="3" height="6" rx="1.5" fill="#FFFFFF"/>
-          <rect x="11" y="9" width="3" height="10" rx="1.5" fill="#FFFFFF"/>
-          <rect x="16" y="5" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
-        </svg>
-      ),
+      title: 'Content Strategy',
+      desc: 'Service pages and blog content that answer customer questions and build authority.',
+      icon: 'ph-newspaper-clipping',
+      color: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
     },
     {
-      name: 'Surfer SEO',
-      badge: 'Semantic NLP',
-      desc: 'Natural Language Processing entity density & topical coverage scoring',
-      color: '#8434E1',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#8434E1"/>
-          <path d="M6 14C8 10 11 10 13 14C15 18 18 18 19 14" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-      ),
+      title: 'Link Building',
+      desc: 'Quality, relevant backlinks that strengthen your website’s authority.',
+      icon: 'ph-link-simple',
+      color: 'text-purple-500 bg-purple-500/10 border-purple-500/20',
     },
     {
-      name: 'Google PageSpeed',
-      badge: 'Core Web Vitals',
-      desc: 'Mobile LCP, INP, CLS benchmarks and render-blocking script reduction',
-      color: '#0086F8',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#0086F8"/>
-          <path d="M12 7V12L15 15" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="12" cy="12" r="1.5" fill="#FFFFFF"/>
-        </svg>
-      ),
+      title: 'Competitor Analysis',
+      desc: 'We study who ranks above you and find the gaps you can win.',
+      icon: 'ph-chart-line-up',
+      color: 'text-cyan-500 bg-cyan-500/10 border-cyan-500/20',
     },
     {
-      name: 'Sitebulb',
-      badge: 'Visual Architecture',
-      desc: 'Internal link depth mapping, orphan page discovery & crawl flow audits',
-      color: '#00C896',
-      icon: (
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#00C896"/>
-          <path d="M12 6C9.5 6 7.5 8 7.5 10.5C7.5 12.2 8.4 13.7 9.8 14.4V16.5C9.8 16.8 10 17 10.3 17H13.7C14 17 14.2 16.8 14.2 16.5V14.4C15.6 13.7 16.5 12.2 16.5 10.5C16.5 8 14.5 6 12 6Z" fill="#FFFFFF"/>
-        </svg>
-      ),
+      title: 'Monthly Reporting',
+      desc: 'Clear reports on rankings, traffic and leads, so you see what is working.',
+      icon: 'ph-chart-bar',
+      color: 'text-teal-500 bg-teal-500/10 border-teal-500/20',
     },
   ]
 
-  const eeatPillars = [
+  // 2. Problem vs Solution (6 Comparisons from Document)
+  const problemSolutions = [
     {
-      letter: 'E',
-      title: 'Experience',
-      subtitle: 'First-Hand Field Mastery',
-      tag: '8+ Years in the Trenches',
-      desc: 'We do not run hypothetical campaigns. We have orchestrated search growth for over 120 brands across Islamabad, Pakistan, UAE, UK, and the US — navigating real estate hyper-competition, medical trust regulations, and high-SKU ecommerce stores.',
-      bullets: [
-        'Direct experience with 15+ major Google Core & Spam updates',
-        'Hands-on execution in high-ticket Islamabad real estate & legal sectors',
-        'Custom headless & server-side rendering SEO setups that rank faster',
-      ],
-      icon: 'ph-trophy',
-      borderColor: 'border-blue-500/30',
-      bgColor: 'bg-blue-500/5',
-      badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+      problem: 'Your website does not show up when customers search on Google.',
+      solution: 'We research the keywords your customers use and optimise your pages to rank for them.',
     },
     {
-      letter: 'E',
-      title: 'Expertise',
-      subtitle: 'Technical & Algorithmic Depth',
-      tag: 'Subject-Matter Specialists',
-      desc: 'Our SEO architects are certified specialists who dissect raw crawl logs, implement nested JSON-LD schema graphs, optimize JavaScript rendering pipelines, and model topical entities using advanced Semantic NLP.',
-      bullets: [
-        'Advanced JSON-LD schema for LocalBusiness, Service, Product & FAQs',
-        'Strict Core Web Vitals optimization (LCP < 2.0s, INP < 150ms)',
-        'Content cluster blueprints created by industry-specific researchers',
-      ],
-      icon: 'ph-brain',
-      borderColor: 'border-emerald-500/30',
-      bgColor: 'bg-emerald-500/5',
-      badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+      problem: 'You get visitors but very few calls or enquiries.',
+      solution: 'We target buyer-intent keywords and improve your pages so visitors turn into leads.',
     },
     {
-      letter: 'A',
-      title: 'Authoritativeness',
-      subtitle: 'Editorial Digital PR & Tier-1 Links',
-      tag: 'Unassailable Domain Power',
-      desc: 'Google ranks verified authorities, not websites with spammy directory links. We earn authentic digital PR mentions, high-DR thought leadership placements, and contextual citations that competitors cannot duplicate.',
-      bullets: [
-        'Zero private blog networks (PBNs) or automated link schemes',
-        'Earned editorial placements on national and niche publications',
-        'Author bio verification and knowledge graph entity establishment',
-      ],
-      icon: 'ph-shield-star',
-      borderColor: 'border-purple-500/30',
-      bgColor: 'bg-purple-500/5',
-      badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+      problem: 'Competitors in Islamabad rank above you.',
+      solution: 'We study your competitors and build a plan to overtake them.',
     },
     {
-      letter: 'T',
-      title: 'Trustworthiness',
-      subtitle: 'Uncompromising Algorithmic Safety',
-      tag: '100% White-Hat Attribution',
-      desc: 'Every strategy complies strictly with Google Search Essentials. We grant real-time access to Search Console and Looker Studio dashboards, tying every organic session directly to customer pipeline and bottom-line revenue.',
-      bullets: [
-        'Clean track record with zero manual actions or algorithmic penalties',
-        'Live Looker Studio reporting connected to your actual CRM leads',
-        'Local team right here in I-8 Markaz, Islamabad for face-to-face reviews',
-      ],
-      icon: 'ph-seal-check',
-      borderColor: 'border-secondary/40',
-      bgColor: 'bg-secondary/5',
-      badgeColor: 'text-secondary bg-secondary/10 border-secondary/20',
+      problem: 'Your site is slow, or has technical errors.',
+      solution: 'We fix speed, mobile, crawling and indexing issues.',
+    },
+    {
+      problem: 'You do not appear on Google Maps.',
+      solution: 'We optimise your Google Business Profile, citations and reviews.',
+    },
+    {
+      problem: 'You cannot tell if your SEO is working.',
+      solution: 'You get monthly reports in simple language.',
     },
   ]
 
-  const caseStudies = [
-    {
-      client: 'Top-Tier Islamabad Real Estate Developer',
-      tag: 'Local & Commercial SEO',
-      challenge: 'Stuck on page 3 for commercial property and luxury housing queries in Islamabad & Rawalpindi.',
-      stat1: '+380%',
-      stat1Label: 'Organic Leads',
-      stat2: '#1 SERP',
-      stat2Label: 'High-Intent Keywords',
-      stat3: '₨180M+',
-      stat3Label: 'Pipeline Value Generated',
-      timeframe: '5-Month Campaign',
-    },
-    {
-      client: 'Direct-to-Consumer Fashion & Apparel',
-      tag: 'E-commerce Technical SEO',
-      challenge: 'High drop-offs due to poor site speed, duplicate faceted navigation URLs, and zero topical clusters.',
-      stat1: '+520%',
-      stat1Label: 'Organic Revenue',
-      stat2: '1.4s',
-      stat2Label: 'Core Web Vitals LCP',
-      stat3: '6.8x',
-      stat3Label: 'Attributed Organic ROI',
-      timeframe: '6-Month Campaign',
-    },
-    {
-      client: 'B2B Enterprise Software Solutions',
-      tag: 'National & Global SaaS SEO',
-      challenge: 'Competing against global enterprise vendors with high DR backlink moats and thin commercial landing pages.',
-      stat1: '0 to 85K',
-      stat1Label: 'Monthly Search Visits',
-      stat2: '420+',
-      stat2Label: 'Top 3 Keyword Rankings',
-      stat3: '34%',
-      stat3Label: 'Demo Request Conversion Rate',
-      timeframe: '8-Month Campaign',
-    },
-  ]
-
-  const processSteps = [
+  // 3. How It Works (4 Steps from Document)
+  const howItWorks = [
     {
       step: '01',
-      title: '37-Point Technical & Algorithmic Audit',
-      desc: 'We crawl every URL with Screaming Frog, inspect server logs, check indexing bloat, and resolve Core Web Vitals bottlenecks before writing a single line of content.',
+      title: 'Audit',
+      desc: 'We review your site, competition and rankings.',
+      icon: 'ph-crosshair',
     },
     {
       step: '02',
-      title: 'Commercial Intent & Entity Architecture',
-      desc: 'We discard vanity keywords with zero buyer intent. We map high-value search queries where Islamabad customers are actively searching to buy your products or services.',
+      title: 'Strategy',
+      desc: 'We build a keyword and content plan around your services.',
+      icon: 'ph-compass',
     },
     {
       step: '03',
-      title: 'E-E-A-T Content Engineering',
-      desc: 'Our writers and technical strategists produce authoritative pillar guides and solution pages engineered for both Google Helpful Content algorithms and human buyers.',
+      title: 'Optimise and Grow',
+      desc: 'We fix issues, improve your pages and build your content and local presence.',
+      icon: 'ph-trend-up',
     },
     {
       step: '04',
-      title: 'Digital PR & Real Revenue Attribution',
-      desc: 'We secure contextual editorial backlinks from authentic publications, optimize Google Maps Local Pack, and tie your organic visitors directly into measurable sales revenue.',
+      title: 'Report',
+      desc: 'Monthly reports show the results and what happens next.',
+      icon: 'ph-presentation-chart',
     },
   ]
 
+  // 4. Before and After (From Document)
+  const beforeAfter = [
+    {
+      before: 'Not on page 1 of Google for your services.',
+      after: 'Ranking for your target keywords in Islamabad.',
+    },
+    {
+      before: 'Few visitors, and most are not looking for your services.',
+      after: 'A steady flow of visitors who are searching for what you offer.',
+    },
+    {
+      before: 'Few calls and enquiries.',
+      after: 'More calls, enquiries and form submissions.',
+    },
+    {
+      before: 'Missing or incomplete Google Business Profile.',
+      after: 'Complete profile, correct citations and positive reviews.',
+    },
+    {
+      before: 'No idea what is working.',
+      after: 'Clear monthly reports with next steps.',
+    },
+  ]
+
+  // 5. Why Choose Bellbee Media (6 Pillars from Document)
+  const whyChooseUs = [
+    {
+      title: 'Local Islamabad Focus',
+      desc: 'We understand the Islamabad and Pakistan market, local search behaviour and what your customers are looking for.',
+      icon: 'ph-map-pin',
+    },
+    {
+      title: 'Strategy Based On You',
+      desc: 'No cookie-cutter packages. Your plan will be based on your services, goals and budget.',
+      icon: 'ph-sliders-horizontal',
+    },
+    {
+      title: 'Focus On Leads, Not Just Rankings',
+      desc: 'We focus on the calls, enquiries and sales that come as a result of traffic, because traffic for traffic’s sake is meaningless.',
+      icon: 'ph-phone-call',
+    },
+    {
+      title: 'White-Hat SEO Only',
+      desc: 'We use safe, Google-approved SEO practices that will help you dominate the search landscape for years to come.',
+      icon: 'ph-shield-check',
+    },
+    {
+      title: 'Transparent Reporting',
+      desc: 'You’ll always know what we did, what we are doing and what we are going to do with monthly reports in simple language, no-nonsense.',
+      icon: 'ph-chart-pie',
+    },
+    {
+      title: 'Direct Communication',
+      desc: 'One point of contact who will answer your questions and concerns at any time.',
+      icon: 'ph-chat-circle-dots',
+    },
+  ]
+
+  // 6. FAQs (From Document)
   const faqs = [
     {
-      q: 'Why should I hire an Islamabad SEO agency instead of a cheap remote freelancer?',
-      a: 'Freelancers often rely on outdated tactics, bulk spun content, and automated low-quality backlinks that risk catastrophic Google penalties. BellBee Media provides an in-house team of technical developers, content specialists, and PR link builders located in I-8 Markaz, Islamabad. You get guaranteed accountability, strategic depth, and in-person quarterly reviews.',
+      q: 'How long does SEO take to show results?',
+      a: 'On average, 3-6 months depending on competition, site state and how much work is needed.',
     },
     {
-      q: 'How long before we see organic rankings and revenue growth?',
-      a: 'Technical fixes and local Google Business Profile improvements often begin yielding ranking lifts in 30 to 60 days. Major competitive keyword jumps and compounding inbound lead velocity typically hit full momentum between months 3 and 6 as domain authority consolidates.',
+      q: 'How much do SEO services in Islamabad cost?',
+      a: 'It depends on your goals and competition. We structure custom packages based on your specific requirements and budget to ensure measurable return on investment.',
     },
     {
-      q: 'How does your local SEO help my business in Islamabad and Rawalpindi?',
-      a: 'We dominate Google Maps 3-Pack rankings for local queries like "near me" and specific Islamabad sectors (F-6, F-7, Blue Area, I-8, DHA, Bahria Town). We optimize your Google Business Profile, synchronize NAP citations across top regional directories, and generate authentic customer review velocity.',
+      q: 'Do you offer local SEO?',
+      a: 'Yes. We make sure your Google Business Profile shows up, your citations are correct and your reviews are positive.',
     },
     {
-      q: 'Do you work with custom-built websites or just WordPress/Shopify?',
-      a: 'We work across all stacks: Next.js, Remix, React, Shopify, WooCommerce, Webflow, and custom PHP/Laravel. Because our agency includes senior software engineers, we directly debug and optimize server-side rendering, meta-tags, and structured JSON-LD data without breaking your codebase.',
-    },
-    {
-      q: 'What is included in the Free SEO Audit?',
-      a: 'Your complimentary audit includes a complete review of your site\'s crawlability, indexing status, Core Web Vitals speed scores, competitor keyword gaps in the Islamabad market, and an actionable 90-day roadmap to outrank your rivals.',
+      q: 'Where is your Islamabad office located?',
+      a: 'Our office is located at Office #204, Vista Building, I-8 Markaz, Islamabad. You can visit us in person or book a meeting anytime.',
     },
   ]
 
   return () => (
     <Layout
-      title="Best SEO Services in Islamabad | #1 Ranking Agency — BellBee Media"
-      description="Dominate Google rankings with Islamabad's premier performance SEO agency. White-hat E-E-A-T framework, deep technical audits, high-authority digital PR, and verified organic revenue. Office in I-8 Markaz."
+      title="SEO Services in Islamabad | BellBee Media"
+      description="Bellbee Media provides SEO services in Islamabad that help your business show up on Google when customers are searching, and turn those visits into enquiries and sales."
       head={
         <script type="application/ld+json">
           {JSON.stringify(schemaJson)}
@@ -370,114 +290,121 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
       }
     >
 
+      {/* ── BREADCRUMB ── */}
+      <div class="bg-surface-dark0 border-b border-white/5 pt-24 pb-4">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <nav class="flex items-center gap-2 text-xs text-white/50">
+            <a href="/" class="hover:text-white transition-colors">Home</a>
+            <i class="ph ph-caret-right text-[10px]"></i>
+            <a href="/locations" class="hover:text-white transition-colors">Locations</a>
+            <i class="ph ph-caret-right text-[10px]"></i>
+            <a href="/locations/pakistan" class="hover:text-white transition-colors">Pakistan</a>
+            <i class="ph ph-caret-right text-[10px]"></i>
+            <span class="text-white/90 font-medium">SEO Services in Islamabad</span>
+          </nav>
+        </div>
+      </div>
+
       {/* ── HERO SECTION ── */}
-      <section class="relative bg-surface-dark0 text-white pt-28 pb-20 overflow-hidden">
-        <div class="absolute top-0 right-0 w-[550px] h-[550px] bg-primary/20 rounded-full blur-[140px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/15 rounded-full blur-[120px] pointer-events-none"></div>
+      <section class="relative bg-surface-dark0 text-white pt-12 pb-24 overflow-hidden border-b border-white/5">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
+        <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-secondary/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Column: Sales Copy */}
+            {/* Left Content */}
             <div class="lg:col-span-7">
-              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-bold uppercase tracking-wider text-white/90 mb-6">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
-                Islamabad & Rawalpindi · Google Search Specialists
-              </div>
-
-              <h1 class="text-4xl md:text-5xl lg:text-[3.6rem] font-black tracking-tight leading-[1.08] mb-6">
-                Stop Paying for <br />
-                <span class="text-gradient">Empty Rankings.</span> <br />
-                We Drive Real Revenue.
-              </h1>
-
-              <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-xl">
-                BellBee Media engineers white-hat, revenue-first SEO campaigns for ambitious businesses in Islamabad, Pakistan, and global markets. From deep technical architecture to topical E-E-A-T authority and enterprise digital PR — we build organic moats that competitors cannot touch.
+              <p class="text-xs font-bold uppercase tracking-widest text-primary-light mb-4">
+                Islamabad, Pakistan · Dedicated SEO Hub
               </p>
 
-              {/* Value Highlights */}
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-6">
+                SEO Services in <br />
+                <span class="text-gradient">Islamabad</span>
+              </h1>
+
+              <p class="text-lg md:text-xl text-white/75 leading-relaxed mb-8 max-w-xl">
+                Best SEO Agency Bellbee Media provides SEO services in Islamabad that help your business show up on Google when customers are searching, and turn those visits into enquiries and sales.
+              </p>
+
+              {/* Highlights Pill Matrix */}
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
                 <div class="flex items-center gap-3 text-sm text-white/80 bg-white/5 border border-white/10 rounded-xl p-3">
-                  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
-                  100% White-Hat & Update-Proof
+                  <span class="w-6 h-6 rounded-full bg-primary/30 text-primary-light flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
+                  Rank #1 on Google & Maps
                 </div>
                 <div class="flex items-center gap-3 text-sm text-white/80 bg-white/5 border border-white/10 rounded-xl p-3">
-                  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
-                  Live Search Console Transparency
+                  <span class="w-6 h-6 rounded-full bg-primary/30 text-primary-light flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
+                  Turn Clicks into Real Sales
                 </div>
                 <div class="flex items-center gap-3 text-sm text-white/80 bg-white/5 border border-white/10 rounded-xl p-3">
-                  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
-                  Rank #1 on Google Maps in Islamabad
+                  <span class="w-6 h-6 rounded-full bg-primary/30 text-primary-light flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
+                  100% White-Hat Practices
                 </div>
                 <div class="flex items-center gap-3 text-sm text-white/80 bg-white/5 border border-white/10 rounded-xl p-3">
-                  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
-                  Office in I-8 Markaz — Meet Us
+                  <span class="w-6 h-6 rounded-full bg-primary/30 text-primary-light flex items-center justify-center text-xs shrink-0"><i class="ph-bold ph-check"></i></span>
+                  Office in I-8 Markaz, Islamabad
                 </div>
               </div>
 
-              {/* CTAs */}
+              {/* Action Buttons */}
               <div class="flex flex-wrap items-center gap-4">
-                <a href="#audit-form" class="inline-flex items-center gap-2 px-8 py-4 bg-secondary hover:bg-secondary-dark text-white font-bold rounded-full shadow-lg shadow-secondary/25 transition-all text-base transform hover:-translate-y-0.5">
-                  Get Free 37-Point SEO Audit <i class="ph-bold ph-arrow-down"></i>
+                <a href="#audit-form" class="inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-white font-bold rounded-xl shadow-lg shadow-primary/25 transition-all text-sm transform hover:-translate-y-0.5">
+                  Get Free SEO Audit <i class="ph-bold ph-arrow-down"></i>
                 </a>
-                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/20 transition-all text-base">
-                  <i class="ph ph-calendar"></i> Book a 1-on-1 Call
+                <a href="https://wa.me/923701902120" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl transition-all text-sm">
+                  <i class="ph-bold ph-chat-circle-dots text-base text-primary-light"></i> WhatsApp Us
                 </a>
               </div>
             </div>
 
-            {/* Right Column: Hero Metrics Card */}
+            {/* Right Card: Quick Overview & Office Proof */}
             <div class="lg:col-span-5">
-              <div class="bg-surface-dark1 border border-white/10 rounded-3xl p-8 shadow-2xl relative">
+              <div class="bg-surface-dark1/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
                   <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-secondary">Verified Track Record</span>
-                    <h2 class="text-xl font-bold text-white mt-1">SEO Performance Benchmarks</h2>
+                    <span class="text-xs font-bold uppercase tracking-wider text-secondary">Bellbee Media HQ</span>
+                    <h2 class="text-xl font-bold text-white mt-1">Islamabad Search Agency</h2>
                   </div>
                   <div class="w-12 h-12 rounded-2xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary text-2xl">
-                    <i class="ph-fill ph-chart-line-up"></i>
+                    <i class="ph-fill ph-trophy"></i>
                   </div>
                 </div>
 
-                <div class="space-y-6">
-                  <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-white/70">Average Organic Traffic Lift</span>
-                      <span class="font-bold text-emerald-400">+450%</span>
+                {/* Proof Metrics */}
+                <div class="space-y-4 mb-6">
+                  <div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+                    <div>
+                      <span class="text-xs text-white/60 block">Experience</span>
+                      <strong class="text-lg text-white">8+ Years in SEO</strong>
                     </div>
-                    <div class="h-2.5 bg-white/10 rounded-full overflow-hidden">
-                      <div class="h-full bg-emerald-500 rounded-full w-[88%]"></div>
-                    </div>
+                    <span class="text-xs font-bold text-emerald-400">Verified</span>
                   </div>
 
-                  <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-white/70">Google Maps 3-Pack Win Rate</span>
-                      <span class="font-bold text-blue-400">92%</span>
+                  <div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+                    <div>
+                      <span class="text-xs text-white/60 block">Rankings Transformed</span>
+                      <strong class="text-lg text-emerald-400">Page 3 ➔ Page 1</strong>
                     </div>
-                    <div class="h-2.5 bg-white/10 rounded-full overflow-hidden">
-                      <div class="h-full bg-blue-500 rounded-full w-[92%]"></div>
-                    </div>
+                    <span class="text-xs font-bold text-primary-light">Top SERPs</span>
                   </div>
 
-                  <div>
-                    <div class="flex justify-between text-sm mb-1.5">
-                      <span class="text-white/70">Attributed Pipeline Value (2025)</span>
-                      <span class="font-bold text-secondary">₨350M+</span>
+                  <div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+                    <div>
+                      <span class="text-xs text-white/60 block">Client Base</span>
+                      <strong class="text-lg text-white">120+ Businesses Served</strong>
                     </div>
-                    <div class="h-2.5 bg-white/10 rounded-full overflow-hidden">
-                      <div class="h-full bg-secondary rounded-full w-[95%]"></div>
-                    </div>
+                    <span class="text-xs font-bold text-blue-300">Islamabad & Beyond</span>
                   </div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-white/10 bg-white/5 rounded-2xl p-4 flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0">
-                    <i class="ph-fill ph-shield-check"></i>
-                  </div>
-                  <div class="text-xs text-white/70">
-                    <strong class="text-white block text-sm mb-0.5">Zero Algorithmic Penalties</strong>
-                    Guaranteed safe white-hat techniques compliant with Google Search Essentials.
+                {/* Office Location Tag */}
+                <div class="p-4 bg-primary/10 border border-primary/20 rounded-2xl flex items-start gap-3 text-xs text-white/70">
+                  <i class="ph-fill ph-map-pin text-primary text-base mt-0.5 shrink-0"></i>
+                  <div>
+                    <strong class="text-white block text-sm">Office #204, Vista Building</strong>
+                    I-8 Markaz, Islamabad, Pakistan · Open Mon - Fri (9 AM - 6 PM)
                   </div>
                 </div>
               </div>
@@ -487,219 +414,456 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
         </div>
       </section>
 
-      {/* ── TOOLS & TECHNOLOGY STACK (Requested Feature) ── */}
-      <section class="py-16 bg-surface-light border-y border-border">
+      {/* ════════════════════════════════════════════════════
+         SECTION 1: WHAT WE DELIVER (8 DELIVERABLES)
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-surface-1 border-b border-surface-2" id="what-we-deliver">
         <div class="container mx-auto px-4 max-w-6xl">
-          <div class="text-center max-w-2xl mx-auto mb-12">
-            <span class="text-xs font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/15 inline-block mb-3">
-              Industry-Standard Tech Stack
-            </span>
-            <h2 class="text-3xl font-black text-foreground">
-              Enterprise SEO Tools Powering Your Growth
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+              Section 1 · Full-Funnel SEO
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight">
+              1. What We Deliver
             </h2>
-            <p class="text-muted text-sm mt-3">
-              We don't guess. We invest tens of thousands of dollars into industry-leading diagnostics, semantic crawlers, and algorithmic intelligence.
+            <p class="text-text-secondary text-base mt-3 max-w-2xl mx-auto">
+              Comprehensive search engine optimization services engineered to establish permanent topical authority and turn organic visits into revenue.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {seoTools.map((tool) => (
-              <div class="bg-white rounded-2xl p-6 border border-border/80 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group">
-                <div class="flex items-center justify-between mb-4">
-                  <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-surface-light border border-border group-hover:scale-105 transition-transform">
-                    {tool.icon}
-                  </div>
-                  <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-surface-light text-foreground/70 border border-border">
-                    {tool.badge}
-                  </span>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {deliverables.map((item, index) => (
+              <div class="bg-white rounded-3xl p-7 border border-surface-2 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+                <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 border ${item.color} group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+                  <i class={`ph-fill ${item.icon}`}></i>
                 </div>
-                <h3 class="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
-                  {tool.name}
+                <h3 class="text-lg font-black text-surface-dark0 group-hover:text-primary transition-colors duration-300 mb-2">
+                  {item.title}
                 </h3>
-                <p class="text-xs text-muted leading-relaxed">
-                  {tool.desc}
+                <p class="text-xs md:text-sm text-text-secondary leading-relaxed flex-grow">
+                  {item.desc}
                 </p>
+                <div class="pt-4 mt-4 border-t border-surface-2 flex items-center justify-between text-[11px] font-bold text-text-secondary">
+                  <span>Deliverable 0{index + 1}</span>
+                  <i class="ph-bold ph-check text-emerald-500"></i>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div class="mt-10 p-5 bg-primary/5 border border-primary/15 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-lg shrink-0">
-                <i class="ph-bold ph-chart-pie-slice"></i>
-              </span>
-              <p class="text-xs text-foreground/80">
-                <strong class="text-foreground">Full Search Console Integration:</strong> We connect directly to your domain properties so you retain 100% ownership and complete visibility over every keyword rank and backlink.
-              </p>
+      {/* ════════════════════════════════════════════════════
+         SECTION 2: PROBLEM VS SOLUTION (COMPARISON MATRIX)
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-white border-b border-surface-2" id="problem-vs-solution">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+              Section 2 · The Diagnosis
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight">
+              2. Problem vs Solution
+            </h2>
+            <p class="text-text-secondary text-base mt-3 max-w-2xl mx-auto">
+              How Bellbee Media tackles the real reasons your site isn't ranking, bringing clarity and measurable customer leads.
+            </p>
+          </div>
+
+          {/* Side-by-side Table / Comparison Grid */}
+          <div class="bg-surface-1 rounded-3xl border border-surface-2 overflow-hidden shadow-lg">
+            
+            {/* Headers */}
+            <div class="grid grid-cols-1 md:grid-cols-2 text-white font-black text-sm md:text-base">
+              <div class="bg-rose-900/90 md:bg-rose-950 p-5 flex items-center gap-2.5">
+                <span class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs shrink-0">
+                  <i class="ph-bold ph-x"></i>
+                </span>
+                <span>The Problem (What Holds You Back)</span>
+              </div>
+              <div class="bg-emerald-800 md:bg-emerald-900 p-5 flex items-center gap-2.5 border-t md:border-t-0 md:border-l border-white/10">
+                <span class="w-6 h-6 rounded-full bg-emerald-400 text-emerald-950 flex items-center justify-center text-xs shrink-0">
+                  <i class="ph-bold ph-check"></i>
+                </span>
+                <span>Our Solution (How We Fix It)</span>
+              </div>
             </div>
-            <a href="#audit-form" class="text-xs font-bold text-primary hover:text-primary-dark whitespace-nowrap inline-flex items-center gap-1">
-              Audit My Site with These Tools <i class="ph ph-arrow-right"></i>
+
+            {/* Comparison Rows */}
+            <div class="divide-y divide-surface-2">
+              {problemSolutions.map((item, idx) => (
+                <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-white/80 transition-colors">
+                  {/* Problem */}
+                  <div class="p-6 md:p-7 flex items-start gap-4 bg-rose-50/30">
+                    <span class="w-7 h-7 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">
+                      {idx + 1}
+                    </span>
+                    <div>
+                      <span class="text-[11px] font-bold uppercase tracking-wider text-rose-500 block mb-1">Issue</span>
+                      <p class="text-sm font-semibold text-surface-dark0 leading-relaxed">{item.problem}</p>
+                    </div>
+                  </div>
+
+                  {/* Solution */}
+                  <div class="p-6 md:p-7 flex items-start gap-4 bg-emerald-50/30 border-t md:border-t-0 md:border-l border-surface-2">
+                    <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">
+                      <i class="ph-bold ph-check"></i>
+                    </span>
+                    <div>
+                      <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 block mb-1">Bellbee Fix</span>
+                      <p class="text-sm font-semibold text-emerald-950 leading-relaxed">{item.solution}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          <div class="mt-12 text-center">
+            <a href="#audit-form" class="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-bold rounded-full hover:bg-primary-light transition-all text-sm shadow-md">
+              Audit My Website for These Problems <i class="ph-bold ph-arrow-right"></i>
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── E-E-A-T AUTHORITY FRAMEWORK (Requested Feature) ── */}
-      <section class="py-24 bg-white relative overflow-hidden">
+      {/* ════════════════════════════════════════════════════
+         SECTION 3: HOW IT WORKS (4 STEPS)
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-surface-dark0 text-white relative overflow-hidden" id="how-it-works">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[160px] pointer-events-none"></div>
+
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
           <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-secondary px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 inline-block mb-3">
-              Google Algorithmic Blueprint
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black text-foreground">
-              Built on Google's Official E-E-A-T Framework
+            <p class="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+              Section 3 · The Process
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+              3. How It Works
             </h2>
-            <p class="text-muted text-base mt-4 leading-relaxed">
-              Google's Quality Rater Guidelines prioritize <strong>Experience, Expertise, Authoritativeness, and Trustworthiness</strong>. While generic agencies use AI spam that triggers core update penalties, BellBee Media builds permanent topical authority.
+            <p class="text-white/65 text-base mt-3 max-w-2xl mx-auto">
+              A transparent, 4-step framework from initial audit to compounding monthly reports and revenue growth.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {eeatPillars.map((pillar) => (
-              <div class={`rounded-3xl p-8 border ${pillar.borderColor} ${pillar.bgColor} transition-all hover:shadow-lg relative overflow-hidden group`}>
-                <div class="flex items-start justify-between mb-6">
-                  <div class="flex items-center gap-4">
-                    <span class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center text-3xl font-black text-primary border border-border">
-                      {pillar.letter}
-                    </span>
-                    <div>
-                      <h3 class="text-2xl font-black text-foreground">{pillar.title}</h3>
-                      <p class="text-xs font-medium text-muted">{pillar.subtitle}</p>
-                    </div>
-                  </div>
-                  <span class={`text-xs font-bold px-3 py-1 rounded-full border ${pillar.badgeColor}`}>
-                    {pillar.tag}
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {howItWorks.map((step) => (
+              <div class="bg-surface-dark1 border border-white/10 rounded-3xl p-7 relative group hover:border-secondary/50 transition-all duration-300 flex flex-col">
+                <div class="flex items-center justify-between mb-6">
+                  <span class="text-3xl font-black text-secondary/40 group-hover:text-secondary transition-colors">
+                    {step.step}
                   </span>
+                  <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-lg text-white group-hover:bg-secondary group-hover:text-white transition-all">
+                    <i class={`ph-fill ${step.icon}`}></i>
+                  </div>
                 </div>
 
-                <p class="text-sm text-foreground/80 leading-relaxed mb-6">
-                  {pillar.desc}
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-secondary transition-colors">
+                  {step.title}
+                </h3>
+                
+                <p class="text-xs md:text-sm text-white/70 leading-relaxed flex-grow">
+                  {step.desc}
                 </p>
 
-                <div class="space-y-2.5 pt-4 border-t border-border/60">
-                  {pillar.bullets.map((bullet) => (
-                    <div class="flex items-start gap-2.5 text-xs text-foreground/75">
-                      <span class="w-4 h-4 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px] shrink-0 mt-0.5">
-                        <i class="ph-bold ph-check"></i>
-                      </span>
-                      <span>{bullet}</span>
-                    </div>
-                  ))}
+                <div class="pt-4 mt-6 border-t border-white/10 flex items-center gap-1.5 text-xs text-white/40">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Phase {step.step} Milestone
                 </div>
               </div>
             ))}
           </div>
 
-          {/* E-E-A-T Local Islamabad Callout */}
-          <div class="mt-12 bg-surface-dark0 text-white rounded-3xl p-8 md:p-10 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="max-w-xl">
-              <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Local Trust Anchor</span>
-              <h4 class="text-2xl font-bold mb-3">Meet Your Islamabad SEO Strategists In Person</h4>
-              <p class="text-sm text-white/70 leading-relaxed">
-                Trustworthiness starts with physical accountability. Visit our Islamabad headquarters at <strong>Office #204, Vista Building, I-8 Markaz</strong> to review your ranking strategy, technical roadmap, and revenue models face-to-face.
-              </p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
-              <a href="https://maps.google.com/?q=I-8+Markaz+Islamabad" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-full font-bold text-xs text-center border border-white/20 transition-all inline-flex items-center justify-center gap-2">
-                <i class="ph ph-map-pin"></i> View Office Map
-              </a>
-              <a href="https://wa.me/923701902120" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full font-bold text-xs text-center transition-all inline-flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40">
-                <i class="ph-fill ph-whatsapp-logo"></i> WhatsApp Us Directly
-              </a>
-            </div>
+          <div class="mt-14 text-center">
+            <a href="#audit-form" class="inline-flex items-center gap-2 px-8 py-4 bg-secondary hover:bg-secondary-dark text-white font-bold rounded-full text-sm transition-all shadow-xl">
+              Start Step 1: Claim Free Audit <i class="ph-bold ph-arrow-right"></i>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── THE AUDIT FORM SECTION (Requested Feature) ── */}
-      <section id="audit-form" class="py-24 bg-surface-light border-y border-border scroll-mt-20">
+      {/* ════════════════════════════════════════════════════
+         SECTION 4: BEFORE AND AFTER (TRANSFORMATION MATRIX)
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-surface-1 border-b border-surface-2" id="before-and-after">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-3">
+              Section 4 · Tangible Growth
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight">
+              4. Before and After
+            </h2>
+            <p class="text-text-secondary text-base mt-3 max-w-2xl mx-auto">
+              What your business looks like before partnering with Bellbee Media versus where you stand after our campaign kicks into gear.
+            </p>
+          </div>
+
+          {/* Before & After Cards */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            
+            {/* Before Column */}
+            <div class="bg-white rounded-3xl border-2 border-rose-200 p-8 shadow-sm relative overflow-hidden">
+              <div class="flex items-center gap-3 mb-6 pb-4 border-b border-rose-100">
+                <span class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl shrink-0 font-bold">
+                  <i class="ph-bold ph-x-circle"></i>
+                </span>
+                <div>
+                  <h3 class="text-xl font-black text-rose-950">Before Bellbee Media</h3>
+                  <p class="text-xs text-rose-600 font-medium">Stuck in obscurity with zero organic pipeline</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                {beforeAfter.map((item, idx) => (
+                  <div class="p-4 rounded-2xl bg-rose-50/50 border border-rose-100/80 flex items-start gap-3">
+                    <span class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center text-[10px] shrink-0 font-bold mt-0.5">
+                      ✕
+                    </span>
+                    <p class="text-xs md:text-sm text-surface-dark0 font-medium leading-relaxed">
+                      {item.before}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* After Column */}
+            <div class="bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30 rounded-3xl border-2 border-emerald-400 p-8 shadow-lg relative overflow-hidden ring-4 ring-emerald-400/10">
+              <div class="flex items-center gap-3 mb-6 pb-4 border-b border-emerald-100">
+                <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xl shrink-0 font-bold shadow-md shadow-emerald-600/20">
+                  <i class="ph-bold ph-check-circle"></i>
+                </span>
+                <div>
+                  <h3 class="text-xl font-black text-emerald-950">After Bellbee Media</h3>
+                  <p class="text-xs text-emerald-700 font-medium">Dominating Islamabad search queries & driving leads</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                {beforeAfter.map((item, idx) => (
+                  <div class="p-4 rounded-2xl bg-white border border-emerald-200 shadow-sm flex items-start gap-3">
+                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold mt-0.5 shadow-sm">
+                      ✓
+                    </span>
+                    <p class="text-xs md:text-sm text-emerald-950 font-bold leading-relaxed">
+                      {item.after}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Real Client Proof Box (Requested in Document) */}
+          <div class="bg-surface-dark0 text-white rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div class="max-w-2xl">
+                <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Verified Growth Proof</span>
+                <h3 class="text-2xl md:text-3xl font-black mb-3">Real Islamabad Client Case Study</h3>
+                <p class="text-sm text-white/70 leading-relaxed mb-6">
+                  "Before working with Bellbee Media, our corporate firm in Blue Area was buried on Page 3 for key Islamabad queries. Within 4 months, Bellbee took us to <strong>#1 on Google Maps</strong> and rank #1 for high-ticket commercial keywords, increasing inbound client calls by <strong>+380%</strong>."
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs font-bold">
+                  <span class="text-white/90">
+                    📈 +380% Qualified Calls
+                  </span>
+                  <span class="text-emerald-400">
+                    ⭐ Page 3 ➔ #1 Rank
+                  </span>
+                  <span class="text-primary-light">
+                    📍 Google Maps 3-Pack Winner
+                  </span>
+                </div>
+              </div>
+
+              <div class="shrink-0 w-full lg:w-auto text-center lg:text-right">
+                <a href="#audit-form" class="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-surface-dark0 font-black rounded-xl text-sm shadow-xl transition-all">
+                  Get Similar Growth Results <i class="ph-bold ph-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════
+         SECTION 5: WHY CHOOSE BELLBEE MEDIA (6 ADVANTAGES)
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-white border-b border-surface-2" id="why-choose-us">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+              Section 5 · The Bellbee Difference
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight">
+              5. Why Choose Bellbee Media
+            </h2>
+            <p class="text-text-secondary text-base mt-3 max-w-2xl mx-auto">
+              We operate with total transparency, local market acumen, and single-minded dedication to your revenue.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {whyChooseUs.map((pillar) => (
+              <div class="bg-surface-1 rounded-3xl p-8 border border-surface-2 hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+                <div class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                  <i class={`ph-fill ${pillar.icon}`}></i>
+                </div>
+                <h3 class="text-xl font-black text-surface-dark0 group-hover:text-primary transition-colors mb-3">
+                  {pillar.title}
+                </h3>
+                <p class="text-sm text-text-secondary leading-relaxed flex-grow">
+                  {pillar.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Proof Strip */}
+          <div class="bg-primary/5 border border-primary/15 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-5">
+              <span class="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center text-3xl shrink-0 shadow-md">
+                <i class="ph-bold ph-medal"></i>
+              </span>
+              <div>
+                <h4 class="text-lg font-black text-surface-dark0">Proven Track Record in Islamabad</h4>
+                <p class="text-xs md:text-sm text-text-secondary mt-1">
+                  8+ years in search engine optimization · 120+ satisfied clients · Ranked clients from page 3 to page 1.
+                </p>
+              </div>
+            </div>
+            <a href="tel:+923701902120" class="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-bold rounded-full hover:bg-primary-light transition-all text-xs whitespace-nowrap shadow-md">
+              <i class="ph-fill ph-phone"></i> Call +92 370 1902120
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════
+         SECTION 6: FAQS ABOUT SEO IN ISLAMABAD
+         ════════════════════════════════════════════════════ */}
+      <section class="py-24 bg-surface-1 border-b border-surface-2" id="faqs">
+        <div class="container mx-auto px-4 max-w-4xl">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <p class="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+              Section 6 · Common Questions
+            </p>
+            <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight">
+              6. FAQs About SEO in Islamabad
+            </h2>
+            <p class="text-text-secondary text-base mt-3">
+              Direct, honest answers to help you choose the right SEO partner for your business.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            {faqs.map((faq, index) => (
+              <div class="bg-white border border-surface-2 rounded-2xl p-6 shadow-sm hover:border-primary/30 transition-all">
+                <h3 class="text-base md:text-lg font-black text-surface-dark0 mb-3 flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">
+                    {index + 1}
+                  </span>
+                  <span>{faq.q}</span>
+                </h3>
+                <p class="text-sm text-text-secondary leading-relaxed pl-10">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════
+         FREE SEO AUDIT & PROPOSAL FORM
+         ════════════════════════════════════════════════════ */}
+      <section id="audit-form" class="py-24 bg-white scroll-mt-20">
         <div class="container mx-auto px-4 max-w-5xl">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-            {/* Left Form Pitch */}
+            {/* Left Column Pitch */}
             <div class="lg:col-span-5">
-              <span class="text-xs font-bold uppercase tracking-wider text-secondary px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 inline-block mb-3">
-                100% Free · Zero Obligation
-              </span>
-              <h2 class="text-3xl md:text-4xl font-black text-foreground tracking-tight leading-tight mb-4">
-                Claim Your Custom 37-Point SEO & Competitor Audit
+              <p class="text-xs font-bold uppercase tracking-wider text-secondary mb-3">
+                100% Free · No Obligation
+              </p>
+              <h2 class="text-3xl md:text-4xl font-black text-surface-dark0 tracking-tight leading-tight mb-4">
+                Get Your Free SEO Audit in Islamabad
               </h2>
-              <p class="text-muted text-sm leading-relaxed mb-8">
-                Send us your website URL. Within 24 business hours, our senior technical SEO specialists in Islamabad will conduct an in-depth diagnostic revealing:
+              <p class="text-text-secondary text-sm leading-relaxed mb-8">
+                Send us your website URL. Our senior SEO specialists in our I-8 Markaz office will personally review your site and deliver an actionable keyword and ranking blueprint within 24 hours.
               </p>
 
               <div class="space-y-4 mb-8">
                 <div class="flex items-start gap-3">
-                  <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm shrink-0 mt-0.5">
-                    <i class="ph-bold ph-shield-check"></i>
+                  <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-base shrink-0 mt-0.5">
+                    <i class="ph-bold ph-magnifying-glass"></i>
                   </div>
                   <div>
-                    <h3 class="text-sm font-bold text-foreground">Critical Technical Red Flags</h3>
-                    <p class="text-xs text-muted mt-0.5">Crawl errors, indexing blocks, and Core Web Vitals speed bottlenecks.</p>
+                    <h3 class="text-sm font-bold text-surface-dark0">Competitor Keyword Analysis</h3>
+                    <p class="text-xs text-text-secondary mt-0.5">See exactly what queries competitors in Islamabad rank for.</p>
                   </div>
                 </div>
 
                 <div class="flex items-start gap-3">
-                  <div class="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-sm shrink-0 mt-0.5">
-                    <i class="ph-bold ph-crosshair"></i>
+                  <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-base shrink-0 mt-0.5">
+                    <i class="ph-bold ph-speedometer"></i>
                   </div>
                   <div>
-                    <h3 class="text-sm font-bold text-foreground">High-Intent Keyword Gaps</h3>
-                    <p class="text-xs text-muted mt-0.5">The exact queries your competitors in Islamabad are taking customer leads from.</p>
+                    <h3 class="text-sm font-bold text-surface-dark0">Technical & Speed Check</h3>
+                    <p class="text-xs text-text-secondary mt-0.5">Identify crawl errors, broken redirects, and indexing roadblocks.</p>
                   </div>
                 </div>
 
                 <div class="flex items-start gap-3">
-                  <div class="w-7 h-7 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm shrink-0 mt-0.5">
-                    <i class="ph-bold ph-link-simple"></i>
+                  <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-base shrink-0 mt-0.5">
+                    <i class="ph-bold ph-map-pin"></i>
                   </div>
                   <div>
-                    <h3 class="text-sm font-bold text-foreground">Toxic Link & Backlink Health</h3>
-                    <p class="text-xs text-muted mt-0.5">Analysis of your domain authority and risk factors for Google penalties.</p>
+                    <h3 class="text-sm font-bold text-surface-dark0">Google Maps 3-Pack Score</h3>
+                    <p class="text-xs text-text-secondary mt-0.5">Recommendations to dominate local Islamabad searches.</p>
                   </div>
                 </div>
               </div>
 
-              <div class="p-4 rounded-2xl bg-white border border-border shadow-sm flex items-center gap-3">
-                <span class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl shrink-0">
-                  <i class="ph-fill ph-phone-call"></i>
-                </span>
-                <div>
-                  <span class="text-[11px] text-muted block uppercase tracking-wider font-bold">Prefer a direct conversation?</span>
-                  <a href="tel:+923701902120" class="text-sm font-bold text-foreground hover:text-primary transition-colors">
-                    +92 370 1902120
-                  </a>
-                </div>
+              {/* Office Details */}
+              <div class="p-5 rounded-2xl bg-surface-1 border border-surface-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-text-secondary mb-3">Visit or Call Us</h4>
+                <p class="text-xs font-bold text-surface-dark0 mb-1">Office #204, Vista Building, I-8 Markaz, Islamabad</p>
+                <p class="text-xs text-text-secondary mb-2">Phone: +92 370 190 2120 · Email: hello@bellbeemedia.com</p>
+                <a href="https://maps.google.com/?q=I-8+Markaz+Islamabad" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1">
+                  Open Google Maps <i class="ph ph-arrow-square-out"></i>
+                </a>
               </div>
             </div>
 
-            {/* Right Form Card */}
+            {/* Right Column: Lead Form */}
             <div class="lg:col-span-7">
-              <div class="bg-white rounded-3xl p-8 md:p-10 border border-border shadow-xl relative">
+              <div class="bg-surface-1 rounded-3xl p-8 md:p-10 border border-surface-2 shadow-xl relative">
                 
                 {submitted ? (
                   <div class="py-12 text-center">
-                    <div class="w-20 h-20 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-4xl mx-auto mb-6">
+                    <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-4xl mx-auto mb-6">
                       <i class="ph-fill ph-check-circle"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-foreground mb-3">Audit Request Received!</h3>
-                    <p class="text-muted text-sm max-w-md mx-auto mb-8">
-                      Thank you! Our senior SEO team in Islamabad is already reviewing your site. We will prepare your comprehensive 37-point roadmap and get back to you within 24 hours.
+                    <h3 class="text-2xl font-black text-surface-dark0 mb-3">Audit Request Received!</h3>
+                    <p class="text-text-secondary text-sm max-w-md mx-auto mb-8">
+                      Thank you! Our Islamabad SEO team is preparing your custom audit. We will review your rankings and send your report within 24 hours.
                     </p>
                     <div class="flex justify-center gap-4">
-                      <a href={routes.home.href()} class="px-6 py-3 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-dark transition-all">
-                        Back to Homepage
-                      </a>
-                      <a href={bookingUrl} target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-surface-light border border-border text-foreground rounded-full text-xs font-bold hover:bg-gray-100 transition-all">
-                        Schedule Call Now
+                      <a href="/locations" class="px-6 py-3 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-light transition-all">
+                        ← Back to Locations
                       </a>
                     </div>
                   </div>
                 ) : (
                   <div>
                     <div class="mb-6">
-                      <h3 class="text-xl font-bold text-foreground">Request Your Free SEO Roadmap</h3>
-                      <p class="text-xs text-muted mt-1">Fill out the brief details below to get started immediately.</p>
+                      <h3 class="text-xl font-black text-surface-dark0">Request Your Free SEO Audit</h3>
+                      <p class="text-xs text-text-secondary mt-1">Fill in the details below to receive your customized 90-day action plan.</p>
                     </div>
 
                     {result?.success === false && (
@@ -709,12 +873,12 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                       </div>
                     )}
 
-                    <form method="POST" action="/services/seo-services-in-islamabad#audit-form" class="space-y-4">
+                    <form method="POST" action="#audit-form" class="space-y-4">
                       
                       {/* Name & Email */}
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label for="fullName" class="block text-xs font-bold text-foreground mb-1.5">
+                          <label for="fullName" class="block text-xs font-bold text-surface-dark0 mb-1.5">
                             Full Name <span class="text-secondary">*</span>
                           </label>
                           <input
@@ -723,12 +887,12 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                             name="fullName"
                             required
                             placeholder="e.g. Asad Khan"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           />
                         </div>
 
                         <div>
-                          <label for="email" class="block text-xs font-bold text-foreground mb-1.5">
+                          <label for="email" class="block text-xs font-bold text-surface-dark0 mb-1.5">
                             Work Email <span class="text-secondary">*</span>
                           </label>
                           <input
@@ -737,28 +901,28 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                             name="email"
                             required
                             placeholder="e.g. asad@company.com"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           />
                         </div>
                       </div>
 
-                      {/* Phone & Website URL */}
+                      {/* Phone & Website */}
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label for="phone" class="block text-xs font-bold text-foreground mb-1.5">
-                            Phone / WhatsApp
+                          <label for="phone" class="block text-xs font-bold text-surface-dark0 mb-1.5">
+                            WhatsApp / Phone Number
                           </label>
                           <input
                             type="tel"
                             id="phone"
                             name="phone"
                             placeholder="+92 300 1234567"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           />
                         </div>
 
                         <div>
-                          <label for="website" class="block text-xs font-bold text-foreground mb-1.5">
+                          <label for="website" class="block text-xs font-bold text-surface-dark0 mb-1.5">
                             Website URL <span class="text-secondary">*</span>
                           </label>
                           <input
@@ -766,8 +930,8 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                             id="website"
                             name="website"
                             required
-                            placeholder="https://yourwebsite.com"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            placeholder="https://yourbusiness.com"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           />
                         </div>
                       </div>
@@ -775,64 +939,64 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                       {/* Primary Goal & Monthly Budget */}
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label for="goal" class="block text-xs font-bold text-foreground mb-1.5">
-                            Primary SEO Objective
+                          <label for="goal" class="block text-xs font-bold text-surface-dark0 mb-1.5">
+                            Primary SEO Goal
                           </label>
                           <select
                             id="goal"
                             name="goal"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           >
-                            <option value="Rank #1 on Google Maps in Islamabad">Dominate Google Maps (Local Islamabad)</option>
-                            <option value="Scale E-Commerce Organic Revenue">Scale E-Commerce Organic Revenue</option>
-                            <option value="Outrank Competitors for High-Intent Queries">Outrank Key Competitors</option>
-                            <option value="Technical SEO & Core Web Vitals Fixes">Technical & Core Web Vitals Overhaul</option>
-                            <option value="Recover from Google Algorithm Drop">Recover from Traffic / Core Update Drop</option>
+                            <option value="Rank #1 on Google Maps in Islamabad">Rank #1 on Google Maps (Islamabad)</option>
+                            <option value="Outrank Competitors for Target Keywords">Outrank Competitors for Target Keywords</option>
+                            <option value="Generate More Inbound Calls & Enquiries">Generate More Calls & Enquiries</option>
+                            <option value="Technical SEO & Speed Fixes">Technical SEO & Speed Fixes</option>
+                            <option value="E-Commerce Organic Sales Growth">E-Commerce Organic Sales Growth</option>
                           </select>
                         </div>
 
                         <div>
-                          <label for="budget" class="block text-xs font-bold text-foreground mb-1.5">
+                          <label for="budget" class="block text-xs font-bold text-surface-dark0 mb-1.5">
                             Estimated Monthly Budget
                           </label>
                           <select
                             id="budget"
                             name="budget"
-                            class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                           >
-                            <option value="₨150,000 - ₨300,000/mo">₨150,000 – ₨300,000 / mo</option>
-                            <option value="₨300,000 - ₨600,000/mo">₨300,000 – ₨600,000 / mo</option>
-                            <option value="₨600,000+/mo (Enterprise)">₨600,000+ / mo (Enterprise Scale)</option>
-                            <option value="$1,500 - $3,500/mo (International)">$1,500 – $3,500 / mo (Global / Export)</option>
+                            <option value="₨150,000 - ₨300,000/mo">₨150,000 – ₨300,000 / month</option>
+                            <option value="₨300,000 - ₨600,000/mo">₨300,000 – ₨600,000 / month</option>
+                            <option value="₨600,000+/mo (Enterprise)">₨600,000+ / month (Enterprise)</option>
+                            <option value="Flexible / Discuss on Call">Flexible / Discuss on Call</option>
                           </select>
                         </div>
                       </div>
 
-                      {/* Notes / Target Keywords */}
+                      {/* Notes / Challenges */}
                       <div>
-                        <label for="notes" class="block text-xs font-bold text-foreground mb-1.5">
-                          Target Keywords or Current Challenges (Optional)
+                        <label for="notes" class="block text-xs font-bold text-surface-dark0 mb-1.5">
+                          Target Keywords or Challenges (Optional)
                         </label>
                         <textarea
                           id="notes"
                           name="notes"
                           rows={3}
-                          placeholder="Tell us what keywords you want to rank for or what challenges you've faced with previous agencies..."
-                          class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                          placeholder="Tell us what keywords you want to rank for in Islamabad, or what issues your site currently faces..."
+                          class="w-full px-4 py-3 rounded-xl border border-surface-2 bg-white text-surface-dark0 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                         ></textarea>
                       </div>
 
                       <div class="pt-2">
                         <button
                           type="submit"
-                          class="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/25 text-sm flex items-center justify-center gap-2 group cursor-pointer"
+                          class="w-full py-4 bg-primary hover:bg-primary-light text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/25 text-sm flex items-center justify-center gap-2 group cursor-pointer"
                         >
                           Generate My Free SEO Action Plan
                           <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
                         </button>
                       </div>
 
-                      <div class="flex items-center justify-center gap-6 pt-3 text-[11px] text-muted">
+                      <div class="flex items-center justify-center gap-6 pt-2 text-[11px] text-text-secondary">
                         <span class="flex items-center gap-1.5">
                           <i class="ph-bold ph-lock text-emerald-600"></i> Strict Privacy
                         </span>
@@ -840,7 +1004,7 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                           <i class="ph-bold ph-clock text-blue-600"></i> 24h Turnaround
                         </span>
                         <span class="flex items-center gap-1.5">
-                          <i class="ph-bold ph-prohibit text-red-500"></i> No Spam Calls
+                          <i class="ph-bold ph-check text-primary"></i> 100% Free
                         </span>
                       </div>
 
@@ -855,145 +1019,24 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
         </div>
       </section>
 
-      {/* ── CLIENT CASE STUDIES & RESULTS ── */}
-      <section class="py-24 bg-white">
-        <div class="container mx-auto px-4 max-w-6xl">
-          <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/15 inline-block mb-3">
-              Measurable Revenue Proof
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black text-foreground">
-              Real Search Case Studies in Pakistan & Beyond
-            </h2>
-            <p class="text-muted text-sm mt-3">
-              Rankings mean nothing if they do not turn into closed customer transactions. Here is how our E-E-A-T framework transforms business balance sheets.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {caseStudies.map((cs) => (
-              <div class="bg-surface-light border border-border rounded-3xl p-7 flex flex-col justify-between hover:shadow-xl transition-all group">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-secondary px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/20">
-                      {cs.tag}
-                    </span>
-                    <span class="text-[11px] text-muted font-medium">{cs.timeframe}</span>
-                  </div>
-
-                  <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {cs.client}
-                  </h3>
-
-                  <p class="text-xs text-muted leading-relaxed mb-6">
-                    {cs.challenge}
-                  </p>
-                </div>
-
-                <div class="pt-6 border-t border-border grid grid-cols-3 gap-2 text-center bg-white rounded-2xl p-4 shadow-sm">
-                  <div>
-                    <span class="text-base font-black text-foreground block">{cs.stat1}</span>
-                    <span class="text-[10px] text-muted font-medium leading-tight block mt-0.5">{cs.stat1Label}</span>
-                  </div>
-                  <div>
-                    <span class="text-base font-black text-primary block">{cs.stat2}</span>
-                    <span class="text-[10px] text-muted font-medium leading-tight block mt-0.5">{cs.stat2Label}</span>
-                  </div>
-                  <div>
-                    <span class="text-base font-black text-emerald-600 block">{cs.stat3}</span>
-                    <span class="text-[10px] text-muted font-medium leading-tight block mt-0.5">{cs.stat3Label}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4-PHASE GROWTH SPRINT ── */}
-      <section class="py-24 bg-surface-dark0 text-white relative overflow-hidden">
-        <div class="container mx-auto px-4 max-w-6xl relative z-10">
-          <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-wider text-secondary px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 inline-block mb-3">
-              The Execution Framework
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black">
-              Our 4-Phase SEO Growth Sprint
-            </h2>
-            <p class="text-white/60 text-sm mt-3">
-              Predictable, transparent steps that transform unranked websites into market-dominating search properties.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step) => (
-              <div class="bg-surface-dark1 border border-white/10 rounded-2xl p-6 relative group hover:border-secondary/50 transition-colors">
-                <span class="text-3xl font-black text-secondary/40 group-hover:text-secondary transition-colors block mb-4">
-                  {step.step}
-                </span>
-                <h3 class="text-base font-bold text-white mb-2">{step.title}</h3>
-                <p class="text-xs text-white/65 leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div class="mt-14 text-center">
-            <a href="#audit-form" class="inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-white font-bold rounded-full text-sm transition-all shadow-lg">
-              Launch Phase 1 for Your Website <i class="ph-bold ph-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ SECTION (Addressing Sales Objections) ── */}
-      <section class="py-24 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-          <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/15 inline-block mb-3">
-              Clear Answers
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black text-foreground">
-              Frequently Asked Questions About SEO in Islamabad
-            </h2>
-          </div>
-
-          <div class="space-y-4">
-            {faqs.map((faq) => (
-              <div class="border border-border rounded-2xl p-6 bg-surface-light hover:border-primary/30 transition-all">
-                <h3 class="text-base font-bold text-foreground mb-2 flex items-start gap-3">
-                  <span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs shrink-0 mt-0.5">
-                    <i class="ph-bold ph-question"></i>
-                  </span>
-                  <span>{faq.q}</span>
-                </h3>
-                <p class="text-xs text-muted leading-relaxed pl-9">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FINAL URGENT SALES CTA ── */}
-      <section class="py-20 bg-gradient-to-r from-primary via-primary-dark to-[#08182b] text-white relative overflow-hidden">
-        <div class="container mx-auto px-4 max-w-5xl text-center relative z-10">
-          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-widest text-white mb-6">
-            <i class="ph-fill ph-lightning text-yellow-400"></i> High-Intent Opportunity
-          </span>
-          <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-6">
-            Your Competitors Are Ranking For Your Keywords Right Now.
-          </h2>
-          <p class="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Every day you delay is another day of qualified buyer traffic given away to competing businesses in Islamabad. Take command of Google search today with BellBee Media.
+      {/* ── FINAL CTA ── */}
+      <section class="py-20 bg-gradient-to-r from-primary via-[#0e2c50] to-[#051120] text-white">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+          <p class="text-xs font-bold uppercase tracking-widest text-secondary-light mb-4">
+            Stop Giving Customers to Competitors
           </p>
-
-          <div class="flex flex-wrap justify-center gap-4">
-            <a href="#audit-form" class="px-8 py-4 bg-secondary hover:bg-secondary-dark text-white font-bold rounded-full shadow-xl transition-all text-sm inline-flex items-center gap-2">
-              Claim Your Free 37-Point SEO Audit <i class="ph-bold ph-arrow-right"></i>
+          <h2 class="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+            Ready to Dominate Google in Islamabad?
+          </h2>
+          <p class="text-white/75 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+            Let's build an SEO strategy tailored to your exact industry, services, and growth targets. Visit our I-8 Markaz office or speak with our strategists today.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="#audit-form" class="px-8 py-4 bg-secondary hover:bg-secondary-dark text-white font-bold rounded-xl shadow-xl transition-all text-sm inline-flex items-center gap-2">
+              Claim Your Free SEO Audit <i class="ph-bold ph-arrow-right"></i>
             </a>
-            <a href="tel:+923701902120" class="px-7 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/20 transition-all text-sm inline-flex items-center gap-2">
-              <i class="ph-fill ph-phone"></i> Call +92 370 1902120
+            <a href="https://wa.me/923701902120" target="_blank" rel="noopener noreferrer" class="px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all text-sm shadow-lg shadow-emerald-900/30 inline-flex items-center gap-2">
+              <i class="ph-fill ph-whatsapp-logo text-base"></i> WhatsApp Us Now
             </a>
           </div>
         </div>

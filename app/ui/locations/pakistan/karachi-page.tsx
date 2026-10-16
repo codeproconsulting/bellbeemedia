@@ -2,6 +2,7 @@ import { type Handle } from 'remix/ui'
 import { Layout } from '../../layout.tsx'
 import { PillBadge } from '../../shared.tsx'
 import { type ProposalSubmissionResult } from '../../../data/wordpress.ts'
+import { routes } from '../../../routes.ts'
 
 interface KarachiPageProps {
   result?: ProposalSubmissionResult
@@ -52,8 +53,29 @@ export function KarachiPage(handle: Handle<KarachiPageProps>) {
         </script>
       }
     >
+      {/* ── Breadcrumb Navigation ── */}
+      <div class="bg-surface-dark0 border-b border-white/10 pt-28 pb-4 text-white/80">
+        <div class="container mx-auto px-4 max-w-6xl flex items-center justify-between gap-3 text-xs">
+          <nav aria-label="Breadcrumb" class="flex items-center gap-2">
+            <a href={routes.home.href()} class="hover:text-white transition-colors">Home</a>
+            <span class="text-white/30">/</span>
+            <a href={routes.locations.href()} class="hover:text-white transition-colors">Locations</a>
+            <span class="text-white/30">/</span>
+            <a href={routes.locationsPakistan.href()} class="hover:text-white transition-colors">Pakistan</a>
+            <span class="text-white/30">/</span>
+            <span class="text-white font-semibold">Karachi</span>
+          </nav>
+          <a
+            href={routes.locationsPakistan.href()}
+            class="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+          >
+            <i class="ph ph-arrow-left"></i> All Pakistan Hubs
+          </a>
+        </div>
+      </div>
+
       {/* ── Hero & Lead Form Section ── */}
-      <section class="relative bg-surface-dark0 text-white pt-28 pb-24 overflow-hidden border-b border-white/5">
+      <section class="relative bg-surface-dark0 text-white pt-10 pb-24 overflow-hidden border-b border-white/5">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
@@ -62,9 +84,9 @@ export function KarachiPage(handle: Handle<KarachiPageProps>) {
             
             {/* Left Column: Heading & Value Props */}
             <div class="lg:col-span-7 flex flex-col items-start text-left">
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/15 text-xs font-bold uppercase tracking-widest mb-6">
-                🇵🇰 Serving Karachi Commercial Hubs
-              </span>
+              <p class="text-xs font-bold uppercase tracking-widest text-primary-light mb-4">
+                Serving Karachi Commercial Hubs
+              </p>
               <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] mb-6">
                 Karachi's Top <br />
                 <span class="text-gradient">Paid Media &amp; E-Commerce</span> <br />
