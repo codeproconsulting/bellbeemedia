@@ -1662,6 +1662,29 @@ export function MetaAdsIslamabadPage(handle: Handle<MetaAdsIslamabadPageProps>) 
         </div>
       </section>
 
+      {/* ── SECTION 15.5 — GOOGLE ADS CROSS-LINK STRIP ── */}
+      <section class="py-10 bg-surface-dark0 border-b border-surface-dark2 text-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+          <div class="p-6 rounded-2xl bg-surface-dark1 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
+                <i class="ph-bold ph-target"></i>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-white">Also running Google Ads or searching for high-intent search leads?</p>
+                <p class="text-xs text-white/70">Explore our Google Ads &amp; PPC Management team in Islamabad.</p>
+              </div>
+            </div>
+            <a
+              href="/google-ads-islamabad"
+              class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-surface-dark0 font-black text-xs uppercase tracking-wider transition-colors shrink-0"
+            >
+              Google Ads Islamabad &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── SECTION 16 — FOOTER / CONTACT ── */}
       <section class="py-16 sm:py-20 bg-surface-dark1 text-white">
         <div class="container mx-auto px-4 max-w-4xl text-center">

@@ -78,23 +78,43 @@ export function PerformanceAdsPage() {
             </div>
           </div>
 
-          {/* Regional Spotlight for Islamabad Meta Ads */}
-          <div class="mt-12 p-6 rounded-2xl bg-surface-dark0 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg border border-surface-dark2">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-secondary/20 text-secondary-light flex items-center justify-center text-xl shrink-0">
-                <i class="ph-bold ph-lightning"></i>
+          {/* Regional Spotlights for Islamabad PPC & Performance Ads */}
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-6 rounded-2xl bg-surface-dark0 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg border border-surface-dark2">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
+                  <i class="ph-bold ph-target"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-white">Google Ads Agency in Islamabad</p>
+                  <p class="text-xs text-white/70">Free 24-hour Google Ads teardown from our I-8 Markaz team.</p>
+                </div>
               </div>
-              <div>
-                <p class="text-sm font-bold text-white">Looking for Meta Ads Services in Islamabad?</p>
-                <p class="text-xs text-white/70">Get a free 24-hour ad account teardown from our I-8 Markaz media team.</p>
-              </div>
+              <a
+                href="/google-ads-islamabad"
+                class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-surface-dark0 text-xs font-black uppercase tracking-wider transition-colors shrink-0"
+              >
+                Google Ads Hub &rarr;
+              </a>
             </div>
-            <a
-              href="/meta-ads-islamabad"
-              class="px-5 py-2.5 rounded-xl bg-secondary hover:bg-secondary-light text-white text-xs font-bold uppercase tracking-wider transition-colors shrink-0"
-            >
-              Islamabad Meta Ads Hub &rarr;
-            </a>
+
+            <div class="p-6 rounded-2xl bg-surface-dark0 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg border border-surface-dark2">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 text-secondary-light flex items-center justify-center text-xl shrink-0">
+                  <i class="ph-bold ph-lightning"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-white">Meta Ads Services in Islamabad</p>
+                  <p class="text-xs text-white/70">Paid social campaigns engineered for WhatsApp and leads.</p>
+                </div>
+              </div>
+              <a
+                href="/meta-ads-islamabad"
+                class="px-4 py-2.5 rounded-xl bg-secondary hover:bg-secondary-light text-white text-xs font-bold uppercase tracking-wider transition-colors shrink-0"
+              >
+                Meta Ads Hub &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>

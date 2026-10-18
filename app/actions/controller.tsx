@@ -40,6 +40,7 @@ import { WebSolutionsPage } from '../ui/services/web-solutions-page.tsx'
 import { DesignCopyPage } from '../ui/services/design-copy-page.tsx'
 import { SeoIslamabadPage } from '../ui/services/seo-islamabad-page.tsx'
 import { MetaAdsIslamabadPage } from '../ui/services/meta-ads-islamabad-page.tsx'
+import { GoogleAdsIslamabadPage } from '../ui/services/google-ads-islamabad-page.tsx'
 
 // Our Work sub-pages
 import { CaseStudiesPage } from '../ui/our-work/case-studies-page.tsx'
@@ -141,6 +142,24 @@ export default createController(routes, {
     },
     async servicesMetaAdsIslamabad(context) {
       return handleMetaAdsIslamabadRequest(context)
+    },
+    async googleAdsIslamabad(context) {
+      return handleGoogleAdsIslamabadRequest(context)
+    },
+    async googleAdsServicesIslamabad(context) {
+      return handleGoogleAdsIslamabadRequest(context)
+    },
+    async ppcServicesIslamabad(context) {
+      return handleGoogleAdsIslamabadRequest(context)
+    },
+    async servicesGoogleAdsIslamabad(context) {
+      return handleGoogleAdsIslamabadRequest(context)
+    },
+    async locationPakistanIslamabadGoogleAds(context) {
+      return handleGoogleAdsIslamabadRequest(context)
+    },
+    async locationIslamabadGoogleAds(context) {
+      return handleGoogleAdsIslamabadRequest(context)
     },
 
     ourWork(context) {
@@ -581,6 +600,56 @@ Main Goal: ${goal}`
   })
 
   return context.render(<MetaAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
+async function handleGoogleAdsIslamabadRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<GoogleAdsIslamabadPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const businessName = formData.get('businessName')?.toString() ?? ''
+  const phone = formData.get('phone')?.toString() ?? ''
+  const website = formData.get('website')?.toString() ?? ''
+  const budget = formData.get('budget')?.toString() || '50k–200k'
+  const converts = formData.getAll('converts').join(', ') || 'WhatsApp'
+  const message = formData.get('message')?.toString() ?? ''
+
+  if (!businessName || !phone) {
+    return context.render(
+      <GoogleAdsIslamabadPage
+        bookingUrl={bookingUrl}
+        result={{ success: false, message: 'Please provide your business name and WhatsApp number.' }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const details = `Google Ads 24-Hour Teardown Request (Islamabad):
+Business Name: ${businessName}
+WhatsApp: ${phone}
+Website: ${website || 'None / Not yet'}
+Monthly Ad Spend: ${budget}
+What Converts: ${converts}
+Message: ${message || 'None'}`
+
+  const email = website.includes('@')
+    ? website
+    : `${phone.replace(/\D/g, '') || 'lead'}@google-ads.bellbeemedia.com`
+
+  const result = await submitProposal({
+    fullName: businessName,
+    email,
+    phone,
+    services: 'Google Ads Services Islamabad',
+    details,
+  })
+
+  return context.render(<GoogleAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
   })
 }
