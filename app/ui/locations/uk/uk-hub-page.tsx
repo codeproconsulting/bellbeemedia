@@ -184,48 +184,50 @@ export function UkHubPage(handle: Handle<UkHubPageProps>) {
               </a>
             </div>
 
-            {/* BIRMINGHAM */}
-            <div class="bg-white rounded-3xl border border-surface-2 p-7 sm:p-8 flex flex-col gap-5 hover:-translate-y-1 hover:shadow-xl transition-all shadow-sm">
+            {/* BIRMINGHAM (Links to /locations/uk/birmingham) */}
+            <a
+              href={routes.locationUkBirmingham.href()}
+              id="city-card-birmingham"
+              class="group bg-white rounded-3xl border border-surface-2 p-7 sm:p-8 flex flex-col gap-5 hover:-translate-y-1 hover:border-primary hover:shadow-xl transition-all shadow-sm"
+            >
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-800 border border-indigo-200">
                   Midlands Central
                 </span>
-                <span class="text-xs text-text-secondary font-medium">Midlands Engine</span>
+                <span class="text-xs text-text-secondary font-medium">West Midlands</span>
               </div>
 
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-800 flex items-center justify-center text-2xl shrink-0">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-800 flex items-center justify-center text-2xl shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                   <i class="ph-fill ph-buildings"></i>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-black text-surface-dark0">Birmingham</h3>
-                  <span class="text-xs text-text-secondary font-semibold">Logistics & Manufacturing</span>
+                  <h3 class="text-2xl font-black text-surface-dark0 group-hover:text-primary transition-colors">Birmingham</h3>
+                  <span class="text-xs text-primary font-semibold">Meta Ads &amp; Qualified Lead Hub</span>
                 </div>
               </div>
 
               <p class="text-sm text-text-secondary leading-relaxed flex-grow">
-                Search engine positioning and lead generation for commercial manufacturers, logistics operators, and regional services throughout the Midlands.
+                Performance Meta advertising, creative testing, and qualified lead generation for commercial businesses throughout Birmingham and the West Midlands.
               </p>
 
               <div class="flex flex-wrap gap-2">
                 <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-surface-1 text-surface-dark1 border border-surface-2">
-                  Industrial B2B
+                  Meta Ads Services
                 </span>
                 <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-surface-1 text-surface-dark1 border border-surface-2">
-                  Google Search Ads
+                  Qualified Lead Gen
+                </span>
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-surface-1 text-surface-dark1 border border-surface-2">
+                  SEO Strategy
                 </span>
               </div>
 
-              <a
-                href={defaultBooking}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="mt-auto pt-4 border-t border-surface-2 flex items-center justify-between text-sm font-bold text-indigo-700 hover:underline"
-              >
-                <span>Book Birmingham Strategy</span>
-                <i class="ph-bold ph-arrow-right"></i>
-              </a>
-            </div>
+              <div class="mt-auto pt-4 border-t border-surface-2 flex items-center justify-between text-sm font-bold text-primary group-hover:text-primary-light transition-colors">
+                <span>View Birmingham Hub &amp; Services</span>
+                <i class="ph-bold ph-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
+              </div>
+            </a>
 
           </div>
         </div>

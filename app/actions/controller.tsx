@@ -30,6 +30,10 @@ import { RawalpindiPage } from '../ui/locations/pakistan/rawalpindi-page.tsx'
 import { LocationsPage } from '../ui/locations/locations-page.tsx'
 import { PakistanHubPage } from '../ui/locations/pakistan/pakistan-hub-page.tsx'
 import { UkHubPage } from '../ui/locations/uk/uk-hub-page.tsx'
+import { BirminghamPage } from '../ui/locations/uk/birmingham-page.tsx'
+import { MetaAdsBirminghamPage } from '../ui/services/meta-ads-birmingham-page.tsx'
+import { SeoBirminghamPage } from '../ui/services/seo-birmingham-page.tsx'
+import { AiAutomationBirminghamPage } from '../ui/services/ai-automation-birmingham-page.tsx'
 
 // Service sub-pages
 import { SocialMediaPage } from '../ui/services/social-media-page.tsx'
@@ -349,6 +353,31 @@ export default createController(routes, {
       return handleLocationRequest(context, RawalpindiPage, 'Rawalpindi')
     },
 
+    async locationUkBirmingham(context) {
+      return handleLocationRequest(context, BirminghamPage, 'Birmingham')
+    },
+    async locationBirmingham(context) {
+      return handleLocationRequest(context, BirminghamPage, 'Birmingham')
+    },
+    async locationUkBirminghamMetaAds(context) {
+      return handleMetaAdsBirminghamRequest(context)
+    },
+    async birminghamMetaAds(context) {
+      return handleMetaAdsBirminghamRequest(context)
+    },
+    async locationUkBirminghamSeo(context) {
+      return handleSeoBirminghamRequest(context)
+    },
+    async birminghamSeo(context) {
+      return handleSeoBirminghamRequest(context)
+    },
+    async locationUkBirminghamAiAutomation(context) {
+      return handleAiAutomationBirminghamRequest(context)
+    },
+    async birminghamAiAutomation(context) {
+      return handleAiAutomationBirminghamRequest(context)
+    },
+
     admin(context) {
       if (isAuthenticated(context.request)) {
         return redirect('/admin/leads')
@@ -650,6 +679,159 @@ Message: ${message || 'None'}`
   })
 
   return context.render(<GoogleAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
+async function handleMetaAdsBirminghamRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<MetaAdsBirminghamPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const email = formData.get('email')?.toString() ?? ''
+  const website = formData.get('website')?.toString() ?? ''
+  const challenge = formData.get('challenge')?.toString() ?? ''
+
+  if (!fullName || !email || !website || !challenge) {
+    return context.render(
+      <MetaAdsBirminghamPage
+        bookingUrl={bookingUrl}
+        result={{
+          success: false,
+          message: 'Please provide your full name, work email, business website or page URL, and what makes your advertising difficult to judge.',
+        }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const phone = formData.get('phone')?.toString()
+  const adStatus = formData.get('adStatus')?.toString() || 'Unspecified'
+  const catchment = formData.get('catchment')?.toString() || 'Birmingham / UK'
+
+  const details = `Meta Ads Teardown Request (Birmingham UK):
+Business / Website: ${website}
+Ad Status: ${adStatus}
+Service Catchment: ${catchment}
+Investigation Challenge: ${challenge}
+Optional WhatsApp: ${phone || 'None provided'}`
+
+  const result = await submitProposal({
+    fullName,
+    email,
+    phone,
+    company: website,
+    services: 'Meta Ads Services in Birmingham UK',
+    details,
+  })
+
+  return context.render(<MetaAdsBirminghamPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
+async function handleSeoBirminghamRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<SeoBirminghamPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const email = formData.get('email')?.toString() ?? ''
+  const website = formData.get('website')?.toString() ?? ''
+  const priorityService = formData.get('priorityService')?.toString() ?? ''
+  const deliveryArea = formData.get('deliveryArea')?.toString() ?? ''
+
+  if (!fullName || !email || !website || !priorityService || !deliveryArea) {
+    return context.render(
+      <SeoBirminghamPage
+        bookingUrl={bookingUrl}
+        result={{
+          success: false,
+          message: 'Please provide your name, work email, website, priority service, and delivery area.',
+        }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const company = formData.get('company')?.toString()
+  const phone = formData.get('phone')?.toString()
+  const enquiryFit = formData.get('enquiryFit')?.toString() || 'None provided'
+  const marketingConsent = formData.get('marketingConsent')?.toString() === 'yes' ? 'Yes' : 'No'
+
+  const details = `SEO Teardown Request (Birmingham UK):
+Website: ${website}
+Priority Service: ${priorityService}
+Delivery Area: ${deliveryArea}
+Company: ${company || 'None'}
+Ideal Enquiry Fit: ${enquiryFit}
+Marketing Consent: ${marketingConsent}
+Optional Phone/WhatsApp: ${phone || 'None provided'}`
+
+  const result = await submitProposal({
+    fullName,
+    email,
+    phone,
+    company: company || website,
+    services: 'SEO Services in Birmingham UK',
+    details,
+  })
+
+  return context.render(<SeoBirminghamPage bookingUrl={bookingUrl} result={result} />, {
+    status: result.success ? 200 : 500,
+  })
+}
+
+async function handleAiAutomationBirminghamRequest(context: any) {
+  const bookingUrl = process.env.BOOKING_URL || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
+
+  if (context.request.method !== 'POST') {
+    return context.render(<AiAutomationBirminghamPage bookingUrl={bookingUrl} />)
+  }
+
+  const formData = await context.request.formData()
+  const fullName = formData.get('fullName')?.toString() ?? ''
+  const email = formData.get('email')?.toString() ?? ''
+  const businessName = formData.get('businessName')?.toString() ?? ''
+  const problem = formData.get('problem')?.toString() ?? ''
+
+  if (!fullName || !email || !businessName || !problem) {
+    return context.render(
+      <AiAutomationBirminghamPage
+        bookingUrl={bookingUrl}
+        result={{
+          success: false,
+          message: 'Please provide your name, work email, business name, and workflow/problem description.',
+        }}
+      />,
+      { status: 400 },
+    )
+  }
+
+  const phone = formData.get('phone')?.toString()
+
+  const details = `AI Automation Teardown Request (Birmingham UK):
+Business Name: ${businessName}
+Problem / Workflow: ${problem}
+Optional Phone/WhatsApp: ${phone || 'None provided'}`
+
+  const result = await submitProposal({
+    fullName,
+    email,
+    phone,
+    company: businessName,
+    services: 'AI Automation Services in Birmingham UK',
+    details,
+  })
+
+  return context.render(<AiAutomationBirminghamPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
   })
 }
