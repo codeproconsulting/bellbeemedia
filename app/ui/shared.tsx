@@ -208,119 +208,240 @@ export function ProcessSection() {
    TESTIMONIALS SECTION
 ───────────────────────────────────────── */
 export function TestimonialsSection() {
-  return () => (
-    <section class="py-24 bg-surface-1 border-t border-surface-2 relative overflow-hidden">
-      <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+  const testimonials = [
+    {
+      name: 'Oliver Smith',
+      rating: 5,
+      quote:
+        "Bell Bee didn't just run our ads — they rewired how we think about digital growth. Within 90 days, our CAC dropped by 48% and ROAS reached 4.5x. They are not a vendor, they are a true strategic partner.",
+    },
+    {
+      name: 'Emily Wilson',
+      rating: 5,
+      quote:
+        "Our paid acquisition was bleeding money before Bell Bee took over. They restructured our entire funnel — new high-converting creatives, tighter audience targeting, and custom landing pages. CAC dropped 42% in month one.",
+    },
+    {
+      name: 'Harry Taylor',
+      rating: 5,
+      quote:
+        "We went from 12K to 280K followers in 6 months. More importantly, those followers convert into buyers — our DM-to-sale rate is 22%. Bell Bee's content strategy and creative execution is genuinely world-class.",
+    },
+    {
+      name: 'Lukas Weber',
+      rating: 5,
+      quote:
+        "The transparency alone is worth everything. For the first time, our executive team knows exactly which campaigns drive profit and why. Fast communication, proactive ideas, and outstanding monthly reporting.",
+    },
+    {
+      name: 'Anna Fischer',
+      rating: 5,
+      quote:
+        "Switched from a large agency and the difference is night and day. Bell Bee understood our business within days, moved fast without red tape, and delivered measurable revenue impact from the first week.",
+    },
+    {
+      name: 'Leon Schneider',
+      rating: 5,
+      quote:
+        "Their creative production team is unmatched. The video ads and scroll-stopping hooks they produced for our TikTok and Meta campaigns cut our cost per acquisition in half while doubling our click-through rate.",
+    },
+  ]
 
-      <div class="container mx-auto px-4 max-w-6xl relative z-10">
-        {/* Header */}
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-          <div class="max-w-xl">
-            <h2 class="text-4xl md:text-5xl font-black text-surface-dark0 mb-3 tracking-tight">
-              Results our clients <span class="text-gradient">can't stop</span> talking about
-            </h2>
-            <p class="text-text-secondary leading-relaxed">Real brands. Real numbers. No fluff — just the outcomes we delivered.</p>
-          </div>
-          {/* Aggregate rating badge */}
-          <a href="https://clutch.co" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 bg-white border border-surface-2 rounded-2xl p-5 flex flex-col items-center gap-1 shadow-sm min-w-[140px] hover:border-primary/40 hover:shadow-md transition-all duration-300 group">
-            <div class="flex gap-0.5 text-secondary text-xl">
-              <i class="ph-fill ph-star"></i>
-              <i class="ph-fill ph-star"></i>
-              <i class="ph-fill ph-star"></i>
-              <i class="ph-fill ph-star"></i>
-              <i class="ph-fill ph-star"></i>
-            </div>
-            <div class="text-3xl font-black text-surface-dark0 group-hover:text-primary transition-colors">4.9</div>
-            <div class="text-xs text-text-secondary font-medium">Avg. Rating</div>
-            <div class="text-[11px] text-primary font-semibold flex items-center gap-1 mt-0.5">
-              Verify on Clutch <i class="ph ph-arrow-square-out"></i>
-            </div>
-          </a>
+  return () => (
+    <section class="relative py-20 sm:py-28 overflow-hidden bg-surface-1 border-t border-surface-2">
+      {/* ── RESPONSIVE 3-CARD SLIDER CSS RULES ── */}
+      <style>{`
+        .bb-carousel-item {
+          flex: 0 0 100% !important;
+          max-width: 100% !important;
+          padding: 0 14px;
+          box-sizing: border-box;
+        }
+        @media (min-width: 640px) {
+          .bb-carousel-item {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .bb-carousel-item {
+            flex: 0 0 33.333333% !important;
+            max-width: 33.333333% !important;
+          }
+        }
+        #bb-testimonial-slider {
+          cursor: grab;
+          user-select: none;
+          -webkit-user-select: none;
+        }
+        #bb-testimonial-slider:active {
+          cursor: grabbing;
+        }
+      `}</style>
+
+      {/* ── BACKGROUND GEOMETRIC ACCENTS & WIREFRAME ── */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+        <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl"></div>
+
+        {/* Concentric Circle Wireframe in Left Area */}
+        <svg
+          class="absolute -top-16 -left-16 w-96 h-96 opacity-40 text-slate-300"
+          viewBox="0 0 400 400"
+          fill="none"
+        >
+          <circle cx="200" cy="200" r="80" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
+          <circle cx="200" cy="200" r="130" stroke="currentColor" stroke-width="1.5" />
+          <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" />
+          <circle cx="200" cy="200" r="50" stroke="currentColor" stroke-width="1" />
+          <line x1="200" y1="20" x2="200" y2="380" stroke="currentColor" stroke-width="0.8" />
+          <line x1="20" y1="200" x2="380" y2="200" stroke="currentColor" stroke-width="0.8" />
+        </svg>
+
+        {/* Accent dots in top-left */}
+        <div class="absolute top-12 left-10 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-primary-light"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
         </div>
 
-        {/* Featured large testimonial + 2 side cards */}
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Concentric Circle Wireframe in Right Area */}
+        <svg
+          class="absolute -bottom-20 -right-20 w-[440px] h-[440px] opacity-40 text-slate-300"
+          viewBox="0 0 400 400"
+          fill="none"
+        >
+          <circle cx="220" cy="220" r="90" stroke="currentColor" stroke-width="1.5" />
+          <circle cx="220" cy="220" r="140" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+          <circle cx="220" cy="220" r="190" stroke="currentColor" stroke-width="1" />
+          <circle cx="220" cy="220" r="215" stroke="currentColor" stroke-width="0.7" stroke-dasharray="2 4" />
+        </svg>
 
-          {/* Featured */}
-          <div class="lg:col-span-6 bg-surface-dark0 rounded-3xl p-10 flex flex-col justify-between relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
-            <div>
-              <i class="ph-fill ph-quotes text-secondary text-5xl mb-6 block opacity-60"></i>
-              <p class="text-white text-lg leading-relaxed font-medium mb-8">
-                Bell Bee didn't just run our ads — they rewired how we think about digital. Within 90 days, our CAC dropped by 48%, our ROAS hit 4.5x, and we crossed ₹1Cr/month in direct social revenue for the first time ever. They're not a vendor, they're a growth partner.
-              </p>
-            </div>
-            <div class="flex items-center gap-4 pt-6 border-t border-white/10">
-              <div class="w-12 h-12 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-black text-base flex-shrink-0">
-                RP
-              </div>
-              <div>
-                <h4 class="font-bold text-white text-base">Rahul Patel</h4>
-                <p class="text-white/50 text-xs font-medium">CEO, FabFashion India — ₹50Cr D2C Brand</p>
-              </div>
-              <div class="ml-auto flex-shrink-0">
-                <div class="flex gap-0.5 text-secondary text-sm">
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
+        {/* Colored dots on right side */}
+        <div class="absolute bottom-24 right-12 flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-primary/20 border-2 border-primary"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-light"></span>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        {/* ── HEADER ── */}
+        <div class="max-w-2xl mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-surface-dark0 mb-3 tracking-tight leading-[1.15]">
+            Results our clients can't <br class="hidden sm:inline" />
+            <span class="text-primary-light">stop</span> talking about
+          </h2>
+          <p class="text-text-secondary text-sm sm:text-base leading-relaxed">
+            Real brands. Real numbers. No fluff — just the outcomes we delivered.
+          </p>
+        </div>
+
+        {/* ── 3-CARD CAROUSEL VIEWPORT ── */}
+        <div id="bb-testimonial-slider" class="overflow-hidden relative py-6 -mx-3.5 select-none touch-pan-y">
+          <div
+            id="bb-slider-track"
+            class="flex transition-transform duration-500 ease-out select-none"
+            style="transform: translateX(0%);"
+          >
+            {testimonials.map((t) => (
+              <div class="bb-carousel-item flex-shrink-0 flex flex-col">
+                <div class="relative group filter drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
+                  {/* Card Main Box */}
+                  <div class="bg-white rounded-t-2xl relative overflow-hidden flex flex-col flex-1">
+                    {/* Top Straight Blue Banner */}
+                    <div class="w-full h-12 sm:h-14 bg-[#154476] relative"></div>
+
+                    {/* Header Row: ONLY Name (in Black) + 5 Stars */}
+                    <div class="px-6 sm:px-7 pt-4 pb-1.5 relative z-10">
+                      <h3
+                        class="font-heading font-black text-xl sm:text-2xl tracking-tight text-surface-dark0"
+                      >
+                        {t.name}
+                      </h3>
+
+                      {/* 5 Stars Rating */}
+                      <div class="flex items-center gap-1 text-amber-400 text-sm mt-1" aria-label="5 out of 5 stars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                      </div>
+                    </div>
+
+                    {/* Body Text + Quotation Mark Icon */}
+                    <div class="px-6 sm:px-7 pt-2 pb-5 flex-1 flex flex-col justify-between">
+                      <p class="text-slate-600 text-sm sm:text-[15px] leading-relaxed font-normal">
+                        {t.quote}
+                      </p>
+
+                      {/* Stylized Double Quotes Icon in Bottom-Right */}
+                      <div class="flex justify-end pt-2 text-slate-300 group-hover:text-primary-light/50 transition-colors">
+                        <i class="ph-fill ph-quotes text-4xl sm:text-5xl leading-none"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Chevron Pennant with Crisp Accent Line */}
+                  <div class="relative -mt-px w-full overflow-visible pointer-events-none">
+                    <svg viewBox="0 0 400 44" class="w-full h-6 sm:h-7 block" preserveAspectRatio="none">
+                      <polygon points="0,0 400,0 400,4 200,40 0,4" fill="#ffffff" />
+                      <polyline
+                        points="0,4 200,40 400,4"
+                        fill="none"
+                        stroke="#2cbcee"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── NAVIGATION CONTROLS & PAGINATION PILLS ── */}
+        <div class="mt-8 sm:mt-12 flex items-center justify-center gap-4 relative z-20">
+          {/* Previous Arrow Button */}
+          <button
+            id="bb-slider-prev"
+            type="button"
+            aria-label="Previous testimonials"
+            class="w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-surface-dark0 shadow-md hover:shadow-lg border border-slate-200 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 hover:text-primary hover:border-primary-light cursor-pointer select-none shrink-0"
+          >
+            <i class="ph-bold ph-caret-left text-lg pointer-events-none"></i>
+          </button>
+
+          {/* Centered Pagination Pills */}
+          <div id="bb-slider-dots" class="flex items-center gap-1.5 sm:gap-2 px-2 overflow-x-auto max-w-[280px] py-1">
+            {testimonials.map((_, i) => (
+              <button
+                type="button"
+                data-index={i}
+                aria-label={`Go to slide ${i + 1}`}
+                class="bb-slider-dot h-2 rounded-full transition-all duration-300 cursor-pointer shrink-0"
+                style={i === 0 ? 'width: 2rem; background-color: #154476;' : 'width: 0.5rem; background-color: #cbd5e1;'}
+              ></button>
+            ))}
           </div>
 
-          {/* Right column with 2 cards stacked */}
-          <div class="lg:col-span-6 flex flex-col gap-6">
+          {/* Next Arrow Button */}
+          <button
+            id="bb-slider-next"
+            type="button"
+            aria-label="Next testimonials"
+            class="w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-surface-dark0 shadow-md hover:shadow-lg border border-slate-200 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 hover:text-primary hover:border-primary-light cursor-pointer select-none shrink-0"
+          >
+            <i class="ph-bold ph-caret-right text-lg pointer-events-none"></i>
+          </button>
+        </div>
 
-            {/* Card 2 */}
-            <div class="bg-white border border-surface-2 rounded-3xl p-8 flex flex-col justify-between hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
-              <div>
-                <div class="flex gap-0.5 text-secondary text-sm mb-5">
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                </div>
-                <p class="text-surface-dark1 leading-relaxed mb-6">
-                  "Our paid acquisition was bleeding money. Bell Bee restructured our entire funnel — new creatives, tighter audiences, better landing pages. CAC cut by 42% in month one. These people actually know what they're doing."
-                </p>
-              </div>
-              <div class="flex items-center gap-3 pt-5 border-t border-surface-2">
-                <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center font-black text-sm flex-shrink-0">VS</div>
-                <div>
-                  <h4 class="font-bold text-surface-dark0 text-sm">Vikram Singh</h4>
-                  <p class="text-text-secondary text-xs">CMO, FinTech Solutions</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div class="bg-white border border-surface-2 rounded-3xl p-8 flex flex-col justify-between hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
-              <div>
-                <div class="flex gap-0.5 text-secondary text-sm mb-5">
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                  <i class="ph-fill ph-star"></i>
-                </div>
-                <p class="text-surface-dark1 leading-relaxed mb-6">
-                  "We went from 12K to 280K Instagram followers in 6 months. More importantly, those followers convert — our DM-to-sale rate is 22%. Bell Bee's content strategy is genuinely world-class."
-                </p>
-              </div>
-              <div class="flex items-center gap-3 pt-5 border-t border-surface-2">
-                <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-black text-sm flex-shrink-0">AR</div>
-                <div>
-                  <h4 class="font-bold text-surface-dark0 text-sm">Ananya Roy</h4>
-                  <p class="text-text-secondary text-xs">Founder, StyleCo E-commerce</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        {/* Geometric Accents beneath */}
+        <div class="mt-4 flex items-center justify-center gap-3 opacity-60">
+          <span class="w-3 h-3 bg-secondary/80 rotate-12 rounded-[2px]"></span>
+          <span class="w-4 h-4 rounded-full border-2 border-primary/40"></span>
         </div>
       </div>
     </section>

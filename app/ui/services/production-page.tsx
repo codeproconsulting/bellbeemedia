@@ -1,5 +1,6 @@
 import { Layout } from '../layout.tsx'
 import { routes } from '../../routes.ts'
+import { TestimonialsSection } from '../shared.tsx'
 
 export function ProductionPage() {
   const schemaJson = {
@@ -1132,6 +1133,9 @@ export function ProductionPage() {
           </div>
         </div>
       </section>
+
+      {/* ── TESTIMONIALS SECTION ── */}
+      <TestimonialsSection />
 
       {/* ── S09: CLOSING (DARK BUNDLE) ── */}
       <section class="relative bg-gradient-to-br from-primary via-[#0e2c50] to-[#051120] text-white py-20 md:py-28 overflow-hidden text-center">

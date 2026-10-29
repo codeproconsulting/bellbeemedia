@@ -19,7 +19,7 @@ export function Document() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {description && <meta name="description" content={description} />}
-        
+
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCXZ19KB1R"></script>
         <script>
@@ -28,7 +28,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GCXZ19KB1R');`}
         </script>
-        
+
         {/* Load Google Fonts (Inter & Space Grotesk) for clean, premium typography */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -36,7 +36,7 @@ gtag('config', 'G-GCXZ19KB1R');`}
 
         <title>{title}</title>
         {head}
-        <link rel="stylesheet" href="/tailwind.css?v=5" />
+        <link rel="stylesheet" href="/tailwind.css?v=10" />
         <link rel="preconnect" href="https://unpkg.com" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />

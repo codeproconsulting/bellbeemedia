@@ -1,7 +1,7 @@
 import { routes } from '../routes.ts'
 import { Layout } from './layout.tsx'
-import { PillBadge, TestimonialsSection, ProcessSection, StatsBar } from './shared.tsx'
-import { InteractiveServicesShowcase } from '../assets/interactive-services-showcase.tsx'
+import { PillBadge, TestimonialsSection, ProcessSection } from './shared.tsx'
+import { IntegratedGrowthSection } from './integrated-growth-section.tsx'
 
 export function HomePage() {
   const schemaJson = {
@@ -89,6 +89,28 @@ export function HomePage() {
                   <span class="text-[11px] text-surface-dark1 font-semibold">— Rahul Patel, CEO @ FabFashion</span>
                 </div>
               </div>
+
+              {/* Stats directly under Verified Client Feedback box on the left */}
+              <div class="bb-stage mt-8 pt-6 border-t border-surface-2 w-full max-w-xl" style="animation-delay:0.6s">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-left" data-stagger-group>
+                  <div class="flex flex-col gap-1 group" data-stagger-item>
+                    <span data-count="5" class="text-3xl sm:text-4xl font-black text-surface-dark0 group-hover:text-primary transition-colors duration-300">5</span>
+                    <span class="text-[11px] font-bold text-text-secondary uppercase tracking-wider">Expert Specialists</span>
+                  </div>
+                  <div class="flex flex-col gap-1 group" data-stagger-item>
+                    <span data-count="5+" class="text-3xl sm:text-4xl font-black text-surface-dark0 group-hover:text-primary transition-colors duration-300">5+</span>
+                    <span class="text-[11px] font-bold text-text-secondary uppercase tracking-wider">Years Experience</span>
+                  </div>
+                  <div class="flex flex-col gap-1 group" data-stagger-item>
+                    <span data-count="3.4x" class="text-3xl sm:text-4xl font-black text-surface-dark0 group-hover:text-primary transition-colors duration-300">3.4x</span>
+                    <span class="text-[11px] font-bold text-text-secondary uppercase tracking-wider">Avg. ROAS Delivered</span>
+                  </div>
+                  <div class="flex flex-col gap-1 group" data-stagger-item>
+                    <span data-count="100+" class="text-3xl sm:text-4xl font-black text-surface-dark0 group-hover:text-primary transition-colors duration-300">100+</span>
+                    <span class="text-[11px] font-bold text-text-secondary uppercase tracking-wider">Campaigns Delivered</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Graphic */}
@@ -154,23 +176,8 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── Stats Bar ────────────────────────────────────── */}
-      <StatsBar />
-
-      {/* ── Services ─────────────────────────────────────── */}
-      <section class="py-[84px] px-4 md:px-6 pb-[88px] bg-[#0b4a94] relative overflow-hidden" data-reveal>
-        <div class="max-w-[1180px] mx-auto relative z-10">
-          <div class="flex justify-between gap-9 flex-wrap items-end mb-9">
-            <h2 class="text-[clamp(32px,4.4vw,52px)] leading-[1.06] font-extrabold tracking-[-0.03em] max-w-[640px] text-white">
-              Search, Social &amp; Creative. <em class="not-italic text-[#ffa24a]">Fully Integrated.</em>
-            </h2>
-            <p class="text-[15.5px] leading-[1.65] text-[#c4daf3] max-w-[370px]">
-              We manage paid acquisition, organic social, and conversion assets under one roof to drive cohesive brand growth.
-            </p>
-          </div>
-          <InteractiveServicesShowcase />
-        </div>
-      </section>
+      {/* ── Services (Search, Social & Creative Trajectory) ── */}
+      <IntegratedGrowthSection />
 
       {/* ── Process ──────────────────────────────────────── */}
       <ProcessSection />
@@ -219,6 +226,232 @@ export function HomePage() {
       </section>
 
     </Layout>
+  )
+}
+
+const HOME_SERVICES = [
+  {
+    num: '01',
+    icon: 'ph-chats',
+    title: 'Social Media Management',
+    desc: 'Content, community and growth across every feed, planned around what converts.',
+    bullets: [
+      'Content calendar and community management',
+      'Short-form video for Reels and TikTok',
+      'Monthly growth and engagement reports',
+    ],
+    tags: ['Instagram', 'TikTok', 'LinkedIn'],
+    outcomeLabel: 'followers in 6 months',
+    outcomeStat: '280K',
+    href: routes.servicesSocialMedia.href(),
+  },
+  {
+    num: '02',
+    icon: 'ph-chart-line-up',
+    title: 'Performance Marketing',
+    desc: 'Paid acquisition built on weekly testing, so every rupee works harder.',
+    bullets: [
+      'Meta, Google and retargeting funnels',
+      'Weekly creative and budget tests',
+      'ROAS and CAC dashboards you can read',
+    ],
+    tags: ['Google Ads', 'Meta Ads', 'Retargeting'],
+    outcomeLabel: 'ROAS within 90 days',
+    outcomeStat: '4.5x',
+    href: routes.servicesPerformanceAds.href(),
+  },
+  {
+    num: '03',
+    icon: 'ph-megaphone',
+    title: 'Digital PR & Influencer',
+    desc: 'Press, creators and collabs that put your brand in front of the right people.',
+    bullets: [
+      'Media outreach and coverage',
+      'Influencer gifting and collabs',
+      'Brand partnerships that scale',
+    ],
+    tags: ['Media Coverage', 'Influencer Gifting', 'Brand Colabs'],
+    outcomeLabel: 'earned reach',
+    outcomeStat: '4.2M',
+    href: routes.servicesDigitalPr.href(),
+  },
+  {
+    num: '04',
+    icon: 'ph-video-camera',
+    title: 'Creative Production',
+    desc: 'Scroll-stopping ads and short-form video, shot and edited by one team.',
+    bullets: [
+      'Ad films and UGC-style video',
+      'Reels, Shorts and product photography',
+      'Scripts, shoots and edits in-house',
+    ],
+    tags: ['Video Ads', 'Reels & Shorts', 'Photography'],
+    outcomeLabel: 'videos produced',
+    outcomeStat: '320',
+    href: routes.servicesProduction.href(),
+  },
+  {
+    num: '05',
+    icon: 'ph-browser',
+    title: 'Web & Landing Pages',
+    desc: 'Fast pages designed to turn paid and social traffic into customers.',
+    bullets: [
+      'High-converting landing pages',
+      'CRO and A/B testing',
+      'SEO-ready e-commerce builds',
+    ],
+    tags: ['CRO', 'SEO', 'E-commerce'],
+    outcomeLabel: 'conversion, up from 2.1%',
+    outcomeStat: '4.8%',
+    href: routes.servicesWebSolutions.href(),
+  },
+  {
+    num: '06',
+    icon: 'ph-drop',
+    title: 'Design & Copywriting',
+    desc: 'Brand, ad creative and copy that look and sound like one company.',
+    bullets: [
+      'Brand identity and guidelines',
+      'Ad creatives for every platform',
+      'UX copy and ad copywriting',
+    ],
+    tags: ['Branding', 'Ad Creatives', 'UX Copy'],
+    outcomeLabel: 'assets delivered',
+    outcomeStat: '1,200+',
+    href: routes.servicesDesignCopy.href(),
+  },
+]
+
+function renderServiceIcon(index: number) {
+  if (index === 0) {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-7l-4 3.5V17H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" />
+        <path stroke="#f0641e" d="M12 14s-3.2-1.9-3.2-4.2a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8C15.2 12.1 12 14 12 14z" />
+      </svg>
+    )
+  }
+  if (index === 1) {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 21v-6M11 21v-9M17 21v-5" />
+        <path stroke="#f0641e" d="M3 10l6-5 4 3 7-6" />
+        <path stroke="#f0641e" d="M15 2h5v5" />
+      </svg>
+    )
+  }
+  if (index === 2) {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10v4a1 1 0 0 0 1 1h3l6 4V5L7 9H4a1 1 0 0 0-1 1z" />
+        <path stroke="#f0641e" d="M16.5 9a4 4 0 0 1 0 6" />
+        <path stroke="#f0641e" d="M19.5 6.5a8 8 0 0 1 0 11" />
+      </svg>
+    )
+  }
+  if (index === 3) {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4.5 6h8A2.5 2.5 0 0 1 15 8.5v7a2.5 2.5 0 0 1-2.5 2.5h-8A2.5 2.5 0 0 1 2 15.5v-7A2.5 2.5 0 0 1 4.5 6z" />
+        <path stroke="#f0641e" d="M15 10.5l6-3.5v10l-6-3.5" />
+      </svg>
+    )
+  }
+  if (index === 4) {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4.5 4h15A2.5 2.5 0 0 1 22 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4z" />
+        <path d="M2 9h20" />
+        <path stroke="#f0641e" d="M10 12.5l7 3-3 1.2-1.2 3z" />
+      </svg>
+    )
+  }
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2.5l6.5 9-3 8.5h-7l-3-8.5z" />
+      <path stroke="#f0641e" d="M12 10v6" />
+      <circle cx="12" cy="8.2" r="1.2" stroke="#f0641e" fill="#f0641e" />
+    </svg>
+  )
+}
+
+function ServicesShowcaseGrid() {
+  return () => (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {HOME_SERVICES.map((s, idx) => (
+        <div class="relative bg-white rounded-[26px] p-6 lg:p-7 flex flex-col justify-between border border-white/20 shadow-xl shadow-black/[0.04] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+          {/* Animated top border line on hover: shoots left-to-right */}
+          <div class="absolute top-0 left-0 right-0 h-[3.5px] bg-[#e56026] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-10"></div>
+
+          <div>
+            {/* Top row: Custom dual-tone SVG badge + Number */}
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-2xl bg-blue-50/80 text-[#0b4a94] flex items-center justify-center transition-all duration-300 group-hover:bg-[#0b4a94] group-hover:text-white shadow-sm">
+                {renderServiceIcon(idx)}
+              </div>
+              <span class="text-xs font-bold text-slate-300 group-hover:text-primary transition-colors duration-300">
+                {s.num}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h3 class="text-lg lg:text-xl font-extrabold text-[#0a2447] tracking-tight mb-2 group-hover:text-primary transition-colors">
+              {s.title}
+            </h3>
+
+            {/* Description */}
+            <p class="text-xs lg:text-[13px] text-slate-500 leading-relaxed mb-6">
+              {s.desc}
+            </p>
+
+            {/* Feature Bullets */}
+            <ul class="space-y-3 mb-6">
+              {s.bullets.map((b) => (
+                <li class="flex items-start gap-2.5 text-xs text-slate-700 font-medium leading-snug">
+                  <i class="ph-fill ph-check-circle text-secondary text-sm shrink-0 mt-0.5"></i>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            {/* Tags */}
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              {s.tags.map((t) => (
+                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-slate-100/90 text-slate-600 border border-slate-200/50">
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* Typical Outcome */}
+            <div class="bg-slate-50/90 rounded-2xl p-4 flex items-center justify-between border border-slate-100 mb-5">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
+                  Typical Outcome
+                </span>
+                <span class="text-xs font-semibold text-slate-600">
+                  {s.outcomeLabel}
+                </span>
+              </div>
+              <span class="text-2xl font-black text-primary tracking-tight">
+                {s.outcomeStat}
+              </span>
+            </div>
+
+            {/* Learn More */}
+            <a
+              href={s.href}
+              class="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-secondary transition-colors group/link"
+            >
+              <span>Learn more</span>
+              <i class="ph-bold ph-arrow-right text-xs transition-transform duration-200 group-hover/link:translate-x-1"></i>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }
 

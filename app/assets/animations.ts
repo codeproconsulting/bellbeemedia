@@ -146,6 +146,221 @@ function initButtonGlow(): void {
   })
 }
 
+// ─── 6. Testimonials Carousel Slider ─────────────────────────────────────────
+function initTestimonialsSlider(): void {
+  const slider = document.getElementById('bb-testimonial-slider')
+  const track = document.getElementById('bb-slider-track') as HTMLElement | null
+  const prevBtn = document.getElementById('bb-slider-prev')
+  const nextBtn = document.getElementById('bb-slider-next')
+  if (!slider || !track) return
+
+  if (slider.dataset.sliderInitialized === 'true') return
+  slider.dataset.sliderInitialized = 'true'
+
+  let currentIndex = 0
+  let timer: any = null
+  let isDragging = false
+  let startX = 0
+  let dragDiff = 0
+
+  function getItemsPerView(): number {
+    if (window.innerWidth >= 1024) return 3
+    if (window.innerWidth >= 640) return 2
+    return 1
+  }
+
+  function getTotalSlides(): number {
+    return track ? track.children.length : 0
+  }
+
+  function getMaxIndex(): number {
+    const total = getTotalSlides()
+    const perView = getItemsPerView()
+    return Math.max(0, total - perView)
+  }
+
+  function updateSlider(animate: boolean = true): void {
+    if (!track) return
+    const perView = getItemsPerView()
+    const maxIdx = getMaxIndex()
+    if (currentIndex > maxIdx) currentIndex = maxIdx
+    if (currentIndex < 0) currentIndex = 0
+
+    track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+    const step = 100 / perView
+    track.style.transform = `translateX(-${currentIndex * step}%)`
+
+    const dots = document.querySelectorAll<HTMLElement>('.bb-slider-dot')
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.style.width = '2rem'
+        dot.style.backgroundColor = '#154476'
+      } else {
+        dot.style.width = '0.5rem'
+        dot.style.backgroundColor = '#cbd5e1'
+      }
+    })
+  }
+
+  function nextSlide(): void {
+    const maxIdx = getMaxIndex()
+    if (currentIndex >= maxIdx) {
+      currentIndex = 0
+    } else {
+      currentIndex++
+    }
+    updateSlider(true)
+  }
+
+  function prevSlide(): void {
+    const maxIdx = getMaxIndex()
+    if (currentIndex <= 0) {
+      currentIndex = maxIdx
+    } else {
+      currentIndex--
+    }
+    updateSlider(true)
+  }
+
+  function goToSlide(idx: number): void {
+    const maxIdx = getMaxIndex()
+    currentIndex = Math.max(0, Math.min(idx, maxIdx))
+    updateSlider(true)
+  }
+
+  function startAuto(): void {
+    stopAuto()
+    timer = setInterval(nextSlide, 3200)
+  }
+
+  function stopAuto(): void {
+    if (timer) {
+      clearInterval(timer)
+      timer = null
+    }
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      nextSlide()
+      startAuto()
+    })
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      prevSlide()
+      startAuto()
+    })
+  }
+
+  const dots = document.querySelectorAll<HTMLElement>('.bb-slider-dot')
+  dots.forEach((dot) => {
+    dot.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault()
+      const idx = parseInt(dot.getAttribute('data-index') ?? '0', 10)
+      goToSlide(idx)
+      startAuto()
+    })
+  })
+
+  slider.addEventListener('mouseenter', stopAuto)
+  slider.addEventListener('mouseleave', () => {
+    if (!isDragging) startAuto()
+  })
+
+  // Mouse Dragging
+  slider.style.cursor = 'grab'
+
+  slider.addEventListener('mousedown', (e: MouseEvent) => {
+    isDragging = true
+    startX = e.clientX
+    dragDiff = 0
+    stopAuto()
+    slider.style.cursor = 'grabbing'
+    track.style.transition = 'none'
+  })
+
+  window.addEventListener('mousemove', (e: MouseEvent) => {
+    if (!isDragging || !track || !slider) return
+    dragDiff = e.clientX - startX
+    const perView = getItemsPerView()
+    const step = 100 / perView
+    const baseTranslate = -(currentIndex * step)
+    const containerWidth = slider.offsetWidth || 1
+    const percentShift = (dragDiff / containerWidth) * 100
+    track.style.transform = `translateX(${baseTranslate + percentShift}%)`
+  })
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return
+    isDragging = false
+    if (slider) slider.style.cursor = 'grab'
+    if (dragDiff < -40) {
+      nextSlide()
+    } else if (dragDiff > 40) {
+      prevSlide()
+    } else {
+      updateSlider(true)
+    }
+    startAuto()
+  })
+
+  // Touch Swiping
+  slider.addEventListener(
+    'touchstart',
+    (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        isDragging = true
+        startX = e.touches[0].clientX
+        dragDiff = 0
+        stopAuto()
+        track.style.transition = 'none'
+      }
+    },
+    { passive: true }
+  )
+
+  slider.addEventListener(
+    'touchmove',
+    (e: TouchEvent) => {
+      if (!isDragging || !e.touches || !e.touches[0] || !track || !slider) return
+      dragDiff = e.touches[0].clientX - startX
+      const perView = getItemsPerView()
+      const step = 100 / perView
+      const baseTranslate = -(currentIndex * step)
+      const containerWidth = slider.offsetWidth || 1
+      const percentShift = (dragDiff / containerWidth) * 100
+      track.style.transform = `translateX(${baseTranslate + percentShift}%)`
+    },
+    { passive: true }
+  )
+
+  slider.addEventListener('touchend', () => {
+    if (!isDragging) return
+    isDragging = false
+    if (dragDiff < -40) {
+      nextSlide()
+    } else if (dragDiff > 40) {
+      prevSlide()
+    } else {
+      updateSlider(true)
+    }
+    startAuto()
+  })
+
+  window.addEventListener('resize', () => {
+    updateSlider(false)
+  })
+
+  updateSlider(false)
+  startAuto()
+}
+
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 function boot(): void {
   initScrollReveal()
@@ -153,6 +368,7 @@ function boot(): void {
   initStaggerGroups()
   initCardTilt()
   initButtonGlow()
+  initTestimonialsSlider()
 }
 
 if (document.readyState === 'loading') {
@@ -160,3 +376,8 @@ if (document.readyState === 'loading') {
 } else {
   boot()
 }
+
+// Re-check in case elements are hydrated or rendered shortly after script evaluation
+setTimeout(initTestimonialsSlider, 150)
+setTimeout(initTestimonialsSlider, 600)
+

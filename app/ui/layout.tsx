@@ -8,29 +8,29 @@ export function Layout() {
       <div class="flex flex-col min-h-screen bg-white">
         {/* Mobile menu toggle input at root level */}
         <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" />
-        
+
         {/* Floating Glassmorphic Header */}
         <header class="sticky top-3 z-50 w-full px-4 max-w-7xl mx-auto overflow-visible pointer-events-auto">
-          <div class="bg-white/85 backdrop-blur-xl border border-surface-2/80 shadow-lg shadow-black/[0.03] hover:border-surface-3 transition-all duration-300 rounded-2xl px-6 h-16 flex items-center justify-between">
-            
+          <div class="bg-white/85 backdrop-blur-xl border border-surface-2/80 shadow-lg shadow-black/[0.03] hover:border-surface-3 transition-all duration-300 rounded-2xl px-6 h-16 flex items-center justify-between relative">
+
             {/* Logo */}
             <div class="flex-1 flex justify-start items-center">
               <a href={routes.home.href()} class="inline-flex items-center gap-2.5 group">
                 <img src="/Logo.svg" alt="Bell Bee Media" class="h-9 w-auto group-hover:scale-105 transition-transform duration-300" />
               </a>
             </div>
-            
+
             {/* Desktop Navigation */}
-            <nav class="hidden md:flex flex-none justify-center items-center gap-6 lg:gap-8 text-sm font-semibold text-surface-dark1">
-              
+            <nav class="h-full hidden md:flex flex-none justify-center items-center gap-6 lg:gap-8 text-sm font-semibold text-surface-dark1">
+
               {/* Services Dropdown */}
-              <div class="group flex items-center">
-                <a href={routes.services.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  Services <i class="ph ph-caret-down text-xs inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+              <div class="group h-full flex items-center nav-dropdown-group">
+                <a href={routes.services.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
+                  Services <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
                 </a>
-                
-                <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[90vw] max-w-6xl opacity-0 transform scale-95 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-8">
+
+                <div class="nav-dropdown-menu w-[92vw] max-w-5xl z-50">
+                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-7">
                     <div class="grid grid-cols-12 gap-8">
                       <div class="col-span-12 flex justify-between items-center border-b border-surface-2 pb-4">
                         <div>
@@ -109,13 +109,13 @@ export function Layout() {
               </div>
 
               {/* Our Work Dropdown */}
-              <div class="group flex items-center">
-                <a href={routes.ourWork.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  Our Work <i class="ph ph-caret-down text-xs inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+              <div class="group h-full flex items-center nav-dropdown-group">
+                <a href={routes.ourWork.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
+                  Our Work <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
                 </a>
-                
-                <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl opacity-0 transform scale-95 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-8">
+
+                <div class="nav-dropdown-menu w-[92vw] max-w-4xl z-50">
+                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-7">
                     <div class="grid grid-cols-2 gap-4">
                       <a href={routes.ourWorkCaseStudies.href()} class="flex gap-3.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
                         <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors">
@@ -162,13 +162,13 @@ export function Layout() {
               </div>
 
               {/* Locations Dropdown (NEW!) */}
-              <div class="group flex items-center">
-                <a href={routes.locations.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  Locations <i class="ph ph-caret-down text-xs inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+              <div class="group h-full flex items-center nav-dropdown-group">
+                <a href={routes.locations.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
+                  Locations <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
                 </a>
-                
-                <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl opacity-0 transform scale-95 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-8">
+
+                <div class="nav-dropdown-menu w-[92vw] max-w-4xl z-50">
+                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-7">
                     <div class="flex justify-between items-center border-b border-surface-2 pb-4 mb-4">
                       <div>
                         <h3 class="text-lg font-black text-surface-dark0 tracking-tight flex items-center gap-2">
@@ -237,16 +237,16 @@ export function Layout() {
                 </div>
               </div>
 
-              <a href={routes.blogs.href()} class="hover:text-primary transition-colors flex items-center py-2 whitespace-nowrap">Blogs</a>
+              <a href={routes.blogs.href()} class="h-full hover:text-primary transition-colors flex items-center py-2 whitespace-nowrap">Blogs</a>
 
               {/* About Us Dropdown */}
-              <div class="group flex items-center">
-                <a href={routes.aboutUs.href()} class="hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  About Us <i class="ph ph-caret-down text-xs inline-block group-hover:rotate-180 transition-transform duration-300"></i>
+              <div class="group h-full flex items-center nav-dropdown-group">
+                <a href={routes.aboutUs.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
+                  About Us <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
                 </a>
-                
-                <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl opacity-0 transform scale-95 origin-top pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-8">
+
+                <div class="nav-dropdown-menu w-[92vw] max-w-3xl z-50">
+                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-7">
                     <div class="grid grid-cols-2 gap-4">
                       <a href={routes.aboutUsOurCompany.href()} class="flex gap-3.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
                         <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-xl group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors">
@@ -298,14 +298,14 @@ export function Layout() {
               <a href={routes.getProposal.href()} class="hidden md:inline-flex px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-light transition-all shadow-md shadow-primary/25 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] items-center whitespace-nowrap">
                 Get a Proposal <i class="ph ph-arrow-right ml-1.5"></i>
               </a>
-              
+
               {/* Mobile Menu Toggle */}
               <label for="mobile-menu-toggle" class="md:hidden cursor-pointer p-2 select-none flex flex-col gap-1.5 z-50">
                 <span class="line-1 block w-5 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
                 <span class="line-2 block w-5 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
                 <span class="line-3 block w-5 h-0.5 bg-surface-dark0 transition-all duration-300 origin-center"></span>
               </label>
-              
+
               <style>{`
                 body:has(#mobile-menu-toggle:checked) {
                   overflow: hidden;
@@ -319,6 +319,36 @@ export function Layout() {
                 #mobile-menu-toggle:checked ~ header label .line-3 {
                   transform: rotate(-45deg) translate(4px, -4px);
                 }
+                .nav-dropdown-group {
+                  position: static;
+                }
+                .nav-dropdown-menu {
+                  position: absolute !important;
+                  top: 100% !important;
+                  left: 0 !important;
+                  right: 0 !important;
+                  margin-left: auto !important;
+                  margin-right: auto !important;
+                  padding-top: 10px;
+                  opacity: 0;
+                  visibility: hidden;
+                  pointer-events: none;
+                  transform: translateY(-8px);
+                  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
+                  z-index: 50;
+                }
+                .nav-dropdown-group:hover .nav-dropdown-menu,
+                .nav-dropdown-menu.is-open,
+                .nav-dropdown-menu.is-active {
+                  opacity: 1 !important;
+                  visibility: visible !important;
+                  transform: translateY(0) !important;
+                  pointer-events: auto !important;
+                }
+                .nav-dropdown-group:hover i.ph-caret-down,
+                .nav-dropdown-group.is-open i.ph-caret-down {
+                  transform: rotate(180deg);
+                }
               `}</style>
             </div>
           </div>
@@ -328,7 +358,7 @@ export function Layout() {
         <div id="mobile-drawer" class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-2xl z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-6 gap-6 overflow-y-auto border-t border-surface-2 shadow-2xl">
           <a href="/services" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
           <a href="/our-work" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
-          
+
           <div class="flex flex-col gap-2">
             <a href="/locations" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors flex items-center justify-between">
               <span>Locations</span>
@@ -352,18 +382,18 @@ export function Layout() {
 
           <a href="/blogs" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
           <a href="/about-us" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">About Us</a>
-          
+
           <div class="h-px bg-surface-2 my-2"></div>
-          
+
           <a href={routes.getProposal.href()} class="w-full py-3.5 bg-primary text-white text-center text-sm font-bold rounded-2xl hover:bg-primary-light transition-colors shadow-md shadow-primary/20 flex items-center justify-center gap-2">
             Get a Free Proposal <i class="ph ph-arrow-right"></i>
           </a>
         </div>
-        
+
         <main class="flex-grow">
           {children}
         </main>
-        
+
         {!hideFooter && (
           <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
             <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12">
@@ -384,7 +414,7 @@ export function Layout() {
                   </a>
                 </div>
               </div>
-              
+
               <div>
                 <h4 class="font-bold text-surface-dark0 mb-6">Company</h4>
                 <ul class="flex flex-col gap-4 text-text-secondary text-sm font-medium">
@@ -413,17 +443,17 @@ export function Layout() {
                   </li>
                 </ul>
               </div>
-              
+
               <div>
                 <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
                 <ul class="flex flex-col gap-4 text-text-secondary text-sm font-medium">
                   <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
                   <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +92 370 190 2120</li>
-                  <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br/>I-8 Markaz, Islamabad</li>
+                  <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br />I-8 Markaz, Islamabad</li>
                 </ul>
               </div>
             </div>
-            
+
             <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary text-sm">
               <div>
                 &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
@@ -435,6 +465,115 @@ export function Layout() {
             </div>
           </footer>
         )}
+
+        {/* Dropdown Hover Intent & Gap Elimination Script */}
+        <script>
+          {`
+          (function() {
+            function initNavDropdowns() {
+              var groups = document.querySelectorAll('.nav-dropdown-group');
+              var activeGroup = null;
+              var closeTimer = null;
+
+              function closeAll() {
+                if (closeTimer) {
+                  clearTimeout(closeTimer);
+                  closeTimer = null;
+                }
+                groups.forEach(function(g) {
+                  g.classList.remove('is-open');
+                  var m = g.querySelector('.nav-dropdown-menu');
+                  if (m) m.classList.remove('is-open', 'is-active');
+                  var icon = g.querySelector('i.ph-caret-down');
+                  if (icon) icon.classList.remove('rotate-180');
+                });
+                activeGroup = null;
+              }
+
+              function openGroup(group) {
+                if (closeTimer) {
+                  clearTimeout(closeTimer);
+                  closeTimer = null;
+                }
+                if (activeGroup === group) return;
+
+                if (activeGroup && activeGroup !== group) {
+                  activeGroup.classList.remove('is-open');
+                  var prevM = activeGroup.querySelector('.nav-dropdown-menu');
+                  if (prevM) prevM.classList.remove('is-open', 'is-active');
+                  var prevIcon = activeGroup.querySelector('i.ph-caret-down');
+                  if (prevIcon) prevIcon.classList.remove('rotate-180');
+                }
+
+                group.classList.add('is-open');
+                var menu = group.querySelector('.nav-dropdown-menu');
+                if (menu) menu.classList.add('is-open', 'is-active');
+                var icon = group.querySelector('i.ph-caret-down');
+                if (icon) icon.classList.add('rotate-180');
+                activeGroup = group;
+              }
+
+              function scheduleClose() {
+                if (closeTimer) clearTimeout(closeTimer);
+                closeTimer = setTimeout(function() {
+                  closeAll();
+                }, 250);
+              }
+
+              groups.forEach(function(group) {
+                var menu = group.querySelector('.nav-dropdown-menu');
+
+                group.addEventListener('mouseenter', function() {
+                  openGroup(group);
+                });
+
+                group.addEventListener('mouseleave', function() {
+                  scheduleClose();
+                });
+
+                if (menu) {
+                  menu.addEventListener('mouseenter', function() {
+                    if (closeTimer) {
+                      clearTimeout(closeTimer);
+                      closeTimer = null;
+                    }
+                  });
+
+                  menu.addEventListener('mouseleave', function() {
+                    scheduleClose();
+                  });
+                }
+              });
+
+              // Close dropdown when hovering non-dropdown nav items
+              var nonDropdownLinks = document.querySelectorAll('header nav > a, header .flex-1 a');
+              nonDropdownLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                  closeAll();
+                });
+              });
+
+              document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown-group')) {
+                  closeAll();
+                }
+              });
+
+              document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                  closeAll();
+                }
+              });
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initNavDropdowns);
+            } else {
+              initNavDropdowns();
+            }
+          })();
+          `}
+        </script>
       </div>
     </Document>
   )
