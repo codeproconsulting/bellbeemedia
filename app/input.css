@@ -641,3 +641,20 @@
 .nav-dropdown-group.is-open i.ph-caret-down {
   transform: rotate(180deg);
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FAQ ACCORDION & DETAILS RESET
+───────────────────────────────────────────────────────────────────────── */
+details summary::-webkit-details-marker,
+details summary::marker {
+  display: none !important;
+}
+
+details summary {
+  list-style: none !important;
+}
+
+details[open] .faq-vbar {
+  transform: scaleY(0);
+}
+

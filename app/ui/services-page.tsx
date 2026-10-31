@@ -266,9 +266,6 @@ export function ServicesPage() {
         <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-secondary/20 blur-[80px] pointer-events-none" aria-hidden="true"></div>
         <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primary-light/10 blur-[80px] pointer-events-none" aria-hidden="true"></div>
         <div class="container mx-auto px-4 max-w-3xl text-center relative z-10">
-          <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/35 mb-4">
-            <i class="ph-fill ph-lightning"></i> Limited slots open this month
-          </span>
           <h2 class="text-2xl md:text-4xl font-black text-white mb-4 leading-tight">
             Ready to turn spend<br /> into scalable revenue?
           </h2>

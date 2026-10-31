@@ -188,40 +188,174 @@ export function HomePage() {
       {/* ── FAQ Section ──────────────────────────────────── */}
       <FaqSection />
 
-      {/* ── Premium CTA ──────────────────────────────────── */}
-      <section class="py-24 bg-white relative overflow-hidden">
-        <div class="container mx-auto px-4 max-w-5xl">
-          <div data-reveal="scale" class="bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 p-10 md:p-20 rounded-[40px] text-white overflow-hidden relative shadow-2xl">
-            <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-secondary/25 blur-[80px] pointer-events-none"></div>
-            <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-primary-light/15 blur-[80px] pointer-events-none"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/[0.02] border border-white/5 pointer-events-none"></div>
+      {/* ── Premium CTA (Full-Width Dark Navy matching Brand System) ── */}
+      <section
+        class="relative pt-24 pb-0 md:pt-32 md:pb-0 text-white overflow-hidden"
+        style="background-color: #030d1a !important; background-image: radial-gradient(ellipse 65% 55% at 18% 45%, rgba(27, 117, 188, 0.32) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 82% 52%, rgba(247, 148, 29, 0.16) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 50% 50%, rgba(12, 38, 75, 0.4) 0%, transparent 70%) !important;"
+      >
+        {/* Concentric Radar / Ripple Rings */}
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full border border-white/[0.045] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full border border-white/[0.04] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] h-[820px] rounded-full border border-white/[0.045] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1120px] h-[1120px] rounded-full border border-white/[0.035] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1460px] h-[1460px] rounded-full border border-white/[0.025] pointer-events-none"></div>
 
-            <div class="relative z-10 max-w-2xl mx-auto text-center">
-              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/40 mb-6">
-                <i class="ph-fill ph-lightning"></i> Limited slots open this month
-              </span>
-              <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
-                Ready to turn your marketing into a revenue engine?
-              </h2>
-              <p class="text-base md:text-lg text-white/60 mb-10 leading-relaxed">
-                Book a free 30-minute strategy call. We'll audit your current marketing, identify the biggest growth levers, and show you exactly how we'd scale you.
-              </p>
-              <div class="flex flex-wrap justify-center gap-4">
-                <a href={routes.getProposal.href()} data-glow-btn class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary-light transition-all shadow-xl shadow-secondary/30 hover:scale-[1.02] active:scale-[0.98]">
-                  Book Your Free Strategy Call <i class="ph ph-arrow-right"></i>
-                </a>
-                <a href={routes.ourWork.href()} class="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/80 rounded-full font-semibold hover:bg-white/10 hover:text-white transition-all">
-                  See Our Results
-                </a>
-              </div>
-              {/* Trust signals */}
-              <div class="flex flex-wrap justify-center gap-6 mt-10 text-xs text-white/30 font-medium">
-                <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> No commitment required</span>
-                <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> 30-minute discovery call</span>
-                <span class="flex items-center gap-1.5"><i class="ph-fill ph-check text-secondary"></i> Free custom growth plan</span>
-              </div>
-            </div>
+        {/* Glowing Amber Particle / Flare on the Right */}
+        <div
+          class="absolute pointer-events-none animate-pulse"
+          style="top: 56%; right: 28%; transform: translateY(-50%);"
+        >
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #fbb040; box-shadow: 0 0 14px 2px #f7941d, 0 0 28px 4px rgba(251, 176, 64, 0.7);"></div>
+        </div>
+
+        <div class="container mx-auto px-4 max-w-4xl relative z-10 text-center">
+          {/* Headline with Orange Gradient Highlight */}
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-white mb-6 tracking-tight leading-[1.14]">
+            Ready to turn your marketing into<br class="hidden sm:inline" />
+            {' '}
+            <span
+              style="background: linear-gradient(135deg, #f7941d 0%, #fbb040 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+            >
+              a revenue engine?
+            </span>
+          </h2>
+
+          {/* Subtitle */}
+          <p class="text-slate-300 text-sm sm:text-base md:text-lg mb-10 leading-relaxed max-w-2xl mx-auto font-normal">
+            Book a free 30-minute strategy call. We'll audit your current marketing, identify the biggest growth levers, and show you exactly how we'd scale you.
+          </p>
+
+          {/* Action Buttons */}
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={routes.getProposal.href()}
+              class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-white text-sm sm:text-base transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+              style="background: linear-gradient(135deg, #f7941d 0%, #fa7c05 100%); box-shadow: 0 10px 28px -4px rgba(247, 148, 29, 0.55), 0 0 20px rgba(247, 148, 29, 0.3);"
+            >
+              <span>Book Your Free Strategy Call</span>
+              <i class="ph-bold ph-arrow-right"></i>
+            </a>
+            <a
+              href={routes.ourWork.href()}
+              class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white/90 text-sm sm:text-base transition-all duration-300 hover:bg-[#154476]/80 hover:text-white hover:border-[#78b4cc]/60"
+              style="background: rgba(12, 36, 68, 0.65); border: 1px solid rgba(120, 180, 204, 0.35); backdrop-filter: blur(8px);"
+            >
+              <span>See Our Results</span>
+            </a>
           </div>
+
+          {/* Trust Signals with Orange Checkmarks */}
+          <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-10 mb-4 text-xs sm:text-sm text-slate-300/90 font-medium">
+            <span class="flex items-center gap-2">
+              <i class="ph-bold ph-check text-[#f7941d] text-base"></i> No commitment required
+            </span>
+            <span class="flex items-center gap-2">
+              <i class="ph-bold ph-check text-[#f7941d] text-base"></i> 30-minute discovery call
+            </span>
+            <span class="flex items-center gap-2">
+              <i class="ph-bold ph-check text-[#f7941d] text-base"></i> Free custom growth plan
+            </span>
+          </div>
+        </div>
+
+        {/* Flowing Silk Wave Ribbon directly below trust signals matching screenshot */}
+        <div class="relative w-full overflow-hidden pointer-events-none" style="height: 80px; margin-top: 14px; margin-bottom: 0px;">
+          <style>{`
+            @keyframes bbSilkFlowLR {
+              0% {
+                transform: translateX(-24px);
+              }
+              50% {
+                transform: translateX(24px);
+              }
+              100% {
+                transform: translateX(-24px);
+              }
+            }
+            .bb-silk-wave-lr {
+              animation: bbSilkFlowLR 7s ease-in-out infinite;
+              width: calc(100% + 60px);
+              margin-left: -30px;
+            }
+          `}</style>
+
+          {/* SVG Silk Ribbon directly matching screenshot */}
+          <svg
+            viewBox="0 0 1440 80"
+            fill="none"
+            preserveAspectRatio="none"
+            class="h-full w-full block bb-silk-wave-lr"
+            style="position: absolute; top: 0; left: 0;"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="bbRibbonFill" x1="0%" y1="15%" x2="0%" y2="90%">
+                <stop offset="0%" stop-color="#1b75bc" stop-opacity="0.5" />
+                <stop offset="45%" stop-color="#78b4cc" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#f7941d" stop-opacity="0.45" />
+              </linearGradient>
+
+              <linearGradient id="bbDropGlow" x1="0%" y1="45%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f7941d" stop-opacity="0.22" />
+                <stop offset="60%" stop-color="#784010" stop-opacity="0.08" />
+                <stop offset="100%" stop-color="#030d1a" stop-opacity="0.0" />
+              </linearGradient>
+            </defs>
+
+            {/* 1. Ambient Drop beneath Orange Wave */}
+            <path
+              d="M 0,44 C 140,36 240,24 380,24 C 540,24 620,58 720,58 C 820,58 900,24 1060,24 C 1200,24 1300,36 1440,44 L 1440,80 L 0,80 Z"
+              fill="url(#bbDropGlow)"
+            />
+
+            {/* 2. Translucent Silk Ribbon Band between Blue & Orange Lines */}
+            <path
+              d="M 0,26 C 140,18 240,8 380,8 C 540,8 620,40 720,40 C 820,40 900,8 1060,8 C 1200,8 1300,18 1440,26 L 1440,44 C 1300,36 1200,24 1060,24 C 900,24 820,58 720,58 C 620,58 540,24 380,24 C 240,24 140,36 0,44 Z"
+              fill="url(#bbRibbonFill)"
+            />
+
+            {/* 3. Top Blue / Cyan Neon Stroke */}
+            <path
+              d="M 0,26 C 140,18 240,8 380,8 C 540,8 620,40 720,40 C 820,40 900,8 1060,8 C 1200,8 1300,18 1440,26"
+              stroke="#78b4cc"
+              stroke-width="5"
+              stroke-opacity="0.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 0,26 C 140,18 240,8 380,8 C 540,8 620,40 720,40 C 820,40 900,8 1060,8 C 1200,8 1300,18 1440,26"
+              stroke="#1b75bc"
+              stroke-width="2.6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 0,26 C 140,18 240,8 380,8 C 540,8 620,40 720,40 C 820,40 900,8 1060,8 C 1200,8 1300,18 1440,26"
+              stroke="#9de4ff"
+              stroke-width="1.2"
+              stroke-linecap="round"
+            />
+
+            {/* 4. Bottom Orange / Amber Neon Stroke */}
+            <path
+              d="M 0,44 C 140,36 240,24 380,24 C 540,24 620,58 720,58 C 820,58 900,24 1060,24 C 1200,24 1300,36 1440,44"
+              stroke="#fbb040"
+              stroke-width="5"
+              stroke-opacity="0.55"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 0,44 C 140,36 240,24 380,24 C 540,24 620,58 720,58 C 820,58 900,24 1060,24 C 1200,24 1300,36 1440,44"
+              stroke="#f7941d"
+              stroke-width="2.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 0,44 C 140,36 240,24 380,24 C 540,24 620,58 720,58 C 820,58 900,24 1060,24 C 1200,24 1300,36 1440,44"
+              stroke="#ffe29a"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+          </svg>
         </div>
       </section>
 
@@ -455,73 +589,210 @@ function ServicesShowcaseGrid() {
   )
 }
 
+interface FaqItemData {
+  q: string
+  a: string
+  highlights?: { icon: string; label: string }[]
+  timeline?: { step: string; title: string; tag: string }[]
+  checklist?: string[]
+  badges?: { icon: string; text: string }[]
+  techStack?: string[]
+}
+
+const homeFaqs: FaqItemData[] = [
+  {
+    q: 'How does BellBee Media deliver data-led marketing results?',
+    a: 'We combine real-time performance analytics with native customer insights to audit your brand positioning and competitor gap matrix. By engineering high-converting funnel pipelines across Meta, Google, and programmatic platforms, our clients achieve an average verified ROAS of 3.4x.',
+    highlights: [
+      { icon: 'ph-chart-line-up', label: '3.4x Verified ROAS' },
+      { icon: 'ph-funnel', label: 'Full-Funnel CRO Audit' },
+      { icon: 'ph-lightning', label: 'Weekly Growth Sprints' },
+    ],
+  },
+  {
+    q: 'What is the typical timeline to launch a new campaign?',
+    a: 'Our standard onboarding takes two to three weeks with a structured 3-phase delivery roadmap. We eliminate guesswork by building tracking foundations before any ad spend goes live.',
+    timeline: [
+      { step: 'Week 01', title: 'Audit & Gap Matrix', tag: 'Discovery' },
+      { step: 'Week 02', title: 'Strategy & Tracking KPIs', tag: 'Blueprint' },
+      { step: 'Week 03', title: 'Creative Build & Live Launch', tag: 'Activation' },
+    ],
+  },
+  {
+    q: 'How does the client onboarding process work?',
+    a: 'Onboarding starts with a free 30-minute discovery call where we map your customer personas and budget allocations. Once agreed, we design a customized 30/60/90-day roadmap. Our creative production and media teams then launch the campaigns after your complete approval.',
+    checklist: [
+      'Free 30-minute discovery strategy session',
+      'Persona mapping & ad spend allocation',
+      'Dedicated Slack channel & bi-weekly check-ins',
+      '100% pre-launch creative sign-off guarantee',
+    ],
+  },
+  {
+    q: 'Do you offer performance guarantees or fixed contracts?',
+    a: 'We offer flexible, results-driven partnerships. We set clear commercial KPIs and success benchmarks upfront so you know exactly what outcomes to expect. Our monthly rolling agreements ensure we continuously optimize and scale your campaigns based on real commercial growth.',
+    badges: [
+      { icon: 'ph-shield-check', text: 'Zero Long-Term Lock-in' },
+      { icon: 'ph-arrows-clockwise', text: '30-Day Rolling Retainer' },
+      { icon: 'ph-target', text: 'Commercial KPI Benchmarks' },
+    ],
+  },
+  {
+    q: 'Can we integrate with our existing CRM and marketing stack?',
+    a: 'Yes, absolutely. We seamlessly integrate with Shopify, HubSpot, Salesforce, Klaviyo, Google Analytics 4, Meta Conversions API (CAPI), and custom server-side webhook tracking to guarantee full-funnel attribution and zero data loss.',
+    techStack: ['Shopify Plus', 'HubSpot', 'Meta CAPI', 'Google Analytics 4', 'Klaviyo', 'Salesforce'],
+  },
+]
+
 function FaqSection() {
   return () => (
-    <section class="py-24 bg-surface-1 border-t border-surface-2 relative overflow-hidden">
-      {/* Decorative subtle glows */}
-      <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-      <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
+    <section class="py-24 sm:py-28 bg-surface-1 border-t border-surface-2 relative overflow-hidden" id="faq">
+      {/* Decorative brand ambient glows */}
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
-      <div class="container mx-auto px-4 max-w-4xl relative z-10">
-        {/* Header */}
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <h2 data-reveal class="text-4xl md:text-5xl font-black text-surface-dark0 mb-4 tracking-tight">
-            Frequently Asked <span class="bb-shimmer-text">Questions</span>
-          </h2>
-          <p data-reveal data-reveal-delay="100" class="text-text-secondary leading-relaxed">
-            Everything you need to know about our workflow, onboarding timelines, and campaign optimization.
-          </p>
-        </div>
-
-        {/* FAQs using details/summary for clean SEO structure */}
-        <div class="flex flex-col gap-4">
-          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
-              <h3>How does BellBee Media deliver data-led marketing results?</h3>
-              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
-                <i class="ph ph-caret-down"></i>
+      <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Badge, Heading & Subtitle — aligned flush with the right cards */}
+          <div class="lg:col-span-5 pt-1">
+            {/* Pill badge with horizontal line and glowing accent node */}
+            <div class="inline-flex items-center gap-3.5 mb-6 sm:mb-7" data-reveal>
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-surface-dark0 text-white shadow-sm">
+                FAQ's
               </span>
-            </summary>
-            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
-              We deliver results by combining real-time performance analytics with native customer insights. We audit your brand positioning and competitor gap matrix to engineer high-converting funnel pipelines, leading to an average ROAS of 3.4x across Meta, Google, and programmatic platforms.
+              <div class="flex items-center w-28 sm:w-36 relative">
+                <div class="h-[1.5px] w-full bg-gradient-to-r from-surface-dark0/40 via-surface-dark0/20 to-transparent relative">
+                  <span class="absolute left-6 -top-1 w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_10px_rgba(229,96,38,0.9)] ring-2 ring-white"></span>
+                </div>
+              </div>
             </div>
-          </details>
 
-          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
-              <h3>What is the typical timeline to launch a new campaign?</h3>
-              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
-                <i class="ph ph-caret-down"></i>
-              </span>
-            </summary>
-            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
-              Our standard campaign onboarding takes two to three weeks. Week one focuses on a discovery brand positioning audit and competitor gap analysis. Week two establishes the strategic blueprint and tracking KPIs. By week three, all creative production is built, approved, and launched.
-            </div>
-          </details>
+            {/* Heading with 100% solid, crisp, high-contrast typography */}
+            <h2 data-reveal data-reveal-delay="100" class="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-surface-dark0 tracking-tight leading-[1.08] mb-6">
+              Frequently asked<br class="hidden sm:inline" />{' '}
+              <span class="text-primary">questions</span>
+            </h2>
 
-          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
-              <h3>How does the client onboarding process work?</h3>
-              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
-                <i class="ph ph-caret-down"></i>
-              </span>
-            </summary>
-            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
-              Onboarding starts with a free 30-minute discovery call where we map your customer personas and budget allocations. Once agreed, we design a customized 30/60/90-day roadmap. Our creative production and media teams then launch the campaigns after your complete approval.
-            </div>
-          </details>
+            {/* Subtitle */}
+            <p data-reveal data-reveal-delay="150" class="text-text-secondary text-base sm:text-lg leading-relaxed max-w-md mb-8">
+              Choose a growth partner that fits your business needs and budget. Transparent agreements, real-time ROI tracking, and dedicated specialist teams to scale your brand.
+            </p>
 
-          <details class="group bg-white border border-surface-2 rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex justify-between items-center font-bold text-lg text-surface-dark0 list-none cursor-pointer">
-              <h3>Do you offer performance guarantees or fixed contracts?</h3>
-              <span class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
-                <i class="ph ph-caret-down"></i>
-              </span>
-            </summary>
-            <div class="mt-4 text-text-secondary leading-relaxed border-t border-surface-2 pt-4">
-              We offer flexible, results-driven partnerships. We set clear performance KPIs and success metrics upfront so that you know exactly what outcomes to expect. Our monthly rolling agreements ensure we continuously optimize and scale your campaigns based on real commercial growth.
+            {/* Extra direct-action CTA */}
+            <div data-reveal data-reveal-delay="200">
+              <a
+                href={routes.getProposal.href()}
+                class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/15 text-primary font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] group"
+              >
+                <span>Have more questions? Ask our team</span>
+                <i class="ph-bold ph-arrow-right transition-transform group-hover:translate-x-1"></i>
+              </a>
             </div>
-          </details>
+          </div>
+
+          {/* Right Column: Stacked Accordion Cards */}
+          <div class="lg:col-span-7 flex flex-col gap-4 sm:gap-5" data-reveal data-reveal-delay="150">
+            {homeFaqs.map((faq, idx) => (
+              <details
+                key={faq.q}
+                name="faq-accordion"
+                open={idx === 0 ? true : undefined}
+                class="group bg-white border border-slate-200/90 hover:border-primary/30 rounded-2xl sm:rounded-3xl p-6 sm:p-7 transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_28px_-6px_rgba(21,68,118,0.08)] open:border-primary/40 open:shadow-[0_20px_40px_-10px_rgba(21,68,118,0.1)] [&_summary::-webkit-details-marker]:hidden"
+              >
+                <summary class="flex justify-between items-center gap-4 list-none cursor-pointer select-none">
+                  <h3 class="font-bold text-lg sm:text-[1.18rem] text-surface-dark0 group-open:text-primary transition-colors leading-snug pr-3">
+                    {faq.q}
+                  </h3>
+
+                  {/* Single morphing + / - toggle button: guaranteed never to show both icons */}
+                  <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#154476] group-open:bg-[#e56026] text-white flex items-center justify-center shrink-0 shadow-md group-open:shadow-[0_4px_16px_rgba(229,96,38,0.35)] transition-all duration-300 group-hover:scale-105 active:scale-95">
+                    <span class="relative w-4 h-4 flex items-center justify-center pointer-events-none">
+                      {/* Horizontal bar (always visible) */}
+                      <span class="absolute w-3.5 h-[2px] bg-white rounded-full"></span>
+                      {/* Vertical bar (visible when closed, collapses to 0 on open) */}
+                      <span class="faq-vbar absolute h-3.5 w-[2px] bg-white rounded-full transition-transform duration-300 group-open:scale-y-0"></span>
+                    </span>
+                  </span>
+                </summary>
+
+                {/* Fully Designed Open State */}
+                <div class="mt-4 sm:mt-5 pt-4 border-t border-slate-100">
+                  <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+                    {faq.a}
+                  </p>
+
+                  {/* Highlights Grid for FAQ 1 */}
+                  {faq.highlights && (
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+                      {faq.highlights.map(h => (
+                        <div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-1 border border-slate-200/80 shadow-2xs">
+                          <span class="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                            <i class={`ph-bold ${h.icon} text-sm`}></i>
+                          </span>
+                          <span class="text-xs font-bold text-surface-dark0">{h.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Timeline Roadmap for FAQ 2 */}
+                  {faq.timeline && (
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+                      {faq.timeline.map(t => (
+                        <div class="p-3 rounded-xl bg-surface-1 border border-slate-200/80 shadow-2xs">
+                          <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-secondary">{t.step}</span>
+                            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary">{t.tag}</span>
+                          </div>
+                          <p class="text-xs font-bold text-surface-dark0 mt-1">{t.title}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Checklist for FAQ 3 */}
+                  {faq.checklist && (
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                      {faq.checklist.map(item => (
+                        <div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-1 border border-slate-200/80 text-xs font-semibold text-surface-dark0 shadow-2xs">
+                          <i class="ph-fill ph-check-circle text-green-500 text-sm shrink-0"></i>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Trust Badges for FAQ 4 */}
+                  {faq.badges && (
+                    <div class="flex flex-wrap gap-2 pt-2">
+                      {faq.badges.map(b => (
+                        <span class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-1 border border-slate-200/80 text-xs font-bold text-surface-dark0 shadow-2xs">
+                          <i class={`ph-bold ${b.icon} text-secondary text-sm`}></i>
+                          {b.text}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Tech Stack for FAQ 5 */}
+                  {faq.techStack && (
+                    <div class="pt-2">
+                      <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                        Supported Platforms & Integrations:
+                      </span>
+                      <div class="flex flex-wrap gap-1.5">
+                        {faq.techStack.map(tech => (
+                          <span class="px-2.5 py-1 rounded-lg bg-surface-1 border border-slate-200/80 text-xs font-medium text-surface-dark0 shadow-2xs">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </section>

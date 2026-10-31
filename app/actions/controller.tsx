@@ -84,6 +84,11 @@ import {
 export default createController(routes, {
   actions: {
     async assets(context) {
+      const url = new URL(context.request.url)
+      if (url.search) {
+        const cleanRequest = new Request(url.origin + url.pathname, context.request)
+        return (await assetServer.fetch(cleanRequest)) ?? new Response('Not Found', { status: 404 })
+      }
       return (
         (await assetServer.fetch(context.request)) ?? new Response('Not Found', { status: 404 })
       )

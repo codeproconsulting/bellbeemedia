@@ -361,6 +361,115 @@ function initTestimonialsSlider(): void {
   startAuto()
 }
 
+// ─── 7. Process Timeline Scroll Progress ─────────────────────────────────────
+function initProcessTimeline(): void {
+  const wrapper = document.getElementById('process-timeline-spine-wrapper')
+  const line = document.getElementById('process-timeline-progress-line') as HTMLElement | null
+  const track = document.getElementById('process-timeline-track') as HTMLElement | null
+  const cap = document.getElementById('process-timeline-cap') as HTMLElement | null
+  const nodes = document.querySelectorAll<HTMLElement>('.process-step-node')
+
+  if (!wrapper || !line || nodes.length < 2) return
+
+  const firstNode = nodes[0]
+  const lastNode = nodes[nodes.length - 1]
+  let ticking = false
+
+  function update(): void {
+    if (!line || !firstNode || !lastNode || !wrapper) return
+
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight
+    const wrapperRect = wrapper.getBoundingClientRect()
+    const firstRect = firstNode.getBoundingClientRect()
+    const lastRect = lastNode.getBoundingClientRect()
+
+    // Calculate exact horizontal center through circular nodes
+    const centerX = (firstRect.left + firstRect.width / 2) - wrapperRect.left
+    const startY = (firstRect.top + firstRect.height / 2) - wrapperRect.top
+    const endY = (lastRect.top + lastRect.height / 2) - wrapperRect.top
+    const totalDistance = endY - startY
+
+    if (totalDistance <= 0) {
+      ticking = false
+      return
+    }
+
+    // Align track, cap, and line horizontally with center of node
+    line.style.left = `${centerX}px`
+    line.style.top = `${startY}px`
+
+    if (track) {
+      track.style.left = `${centerX}px`
+      track.style.top = `${startY}px`
+      track.style.height = `${totalDistance}px`
+    }
+
+    if (cap) {
+      cap.style.left = `${centerX}px`
+      cap.style.top = `${Math.max(0, startY - 24)}px`
+      cap.style.height = '18px'
+    }
+
+    const firstNodeY = firstRect.top + firstRect.height / 2
+    const lastNodeY = lastRect.top + lastRect.height / 2
+
+    // Responsive trigger formula:
+    // Starts drawing when Node 1 enters bottom 82% of viewport
+    // Completes when Node 4 reaches middle 42% of viewport
+    const startScrollY = windowHeight * 0.82
+    const endScrollY = windowHeight * 0.42
+    const totalScrollDistance = (lastNodeY - firstNodeY) + (startScrollY - endScrollY)
+    const currentScrolled = startScrollY - firstNodeY
+
+    let progress = 0
+    if (totalScrollDistance > 0) {
+      progress = currentScrolled / totalScrollDistance
+      progress = Math.max(0, Math.min(1, progress))
+    }
+
+    const currentHeight = progress * totalDistance
+    line.style.height = `${currentHeight}px`
+
+    const head = line.querySelector<HTMLElement>('.timeline-progress-head')
+    if (head) {
+      head.style.opacity = progress > 0.01 && progress < 0.99 ? '1' : '0'
+    }
+
+    // Light up nodes as the orange progress line reaches them
+    nodes.forEach((node) => {
+      const nRect = node.getBoundingClientRect()
+      const nodeCenterY = nRect.top + nRect.height / 2
+      const nodeDist = (nodeCenterY - wrapperRect.top) - startY
+      const nodeReqProgress = totalDistance > 0 ? nodeDist / totalDistance : 0
+
+      if (progress >= nodeReqProgress - 0.02 && progress > 0) {
+        node.classList.add('is-active')
+      } else {
+        node.classList.remove('is-active')
+      }
+    })
+
+    ticking = false
+  }
+
+  function onScroll(): void {
+    if (!ticking) {
+      requestAnimationFrame(update)
+      ticking = true
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll, { passive: true })
+  document.addEventListener('scroll', onScroll, { passive: true })
+
+  update()
+  setTimeout(update, 100)
+  setTimeout(update, 350)
+  setTimeout(update, 800)
+  setTimeout(update, 1500)
+}
+
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 function boot(): void {
   initScrollReveal()
@@ -369,6 +478,7 @@ function boot(): void {
   initCardTilt()
   initButtonGlow()
   initTestimonialsSlider()
+  initProcessTimeline()
 }
 
 if (document.readyState === 'loading') {
@@ -376,8 +486,13 @@ if (document.readyState === 'loading') {
 } else {
   boot()
 }
+window.addEventListener('load', boot)
 
 // Re-check in case elements are hydrated or rendered shortly after script evaluation
 setTimeout(initTestimonialsSlider, 150)
 setTimeout(initTestimonialsSlider, 600)
+setTimeout(initProcessTimeline, 150)
+setTimeout(initProcessTimeline, 600)
+setTimeout(initProcessTimeline, 1200)
+
 

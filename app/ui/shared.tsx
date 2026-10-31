@@ -129,319 +129,516 @@ export function ServicesGrid() {
 }
 
 export function ProcessSection() {
-  const steps = [
-    {
-      num: '01',
-      badge: 'Week 1',
-      title: 'Discovery & Audit',
-      desc: 'We audit your brand voice, analyze competitor gaps, and find leverage points to establish a solid baseline.',
-      icon: 'ph-binoculars',
-      color: 'text-secondary bg-secondary/10 border-secondary/20',
-    },
-    {
-      num: '02',
-      badge: 'Week 1–2',
-      title: 'Strategic Blueprint',
-      desc: 'We map out a custom 30/60/90-day growth roadmap, KPI framework, and dynamic budget allocation.',
-      icon: 'ph-map-trifold',
-      color: 'text-primary-light bg-primary-light/10 border-primary-light/20',
-    },
-    {
-      num: '03',
-      badge: 'Week 2–3',
-      title: 'Execution & Launch',
-      desc: 'Our creative and technical teams produce ad creatives, set up tracking QA, and go live.',
-      icon: 'ph-airplane-takeoff',
-      color: 'text-secondary bg-secondary/10 border-secondary/20',
-    },
-    {
-      num: '04',
-      badge: 'Ongoing',
-      title: 'Optimize & Scale',
-      desc: 'We run creative A/B tests, analyze performance metrics daily, and scale successful campaigns.',
-      icon: 'ph-chart-line-up',
-      color: 'text-primary-light bg-primary-light/10 border-primary-light/20',
-    },
-  ]
-
   return () => (
-    <section class="py-24 bg-surface-dark0 text-white relative overflow-hidden border-t border-white/5">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(21,68,118,0.1)_0,transparent_60%)] pointer-events-none"></div>
-      
-      <div class="container mx-auto px-4 max-w-6xl relative z-10">
-        
+    <section
+      id="process-timeline-section"
+      class="py-14 md:py-18 text-white relative overflow-hidden"
+      style="background-color: #030d1a !important; background-image: radial-gradient(ellipse 70% 40% at 50% 15%, rgba(27, 117, 188, 0.16) 0%, transparent 70%), radial-gradient(ellipse 60% 30% at 50% 85%, rgba(247, 148, 29, 0.12) 0%, transparent 70%) !important;"
+    >
+      <style>{`
+        .timeline-grid {
+          display: grid;
+          grid-template-columns: 1fr 54px 1fr;
+          align-items: center;
+          column-gap: 20px;
+          width: 100%;
+          position: relative;
+          z-index: 5;
+        }
+        .timeline-col-left {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          text-align: right;
+          position: relative;
+          z-index: 5;
+        }
+        .timeline-col-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+          position: relative;
+          z-index: 5;
+        }
+        .timeline-col-center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          z-index: 15 !important;
+        }
+        .outline-num-orange {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+          font-size: 48px;
+          font-weight: 900;
+          line-height: 1;
+          -webkit-text-stroke: 1.8px rgba(247, 148, 29, 0.45);
+          color: transparent;
+          user-select: none;
+        }
+        .outline-num-blue {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+          font-size: 48px;
+          font-weight: 900;
+          line-height: 1;
+          -webkit-text-stroke: 1.8px rgba(27, 117, 188, 0.55);
+          color: transparent;
+          user-select: none;
+        }
+        .process-node {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          color: #ffffff;
+          border: 4px solid #030d1a;
+          position: relative;
+          z-index: 15 !important;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+        }
+        .process-node.is-active {
+          transform: scale(1.14);
+        }
+        .process-node-orange {
+          background-color: #f7941d !important;
+          box-shadow: 0 4px 16px rgba(247, 148, 29, 0.4);
+        }
+        .process-node-orange.is-active {
+          box-shadow: 0 0 26px rgba(247, 148, 29, 0.95);
+        }
+        .process-node-blue {
+          background-color: #1b75bc !important;
+          box-shadow: 0 4px 16px rgba(27, 117, 188, 0.45);
+        }
+        .process-node-blue.is-active {
+          box-shadow: 0 0 26px rgba(27, 117, 188, 0.95);
+        }
+
+        .timeline-spine-progress {
+          transition: height 0.08s linear;
+        }
+
+        @media (max-width: 640px) {
+          .timeline-grid {
+            grid-template-columns: 46px 1fr !important;
+            column-gap: 14px !important;
+          }
+          .timeline-col-center {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+          }
+          .timeline-col-left, .timeline-col-right {
+            grid-column: 2 !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+          }
+          .timeline-hollow-num {
+            display: none !important;
+          }
+          .timeline-spine-track, .timeline-spine-progress, .timeline-spine-cap {
+            left: 23px !important;
+          }
+        }
+      `}</style>
+
+      <div class="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-            From brief to <span class="text-gradient">breakthrough</span>
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-4xl sm:text-5xl font-black text-white mb-4 tracking-tight leading-[1.12]">
+            From brief to<br />
+            <span style="color: #78b4cc;">break</span><span style="color: #f7941d;">through</span>
           </h2>
-          <p class="text-white/60 leading-relaxed text-base md:text-lg">
+          <p class="text-slate-400 leading-relaxed text-sm sm:text-base max-w-xl mx-auto">
             We follow a highly-structured, data-proven execution plan to transition your brand to predictable, compounding growth.
           </p>
         </div>
 
-        {/* 4-Column Grid */}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((s) => (
-            <div class="group relative rounded-3xl p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col gap-4">
-              <div class="flex items-center justify-between">
-                <div class={`w-12 h-12 rounded-xl flex items-center justify-center text-xl border ${s.color}`}>
-                  <i class={`ph-fill ${s.icon}`}></i>
-                </div>
-                <span class="text-sm font-bold text-white/40">{s.num}</span>
+        {/* Central Vertical Timeline Container (Compact & Close to Line) */}
+        <div
+          id="process-timeline-spine-wrapper"
+          style="max-width: 680px; margin: 0 auto; position: relative; padding: 10px 0;"
+        >
+          {/* Top Orange Cap Line (Above Node 1) */}
+          <div
+            id="process-timeline-cap"
+            class="timeline-spine-cap"
+            style="position: absolute; left: 50%; top: 12px; height: 18px; width: 2.5px; transform: translateX(-50%); background: #f7941d; box-shadow: 0 0 10px rgba(247, 148, 29, 0.85); border-radius: 2px; z-index: 1;"
+          ></div>
+
+          {/* Base Inactive Track (from center of Node 1 to center of Node 4) - Orange Translucent Spine */}
+          <div
+            id="process-timeline-track"
+            class="timeline-spine-track"
+            style="position: absolute; left: 50%; top: 36px; bottom: 36px; width: 2.5px; transform: translateX(-50%); background: rgba(247, 148, 29, 0.35); box-shadow: 0 0 8px rgba(247, 148, 29, 0.22); z-index: 1;"
+          ></div>
+
+          {/* Dynamic Scroll-driven Glowing Golden-Orange Progress Line (Starts at Node 1 center - Runs BEHIND icon nodes) */}
+          <div
+            id="process-timeline-progress-line"
+            class="timeline-spine-progress"
+            style="position: absolute; left: 50%; top: 36px; width: 4px; height: 0px; transform: translateX(-50%); background: linear-gradient(180deg, #f7941d 0%, #fbb040 65%, #ffffff 100%); box-shadow: 0 0 14px 2px #f7941d, 0 0 28px 5px rgba(251, 176, 64, 0.85); z-index: 2; pointer-events: none;"
+          >
+            {/* Glowing leading head tip */}
+            <div
+              class="timeline-progress-head"
+              style="position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 10px 2px #f7941d, 0 0 20px 4px #fbb040; opacity: 0; transition: opacity 0.2s ease; z-index: 2;"
+            ></div>
+          </div>
+
+          {/* Timeline Steps (Placed ABOVE the spine line at z-index: 10 so the line passes cleanly behind nodes) */}
+          <div style="display: flex; flex-direction: column; gap: 44px; position: relative; z-index: 10;">
+            {/* Step 01 (Week 1 - Left content, Center node, Right outline num) */}
+            <div class="timeline-grid">
+              {/* Left Column: Content */}
+              <div class="timeline-col-left">
+                <span style="display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(247, 148, 29, 0.15); color: #fbb040; border: 1px solid rgba(247, 148, 29, 0.45); margin-bottom: 6px;">
+                  WEEK 1
+                </span>
+                <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; line-height: 1.25;">
+                  Discovery &amp; Audit
+                </h3>
+                <p style="font-size: 12.5px; color: #94a3b8; line-height: 1.55; max-width: 290px; margin: 0;">
+                  We audit your brand vision, analyze competitor gaps, and find leverage points to establish a solid baseline.
+                </p>
               </div>
-              <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-secondary mb-1 block">{s.badge}</span>
-                <h3 class="text-lg font-bold text-white mb-2">{s.title}</h3>
-                <p class="text-sm text-white/50 leading-relaxed">{s.desc}</p>
+
+              {/* Center Node */}
+              <div class="timeline-col-center">
+                <div class="process-node process-node-orange process-step-node" data-step="1">
+                  <i class="ph-bold ph-magnifying-glass"></i>
+                </div>
+              </div>
+
+              {/* Right Column: Outline Number 01 */}
+              <div class="timeline-hollow-num" style="display: flex; align-items: center; justify-content: flex-start;">
+                <span class="outline-num-orange">01</span>
               </div>
             </div>
-          ))}
-        </div>
 
+            {/* Step 02 (Week 1–2 - Left outline num, Center node, Right content) */}
+            <div class="timeline-grid">
+              {/* Left Column: Outline Number 02 */}
+              <div class="timeline-hollow-num" style="display: flex; align-items: center; justify-content: flex-end;">
+                <span class="outline-num-blue">02</span>
+              </div>
+
+              {/* Center Node */}
+              <div class="timeline-col-center">
+                <div class="process-node process-node-blue process-step-node" data-step="2">
+                  <i class="ph-bold ph-compass"></i>
+                </div>
+              </div>
+
+              {/* Right Column: Content */}
+              <div class="timeline-col-right">
+                <span style="display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(27, 117, 188, 0.18); color: #78b4cc; border: 1px solid rgba(27, 117, 188, 0.45); margin-bottom: 6px;">
+                  WEEK 1–2
+                </span>
+                <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; line-height: 1.25;">
+                  Strategic Blueprint
+                </h3>
+                <p style="font-size: 12.5px; color: #94a3b8; line-height: 1.55; max-width: 290px; margin: 0;">
+                  We map out a custom 30/60/90-day growth roadmap, KPI framework, and dynamic budget allocation.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 03 (Week 2–3 - Left content, Center node, Right outline num) */}
+            <div class="timeline-grid">
+              {/* Left Column: Content */}
+              <div class="timeline-col-left">
+                <span style="display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(247, 148, 29, 0.15); color: #fbb040; border: 1px solid rgba(247, 148, 29, 0.45); margin-bottom: 6px;">
+                  WEEK 2–3
+                </span>
+                <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; line-height: 1.25;">
+                  Execution &amp; Launch
+                </h3>
+                <p style="font-size: 12.5px; color: #94a3b8; line-height: 1.55; max-width: 290px; margin: 0;">
+                  Our creative and technical teams produce ad creatives, set up tracking QA, and go live.
+                </p>
+              </div>
+
+              {/* Center Node */}
+              <div class="timeline-col-center">
+                <div class="process-node process-node-orange process-step-node" data-step="3">
+                  <i class="ph-bold ph-rocket-launch"></i>
+                </div>
+              </div>
+
+              {/* Right Column: Outline Number 03 */}
+              <div class="timeline-hollow-num" style="display: flex; align-items: center; justify-content: flex-start;">
+                <span class="outline-num-orange">03</span>
+              </div>
+            </div>
+
+            {/* Step 04 (Ongoing - Left outline num, Center node, Right content) */}
+            <div class="timeline-grid">
+              {/* Left Column: Outline Number 04 */}
+              <div class="timeline-hollow-num" style="display: flex; align-items: center; justify-content: flex-end;">
+                <span class="outline-num-blue">04</span>
+              </div>
+
+              {/* Center Node with Glowing Outer Pulse Ring */}
+              <div class="timeline-col-center" style="position: relative;">
+                <div style="position: absolute; width: 70px; height: 70px; border-radius: 50%; background: rgba(27, 117, 188, 0.25); animation: pulse 2s infinite ease-in-out; pointer-events: none;"></div>
+                <div class="process-node process-node-blue process-step-node" data-step="4" style="position: relative; z-index: 15;">
+                  <i class="ph-bold ph-chart-line-up"></i>
+                </div>
+              </div>
+
+              {/* Right Column: Content */}
+              <div class="timeline-col-right">
+                <span style="display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(27, 117, 188, 0.18); color: #78b4cc; border: 1px solid rgba(27, 117, 188, 0.45); margin-bottom: 6px;">
+                  ONGOING
+                </span>
+                <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; line-height: 1.25;">
+                  Optimize &amp; Scale
+                </h3>
+                <p style="font-size: 12.5px; color: #94a3b8; line-height: 1.55; max-width: 290px; margin: 0;">
+                  We run creative A/B tests, analyze performance metrics daily, and scale successful campaigns.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </section>
   )
 }
 
 /* ─────────────────────────────────────────
-   TESTIMONIALS SECTION
+   TESTIMONIALS SECTION (Wall of Love)
 ───────────────────────────────────────── */
-export function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: 'Oliver Smith',
-      rating: 5,
-      quote:
-        "Bell Bee didn't just run our ads — they rewired how we think about digital growth. Within 90 days, our CAC dropped by 48% and ROAS reached 4.5x. They are not a vendor, they are a true strategic partner.",
-    },
-    {
-      name: 'Emily Wilson',
-      rating: 5,
-      quote:
-        "Our paid acquisition was bleeding money before Bell Bee took over. They restructured our entire funnel — new high-converting creatives, tighter audience targeting, and custom landing pages. CAC dropped 42% in month one.",
-    },
-    {
-      name: 'Harry Taylor',
-      rating: 5,
-      quote:
-        "We went from 12K to 280K followers in 6 months. More importantly, those followers convert into buyers — our DM-to-sale rate is 22%. Bell Bee's content strategy and creative execution is genuinely world-class.",
-    },
-    {
-      name: 'Lukas Weber',
-      rating: 5,
-      quote:
-        "The transparency alone is worth everything. For the first time, our executive team knows exactly which campaigns drive profit and why. Fast communication, proactive ideas, and outstanding monthly reporting.",
-    },
-    {
-      name: 'Anna Fischer',
-      rating: 5,
-      quote:
-        "Switched from a large agency and the difference is night and day. Bell Bee understood our business within days, moved fast without red tape, and delivered measurable revenue impact from the first week.",
-    },
-    {
-      name: 'Leon Schneider',
-      rating: 5,
-      quote:
-        "Their creative production team is unmatched. The video ads and scroll-stopping hooks they produced for our TikTok and Meta campaigns cut our cost per acquisition in half while doubling our click-through rate.",
-    },
-  ]
+interface WallTestimonial {
+  name: string
+  role: string
+  company: string
+  theme: 'blue' | 'orange'
+  content: RemixNode
+}
 
+const sevenTestimonials: WallTestimonial[] = [
+  {
+    name: 'Oliver Smith',
+    role: 'Founder',
+    company: 'D2C Apparel',
+    theme: 'blue',
+    content: (
+      <>
+        BellBee didn't just run our ads — they rewired how we think about digital growth. Within 90 days, our <strong>CAC dropped by 48%</strong> and <strong>ROAS reached 4.5x</strong>. Truly our best strategic growth partner.
+      </>
+    ),
+  },
+  {
+    name: 'Emily Wilson',
+    role: 'CMO',
+    company: 'Bloom Nutrition',
+    theme: 'orange',
+    content: (
+      <>
+        Our paid acquisition was bleeding money before BellBee took over. They restructured our entire funnel — <strong>CAC dropped 42% in month one</strong> and we hit our <strong>highest revenue quarter on record</strong>.
+      </>
+    ),
+  },
+  {
+    name: 'Harry Taylor',
+    role: 'E-commerce Director',
+    company: 'Verve Health',
+    theme: 'blue',
+    content: (
+      <>
+        We went from 12K to <strong>280K followers in 6 months</strong>. More importantly, those followers convert into buyers — our <strong>DM-to-sale rate is 22%</strong>! World-class creative execution.
+      </>
+    ),
+  },
+  {
+    name: 'Sophie Davies',
+    role: 'Founder',
+    company: 'Luxe Living UK',
+    theme: 'orange',
+    content: (
+      <>
+        Just checked our Shopify dashboard — generated <strong>£340k in 90 days</strong> from Meta & Google Ads alone. Working with BellBee is <strong>the single best growth decision</strong> we made this year.
+      </>
+    ),
+  },
+  {
+    name: 'Lukas Weber',
+    role: 'Managing Partner',
+    company: 'Aura Ventures',
+    theme: 'blue',
+    content: (
+      <>
+        The transparency alone is <strong>worth everything</strong>. For the first time, our executive team knows <strong>exactly which campaigns drive profit</strong> and why. 100x better reporting than any agency.
+      </>
+    ),
+  },
+  {
+    name: 'Anna Fischer',
+    role: 'Brand Lead',
+    company: 'Kova Skincare',
+    theme: 'orange',
+    content: (
+      <>
+        Switched from a large London agency and the difference is <strong>night and day</strong>. BellBee understood our business within days and delivered <strong>measurable revenue impact from week one</strong>.
+      </>
+    ),
+  },
+  {
+    name: 'Leon Schneider',
+    role: 'Head of Growth',
+    company: 'NeoTech Labs',
+    theme: 'blue',
+    content: (
+      <>
+        Their creative production team is <strong>unmatched</strong>. The video ads and scroll-stopping hooks cut our <strong>CPA in half while doubling our CTR</strong>. Genuinely obsessed with these results.
+      </>
+    ),
+  },
+]
+
+function RedPinHead() {
   return () => (
-    <section class="relative py-20 sm:py-28 overflow-hidden bg-surface-1 border-t border-surface-2">
-      {/* ── RESPONSIVE 3-CARD SLIDER CSS RULES ── */}
-      <style>{`
-        .bb-carousel-item {
-          flex: 0 0 100% !important;
-          max-width: 100% !important;
-          padding: 0 14px;
-          box-sizing: border-box;
-        }
-        @media (min-width: 640px) {
-          .bb-carousel-item {
-            flex: 0 0 50% !important;
-            max-width: 50% !important;
-          }
-        }
-        @media (min-width: 1024px) {
-          .bb-carousel-item {
-            flex: 0 0 33.333333% !important;
-            max-width: 33.333333% !important;
-          }
-        }
-        #bb-testimonial-slider {
-          cursor: grab;
-          user-select: none;
-          -webkit-user-select: none;
-        }
-        #bb-testimonial-slider:active {
-          cursor: grabbing;
-        }
-      `}</style>
+    <div class="absolute -top-3.5 right-6 sm:right-7 w-7 h-7 sm:w-8 sm:h-8 z-20 pointer-events-none select-none">
+      <svg
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full h-full drop-shadow-[0_4px_6px_rgba(0,0,0,0.35)]"
+      >
+        {/* 1. Cast shadow on the paper */}
+        <ellipse cx="18" cy="24" rx="12" ry="5" fill="url(#sharedPinShadow)" />
 
-      {/* ── BACKGROUND GEOMETRIC ACCENTS & WIREFRAME ── */}
-      <div class="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl"></div>
+        {/* 2. Base flange pressed right against the wall/card */}
+        <ellipse cx="18" cy="20" rx="9" ry="4" fill="#991b1b" />
 
-        {/* Concentric Circle Wireframe in Left Area */}
-        <svg
-          class="absolute -top-16 -left-16 w-96 h-96 opacity-40 text-slate-300"
-          viewBox="0 0 400 400"
-          fill="none"
-        >
-          <circle cx="200" cy="200" r="80" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
-          <circle cx="200" cy="200" r="130" stroke="currentColor" stroke-width="1.5" />
-          <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" />
-          <circle cx="200" cy="200" r="50" stroke="currentColor" stroke-width="1" />
-          <line x1="200" y1="20" x2="200" y2="380" stroke="currentColor" stroke-width="0.8" />
-          <line x1="20" y1="200" x2="380" y2="200" stroke="currentColor" stroke-width="0.8" />
-        </svg>
+        {/* 3. Cylindrical body of the head */}
+        <path
+          d="M9.5 15 C9.5 18 13.2 20 18 20 C22.8 20 26.5 18 26.5 15 L26.5 11.5 C26.5 14.5 22.8 16.5 18 16.5 C13.2 16.5 9.5 14.5 9.5 11.5 Z"
+          fill="url(#sharedPinStem)"
+        />
 
-        {/* Accent dots in top-left */}
-        <div class="absolute top-12 left-10 flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-primary-light"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-        </div>
+        {/* 4. Top cap head (seen pushed straight into the wall) */}
+        <ellipse cx="18" cy="11.5" rx="8.5" ry="5.5" fill="url(#sharedPinCap)" />
 
-        {/* Concentric Circle Wireframe in Right Area */}
-        <svg
-          class="absolute -bottom-20 -right-20 w-[440px] h-[440px] opacity-40 text-slate-300"
-          viewBox="0 0 400 400"
-          fill="none"
-        >
-          <circle cx="220" cy="220" r="90" stroke="currentColor" stroke-width="1.5" />
-          <circle cx="220" cy="220" r="140" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
-          <circle cx="220" cy="220" r="190" stroke="currentColor" stroke-width="1" />
-          <circle cx="220" cy="220" r="215" stroke="currentColor" stroke-width="0.7" stroke-dasharray="2 4" />
-        </svg>
+        {/* 5. Rim specular ring */}
+        <ellipse cx="18" cy="11.5" rx="8.2" ry="5.2" stroke="rgba(255,255,255,0.4)" stroke-width="0.6" fill="none" />
 
-        {/* Colored dots on right side */}
-        <div class="absolute bottom-24 right-12 flex items-center gap-3">
-          <span class="w-3.5 h-3.5 rounded-full bg-primary/20 border-2 border-primary"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-primary-light"></span>
-        </div>
-      </div>
+        {/* 6. Glossy white reflection on the cap */}
+        <ellipse cx="15.5" cy="9.5" rx="4.5" ry="2.2" fill="url(#sharedPinGloss)" />
+      </svg>
+    </div>
+  )
+}
+
+export function TestimonialsSection() {
+  return () => (
+    <section class="relative py-24 sm:py-32 overflow-hidden bg-surface-1 border-t border-surface-2" id="reviews">
+      {/* Background ambient glows */}
+      <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+
+      {/* Shared SVG Defs for Red Pin */}
+      <svg class="sr-only" aria-hidden="true">
+        <defs>
+          <radialGradient id="sharedPinShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#000000" stop-opacity="0.38" />
+            <stop offset="65%" stop-color="#000000" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="sharedPinStem" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7f1d1d" />
+            <stop offset="25%" stop-color="#b91c1c" />
+            <stop offset="65%" stop-color="#ef4444" />
+            <stop offset="90%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#7f1d1d" />
+          </linearGradient>
+          <radialGradient id="sharedPinCap" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#fca5a5" />
+            <stop offset="25%" stop-color="#ef4444" />
+            <stop offset="70%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#991b1b" />
+          </radialGradient>
+          <linearGradient id="sharedPinGloss" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+            <stop offset="50%" stop-color="#ffffff" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
 
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* ── HEADER ── */}
-        <div class="max-w-2xl mb-12 sm:mb-16">
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-surface-dark0 mb-3 tracking-tight leading-[1.15]">
-            Results our clients can't <br class="hidden sm:inline" />
-            <span class="text-primary-light">stop</span> talking about
+        {/* Header */}
+        <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-surface-dark0 mb-4 tracking-tight leading-[1.12]">
+            Results our clients can't <span class="text-primary">stop talking</span> about
           </h2>
-          <p class="text-text-secondary text-sm sm:text-base leading-relaxed">
-            Real brands. Real numbers. No fluff — just the outcomes we delivered.
+          <p class="text-text-secondary text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            Real brands. Real numbers. No fluff, just genuine feedback from founders, CMOs, and growth leaders we scale every single day.
           </p>
         </div>
 
-        {/* ── 3-CARD CAROUSEL VIEWPORT ── */}
-        <div id="bb-testimonial-slider" class="overflow-hidden relative py-6 -mx-3.5 select-none touch-pan-y">
-          <div
-            id="bb-slider-track"
-            class="flex transition-transform duration-500 ease-out select-none"
-            style="transform: translateX(0%);"
-          >
-            {testimonials.map((t) => (
-              <div class="bb-carousel-item flex-shrink-0 flex flex-col">
-                <div class="relative group filter drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
-                  {/* Card Main Box */}
-                  <div class="bg-white rounded-t-2xl relative overflow-hidden flex flex-col flex-1">
-                    {/* Top Straight Blue Banner */}
-                    <div class="w-full h-12 sm:h-14 bg-[#154476] relative"></div>
+        {/* 12-Column Responsive Balanced Grid: Row 1 = 4 cards (col-span-3), Row 2 = 3 cards (col-span-4) */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 max-w-7xl mx-auto">
+          {sevenTestimonials.map((t, idx) => {
+            const isOrange = t.theme === 'orange'
+            const cardThemeClass = isOrange
+              ? 'bg-gradient-to-br from-[#e56026] via-[#d6521a] to-[#b83f0e] border-[#fed7aa]/35 text-white shadow-[0_10px_24px_-4px_rgba(229,96,38,0.35)] hover:shadow-[0_16px_32px_-4px_rgba(229,96,38,0.5)] hover:border-[#fed7aa]/70'
+              : 'bg-gradient-to-br from-[#154476] via-[#123e6d] to-[#0c2a4d] border-[#2cbcee]/35 text-white shadow-[0_10px_24px_-4px_rgba(21,68,118,0.35)] hover:shadow-[0_16px_32px_-4px_rgba(21,68,118,0.5)] hover:border-[#2cbcee]/70'
 
-                    {/* Header Row: ONLY Name (in Black) + 5 Stars */}
-                    <div class="px-6 sm:px-7 pt-4 pb-1.5 relative z-10">
-                      <h3
-                        class="font-heading font-black text-xl sm:text-2xl tracking-tight text-surface-dark0"
-                      >
-                        {t.name}
-                      </h3>
+            const quoteClass = isOrange
+              ? 'text-white/95 text-[14px] sm:text-[14.5px] leading-relaxed font-normal [&_strong]:font-black [&_strong]:text-[#fef08a]'
+              : 'text-white/95 text-[14px] sm:text-[14.5px] leading-relaxed font-normal [&_strong]:font-black [&_strong]:text-[#38bdf8]'
 
-                      {/* 5 Stars Rating */}
-                      <div class="flex items-center gap-1 text-amber-400 text-sm mt-1" aria-label="5 out of 5 stars">
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                      </div>
-                    </div>
+            const roleClass = isOrange ? 'text-orange-100/85' : 'text-blue-200/85'
+            const dividerClass = isOrange ? 'border-white/20' : 'border-white/15'
+            const starClass = isOrange ? 'text-amber-200' : 'text-amber-300'
 
-                    {/* Body Text + Quotation Mark Icon */}
-                    <div class="px-6 sm:px-7 pt-2 pb-5 flex-1 flex flex-col justify-between">
-                      <p class="text-slate-600 text-sm sm:text-[15px] leading-relaxed font-normal">
-                        {t.quote}
-                      </p>
+            return (
+              <div
+                key={t.name}
+                class={`relative rounded-2xl p-6 sm:p-7 border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between h-full ${
+                  idx < 4 ? 'lg:col-span-3' : 'lg:col-span-4'
+                } ${
+                  idx === 6 ? 'sm:col-span-2 lg:col-span-4 sm:max-w-md sm:mx-auto lg:max-w-none w-full' : ''
+                } ${cardThemeClass}`}
+              >
+                {/* 3D Red Pushpin Head pinned straight into the card/wall */}
+                <RedPinHead />
 
-                      {/* Stylized Double Quotes Icon in Bottom-Right */}
-                      <div class="flex justify-end pt-2 text-slate-300 group-hover:text-primary-light/50 transition-colors">
-                        <i class="ph-fill ph-quotes text-4xl sm:text-5xl leading-none"></i>
-                      </div>
-                    </div>
+                {/* Quote Content with Highlighted Stat Keywords */}
+                <div class="pt-1">
+                  <p class={quoteClass}>
+                    {t.content}
+                  </p>
+                </div>
+
+                {/* Author Footer (NO Profile Photo Image!) */}
+                <div class={`mt-5 pt-3.5 border-t ${dividerClass} flex items-center justify-between`}>
+                  <div>
+                    <h4 class="font-heading font-black text-sm text-white leading-tight">
+                      {t.name}
+                    </h4>
+                    <p class={`text-xs ${roleClass} font-medium leading-tight mt-0.5`}>
+                      {t.role} • {t.company}
+                    </p>
                   </div>
-
-                  {/* Bottom Chevron Pennant with Crisp Accent Line */}
-                  <div class="relative -mt-px w-full overflow-visible pointer-events-none">
-                    <svg viewBox="0 0 400 44" class="w-full h-6 sm:h-7 block" preserveAspectRatio="none">
-                      <polygon points="0,0 400,0 400,4 200,40 0,4" fill="#ffffff" />
-                      <polyline
-                        points="0,4 200,40 400,4"
-                        fill="none"
-                        stroke="#2cbcee"
-                        stroke-width="4"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                      />
-                    </svg>
+                  <div class={`flex items-center gap-0.5 ${starClass} text-xs`} aria-label="5 stars">
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
+                    <i class="ph-fill ph-star"></i>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── NAVIGATION CONTROLS & PAGINATION PILLS ── */}
-        <div class="mt-8 sm:mt-12 flex items-center justify-center gap-4 relative z-20">
-          {/* Previous Arrow Button */}
-          <button
-            id="bb-slider-prev"
-            type="button"
-            aria-label="Previous testimonials"
-            class="w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-surface-dark0 shadow-md hover:shadow-lg border border-slate-200 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 hover:text-primary hover:border-primary-light cursor-pointer select-none shrink-0"
-          >
-            <i class="ph-bold ph-caret-left text-lg pointer-events-none"></i>
-          </button>
-
-          {/* Centered Pagination Pills */}
-          <div id="bb-slider-dots" class="flex items-center gap-1.5 sm:gap-2 px-2 overflow-x-auto max-w-[280px] py-1">
-            {testimonials.map((_, i) => (
-              <button
-                type="button"
-                data-index={i}
-                aria-label={`Go to slide ${i + 1}`}
-                class="bb-slider-dot h-2 rounded-full transition-all duration-300 cursor-pointer shrink-0"
-                style={i === 0 ? 'width: 2rem; background-color: #154476;' : 'width: 0.5rem; background-color: #cbd5e1;'}
-              ></button>
-            ))}
-          </div>
-
-          {/* Next Arrow Button */}
-          <button
-            id="bb-slider-next"
-            type="button"
-            aria-label="Next testimonials"
-            class="w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-surface-dark0 shadow-md hover:shadow-lg border border-slate-200 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 hover:text-primary hover:border-primary-light cursor-pointer select-none shrink-0"
-          >
-            <i class="ph-bold ph-caret-right text-lg pointer-events-none"></i>
-          </button>
-        </div>
-
-        {/* Geometric Accents beneath */}
-        <div class="mt-4 flex items-center justify-center gap-3 opacity-60">
-          <span class="w-3 h-3 bg-secondary/80 rotate-12 rounded-[2px]"></span>
-          <span class="w-4 h-4 rounded-full border-2 border-primary/40"></span>
+            )
+          })}
         </div>
       </div>
     </section>

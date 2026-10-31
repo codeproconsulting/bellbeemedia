@@ -161,88 +161,10 @@ export function Layout() {
                 </div>
               </div>
 
-              {/* Locations Dropdown (NEW!) */}
-              <div class="group h-full flex items-center nav-dropdown-group">
-                <a href={routes.locations.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  Locations <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
-                </a>
-
-                <div class="nav-dropdown-menu w-[92vw] max-w-4xl z-50">
-                  <div class="bg-white/95 backdrop-blur-2xl rounded-3xl border border-surface-2 shadow-2xl p-7">
-                    <div class="flex justify-between items-center border-b border-surface-2 pb-4 mb-4">
-                      <div>
-                        <h3 class="text-lg font-black text-surface-dark0 tracking-tight flex items-center gap-2">
-                          <span class="text-xl">🇵🇰</span> Service Locations & Regional Hubs
-                        </h3>
-                        <p class="text-xs text-text-secondary mt-0.5">Dedicated performance marketing & creative teams across Pakistan & UK.</p>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <a href={routes.locationsPakistan.href()} class="text-xs font-bold px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors">
-                          🇵🇰 Pakistan Cities
-                        </a>
-                        <a href={routes.locationsUk.href()} class="text-xs font-bold px-3 py-1.5 rounded-full bg-surface-2 text-surface-dark1 border border-surface-3 hover:bg-surface-3 transition-colors">
-                          🇬🇧 UK Hubs
-                        </a>
-                        <a href={routes.locations.href()} class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-                          All Regions <i class="ph ph-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-
-                    <div class="grid grid-cols-4 gap-4">
-                      <a href="/locations/pakistan/islamabad" class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary bg-white hover:shadow-md transition-all group/item">
-                        <div class="flex items-center gap-2">
-                          <div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                            <i class="ph-fill ph-buildings"></i>
-                          </div>
-                          <div>
-                            <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Islamabad</h4>
-                            <span class="text-[10px] font-bold text-primary">Flagship HQ</span>
-                          </div>
-                        </div>
-                        <p class="text-[11px] text-text-secondary leading-normal">Office #204, Vista Bldg, I-8 Markaz.</p>
-                      </a>
-
-                      <a href={routes.locationLahore.href()} class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
-                        <div class="flex items-center gap-2">
-                          <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-sm group-hover/item:bg-amber-600 group-hover/item:text-white transition-colors">
-                            <i class="ph-fill ph-storefront"></i>
-                          </div>
-                          <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Lahore</h4>
-                        </div>
-                        <p class="text-[11px] text-text-secondary leading-normal">Gulberg & DHA tech hub.</p>
-                      </a>
-
-                      <a href={routes.locationKarachi.href()} class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
-                        <div class="flex items-center gap-2">
-                          <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-sm group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors">
-                            <i class="ph-fill ph-globe"></i>
-                          </div>
-                          <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Karachi</h4>
-                        </div>
-                        <p class="text-[11px] text-text-secondary leading-normal">Clifton & PECHS retail hub.</p>
-                      </a>
-
-                      <a href={routes.locationRawalpindi.href()} class="flex flex-col gap-1.5 p-4 rounded-xl border border-surface-2 hover:border-primary-light/50 bg-white hover:shadow-md transition-all group/item">
-                        <div class="flex items-center gap-2">
-                          <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center text-sm group-hover/item:bg-purple-600 group-hover/item:text-white transition-colors">
-                            <i class="ph-fill ph-city"></i>
-                          </div>
-                          <h4 class="font-bold text-sm text-surface-dark0 group-hover/item:text-primary transition-colors">Rawalpindi</h4>
-                        </div>
-                        <p class="text-[11px] text-text-secondary leading-normal">Bahria Town & Saddar hub.</p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <a href={routes.blogs.href()} class="h-full hover:text-primary transition-colors flex items-center py-2 whitespace-nowrap">Blogs</a>
-
-              {/* About Us Dropdown */}
+              {/* About Dropdown */}
               <div class="group h-full flex items-center nav-dropdown-group">
                 <a href={routes.aboutUs.href()} class="h-full hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer py-2 whitespace-nowrap">
-                  About Us <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
+                  About <i class="ph ph-caret-down text-xs inline-block transition-transform duration-300"></i>
                 </a>
 
                 <div class="nav-dropdown-menu w-[92vw] max-w-3xl z-50">
@@ -291,6 +213,8 @@ export function Layout() {
                   </div>
                 </div>
               </div>
+
+              <a href={routes.blogs.href()} class="h-full hover:text-primary transition-colors flex items-center py-2 whitespace-nowrap">Blog</a>
             </nav>
 
             {/* CTA Button & Mobile Toggle */}
@@ -358,30 +282,8 @@ export function Layout() {
         <div id="mobile-drawer" class="fixed inset-x-0 top-20 bottom-0 bg-white/95 backdrop-blur-2xl z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 md:hidden flex flex-col p-6 gap-6 overflow-y-auto border-t border-surface-2 shadow-2xl">
           <a href="/services" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Services</a>
           <a href="/our-work" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Our Work</a>
-
-          <div class="flex flex-col gap-2">
-            <a href="/locations" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors flex items-center justify-between">
-              <span>Locations</span>
-              <span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">All Hubs</span>
-            </a>
-            <div class="flex flex-col gap-1 pl-2">
-              <a href={routes.locationsPakistan.href()} class="text-xs font-bold text-primary hover:text-primary-light py-1 flex items-center gap-1.5">
-                🇵🇰 Pakistan Service Locations &rarr;
-              </a>
-              <div class="grid grid-cols-2 gap-2 pl-3 pb-1">
-                <a href="/locations/pakistan/islamabad" class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Islamabad Hub</a>
-                <a href={routes.locationLahore.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Lahore</a>
-                <a href={routes.locationKarachi.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Karachi</a>
-                <a href={routes.locationRawalpindi.href()} class="text-xs text-text-secondary hover:text-primary py-0.5 font-medium">📍 Rawalpindi</a>
-              </div>
-              <a href={routes.locationsUk.href()} class="text-xs font-bold text-text-secondary hover:text-primary py-1 flex items-center gap-1.5">
-                🇬🇧 United Kingdom Hub &rarr;
-              </a>
-            </div>
-          </div>
-
-          <a href="/blogs" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Blogs</a>
-          <a href="/about-us" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">About Us</a>
+          <a href="/about-us" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">About</a>
+          <a href="/blogs" class="text-lg font-bold text-surface-dark0 hover:text-primary transition-colors">Blog</a>
 
           <div class="h-px bg-surface-2 my-2"></div>
 
@@ -395,73 +297,129 @@ export function Layout() {
         </main>
 
         {!hideFooter && (
-          <footer class="bg-surface-1 py-16 mt-auto border-t border-surface-2">
-            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12">
-              <div class="md:col-span-2">
-                <img src="/Logo.svg" alt="Bell Bee Media" class="h-10 w-auto mb-6" />
-                <p class="text-text-secondary max-w-sm mb-6">
-                  Elevating your digital presence with performance marketing, data-driven paid acquisition, and scroll-stopping creative production.
-                </p>
-                <div class="flex gap-4">
-                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                    <i class="ph ph-facebook-logo text-xl"></i>
-                  </a>
-                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                    <i class="ph ph-instagram-logo text-xl"></i>
-                  </a>
-                  <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-surface-dark1 hover:bg-primary hover:text-white transition-colors border border-surface-2">
-                    <i class="ph ph-linkedin-logo text-xl"></i>
-                  </a>
+          <footer class="relative bg-[#030d1a] text-white pt-16 pb-0 mt-auto overflow-hidden">
+            <div class="container mx-auto px-4 max-w-7xl relative z-10">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                {/* Brand Column */}
+                <div class="lg:col-span-4">
+                  <div class="inline-flex items-center bg-white rounded-xl px-3.5 py-2 shadow-sm mb-6">
+                    <img src="/Logo.svg" alt="Bell Bee Media" class="h-8 w-auto" />
+                  </div>
+                  <p class="text-[#bccbdc] text-sm leading-relaxed max-w-sm mb-8 font-normal">
+                    Elevating your digital presence with performance marketing, data-driven paid acquisition, and scroll-stopping creative production.
+                  </p>
+                  <div class="flex gap-3">
+                    <a
+                      href="https://www.facebook.com/bellbeemedia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-10 h-10 rounded-full bg-white/5 hover:bg-[#1b75bc] border border-white/10 hover:border-[#1b75bc] flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300 shadow-sm"
+                      aria-label="Facebook"
+                    >
+                      <i class="ph-bold ph-facebook-logo text-lg"></i>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/bellbeemedia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-10 h-10 rounded-full bg-white/5 hover:bg-[#f7941d] border border-white/10 hover:border-[#f7941d] flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300 shadow-sm"
+                      aria-label="Instagram"
+                    >
+                      <i class="ph-bold ph-instagram-logo text-lg"></i>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/bellbeemedia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-10 h-10 rounded-full bg-white/5 hover:bg-[#1b75bc] border border-white/10 hover:border-[#1b75bc] flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300 shadow-sm"
+                      aria-label="LinkedIn"
+                    >
+                      <i class="ph-bold ph-linkedin-logo text-lg"></i>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Company Column */}
+                <div class="lg:col-span-2">
+                  <h4 class="font-bold text-white text-base mb-6 tracking-wide" style="color: #ffffff !important;">Company</h4>
+                  <ul class="flex flex-col gap-3.5 text-sm" style="color: #bccbdc !important;">
+                    <li><a href={routes.home.href()} class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href={routes.services.href()} class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href={routes.ourWork.href()} class="hover:text-white transition-colors">Our Work</a></li>
+                    <li><a href={routes.aboutUs.href()} class="hover:text-white transition-colors">About</a></li>
+                    <li><a href={routes.blogs.href()} class="hover:text-white transition-colors">Blog</a></li>
+                    <li><a href={routes.getProposal.href()} class="hover:text-white transition-colors">Get a Quote</a></li>
+                  </ul>
+                </div>
+
+                {/* Service Locations Column */}
+                <div class="lg:col-span-3">
+                  <h4 class="font-bold text-white text-base mb-6 tracking-wide" style="color: #ffffff !important;">Service Locations</h4>
+                  <ul class="flex flex-col gap-3.5 text-sm" style="color: #bccbdc !important;">
+                    <li>
+                      <a href={routes.locations.href()} class="hover:text-white inline-flex items-center gap-2 transition-colors">
+                        <span>View Locations</span>
+                        <i class="ph-bold ph-arrow-right text-xs text-[#f7941d]"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Contact Column */}
+                <div class="lg:col-span-3">
+                  <h4 class="font-bold text-white text-base mb-6 tracking-wide" style="color: #ffffff !important;">Contact</h4>
+                  <ul class="flex flex-col gap-4 text-sm" style="color: #bccbdc !important;">
+                    <li class="flex items-center gap-3">
+                      <i class="ph-bold ph-envelope-simple text-base shrink-0 text-[#f7941d]"></i>
+                      <a href="mailto:hello@bellbeemedia.com" class="hover:text-white transition-colors">hello@bellbeemedia.com</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <i class="ph-bold ph-phone text-base shrink-0 text-[#f7941d]"></i>
+                      <a href="tel:+923701902120" class="hover:text-white transition-colors">+92 370 190 2120</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="ph-bold ph-map-pin text-base shrink-0 mt-0.5 text-[#f7941d]"></i>
+                      <span class="leading-snug">Office #204, Vista Building,<br />I-8 Markaz, Islamabad</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
-              <div>
-                <h4 class="font-bold text-surface-dark0 mb-6">Company</h4>
-                <ul class="flex flex-col gap-4 text-text-secondary text-sm font-medium">
-                  <li><a href={routes.home.href()} class="hover:text-primary transition-colors">Home</a></li>
-                  <li><a href={routes.aboutUs.href()} class="hover:text-primary transition-colors">About Us</a></li>
-                  <li><a href={routes.services.href()} class="hover:text-primary transition-colors">Services</a></li>
-                  <li><a href={routes.ourWork.href()} class="hover:text-primary transition-colors">Our Work</a></li>
-                  <li><a href={routes.blogs.href()} class="hover:text-primary transition-colors">Blogs</a></li>
-                  <li><a href={routes.getProposal.href()} class="hover:text-primary transition-colors">Get a Quote</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 class="font-bold text-surface-dark0 mb-6">Service Locations</h4>
-                <ul class="flex flex-col gap-2.5 text-text-secondary text-sm font-medium">
-                  <li><a href={routes.locationsPakistan.href()} class="hover:text-primary font-semibold text-surface-dark0 flex items-center gap-1.5">🇵🇰 Pakistan Hubs</a></li>
-                  <li class="pl-3"><a href="/locations/pakistan/seo-services-islamabad" class="hover:text-primary transition-colors text-xs">Islamabad (Flagship HQ)</a></li>
-                  <li class="pl-3"><a href={routes.locationLahore.href()} class="hover:text-primary transition-colors text-xs">Lahore Hub</a></li>
-                  <li class="pl-3"><a href={routes.locationKarachi.href()} class="hover:text-primary transition-colors text-xs">Karachi Hub</a></li>
-                  <li class="pl-3"><a href={routes.locationRawalpindi.href()} class="hover:text-primary transition-colors text-xs">Rawalpindi Hub</a></li>
-                  <li class="pt-1"><a href={routes.locationsUk.href()} class="hover:text-primary font-semibold text-surface-dark0 flex items-center gap-1.5">🇬🇧 United Kingdom Hub</a></li>
-                  <li class="pt-2">
-                    <a href={routes.locations.href()} class="text-primary hover:underline font-bold inline-flex items-center gap-1 text-xs">
-                      View All Locations <i class="ph ph-arrow-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 class="font-bold text-surface-dark0 mb-6">Contact</h4>
-                <ul class="flex flex-col gap-4 text-text-secondary text-sm font-medium">
-                  <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-primary"></i> hello@bellbeemedia.com</li>
-                  <li class="flex items-center gap-2"><i class="ph ph-phone text-primary"></i> +92 370 190 2120</li>
-                  <li class="flex items-start gap-2"><i class="ph ph-map-pin text-primary mt-1"></i> Office #204, Vista Building,<br />I-8 Markaz, Islamabad</li>
-                </ul>
+              {/* Bottom Copyright and Legal Bar */}
+              <div
+                class="mt-14 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs relative z-10"
+                style="border-top: 1px solid rgba(255, 255, 255, 0.12); color: #94a3b8 !important;"
+              >
+                <div>
+                  &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
+                </div>
+                <div class="flex items-center gap-5 sm:gap-6">
+                  <a href={routes.privacy.href()} class="hover:text-white transition-colors">Privacy Policy</a>
+                  <a href={routes.terms.href()} class="hover:text-white transition-colors">Terms of Service</a>
+                  <a
+                    href="#"
+                    id="footer-back-to-top"
+                    aria-label="Back to top"
+                    class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer shrink-0"
+                    style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff;"
+                  >
+                    <i class="ph-bold ph-arrow-up text-xs"></i>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div class="container mx-auto px-4 mt-16 pt-8 border-t border-surface-2 flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary text-sm">
-              <div>
-                &copy; {new Date().getFullYear()} Bell Bee Media. All rights reserved.
-              </div>
-              <div class="flex gap-6">
-                <a href={routes.privacy.href()} class="hover:text-primary transition-colors">Privacy Policy</a>
-                <a href={routes.terms.href()} class="hover:text-primary transition-colors">Terms of Service</a>
-              </div>
+            {/* Giant Bottom Watermark Typography matching Screenshot (Half-submerged cut-off) */}
+            <div
+              class="w-full overflow-hidden flex justify-center items-start pt-2 sm:pt-4 select-none pointer-events-none relative z-10"
+              style="height: clamp(36px, 7.5vw, 102px);"
+            >
+              <span
+                class="font-black text-center whitespace-nowrap tracking-tight"
+                style="font-size: clamp(62px, 14vw, 195px); line-height: 0.88; font-family: inherit; font-weight: 900; background: linear-gradient(180deg, rgba(186, 230, 253, 0.4) 0%, rgba(44, 188, 238, 0.75) 42%, rgba(27, 117, 188, 0.92) 68%, rgba(15, 45, 82, 0.3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; opacity: 0.92;"
+              >
+                Bell Bee Media
+              </span>
             </div>
           </footer>
         )}
@@ -564,6 +522,14 @@ export function Layout() {
                   closeAll();
                 }
               });
+
+              var btt = document.getElementById('footer-back-to-top');
+              if (btt) {
+                btt.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+              }
             }
 
             if (document.readyState === 'loading') {
