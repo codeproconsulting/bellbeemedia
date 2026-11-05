@@ -3,9 +3,9 @@ import { routes } from '../routes.ts'
 import { Document } from './document.tsx'
 
 export function Layout() {
-  return ({ children, title, description, head, hideFooter }: { children: RemixNode; title?: string; description?: string; head?: RemixNode; hideFooter?: boolean }) => (
+  return ({ children, title, description, head, hideFooter, dark }: { children: RemixNode; title?: string; description?: string; head?: RemixNode; hideFooter?: boolean; dark?: boolean }) => (
     <Document title={title} description={description} head={head}>
-      <div class="flex flex-col min-h-screen bg-white">
+      <div class={`flex flex-col min-h-screen ${dark ? 'bg-[#050a15] text-white' : 'bg-white'}`} style={dark ? 'background-color: #050a15;' : undefined}>
         {/* Mobile menu toggle input at root level */}
         <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" />
 
