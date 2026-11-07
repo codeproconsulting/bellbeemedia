@@ -48,8 +48,8 @@ export function WorldMapGraphic() {
           d="M 549.6,124.5 Q 655,50 773.2,179.7"
           fill="none"
           stroke="url(#flightArcGradient)"
-          stroke-width="5"
-          stroke-linecap="round"
+          strokeWidth="5"
+          strokeLinecap="round"
           opacity="0.3"
           filter="url(#glow)"
         />
@@ -58,9 +58,9 @@ export function WorldMapGraphic() {
           d="M 549.6,124.5 Q 655,50 773.2,179.7"
           fill="none"
           stroke="url(#flightArcGradient)"
-          stroke-width="1.8"
-          stroke-dasharray="4 5"
-          stroke-linecap="round"
+          strokeWidth="1.8"
+          strokeDasharray="4 5"
+          strokeLinecap="round"
         />
 
         {/* Animated pulse dot moving back and forth along trajectory (London <-> Islamabad) */}
@@ -70,7 +70,7 @@ export function WorldMapGraphic() {
           cy="124.5"
           r="9"
           fill="#38bdf8"
-          fill-opacity="0.35"
+          fillOpacity="0.35"
         />
         <circle
           id="flightTravelingDot"
@@ -79,15 +79,15 @@ export function WorldMapGraphic() {
           r="4.5"
           fill="#ffffff"
           stroke="#38bdf8"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           filter="url(#glow)"
         />
 
         {/* ── London Hub (UK) ── */}
         <g transform="translate(549.6, 124.5)">
           {/* Node pulse rings */}
-          <circle cx="0" cy="0" r="16" fill="#0284c7" fill-opacity="0.15" class="animate-ping" />
-          <circle cx="0" cy="0" r="10" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="16" fill="#0284c7" fillOpacity="0.15" class="animate-ping" />
+          <circle cx="0" cy="0" r="10" fill="#0284c7" fillOpacity="0.3" stroke="#38bdf8" strokeWidth="1.5" />
           <circle cx="0" cy="0" r="4.5" fill="#38bdf8" />
           <circle cx="0" cy="0" r="1.5" fill="#ffffff" />
 
@@ -100,9 +100,9 @@ export function WorldMapGraphic() {
               height="28"
               rx="14"
               fill="#060d1a"
-              fill-opacity="0.92"
+              fillOpacity="0.92"
               stroke="#1e3a5f"
-              stroke-width="1"
+              strokeWidth="1"
             />
             {/* Pill tag: Growth Wing */}
             <rect
@@ -116,12 +116,12 @@ export function WorldMapGraphic() {
             <text
               x="-110"
               y="4"
-              text-anchor="middle"
+              textAnchor="middle"
               fill="#ffffff"
-              font-size="9"
-              font-weight="700"
-              font-family="Inter, system-ui, sans-serif"
-              letter-spacing="0.3"
+              fontSize="9"
+              fontWeight="700"
+              fontFamily="Inter, system-ui, sans-serif"
+              letterSpacing="0.3"
             >
               Growth Wing
             </text>
@@ -129,11 +129,11 @@ export function WorldMapGraphic() {
             <text
               x="-40"
               y="4.5"
-              text-anchor="middle"
+              textAnchor="middle"
               fill="#f8fafc"
-              font-size="11.5"
-              font-weight="700"
-              font-family="Inter, system-ui, sans-serif"
+              fontSize="11.5"
+              fontWeight="700"
+              fontFamily="Inter, system-ui, sans-serif"
             >
               London
             </text>
@@ -143,8 +143,8 @@ export function WorldMapGraphic() {
         {/* ── Islamabad Hub (Pakistan) ── */}
         <g transform="translate(773.2, 179.7)">
           {/* Node pulse rings */}
-          <circle cx="0" cy="0" r="16" fill="#ea580c" fill-opacity="0.15" class="animate-ping" />
-          <circle cx="0" cy="0" r="10" fill="#ea580c" fill-opacity="0.3" stroke="#fb923c" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="16" fill="#ea580c" fillOpacity="0.15" class="animate-ping" />
+          <circle cx="0" cy="0" r="10" fill="#ea580c" fillOpacity="0.3" stroke="#fb923c" strokeWidth="1.5" />
           <circle cx="0" cy="0" r="4.5" fill="#fb923c" />
           <circle cx="0" cy="0" r="1.5" fill="#ffffff" />
 
@@ -157,19 +157,19 @@ export function WorldMapGraphic() {
               height="28"
               rx="14"
               fill="#140a04"
-              fill-opacity="0.92"
+              fillOpacity="0.92"
               stroke="#6c2e09"
-              stroke-width="1"
+              strokeWidth="1"
             />
             {/* Hub Name: Islamabad */}
             <text
               x="48"
               y="4.5"
-              text-anchor="middle"
+              textAnchor="middle"
               fill="#f8fafc"
-              font-size="11.5"
-              font-weight="700"
-              font-family="Inter, system-ui, sans-serif"
+              fontSize="11.5"
+              fontWeight="700"
+              fontFamily="Inter, system-ui, sans-serif"
             >
               Islamabad
             </text>
@@ -185,12 +185,12 @@ export function WorldMapGraphic() {
             <text
               x="118"
               y="4"
-              text-anchor="middle"
+              textAnchor="middle"
               fill="#ffffff"
-              font-size="9"
-              font-weight="700"
-              font-family="Inter, system-ui, sans-serif"
-              letter-spacing="0.3"
+              fontSize="9"
+              fontWeight="700"
+              fontFamily="Inter, system-ui, sans-serif"
+              letterSpacing="0.3"
             >
               Primary HQ
             </text>

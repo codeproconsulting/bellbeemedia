@@ -74,8 +74,8 @@ export function LocationsPage() {
                   <path
                     d="M 0,0 L 44,0 C 62,0 74,12 74,29 C 74,46 62,58 44,58 L 22,58 L 22,100 L 0,100 Z M 22,19 L 41,19 C 48,19 53,23 53,29 C 53,35 48,39 41,39 L 22,39 Z M 88,0 L 88,100 L 110,100 L 110,64 L 138,100 L 166,100 L 128,52 L 163,0 L 135,0 L 110,36 L 110,0 Z"
                     class="stroke-slate-900/20 group-hover:stroke-[#ea580c] fill-transparent group-hover:fill-[#ea580c]/[0.08] transition-colors duration-300"
-                    stroke-width="2.2"
-                    stroke-linejoin="round"
+                    strokeWidth="2.2"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
@@ -121,8 +121,8 @@ export function LocationsPage() {
                   <path
                     d="M 0,0 L 22,0 L 22,68 C 22,78 30,81 43,81 C 56,81 64,78 64,68 L 64,0 L 86,0 L 86,68 C 86,89 72,100 43,100 C 14,100 0,89 0,68 Z M 98,0 L 98,100 L 120,100 L 120,64 L 148,100 L 176,100 L 138,52 L 173,0 L 145,0 L 120,36 L 120,0 Z"
                     class="stroke-slate-900/20 group-hover:stroke-[#0284c7] fill-transparent group-hover:fill-[#0284c7]/[0.08] transition-colors duration-300"
-                    stroke-width="2.2"
-                    stroke-linejoin="round"
+                    strokeWidth="2.2"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
