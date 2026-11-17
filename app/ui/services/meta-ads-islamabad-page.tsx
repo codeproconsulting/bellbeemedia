@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { type ProposalSubmissionResult } from '../../data/wordpress.ts'
@@ -1559,6 +1560,7 @@ export function MetaAdsIslamabadPage(handle: Handle<MetaAdsIslamabadPageProps>) 
                   </div>
                 ) : (
                   <form method="POST" action="/locations/pakistan/islamabad/meta-ads-islamabad" class="space-y-4">
+                    <LeadSubmissionField retryId={result?.submissionId} />
                     
                     {result && !result.success && (
                       <div class="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">

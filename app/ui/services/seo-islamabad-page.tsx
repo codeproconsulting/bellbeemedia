@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { PillBadge } from '../shared.tsx'
@@ -874,6 +875,7 @@ export function SeoIslamabadPage(handle: Handle<SeoIslamabadPageProps>) {
                     )}
 
                     <form method="POST" action="#audit-form" class="space-y-4">
+                      <LeadSubmissionField retryId={result?.submissionId} />
                       
                       {/* Name & Email */}
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -1,19 +1,24 @@
 import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
+import { createHash, randomUUID } from 'node:crypto'
 
-export type LeadStatus = 'New' | 'Contacted' | 'In Discussion' | 'Won' | 'Lost'
+import { appwriteLeadsEnabled, appwriteLeadStore } from './appwrite-leads.ts'
+
+export const leadStatuses = ['New', 'Contacted', 'In Discussion', 'Won', 'Lost'] as const
+export type LeadStatus = typeof leadStatuses[number]
 
 export interface Lead {
   id: string
   createdAt: string
   fullName: string
-  email: string
+  email?: string
   phone?: string
   company?: string
   services?: string
   details?: string
   status: LeadStatus
   notes?: string
+  ownerId?: string | null
 }
 
 export interface LeadFilters {
@@ -23,6 +28,11 @@ export interface LeadFilters {
   dateFrom?: string
   dateTo?: string
   dateRange?: string
+  assigned?: 'me'
+}
+
+export function isLegacyAdsEmail(email: string): boolean {
+  return /^(?:[0-9]+|lead)@(?:meta|google)-ads\.bellbeemedia\.com$/i.test(email.trim())
 }
 
 const DATA_FILE = path.resolve(process.cwd(), 'data', 'leads.json')
@@ -100,6 +110,11 @@ async function ensureDataFile(): Promise<void> {
 }
 
 export async function getAllLeads(): Promise<Lead[]> {
+  const leads = appwriteLeadsEnabled() ? await appwriteLeadStore('staff').list() : await readJsonLeads()
+  return leads.map((lead) => lead.email && isLegacyAdsEmail(lead.email) ? { ...lead, email: undefined } : lead)
+}
+
+async function readJsonLeads(): Promise<Lead[]> {
   await ensureDataFile()
   try {
     const raw = await fs.readFile(DATA_FILE, 'utf-8')
@@ -113,20 +128,17 @@ export async function getAllLeads(): Promise<Lead[]> {
 
 export async function saveLead(data: {
   fullName: string
-  email: string
+  email?: string
   phone?: string
   company?: string
   services?: string
   details?: string
-}): Promise<Lead> {
-  await ensureDataFile()
-  const leads = await getAllLeads()
-
+}, submissionId?: string): Promise<boolean> {
   const newLead: Lead = {
-    id: `lead-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`,
+    id: `lead-${randomUUID().replaceAll('-', '').slice(0, 31)}`,
     createdAt: new Date().toISOString(),
     fullName: data.fullName.trim(),
-    email: data.email.trim(),
+    email: data.email?.trim() || undefined,
     phone: data.phone?.trim() || undefined,
     company: data.company?.trim() || undefined,
     services: data.services?.trim() || 'General Inquiry',
@@ -134,17 +146,30 @@ export async function saveLead(data: {
     status: 'New',
   }
 
+  if (!newLead.fullName || (!newLead.email && !newLead.phone)) throw new Error('A lead needs a name and a contact method.')
+  if (appwriteLeadsEnabled()) {
+    // shortcut: older forms use a five-minute bucket, remove this fallback when clients always send a submission ID.
+    const window = submissionId ?? Math.floor(Date.parse(newLead.createdAt) / 300_000)
+    const fingerprint = JSON.stringify([
+      window, newLead.fullName, newLead.email?.toLowerCase(), newLead.company, newLead.phone,
+      newLead.services, newLead.details?.replace(/\r\n/g, '\n'),
+    ])
+    newLead.id = `web-${createHash('sha256').update(fingerprint).digest('hex').slice(0, 32)}`
+    return appwriteLeadStore('intake').create(newLead)
+  }
+  const leads = await readJsonLeads()
   leads.unshift(newLead)
   await fs.writeFile(DATA_FILE, JSON.stringify(leads, null, 2), 'utf-8')
-  return newLead
+  return true
 }
 
 export async function updateLead(
   id: string,
-  updates: Partial<Pick<Lead, 'status' | 'notes'>>,
+  updates: Partial<Pick<Lead, 'status' | 'notes' | 'ownerId'>>,
 ): Promise<Lead | null> {
+  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').update(id, updates)
   await ensureDataFile()
-  const leads = await getAllLeads()
+  const leads = await readJsonLeads()
   const idx = leads.findIndex((l) => l.id === id)
   if (idx === -1) return null
 
@@ -159,8 +184,9 @@ export async function updateLead(
 
 export async function updateBulkStatus(ids: string[], status: LeadStatus): Promise<number> {
   if (!ids.length) return 0
+  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').bulk(ids, { status })
   await ensureDataFile()
-  const leads = await getAllLeads()
+  const leads = await readJsonLeads()
   let count = 0
 
   for (const lead of leads) {
@@ -176,16 +202,22 @@ export async function updateBulkStatus(ids: string[], status: LeadStatus): Promi
 
 export async function deleteLeads(ids: string[]): Promise<number> {
   if (!ids.length) return 0
+  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').bulk(ids)
   await ensureDataFile()
-  const leads = await getAllLeads()
+  const leads = await readJsonLeads()
   const filtered = leads.filter((l) => !ids.includes(l.id))
   const deletedCount = leads.length - filtered.length
   await fs.writeFile(DATA_FILE, JSON.stringify(filtered, null, 2), 'utf-8')
   return deletedCount
 }
 
-export function filterLeads(leads: Lead[], filters: LeadFilters): Lead[] {
+export function filterLeads(leads: Lead[], filters: LeadFilters, staffId?: string): Lead[] {
   let result = [...leads]
+
+  if (filters.assigned === 'me') {
+    if (!staffId) return []
+    result = result.filter((lead) => lead.ownerId === staffId)
+  }
 
   // Status Filter
   if (filters.status && filters.status !== 'All') {
@@ -239,7 +271,7 @@ export function filterLeads(leads: Lead[], filters: LeadFilters): Lead[] {
     result = result.filter(
       (l) =>
         l.fullName.toLowerCase().includes(q) ||
-        l.email.toLowerCase().includes(q) ||
+        l.email?.toLowerCase().includes(q) ||
         (l.phone && l.phone.toLowerCase().includes(q)) ||
         (l.company && l.company.toLowerCase().includes(q)) ||
         (l.services && l.services.toLowerCase().includes(q)) ||
@@ -257,7 +289,7 @@ export function filterLeads(leads: Lead[], filters: LeadFilters): Lead[] {
 export function generateLeadsCsv(leads: Lead[]): string {
   const headers = [
     'Lead ID',
-    'Date & Time (UTC)',
+    'Date & Time (PKT)',
     'Full Name',
     'Email Address',
     'Phone / WhatsApp',
@@ -270,8 +302,9 @@ export function generateLeadsCsv(leads: Lead[]): string {
 
   const escapeCsv = (val: string | undefined): string => {
     if (val === undefined || val === null) return '""'
-    const str = String(val).replace(/"/g, '""').replace(/\r\n/g, '\n').replace(/\r/g, '\n')
-    return `"${str}"`
+    const prefix = /^(?:\s*[=+@-]|[\t\r\n])/.test(val) ? "'" : ''
+    const str = val.replace(/"/g, '""').replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+    return `"${prefix}${str}"`
   }
 
   const rows = leads.map((l) => [

@@ -14,13 +14,14 @@ const SERVICE_OPTIONS = [
 export interface ProposalBookingWidgetProps extends SerializableProps {
   result?: ProposalSubmissionResult
   submitted: boolean
+  submissionId: string
   bookingUrl?: string
 }
 
 export const ProposalBookingWidget = clientEntry(
   import.meta.url,
   function ProposalBookingWidget(handle: Handle<ProposalBookingWidgetProps>) {
-    const { result, submitted, bookingUrl } = handle.props
+    const { result, submitted, bookingUrl, submissionId } = handle.props
     const finalBookingUrl = bookingUrl || "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0123456789?gv=true"
     
     // Check if the URL is embeddable in an iframe (e.g., Google Calendar appointment schedule or Calendly)
@@ -184,6 +185,7 @@ export const ProposalBookingWidget = clientEntry(
               </h2>
 
               <form method="post" action="/get-proposal" class="flex flex-col gap-4 relative z-10">
+                <input type="hidden" name="submissionId" value={submissionId} />
                 
                 {/* STEP 1 CONTAINER */}
                 <div 

@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { type ProposalSubmissionResult } from '../../data/wordpress.ts'
@@ -950,6 +951,7 @@ export function AiAutomationBirminghamPage(handle: Handle<AiAutomationBirmingham
 
             {/* Form */}
             <form method="POST" action="#request-automation-teardown" class="space-y-5">
+              <LeadSubmissionField retryId={result?.submissionId} />
               
               {/* Hidden context fields */}
               <input type="hidden" name="pageId" value="bellbee-uk-birmingham-ai-automation" />

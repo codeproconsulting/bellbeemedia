@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { type ProposalSubmissionResult } from '../../data/wordpress.ts'
@@ -988,6 +989,7 @@ export function SeoBirminghamPage(handle: Handle<SeoBirminghamPageProps>) {
 
             {/* Form */}
             <form method="POST" action="#request-seo-teardown" class="space-y-5">
+              <LeadSubmissionField retryId={result?.submissionId} />
               
               {/* Hidden context fields */}
               <input type="hidden" name="sourcePage" value="bellbee-uk-birmingham-seo" />

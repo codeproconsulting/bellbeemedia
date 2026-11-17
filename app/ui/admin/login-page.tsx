@@ -1,16 +1,17 @@
 import { type Handle } from 'remix/ui'
-import { Layout } from '../layout.tsx'
+import { Document } from '../document.tsx'
 
 interface LoginPageProps {
   error?: string
-  redirectUrl?: string
+  staffLogin: boolean
 }
 
 export function LoginPage(handle: Handle<LoginPageProps>) {
-  const { error, redirectUrl = '/admin' } = handle.props
+  const { error, staffLogin } = handle.props
 
   return () => (
-    <Layout
+    <Document
+      privatePage
       title="Admin Login | BellBee Media"
       description="Administrative access portal for BellBee Media."
     >
@@ -28,7 +29,7 @@ export function LoginPage(handle: Handle<LoginPageProps>) {
                 <i class="ph-fill ph-shield-check text-secondary text-3xl"></i>
               </div>
               <h1 class="text-2xl font-black text-foreground tracking-tight">Admin Portal</h1>
-              <p class="text-xs text-muted mt-1">Enter your master password to access leads & analytics</p>
+              {staffLogin && <p class="text-xs text-muted mt-1">Sign in with your BellBee CRM account</p>}
             </div>
 
             {/* Error Message */}
@@ -41,11 +42,17 @@ export function LoginPage(handle: Handle<LoginPageProps>) {
 
             {/* Form */}
             <form method="POST" action="/admin/login" class="space-y-5">
-              <input type="hidden" name="redirectUrl" value={redirectUrl} />
+              {staffLogin && (
+                <div>
+                  <label for="email" class="block text-xs font-bold text-foreground mb-1.5">Work email</label>
+                  <input type="email" id="email" name="email" autocomplete="username" required autofocus
+                    class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm" />
+                </div>
+              )}
 
               <div>
                 <label for="password" class="block text-xs font-bold text-foreground mb-1.5 uppercase tracking-wider">
-                  Admin Master Password
+                  {staffLogin ? 'Password' : 'Admin Master Password'}
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted">
@@ -56,7 +63,8 @@ export function LoginPage(handle: Handle<LoginPageProps>) {
                     id="password"
                     name="password"
                     required
-                    autofocus
+                    autofocus={!staffLogin}
+                    autocomplete="current-password"
                     placeholder="••••••••••••"
                     class="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   />
@@ -85,6 +93,6 @@ export function LoginPage(handle: Handle<LoginPageProps>) {
           </div>
         </div>
       </section>
-    </Layout>
+    </Document>
   )
 }

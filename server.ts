@@ -4,6 +4,8 @@ import * as path from 'node:path'
 import { createRequestListener } from 'remix/node-fetch-server'
 
 import { router } from './app/router.ts'
+import { appwriteLeadsEnabled, appwriteLeadStore } from './app/data/appwrite-leads.ts'
+import { appwriteStaffConfig } from './app/data/appwrite-staff.ts'
 
 // Load environment variables from .env file if it exists
 try {
@@ -29,6 +31,12 @@ try {
   }
 } catch (error) {
   console.warn('Warning: Could not read .env file:', error)
+}
+
+if (appwriteLeadsEnabled()) {
+  appwriteStaffConfig()
+  appwriteLeadStore('intake')
+  appwriteLeadStore('staff')
 }
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 44100

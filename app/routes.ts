@@ -1,4 +1,4 @@
-import { form, get, route } from 'remix/routes'
+import { form, get, post, route } from 'remix/routes'
 
 export const routes = route({
   assets: get('/assets/*path'),
@@ -22,7 +22,7 @@ export const routes = route({
   aboutUsOurMission: get('/about-us/our-mission'),
   aboutUsWhyChooseUs: get('/about-us/why-choose-us'),
   aboutUsCareers: get('/about-us/careers'),
-  getProposal: get('/get-proposal'),
+  getProposal: '/get-proposal',
   contact: '/contact',
   privacy: get('/privacy'),
   terms: get('/terms'),
@@ -30,13 +30,13 @@ export const routes = route({
   locationsPakistan: '/locations/pakistan',
   locationsUk: '/locations/uk',
   locationIslamabad: '/locations/islamabad',
-  locationLahore: get('/locations/lahore'),
-  locationKarachi: get('/locations/karachi'),
-  locationRawalpindi: get('/locations/rawalpindi'),
+  locationLahore: '/locations/lahore',
+  locationKarachi: '/locations/karachi',
+  locationRawalpindi: '/locations/rawalpindi',
   locationPakistanIslamabad: '/locations/pakistan/islamabad',
-  locationPakistanLahore: get('/locations/pakistan/lahore'),
-  locationPakistanKarachi: get('/locations/pakistan/karachi'),
-  locationPakistanRawalpindi: get('/locations/pakistan/rawalpindi'),
+  locationPakistanLahore: '/locations/pakistan/lahore',
+  locationPakistanKarachi: '/locations/pakistan/karachi',
+  locationPakistanRawalpindi: '/locations/pakistan/rawalpindi',
   locationUkBirmingham: '/locations/uk/birmingham',
   locationBirmingham: '/locations/birmingham',
   locationUkBirminghamMetaAds: '/locations/uk/birmingham/meta-ads',
@@ -64,7 +64,7 @@ export const routes = route({
   locationIslamabadGoogleAds: '/locations/islamabad/google-ads-islamabad',
   admin: '/admin',
   adminLogin: '/admin/login',
-  adminLogout: get('/admin/logout'),
+  adminLogout: post('/admin/logout'),
   adminLeads: '/admin/leads',
   adminLeadsExport: get('/admin/leads/export'),
 })

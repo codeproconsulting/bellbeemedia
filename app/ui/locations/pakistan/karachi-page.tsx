@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../../layout.tsx'
 import { PillBadge } from '../../shared.tsx'
@@ -127,6 +128,7 @@ export function KarachiPage(handle: Handle<KarachiPageProps>) {
                   </div>
                 ) : (
                   <form method="POST" action="/locations/karachi" class="flex flex-col gap-4">
+                    <LeadSubmissionField retryId={result?.submissionId} />
                     <div>
                       <label class="block text-xs font-bold uppercase tracking-wider text-surface-dark1 mb-1">Full Name *</label>
                       <input type="text" name="fullName" required placeholder="e.g. Tariq Hashmi" class="w-full px-4 py-3 rounded-xl border border-surface-3 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm transition-all" />

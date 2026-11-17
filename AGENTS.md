@@ -15,6 +15,8 @@ npm run typecheck
 
 Refer to ./.agents/skills/remix/SKILL.md
 
+For CRM and lead intake work, start with [the BellBee context vault](context-vault/00%20-%20Index.md).
+
 ## Starter Layout
 
 - `app/actions/controller.tsx` owns the top-level route actions

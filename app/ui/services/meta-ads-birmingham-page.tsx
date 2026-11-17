@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { type ProposalSubmissionResult } from '../../data/wordpress.ts'
@@ -1052,6 +1053,7 @@ export function MetaAdsBirminghamPage(handle: Handle<MetaAdsBirminghamPageProps>
 
             {/* Form */}
             <form method="POST" action="#request-meta-ads-teardown" class="space-y-5">
+              <LeadSubmissionField retryId={result?.submissionId} />
               
               {/* Hidden context fields */}
               <input type="hidden" name="sourcePage" value="bellbee-uk-birmingham-meta-ads" />

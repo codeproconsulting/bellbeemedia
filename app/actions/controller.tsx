@@ -63,7 +63,7 @@ import { BlogPostPage } from '../ui/blog-post-page.tsx'
 
 // Admin pages & data modules
 import { LoginPage } from '../ui/admin/login-page.tsx'
-import { DashboardPage } from '../ui/admin/dashboard-page.tsx'
+import { DashboardPage, inboxPageSize } from '../ui/admin/dashboard-page.tsx'
 import {
   getAllLeads,
   filterLeads,
@@ -71,7 +71,7 @@ import {
   updateBulkStatus,
   deleteLeads,
   generateLeadsCsv,
-  type LeadStatus,
+  leadStatuses,
 } from '../data/leads.ts'
 import {
   verifyPassword,
@@ -80,6 +80,31 @@ import {
   getSessionCookieHeader,
   getLogoutCookieHeader,
 } from '../data/auth.ts'
+import { appwriteLeadStore, appwriteLeadsEnabled } from '../data/appwrite-leads.ts'
+import { appwriteStaffConfig, getCrmStaff, signInCrmStaff, signOutCrmStaff } from '../data/appwrite-staff.ts'
+
+const privateAdminHeaders = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' }
+
+async function crmAccess(request: Request) {
+  if (appwriteLeadsEnabled()) return getCrmStaff(request)
+  return isAuthenticated(request) ? { role: 'admin' as const, id: undefined, staff: undefined } : null
+}
+
+function allowsCrmPost(request: Request) {
+  return !appwriteLeadsEnabled() || request.headers.get('origin') === appwriteStaffConfig().origin
+}
+
+function crmLeadFilters(params: URLSearchParams) {
+  return {
+    search: params.get('search') || '',
+    status: params.get('status') || 'All',
+    source: params.get('source') || 'All',
+    dateRange: params.get('dateRange') || 'All',
+    dateFrom: params.get('dateFrom') || '',
+    dateTo: params.get('dateTo') || '',
+    assigned: params.get('assigned') === 'me' ? 'me' as const : undefined,
+  }
+}
 
 export default createController(routes, {
   actions: {
@@ -249,7 +274,7 @@ export default createController(routes, {
       const services = formData.getAll('services').join(', ')
       const details = formData.get('details')?.toString()
 
-      const result = await submitProposal({ fullName, email, company, phone, services, details })
+      const result = await submitProposal({ fullName, email, company, phone, services, details }, formData.get('submissionId'))
 
       return context.render(<GetProposalPage bookingUrl={bookingUrl} result={result} />, {
         status: result.success ? 200 : 500,
@@ -276,7 +301,7 @@ export default createController(routes, {
           )
         }
 
-        const result = await submitProposal({ fullName, email, phone, details, services: 'Pakistan Regional Operations' })
+        const result = await submitProposal({ fullName, email, phone, details, services: 'Pakistan Regional Operations' }, formData.get('submissionId'))
         return context.render(<PakistanHubPage bookingUrl={bookingUrl} result={result} />, {
           status: result.success ? 200 : 500,
         })
@@ -315,7 +340,7 @@ export default createController(routes, {
         email,
         services: service,
         details: `Contact Form Message:\n${message}`,
-      })
+      }, formData.get('submissionId'))
 
       return context.render(<ContactPage result={result} />, {
         status: result.success ? 200 : 500,
@@ -383,68 +408,104 @@ export default createController(routes, {
       return handleAiAutomationBirminghamRequest(context)
     },
 
-    admin(context) {
-      if (isAuthenticated(context.request)) {
+    async admin(context) {
+      if (await crmAccess(context.request)) {
         return redirect('/admin/leads')
       }
       return redirect('/admin/login')
     },
 
     async adminLogin(context) {
+      const staffLogin = appwriteLeadsEnabled()
       if (context.request.method !== 'POST') {
-        if (isAuthenticated(context.request)) {
+        if (await crmAccess(context.request)) {
           return redirect('/admin/leads')
         }
-        return context.render(<LoginPage />)
+        return context.render(<LoginPage staffLogin={staffLogin} />, { headers: privateAdminHeaders })
       }
 
+      if (!allowsCrmPost(context.request)) return new Response('Forbidden', { status: 403 })
       const formData = await context.request.formData()
       const password = formData.get('password')?.toString() ?? ''
-      const redirectUrl = formData.get('redirectUrl')?.toString() || '/admin/leads'
-
-      if (verifyPassword(password)) {
-        const token = generateSessionToken()
-        return redirect(redirectUrl, {
-          headers: {
-            'Set-Cookie': getSessionCookieHeader(token),
-          },
+      let cookie: string | null
+      try {
+        cookie = staffLogin
+          ? await signInCrmStaff(formData.get('email')?.toString().trim() ?? '', password)
+          : verifyPassword(password) ? getSessionCookieHeader(generateSessionToken()) : null
+      } catch {
+        return context.render(<LoginPage staffLogin={staffLogin} error="Sign-in is temporarily unavailable." />,
+          { status: 503, headers: privateAdminHeaders })
+      }
+      if (cookie) {
+        return redirect('/admin/leads', {
+          status: 303, headers: { ...privateAdminHeaders, 'Set-Cookie': cookie },
         })
       }
 
       return context.render(
-        <LoginPage error="Incorrect master password. Please verify and try again." redirectUrl={redirectUrl} />,
-        { status: 401 },
+        <LoginPage staffLogin={staffLogin} error="Sign-in failed. Check your credentials and CRM access." />,
+        { status: 401, headers: privateAdminHeaders },
       )
     },
 
-    adminLogout() {
+    async adminLogout(context) {
+      if (!allowsCrmPost(context.request)) return new Response('Forbidden', { status: 403 })
+      let cookie: string
+      try {
+        cookie = appwriteLeadsEnabled() ? await signOutCrmStaff(context.request) : getLogoutCookieHeader()
+      } catch {
+        return new Response('Sign-out is temporarily unavailable. Please try again.', {
+          status: 503, headers: privateAdminHeaders,
+        })
+      }
       return redirect('/admin/login', {
-        headers: {
-          'Set-Cookie': getLogoutCookieHeader(),
-        },
+        status: 303, headers: { ...privateAdminHeaders, 'Set-Cookie': cookie },
       })
     },
 
     async adminLeads(context) {
-      if (!isAuthenticated(context.request)) {
+      const access = await crmAccess(context.request)
+      if (!access) {
         return redirect('/admin/login')
       }
 
       if (context.request.method === 'POST') {
+        if (!allowsCrmPost(context.request) || access.role === 'viewer') {
+          return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
+        }
         const formData = await context.request.formData()
         const actionType = formData.get('actionType')?.toString()
         const leadIds = formData.get('leadIds')?.toString() || ''
         const ids = leadIds.split(',').map((id) => id.trim()).filter(Boolean)
 
-        if (actionType === 'updateStatus') {
-          const status = formData.get('status')?.toString() as LeadStatus
+        const status = leadStatuses.find((value) => value === formData.get('status'))
+        const notes = formData.get('notes')
+        if (access.role === 'member') {
+          const updates = actionType === 'updateStatus' && status ? { status } :
+            actionType === 'updateNotes' && typeof notes === 'string' ? { notes } : null
+          if (ids.length !== 1 || !updates ||
+              !await appwriteLeadStore('staff').updateOwned(ids[0], access.id, updates)) {
+            return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
+          }
+        } else if (actionType === 'updateStatus') {
           if (status && ids.length) {
             await updateBulkStatus(ids, status)
           }
         } else if (actionType === 'updateNotes') {
-          const notes = formData.get('notes')?.toString() ?? ''
-          if (ids.length) {
+          if (ids.length && typeof notes === 'string') {
             await updateLead(ids[0], { notes })
+          }
+        } else if (actionType === 'assignOwner') {
+          if (!access.staff) return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
+          const ownerId = formData.get('ownerId')
+          if (ids.length !== 1 || typeof ownerId !== 'string') {
+            return new Response('Choose a lead and an owner.', { status: 400, headers: privateAdminHeaders })
+          }
+          if (ownerId && !access.staff.some((member) => member.id === ownerId && member.role !== 'viewer')) {
+            return new Response('Choose a current BellBee CRM team member.', { status: 400, headers: privateAdminHeaders })
+          }
+          if (!await updateLead(ids[0], { ownerId: ownerId || null })) {
+            return new Response('Lead not found.', { status: 404, headers: privateAdminHeaders })
           }
         } else if (actionType === 'delete') {
           if (ids.length) {
@@ -452,55 +513,54 @@ export default createController(routes, {
           }
         }
 
-        const referer = context.request.headers.get('referer')
-        return redirect(referer || '/admin/leads')
+        const referer = URL.parse(context.request.headers.get('referer') ?? '')
+        const origin = appwriteLeadsEnabled() ? appwriteStaffConfig().origin : new URL(context.request.url).origin
+        const filters = referer?.origin === origin && referer.pathname === '/admin/leads' ? referer.search : ''
+        return redirect(`/admin/leads${filters}`, { status: 303 })
       }
 
       const url = new URL(context.request.url)
-      const filters = {
-        search: url.searchParams.get('search') || '',
-        status: url.searchParams.get('status') || 'All',
-        source: url.searchParams.get('source') || 'All',
-        dateRange: url.searchParams.get('dateRange') || 'All',
-        dateFrom: url.searchParams.get('dateFrom') || '',
-        dateTo: url.searchParams.get('dateTo') || '',
-      }
-
+      const requestedView = url.searchParams.get('view')
+      const view = requestedView === 'overview' || requestedView === 'pipeline' ? requestedView : 'inbox'
+      const filters = crmLeadFilters(view === 'overview' ? new URLSearchParams() : url.searchParams)
       const allLeads = await getAllLeads()
-      const filteredLeads = filterLeads(allLeads, filters)
+      const filteredLeads = view === 'overview' ? allLeads : filterLeads(allLeads, filters, access.id)
+      const requestedPage = Number(url.searchParams.get('page'))
+      const lastPage = Math.max(1, Math.ceil(filteredLeads.length / inboxPageSize))
+      const inboxPage = Number.isSafeInteger(requestedPage) ? Math.min(Math.max(1, requestedPage), lastPage) : 1
+      const offset = (inboxPage - 1) * inboxPageSize
 
       return context.render(
         <DashboardPage
-          leads={filteredLeads}
-          allLeadsCount={allLeads.length}
+          leads={view === 'inbox' ? filteredLeads.slice(offset, offset + inboxPageSize) : filteredLeads}
+          matchingLeadCount={filteredLeads.length}
+          inboxPage={inboxPage}
           filters={filters}
+          view={view}
+          staff={access.staff}
+          staffId={access.id}
+          role={access.role}
         />,
+        { headers: privateAdminHeaders },
       )
     },
 
     async adminLeadsExport(context) {
-      if (!isAuthenticated(context.request)) {
+      const access = await crmAccess(context.request)
+      if (!access) {
         return redirect('/admin/login')
       }
+      if (access.role !== 'admin') return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
 
       const url = new URL(context.request.url)
       const idsParam = url.searchParams.get('ids')
+      const filters = crmLeadFilters(url.searchParams)
       const allLeads = await getAllLeads()
-      let leadsToExport = allLeads
+      let leadsToExport = filterLeads(allLeads, filters, access.id)
 
       if (idsParam) {
-        const ids = idsParam.split(',').map((id) => id.trim()).filter(Boolean)
-        leadsToExport = allLeads.filter((l) => ids.includes(l.id))
-      } else {
-        const filters = {
-          search: url.searchParams.get('search') || '',
-          status: url.searchParams.get('status') || 'All',
-          source: url.searchParams.get('source') || 'All',
-          dateRange: url.searchParams.get('dateRange') || 'All',
-          dateFrom: url.searchParams.get('dateFrom') || '',
-          dateTo: url.searchParams.get('dateTo') || '',
-        }
-        leadsToExport = filterLeads(allLeads, filters)
+        const ids = new Set(idsParam.split(',').map((id) => id.trim()).filter(Boolean))
+        leadsToExport = leadsToExport.filter((lead) => ids.has(lead.id))
       }
 
       const csvContent = generateLeadsCsv(leadsToExport)
@@ -511,6 +571,8 @@ export default createController(routes, {
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
           'Content-Disposition': `attachment; filename="${filename}"`,
+          'Cache-Control': 'private, no-store',
+          'X-Robots-Tag': 'noindex, nofollow',
         },
       })
     },
@@ -538,7 +600,7 @@ async function handleLocationRequest(context: any, Component: any, cityName: str
   const phone = formData.get('phone')?.toString()
   const details = `Contact from ${cityName} Landing Page. Details: ${formData.get('details')?.toString() || 'None'}`
 
-  const result = await submitProposal({ fullName, email, phone, details })
+  const result = await submitProposal({ fullName, email, phone, details }, formData.get('submissionId'))
 
   return context.render(<Component bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
@@ -584,7 +646,7 @@ Notes / Keywords: ${notes}`
     phone,
     services: 'SEO Services in Islamabad',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<SeoIslamabadPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
@@ -605,7 +667,7 @@ async function handleMetaAdsIslamabadRequest(context: any) {
   const budget = formData.get('budget')?.toString() || '50k–200k'
   const goal = formData.get('goal')?.toString() || 'more WhatsApp chats'
 
-  if (!fullName || !phone || !pageOrWebsite) {
+  if (!fullName.trim() || !/\d/.test(phone) || !pageOrWebsite.trim()) {
     return context.render(
       <MetaAdsIslamabadPage
         bookingUrl={bookingUrl}
@@ -621,9 +683,7 @@ Page / Website Link: ${pageOrWebsite}
 Monthly Ad Budget: ${budget}
 Main Goal: ${goal}`
 
-  const email = pageOrWebsite.includes('@')
-    ? pageOrWebsite
-    : `${phone.replace(/\D/g, '') || 'lead'}@meta-ads.bellbeemedia.com`
+  const email = emailFromWebsiteField(pageOrWebsite)
 
   const result = await submitProposal({
     fullName,
@@ -631,7 +691,7 @@ Main Goal: ${goal}`
     phone,
     services: 'Meta Ads Services Islamabad',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<MetaAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
@@ -653,7 +713,7 @@ async function handleGoogleAdsIslamabadRequest(context: any) {
   const converts = formData.getAll('converts').join(', ') || 'WhatsApp'
   const message = formData.get('message')?.toString() ?? ''
 
-  if (!businessName || !phone) {
+  if (!businessName.trim() || !/\d/.test(phone)) {
     return context.render(
       <GoogleAdsIslamabadPage
         bookingUrl={bookingUrl}
@@ -671,9 +731,7 @@ Monthly Ad Spend: ${budget}
 What Converts: ${converts}
 Message: ${message || 'None'}`
 
-  const email = website.includes('@')
-    ? website
-    : `${phone.replace(/\D/g, '') || 'lead'}@google-ads.bellbeemedia.com`
+  const email = emailFromWebsiteField(website)
 
   const result = await submitProposal({
     fullName: businessName,
@@ -681,11 +739,16 @@ Message: ${message || 'None'}`
     phone,
     services: 'Google Ads Services Islamabad',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<GoogleAdsIslamabadPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
   })
+}
+
+function emailFromWebsiteField(value: string) {
+  const email = value.trim()
+  return /^[^\s@/:]+@[^\s@/:]+\.[^\s@/:]+$/.test(email) ? email : undefined
 }
 
 async function handleMetaAdsBirminghamRequest(context: any) {
@@ -732,7 +795,7 @@ Optional WhatsApp: ${phone || 'None provided'}`
     company: website,
     services: 'Meta Ads Services in Birmingham UK',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<MetaAdsBirminghamPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
@@ -787,7 +850,7 @@ Optional Phone/WhatsApp: ${phone || 'None provided'}`
     company: company || website,
     services: 'SEO Services in Birmingham UK',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<SeoBirminghamPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,
@@ -834,7 +897,7 @@ Optional Phone/WhatsApp: ${phone || 'None provided'}`
     company: businessName,
     services: 'AI Automation Services in Birmingham UK',
     details,
-  })
+  }, formData.get('submissionId'))
 
   return context.render(<AiAutomationBirminghamPage bookingUrl={bookingUrl} result={result} />, {
     status: result.success ? 200 : 500,

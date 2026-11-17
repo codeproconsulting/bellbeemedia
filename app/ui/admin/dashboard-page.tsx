@@ -1,22 +1,45 @@
 import { type Handle } from 'remix/ui'
-import { Layout } from '../layout.tsx'
+import type { CrmRole } from '../../data/appwrite-staff.ts'
+import { Document } from '../document.tsx'
+import { LeadsOverview } from './leads-overview.tsx'
 import { type Lead, type LeadFilters, type LeadStatus } from '../../data/leads.ts'
+
+export const inboxPageSize = 25
 
 interface DashboardPageProps {
   leads: Lead[]
-  allLeadsCount: number
+  matchingLeadCount: number
+  inboxPage: number
   filters: LeadFilters
+  view: 'overview' | 'inbox' | 'pipeline'
+  staff?: { id: string; name: string; role: CrmRole }[]
+  staffId?: string
+  role: CrmRole
   flashMessage?: string
 }
 
 export function DashboardPage(handle: Handle<DashboardPageProps>) {
-  const { leads, allLeadsCount, filters, flashMessage } = handle.props
+  const { leads, matchingLeadCount, inboxPage, filters, view, staff, staffId, role, flashMessage } = handle.props
+  const isAdmin = role === 'admin'
+  const filterQuery = new URLSearchParams()
+  for (const [name, value] of Object.entries(filters)) {
+    if (value) filterQuery.set(name, value)
+  }
+  const inboxHref = `/admin/leads?${filterQuery}`
+  const pipelineHref = `${inboxHref}&view=pipeline`
 
-  const totalLeads = allLeadsCount
-  const newLeads = leads.filter((l) => l.status === 'New').length
-  const inProgressLeads = leads.filter((l) => l.status === 'Contacted' || l.status === 'In Discussion').length
-  const wonLeads = leads.filter((l) => l.status === 'Won').length
-  const conversionRate = totalLeads > 0 ? Math.round((wonLeads / totalLeads) * 100) : 0
+  const needsReplyQuery = new URLSearchParams(filterQuery)
+  needsReplyQuery.set('status', 'New')
+  const assignmentQuery = new URLSearchParams(filterQuery)
+  if (filters.assigned === 'me') assignmentQuery.delete('assigned')
+  else assignmentQuery.set('assigned', 'me')
+  const staffNames = new Map(staff?.map((member) => [member.id, member.name]))
+  const inboxPageCount = Math.ceil(matchingLeadCount / inboxPageSize)
+  const inboxOffset = (inboxPage - 1) * inboxPageSize
+  const inboxPageHref = (page: number) => page > 1 ? `${inboxHref}&page=${page}` : inboxHref
+  const pipelinePages = view === 'pipeline'
+    ? new Map(leads.map((lead, index) => [lead.id, Math.floor(index / inboxPageSize) + 1]))
+    : undefined
 
   const statusColors: Record<LeadStatus, { bg: string; text: string; border: string }> = {
     New: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/20' },
@@ -26,11 +49,9 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
     Lost: { bg: 'bg-gray-500/10', text: 'text-gray-600', border: 'border-gray-500/20' },
   }
 
-  // Pre-serialize leads for client-side search, selection, and instant CSV export
-  const serializedLeads = JSON.stringify(leads)
-
   return () => (
-    <Layout
+    <Document
+      privatePage
       title="Leads Management Dashboard | BellBee Media"
       description="Admin lead management dashboard for BellBee Media."
     >
@@ -45,31 +66,44 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                   <i class="ph-fill ph-users-three"></i>
                 </span>
                 <div>
-                  <h1 class="text-2xl md:text-3xl font-black text-foreground tracking-tight">Leads & Inquiries</h1>
-                  <p class="text-xs text-muted mt-0.5">Real-time submissions captured across all BellBee Media forms</p>
+                  <h1 class="text-2xl md:text-3xl font-black text-foreground tracking-tight">BellBee Media CRM</h1>
                 </div>
               </div>
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-              <a
-                href={`/admin/leads/export?status=${encodeURIComponent(filters.status || 'All')}&search=${encodeURIComponent(filters.search || '')}&source=${encodeURIComponent(filters.source || 'All')}&dateRange=${encodeURIComponent(filters.dateRange || 'All')}`}
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-sm transition-all"
-                title="Export all currently filtered leads directly into an Excel CSV spreadsheet"
-              >
-                <i class="ph-bold ph-microsoft-excel-logo text-base"></i>
-                <span>Export Filtered to Excel</span>
-              </a>
+              {isAdmin && (
+                <a
+                  href={`/admin/leads/export?${filterQuery}`}
+                  class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-sm transition-all"
+                >
+                  <i class="ph-bold ph-microsoft-excel-logo text-base"></i>
+                  <span>{view === 'overview' ? 'Export all leads' : 'Export filtered leads'}</span>
+                </a>
+              )}
 
-              <a
-                href="/admin/logout"
-                class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-xl text-xs transition-all"
-              >
-                <i class="ph-bold ph-sign-out"></i>
-                <span>Logout</span>
-              </a>
+              <form method="POST" action="/admin/logout">
+                <button type="submit"
+                  class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-xl text-xs transition-all">
+                  <i class="ph-bold ph-sign-out"></i>
+                  <span>Logout</span>
+                </button>
+              </form>
             </div>
           </div>
+
+          <nav aria-label="CRM views" class="flex flex-wrap gap-2 mb-6 text-sm font-semibold">
+            {([
+              ['overview', 'Overview', '/admin/leads?view=overview'],
+              ['inbox', 'Inbox', inboxHref],
+              ['pipeline', 'Pipeline', pipelineHref],
+            ] as const).map(([key, label, href]) => (
+              <a key={key} href={href} aria-current={view === key ? 'page' : undefined}
+                class={`rounded-lg px-3 py-2 ${view === key ? 'bg-surface-dark0 text-white' : 'text-foreground hover:bg-surface-light'}`}>
+                {label}
+              </a>
+            ))}
+          </nav>
 
           {/* Flash Message */}
           {flashMessage && (
@@ -79,62 +113,30 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             </div>
           )}
 
-          {/* ── Metric Summary Cards ── */}
-          <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-            <div class="bg-white rounded-2xl p-5 border border-border shadow-sm">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-muted block mb-1">Total Leads</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-3xl font-black text-foreground">{totalLeads}</span>
-                <span class="w-8 h-8 rounded-lg bg-surface-light flex items-center justify-center text-primary text-base">
-                  <i class="ph-bold ph-inbox"></i>
-                </span>
-              </div>
-            </div>
+          {view === 'overview' && <LeadsOverview leads={leads} />}
 
-            <div class="bg-white rounded-2xl p-5 border border-border shadow-sm">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 block mb-1">New Inquiries</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-3xl font-black text-blue-600">{newLeads}</span>
-                <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-base">
-                  <i class="ph-bold ph-sparkle"></i>
-                </span>
-              </div>
+          {view === 'inbox' && (
+            <div class="mb-4 flex flex-wrap gap-2">
+              <a href={`/admin/leads?${needsReplyQuery}`}
+                class="inline-flex rounded-lg border border-border bg-white px-3 py-2 text-sm font-semibold text-foreground hover:border-primary"
+                aria-current={filters.status === 'New' ? 'true' : undefined}>
+                Needs a reply
+              </a>
+              {staff && (
+                <a href={`/admin/leads?${assignmentQuery}`}
+                  class="inline-flex rounded-lg border border-border bg-white px-3 py-2 text-sm font-semibold text-foreground hover:border-primary">
+                  {filters.assigned === 'me' ? 'Show all owners' : 'Assigned to me'}
+                </a>
+              )}
             </div>
+          )}
 
-            <div class="bg-white rounded-2xl p-5 border border-border shadow-sm">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-purple-600 block mb-1">In Progress</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-3xl font-black text-purple-600">{inProgressLeads}</span>
-                <span class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600 text-base">
-                  <i class="ph-bold ph-chats-circle"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-2xl p-5 border border-border shadow-sm">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 block mb-1">Deals Won</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-3xl font-black text-emerald-600">{wonLeads}</span>
-                <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 text-base">
-                  <i class="ph-bold ph-handshake"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-2xl p-5 border border-border shadow-sm col-span-2 lg:col-span-1">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-secondary block mb-1">Win Rate</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-3xl font-black text-secondary">{conversionRate}%</span>
-                <span class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary text-base">
-                  <i class="ph-bold ph-chart-pie-slice"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-
+          {view !== 'overview' && <>
           {/* ── Filters Bar ── */}
           <div class="bg-white rounded-2xl p-6 border border-border shadow-sm mb-6">
             <form method="GET" action="/admin/leads" class="space-y-4">
+              {view === 'pipeline' && <input type="hidden" name="view" value="pipeline" />}
+              {filters.assigned && <input type="hidden" name="assigned" value={filters.assigned} />}
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* Search */}
@@ -238,7 +240,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
                 <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
                   <a
-                    href="/admin/leads"
+                    href={view === 'pipeline' ? '/admin/leads?view=pipeline' : '/admin/leads'}
                     class="px-4 py-2 bg-surface-light hover:bg-gray-200 text-muted hover:text-foreground font-semibold rounded-xl text-xs transition-colors"
                   >
                     Reset
@@ -254,60 +256,91 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             </form>
           </div>
 
-          {/* ── Dynamic Bulk Action Bar ── */}
-          <div id="bulk-action-bar" class="hidden bg-surface-dark0 text-white rounded-2xl p-4 shadow-xl mb-4 flex flex-wrap items-center justify-between gap-4 transition-all">
-            <div class="flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-sm font-bold text-secondary">
-                <i class="ph-bold ph-check-square"></i>
-              </span>
-              <span id="selected-count-label" class="text-xs font-bold text-white">
-                0 leads selected
-              </span>
+          </>}
+
+          {view === 'pipeline' && (
+            <div aria-label="Lead pipeline" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {(Object.keys(statusColors) as LeadStatus[]).map((status) => {
+                const stageLeads = leads.filter((lead) => (Object.hasOwn(statusColors, lead.status) ? lead.status : 'New') === status)
+                return (
+                  <section key={status} class="min-w-0 rounded-xl border border-border bg-white p-4">
+                    <h2 class={`rounded-lg p-2 text-sm font-bold ${statusColors[status].bg} ${statusColors[status].text}`}>
+                      {status} ({stageLeads.length})
+                    </h2>
+                    {stageLeads.length ? (
+                      <ul class="mt-3 space-y-3">
+                        {stageLeads.map((lead) => (
+                          <li key={lead.id} class="rounded-lg border border-border p-3 text-sm break-words">
+                            <a class="font-semibold underline" href={`${inboxPageHref(pipelinePages?.get(lead.id) ?? 1)}#row-${encodeURIComponent(lead.id)}`}>{lead.fullName}</a>
+                            {lead.company && <p class="mt-1 text-xs text-muted">{lead.company}</p>}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : <p class="mt-3 text-xs text-muted">No leads</p>}
+                  </section>
+                )
+              })}
             </div>
+          )}
 
-            <div class="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                id="btn-export-selected"
-                class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
-              >
-                <i class="ph-bold ph-microsoft-excel-logo text-sm"></i>
-                <span>Export Selected to Excel</span>
-              </button>
+          {view === 'inbox' && <>
+          {isAdmin && <>
+            {/* ── Dynamic Bulk Action Bar ── */}
+            <div id="bulk-action-bar" class="hidden bg-surface-dark0 text-white rounded-2xl p-4 shadow-xl mb-4 flex flex-wrap items-center justify-between gap-4 transition-all">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-sm font-bold text-secondary">
+                  <i class="ph-bold ph-check-square"></i>
+                </span>
+                <span id="selected-count-label" class="text-xs font-bold text-white">
+                  0 leads selected
+                </span>
+              </div>
 
-              <form method="POST" action="/admin/leads" id="bulk-action-form" class="inline-flex gap-2">
-                <input type="hidden" name="actionType" id="bulk-action-type" value="updateStatus" />
-                <input type="hidden" name="leadIds" id="bulk-lead-ids" value="" />
-                
-                <select
-                  name="status"
-                  id="bulk-status-select"
-                  class="px-3 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white focus:outline-none"
-                >
-                  <option value="New" class="text-foreground">Mark as New</option>
-                  <option value="Contacted" class="text-foreground">Mark as Contacted</option>
-                  <option value="In Discussion" class="text-foreground">Mark as In Discussion</option>
-                  <option value="Won" class="text-foreground">Mark as Won</option>
-                  <option value="Lost" class="text-foreground">Mark as Lost</option>
-                </select>
-
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-xs transition-all cursor-pointer"
-                >
-                  Update Status
-                </button>
-
+              <div class="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
-                  id="btn-bulk-delete"
-                  class="px-3 py-2 bg-red-600/30 hover:bg-red-600 text-red-200 hover:text-white border border-red-500/40 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                  id="btn-export-selected"
+                  data-export-href={`/admin/leads/export?${filterQuery}`}
+                  class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
                 >
-                  <i class="ph-bold ph-trash"></i> Delete
+                  <i class="ph-bold ph-microsoft-excel-logo text-sm"></i>
+                  <span>Export Selected to Excel</span>
                 </button>
-              </form>
+
+                <form method="POST" action="/admin/leads" id="bulk-action-form" class="inline-flex gap-2">
+                  <input type="hidden" name="actionType" id="bulk-action-type" value="updateStatus" />
+                  <input type="hidden" name="leadIds" id="bulk-lead-ids" value="" />
+
+                  <select
+                    name="status"
+                    id="bulk-status-select"
+                    class="px-3 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white focus:outline-none"
+                  >
+                    <option value="New" class="text-foreground">Mark as New</option>
+                    <option value="Contacted" class="text-foreground">Mark as Contacted</option>
+                    <option value="In Discussion" class="text-foreground">Mark as In Discussion</option>
+                    <option value="Won" class="text-foreground">Mark as Won</option>
+                    <option value="Lost" class="text-foreground">Mark as Lost</option>
+                  </select>
+
+                  <button
+                    type="submit"
+                    class="px-4 py-2 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-xs transition-all cursor-pointer"
+                  >
+                    Update Status
+                  </button>
+
+                  <button
+                    type="button"
+                    id="btn-bulk-delete"
+                    class="px-3 py-2 bg-red-600/30 hover:bg-red-600 text-red-200 hover:text-white border border-red-500/40 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                  >
+                    <i class="ph-bold ph-trash"></i> Delete
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
+          </>}
 
           {/* ── Main Leads Table ── */}
           <div class="bg-white rounded-3xl border border-border shadow-sm overflow-hidden">
@@ -333,14 +366,16 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                 <table class="w-full text-left border-collapse text-xs">
                   <thead>
                     <tr class="bg-surface-light/80 border-b border-border text-[11px] font-bold uppercase tracking-wider text-muted">
-                      <th class="p-4 w-10 text-center">
-                        <input
-                          type="checkbox"
-                          id="select-all-leads"
-                          class="rounded border-border text-primary focus:ring-primary cursor-pointer w-4 h-4"
-                          title="Select all leads"
-                        />
-                      </th>
+                      {isAdmin && (
+                        <th class="p-4 w-10 text-center">
+                          <input
+                            type="checkbox"
+                            id="select-all-leads"
+                            class="rounded border-border text-primary focus:ring-primary cursor-pointer w-4 h-4"
+                            title="Select all leads"
+                          />
+                        </th>
+                      )}
                       <th class="p-4">Date / Time (PKT)</th>
                       <th class="p-4">Prospect</th>
                       <th class="p-4">Service / Source</th>
@@ -351,6 +386,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                   </thead>
                   <tbody class="divide-y divide-border">
                     {leads.map((lead) => {
+                      const canEdit = isAdmin || (role === 'member' && lead.ownerId === staffId)
                       const color = statusColors[lead.status] || statusColors.New
                       const dateObj = new Date(lead.createdAt)
                       const formattedDate = dateObj.toLocaleDateString('en-US', {
@@ -367,15 +403,15 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
                       return (
                         <tr class="hover:bg-slate-50/70 transition-colors group" id={`row-${lead.id}`}>
-                          {/* Checkbox */}
-                          <td class="p-4 text-center">
-                            <input
-                              type="checkbox"
-                              class="lead-checkbox rounded border-border text-primary focus:ring-primary cursor-pointer w-4 h-4"
-                              value={lead.id}
-                              data-lead={JSON.stringify(lead)}
-                            />
-                          </td>
+                          {isAdmin && (
+                            <td class="p-4 text-center">
+                              <input
+                                type="checkbox"
+                                class="lead-checkbox rounded border-border text-primary focus:ring-primary cursor-pointer w-4 h-4"
+                                value={lead.id}
+                              />
+                            </td>
+                          )}
 
                           {/* Date & Time */}
                           <td class="p-4 whitespace-nowrap">
@@ -389,10 +425,17 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                             {lead.company && (
                               <div class="text-[11px] font-medium text-muted">{lead.company}</div>
                             )}
+                            {staff && (
+                              <div class="text-[11px] text-muted">
+                                {lead.ownerId ? staffNames.get(lead.ownerId) ?? 'Former team member' : 'Unassigned'}
+                              </div>
+                            )}
                             <div class="flex items-center gap-3 mt-1.5 text-[11px]">
-                              <a href={`mailto:${lead.email}`} class="text-primary hover:underline flex items-center gap-1 font-medium">
-                                <i class="ph ph-envelope-simple"></i> {lead.email}
-                              </a>
+                              {lead.email && (
+                                <a href={`mailto:${lead.email}`} class="text-primary hover:underline flex items-center gap-1 font-medium">
+                                  <i class="ph ph-envelope-simple"></i> {lead.email}
+                                </a>
+                              )}
                               {lead.phone && (
                                 <div class="flex items-center gap-1.5">
                                   <a href={`tel:${lead.phone}`} class="text-foreground/80 hover:text-primary flex items-center gap-1">
@@ -433,20 +476,24 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
                           {/* Status Dropdown */}
                           <td class="p-4">
-                            <form method="POST" action="/admin/leads" class="inline-block">
-                              <input type="hidden" name="actionType" value="updateStatus" />
-                              <input type="hidden" name="leadIds" value={lead.id} />
-                              <select
-                                name="status"
-                                class={`lead-status-select px-2.5 py-1.5 rounded-full text-xs font-bold border ${color.bg} ${color.text} ${color.border} focus:outline-none cursor-pointer transition-all`}
-                              >
-                                <option value="New" selected={lead.status === 'New'}>New</option>
-                                <option value="Contacted" selected={lead.status === 'Contacted'}>Contacted</option>
-                                <option value="In Discussion" selected={lead.status === 'In Discussion'}>In Discussion</option>
-                                <option value="Won" selected={lead.status === 'Won'}>Won</option>
-                                <option value="Lost" selected={lead.status === 'Lost'}>Lost</option>
-                              </select>
-                            </form>
+                            {canEdit ? (
+                              <form method="POST" action="/admin/leads" class="inline-block">
+                                <input type="hidden" name="actionType" value="updateStatus" />
+                                <input type="hidden" name="leadIds" value={lead.id} />
+                                <select
+                                  name="status"
+                                  class={`lead-status-select px-2.5 py-1.5 rounded-full text-xs font-bold border ${color.bg} ${color.text} ${color.border} focus:outline-none cursor-pointer transition-all`}
+                                >
+                                  <option value="New" selected={lead.status === 'New'}>New</option>
+                                  <option value="Contacted" selected={lead.status === 'Contacted'}>Contacted</option>
+                                  <option value="In Discussion" selected={lead.status === 'In Discussion'}>In Discussion</option>
+                                  <option value="Won" selected={lead.status === 'Won'}>Won</option>
+                                  <option value="Lost" selected={lead.status === 'Lost'}>Lost</option>
+                                </select>
+                              </form>
+                            ) : (
+                              <span class={`inline-block rounded-full border px-2.5 py-1.5 text-xs font-bold ${color.bg} ${color.text} ${color.border}`}>{lead.status}</span>
+                            )}
                           </td>
 
                           {/* Actions */}
@@ -456,22 +503,25 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                                 type="button"
                                 class="btn-view-lead p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
                                 data-lead={JSON.stringify(lead)}
+                                data-can-edit={canEdit ? 'true' : 'false'}
                                 title="View full lead record and notes"
                               >
                                 <i class="ph-bold ph-eye text-base"></i>
                               </button>
 
-                              <form method="POST" action="/admin/leads" class="lead-delete-form inline-block">
-                                <input type="hidden" name="actionType" value="delete" />
-                                <input type="hidden" name="leadIds" value={lead.id} />
-                                <button
-                                  type="submit"
-                                  class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                                  title="Delete lead"
-                                >
-                                  <i class="ph-bold ph-trash text-base"></i>
-                                </button>
-                              </form>
+                              {isAdmin && (
+                                <form method="POST" action="/admin/leads" class="lead-delete-form inline-block">
+                                  <input type="hidden" name="actionType" value="delete" />
+                                  <input type="hidden" name="leadIds" value={lead.id} />
+                                  <button
+                                    type="submit"
+                                    class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                                    title="Delete lead"
+                                  >
+                                    <i class="ph-bold ph-trash text-base"></i>
+                                  </button>
+                                </form>
+                              )}
                             </div>
                           </td>
                         </tr>
@@ -483,16 +533,24 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             )}
 
             {/* Footer Status */}
-            <div class="p-4 bg-surface-light border-t border-border flex items-center justify-between text-xs text-muted">
-              <span>Showing <strong>{leads.length}</strong> of <strong>{totalLeads}</strong> total leads</span>
-              <span>Timezone: Pakistan Standard Time (PKT, UTC+5)</span>
+            <div class="p-4 bg-surface-light border-t border-border flex flex-wrap gap-3 items-center justify-between text-xs text-muted">
+              <span>Showing {leads.length ? inboxOffset + 1 : 0}–{inboxOffset + leads.length} of {matchingLeadCount} matching leads</span>
+              {inboxPageCount > 1 && (
+                <nav aria-label="Inbox pages" class="flex flex-wrap items-center gap-3">
+                  {inboxPage > 1 && <a class="underline" href={inboxPageHref(inboxPage - 1)}>Previous</a>}
+                  <span>Page {inboxPage} of {inboxPageCount}</span>
+                  {inboxPage < inboxPageCount && <a class="underline" href={inboxPageHref(inboxPage + 1)}>Next</a>}
+                </nav>
+              )}
             </div>
 
           </div>
 
+          </>}
         </div>
       </div>
 
+      {view === 'inbox' && <>
       {/* ── Modal: View & Edit Lead Record ── */}
       <div id="lead-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-border relative max-h-[90vh] overflow-y-auto">
@@ -505,7 +563,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
               <h2 id="modal-lead-name" class="text-2xl font-black text-foreground">Lead Details</h2>
               <span id="modal-lead-date" class="text-xs text-muted">Date</span>
             </div>
-            <button type="button" id="modal-close-btn" class="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-muted hover:text-foreground text-lg cursor-pointer">
+            <button type="button" id="modal-close-btn" aria-label="Close lead details" class="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-muted hover:text-foreground text-lg cursor-pointer">
               <i class="ph-bold ph-x"></i>
             </button>
           </div>
@@ -535,41 +593,60 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
               </div>
             </div>
 
-            {/* Internal Admin Notes Form */}
-            <form method="POST" action="/admin/leads" class="space-y-3 pt-4 border-t border-border">
-              <input type="hidden" name="actionType" value="updateNotes" />
-              <input type="hidden" name="leadIds" id="modal-lead-id-input" value="" />
+            {isAdmin && staff && (
+              <form method="POST" action="/admin/leads" class="space-y-2 pt-4 border-t border-border">
+                <input type="hidden" name="actionType" value="assignOwner" />
+                <input type="hidden" name="leadIds" id="modal-owner-lead-id" value="" />
+                <label for="modal-lead-owner" class="block text-xs font-bold text-foreground">Lead owner</label>
+                <div class="flex flex-wrap gap-2">
+                  <select id="modal-lead-owner" name="ownerId" class="min-w-0 flex-1 rounded-lg border border-border bg-white px-3 py-2 text-sm">
+                    <option value="">Unassigned</option>
+                    {staff.filter((member) => member.role !== 'viewer').map((member) => <option key={member.id} value={member.id}>{member.name}</option>)}
+                  </select>
+                  <button type="submit" class="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white">Save owner</button>
+                </div>
+              </form>
+            )}
 
-              <div class="flex items-center justify-between">
-                <label for="modal-notes-textarea" class="text-xs font-bold text-foreground uppercase tracking-wider">
-                  Internal Agency Notes
-                </label>
-                <span class="text-[10px] text-muted">Only visible to administrators</span>
-              </div>
-              <textarea
-                id="modal-notes-textarea"
-                name="notes"
-                rows={3}
-                placeholder="Add meeting notes, agreed budget, status updates, or follow-up details..."
-                class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-              ></textarea>
+            <div id="modal-read-only-notes" class="space-y-2 pt-4 border-t border-border">
+              <p class="text-xs font-bold text-foreground">Internal notes</p>
+              <p id="modal-notes-preview" class="whitespace-pre-wrap text-sm text-muted"></p>
+            </div>
+            {role !== 'viewer' && (
+              <form method="POST" action="/admin/leads" id="modal-notes-form" hidden class="space-y-3 pt-4 border-t border-border">
+                <input type="hidden" name="actionType" value="updateNotes" />
+                <input type="hidden" name="leadIds" id="modal-lead-id-input" value="" />
 
-              <div class="flex justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  id="modal-cancel-btn"
-                  class="px-5 py-2.5 rounded-xl border border-border text-xs font-bold text-foreground hover:bg-surface-light transition-colors cursor-pointer"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  class="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-md transition-all cursor-pointer"
-                >
-                  Save Notes
-                </button>
-              </div>
-            </form>
+                <div class="flex items-center justify-between">
+                  <label for="modal-notes-textarea" class="text-xs font-bold text-foreground uppercase tracking-wider">
+                    Internal notes
+                  </label>
+                </div>
+                <textarea
+                  id="modal-notes-textarea"
+                  name="notes"
+                  rows={3}
+                  placeholder="Add meeting notes, agreed budget, status updates, or follow-up details..."
+                  class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                ></textarea>
+
+                <div class="flex justify-end gap-3 pt-2">
+                  <button
+                    type="button"
+                    id="modal-cancel-btn"
+                    class="px-5 py-2.5 rounded-xl border border-border text-xs font-bold text-foreground hover:bg-surface-light transition-colors cursor-pointer"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  >
+                    Save Notes
+                  </button>
+                </div>
+              </form>
+            )}
 
           </div>
 
@@ -580,7 +657,6 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
       <script>
         {`
           (function() {
-            var leadsData = ${serializedLeads};
             var selectAllCheckbox = document.getElementById('select-all-leads');
             var checkboxes = document.querySelectorAll('.lead-checkbox');
             var bulkBar = document.getElementById('bulk-action-bar');
@@ -653,7 +729,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
               });
             }
 
-            // Client-side Instant Excel CSV Export of Selected Rows
+            // Export selected rows through the same endpoint as the filtered export.
             if (exportSelectedBtn) {
               exportSelectedBtn.addEventListener('click', function() {
                 var ids = getSelectedIds();
@@ -661,46 +737,10 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                   alert('Please select at least one lead to export.');
                   return;
                 }
-                var selectedLeads = leadsData.filter(function(l) { return ids.indexOf(l.id) !== -1; });
-                downloadCsv(selectedLeads, 'bellbee_leads_selected_' + new Date().toISOString().slice(0, 10) + '.csv');
+                var url = new URL(exportSelectedBtn.dataset.exportHref, window.location.origin);
+                url.searchParams.set('ids', ids.join(','));
+                window.location.assign(url.href);
               });
-            }
-
-            function downloadCsv(list, filename) {
-              var headers = ['Lead ID', 'Date & Time (PKT)', 'Full Name', 'Email', 'Phone', 'Company', 'Source', 'Status', 'Details', 'Notes'];
-              var rows = [headers];
-
-              list.forEach(function(l) {
-                var dateStr = new Date(l.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Karachi' }) + ' (PKT)';
-                rows.push([
-                  l.id,
-                  dateStr,
-                  l.fullName || '',
-                  l.email || '',
-                  l.phone || '',
-                  l.company || '',
-                  l.services || '',
-                  l.status || '',
-                  (l.details || '').replace(/\\n/g, ' | '),
-                  (l.notes || '').replace(/\\n/g, ' | ')
-                ]);
-              });
-
-              var csvContent = '\\uFEFF' + rows.map(function(r) {
-                return r.map(function(field) {
-                  var escaped = String(field || '').replace(/"/g, '""');
-                  return '"' + escaped + '"';
-                }).join(',');
-              }).join('\\r\\n');
-
-              var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-              var link = document.createElement('a');
-              var url = URL.createObjectURL(blob);
-              link.setAttribute('href', url);
-              link.setAttribute('download', filename);
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
             }
 
             // Modal functionality
@@ -719,8 +759,12 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                 document.getElementById('modal-lead-date').textContent = 'Submitted: ' + new Date(lead.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Karachi' }) + ' PKT';
                 
                 var emailEl = document.getElementById('modal-lead-email');
-                emailEl.textContent = lead.email;
-                emailEl.href = 'mailto:' + lead.email;
+                emailEl.textContent = lead.email || 'None';
+                if (lead.email) {
+                  emailEl.href = 'mailto:' + lead.email;
+                } else {
+                  emailEl.removeAttribute('href');
+                }
 
                 var phoneEl = document.getElementById('modal-lead-phone');
                 var waEl = document.getElementById('modal-lead-wa');
@@ -734,8 +778,21 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                 }
 
                 document.getElementById('modal-lead-details').textContent = lead.details || 'No details specified.';
-                document.getElementById('modal-lead-id-input').value = lead.id;
-                document.getElementById('modal-notes-textarea').value = lead.notes || '';
+                var canEdit = btn.dataset.canEdit === 'true';
+                var notesForm = document.getElementById('modal-notes-form');
+                if (notesForm) {
+                  notesForm.hidden = !canEdit;
+                  document.getElementById('modal-lead-id-input').value = lead.id;
+                  document.getElementById('modal-notes-textarea').value = lead.notes || '';
+                }
+                document.getElementById('modal-read-only-notes').hidden = canEdit;
+                document.getElementById('modal-notes-preview').textContent = lead.notes || 'No notes yet.';
+                var ownerSelect = document.getElementById('modal-lead-owner');
+                if (ownerSelect) {
+                  document.getElementById('modal-owner-lead-id').value = lead.id;
+                  ownerSelect.value = lead.ownerId || '';
+                  if (ownerSelect.selectedIndex < 0) ownerSelect.value = '';
+                }
 
                 modal.classList.remove('hidden');
               });
@@ -757,6 +814,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
         `}
       </script>
 
-    </Layout>
+      </>}
+    </Document>
   )
 }

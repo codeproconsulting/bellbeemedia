@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from './lead-submission-field.tsx'
 import { Layout } from './layout.tsx'
 import { PillBadge } from './shared.tsx'
 import { type Handle } from 'remix/ui'
@@ -94,6 +95,7 @@ export function ContactPage(handle: Handle<ContactPageProps>) {
                 )}
 
                 <form method="post" action="/contact" class="flex flex-col gap-6 relative z-10">
+                  <LeadSubmissionField retryId={result?.submissionId} />
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                       <label for="firstName" class="text-sm font-bold text-surface-dark2 uppercase tracking-wide">First Name</label>

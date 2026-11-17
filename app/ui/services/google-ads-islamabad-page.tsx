@@ -1,3 +1,4 @@
+import { LeadSubmissionField } from '../lead-submission-field.tsx'
 import { type Handle } from 'remix/ui'
 import { Layout } from '../layout.tsx'
 import { type ProposalSubmissionResult } from '../../data/wordpress.ts'
@@ -1366,6 +1367,7 @@ export function GoogleAdsIslamabadPage(handle: Handle<GoogleAdsIslamabadPageProp
                   </div>
                 ) : (
                   <form method="POST" action="/google-ads-islamabad" class="space-y-4">
+                    <LeadSubmissionField retryId={result?.submissionId} />
                     {result && !result.success && (
                       <div class="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
                         <i class="ph-bold ph-warning-circle"></i> {result.message}

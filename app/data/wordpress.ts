@@ -11,6 +11,7 @@
  */
 
 import { saveLead } from './leads.ts'
+import { appwriteLeadsEnabled } from './appwrite-leads.ts'
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
@@ -481,7 +482,7 @@ const SUBMIT_PROPOSAL_MUTATION = `
 
 export interface ProposalFormData {
   fullName: string
-  email: string
+  email?: string
   company?: string
   phone?: string
   services?: string
@@ -492,35 +493,43 @@ export interface ProposalFormData {
 export type ProposalSubmissionResult = {
   success: boolean
   message: string
+  submissionId?: string
 }
 
-export async function submitProposal(data: ProposalFormData): Promise<ProposalSubmissionResult> {
+export async function submitProposal(data: ProposalFormData, submissionId?: FormDataEntryValue | null): Promise<ProposalSubmissionResult> {
+  const retryId = typeof submissionId === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(submissionId)
+    ? submissionId.toLowerCase()
+    : undefined
+  let created: boolean
   try {
-    await saveLead({
+    created = await saveLead({
       fullName: data.fullName,
       email: data.email,
       phone: data.phone,
       company: data.company,
       services: data.services,
       details: data.details,
-    })
-  } catch (err) {
-    console.error('[Leads] Error saving lead to local store:', err)
+    }, retryId)
+  } catch {
+    console.error('[Leads] Proposal could not be saved.')
+    return { success: false, message: 'Sorry, we could not save your request. Please try again or email us directly.', submissionId: retryId }
   }
 
-  if (!process.env.WORDPRESS_GRAPHQL_URL) {
-    // Dev mode: simulate success
-    console.log('[WordPress] Proposal (dev mode, not sent):', data)
-    return { success: true, message: 'Proposal received! (WordPress not yet connected)' }
+  const accepted = { success: true, message: 'Proposal received!' }
+  if (!created || !data.email?.trim() || !process.env.WORDPRESS_GRAPHQL_URL) {
+    return accepted
   }
   try {
     const result = await fetchWP<{ createProposalSubmission: ProposalSubmissionResult }>(
       SUBMIT_PROPOSAL_MUTATION,
       data,
     )
-    return result.createProposalSubmission
-  } catch (err) {
-    console.error('[WordPress] submitProposal error:', err)
+    if (!appwriteLeadsEnabled()) return result.createProposalSubmission
+    if (!result.createProposalSubmission.success) console.error('[WordPress] Proposal forwarding was declined.')
+    return accepted
+  } catch {
+    console.error('[WordPress] Proposal forwarding failed.')
+    if (appwriteLeadsEnabled()) return accepted
     return { success: false, message: 'Sorry, something went wrong. Please try again or email us directly.' }
   }
 }

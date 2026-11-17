@@ -7,12 +7,13 @@ export interface DocumentProps {
   head?: RemixNode
   title?: string
   description?: string
+  privatePage?: boolean
 }
 
 const DEFAULT_TITLE = readAppDisplayName('BellBee%20Media')
 
 export function Document() {
-  return ({ children, head, title = DEFAULT_TITLE, description }: DocumentProps) => (
+  return ({ children, head, title = DEFAULT_TITLE, description, privatePage }: DocumentProps) => (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -21,6 +22,7 @@ export function Document() {
         {description && <meta name="description" content={description} />}
 
         {/* Google tag (gtag.js) */}
+        {!privatePage && <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCXZ19KB1R"></script>
         <script>
           {`window.dataLayer = window.dataLayer || [];
@@ -28,6 +30,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GCXZ19KB1R');`}
         </script>
+        </>}
 
         {/* Load Google Fonts (Plus Jakarta Sans, Inter & Space Grotesk) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

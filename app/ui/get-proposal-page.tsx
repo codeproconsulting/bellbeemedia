@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { Layout } from './layout.tsx'
 import { PillBadge } from './shared.tsx'
 import { type Handle } from 'remix/ui'
@@ -12,6 +13,7 @@ interface GetProposalPageProps {
 export function GetProposalPage(handle: Handle<GetProposalPageProps>) {
   const { result, bookingUrl } = handle.props
   const submitted = result?.success === true
+  const submissionId = result?.submissionId ?? randomUUID()
 
   return () => (
     <Layout title="Get a Free Proposal | Bell Bee Media" description="Share your goals and our team will build a bespoke digital marketing strategy for your brand — free, fast, and with no commitment." hideFooter={true}>
@@ -38,7 +40,7 @@ export function GetProposalPage(handle: Handle<GetProposalPageProps>) {
 
             {/* Form Widget — middle on mobile, right column on desktop */}
             <div class="lg:col-span-7 lg:row-span-2 flex flex-col justify-center order-2 lg:order-2">
-              <ProposalBookingWidget result={result} submitted={submitted} bookingUrl={bookingUrl} />
+              <ProposalBookingWidget result={result} submitted={submitted} bookingUrl={bookingUrl} submissionId={submissionId} />
             </div>
 
             {/* Trust Features — bottom on mobile, left column footer on desktop */}
