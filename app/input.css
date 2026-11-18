@@ -468,8 +468,8 @@
      STAGGER CHILDREN UTILITY
   ───────────────────────────────────────────────────────────────────────── */
   [data-stagger-item] {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 1;
+    transform: translateY(0);
     transition:
       opacity 0.55s var(--bb-easing),
       transform 0.55s var(--bb-easing);
@@ -481,8 +481,8 @@
   }
 
   [data-stagger-item].bb-revealed {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   /* ─────────────────────────────────────────────────────────────────────────
