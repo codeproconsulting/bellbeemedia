@@ -143,9 +143,9 @@ export function OurWorkPage() {
       {/* ── STATS TICKER ── */}
       <section class="bg-surface-1 border-b border-surface-2 py-0">
         <div class="container mx-auto px-4 max-w-6xl">
-          <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-surface-2" data-stagger-group>
+          <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-surface-2">
             {stats.map((s) => (
-              <div class="flex flex-col items-center justify-center py-10 px-6 gap-2 group" data-stagger-item>
+              <div class="flex flex-col items-center justify-center py-10 px-6 gap-2 group">
                 <div class="w-10 h-10 rounded-xl bg-primary/8 text-primary flex items-center justify-center text-lg mb-2">
                   <i class={`ph-fill ${s.icon}`} />
                 </div>
@@ -160,7 +160,7 @@ export function OurWorkPage() {
       {/* ── PROJECT GRID ── */}
       <section class="py-24 bg-surface-1">
         <div class="container mx-auto px-4 max-w-7xl">
-          <div class="text-center mb-16" data-reveal>
+          <div class="text-center mb-16">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-semibold mb-6">
               <i class="ph-fill ph-star" /> Featured Campaigns
             </div>
@@ -168,9 +168,9 @@ export function OurWorkPage() {
             <p class="text-text-secondary max-w-2xl mx-auto">From ambitious D2C startups to established enterprises — these are the growth stories that define what we do.</p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger-group>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <div data-tilt data-tilt-intensity="5" data-stagger-item class="group relative flex flex-col bg-white rounded-[1.75rem] border border-surface-2 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div data-tilt data-tilt-intensity="5" class="group relative flex flex-col bg-white rounded-[1.75rem] border border-surface-2 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                 {/* Gradient visual header */}
                 <div class={`relative h-52 bg-gradient-to-br ${project.gradient} p-7 flex flex-col justify-between overflow-hidden`}>
                   {/* shine overlay */}
@@ -224,7 +224,7 @@ export function OurWorkPage() {
       {/* ── SUB-PAGES NAV CARDS ── */}
       <section class="py-24 bg-white">
         <div class="container mx-auto px-4 max-w-6xl">
-          <div class="text-center mb-14" data-reveal>
+          <div class="text-center mb-14">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/8 border border-secondary/15 text-secondary text-sm font-semibold mb-6">
               <i class="ph-fill ph-compass" /> Explore In Depth
             </div>
@@ -232,9 +232,9 @@ export function OurWorkPage() {
             <p class="text-text-secondary max-w-xl mx-auto">Browse every dimension of our work — from granular case studies to aggregated results by channel and industry.</p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-stagger-group>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Case Studies */}
-            <a href={routes.ourWorkCaseStudies.href()} data-tilt data-tilt-intensity="4" data-stagger-item class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/15 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden min-h-[220px]">
+            <a href={routes.ourWorkCaseStudies.href()} data-tilt data-tilt-intensity="4" class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/15 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden min-h-[220px]">
               <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all" />
               <div>
                 <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-2xl mb-5">
@@ -249,7 +249,7 @@ export function OurWorkPage() {
             </a>
 
             {/* Client Results */}
-            <a href={routes.ourWorkClientResults.href()} data-tilt data-tilt-intensity="4" data-stagger-item class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-secondary/5 to-amber-500/10 border border-secondary/15 hover:border-secondary/40 hover:shadow-xl hover:shadow-secondary/10 transition-all duration-300 overflow-hidden min-h-[220px]">
+            <a href={routes.ourWorkClientResults.href()} data-tilt data-tilt-intensity="4" class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-secondary/5 to-amber-500/10 border border-secondary/15 hover:border-secondary/40 hover:shadow-xl hover:shadow-secondary/10 transition-all duration-300 overflow-hidden min-h-[220px]">
               <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-secondary/10 blur-2xl group-hover:bg-secondary/20 transition-all" />
               <div>
                 <div class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center text-2xl mb-5">
@@ -264,7 +264,7 @@ export function OurWorkPage() {
             </a>
 
             {/* Success Stories */}
-            <a href={routes.ourWorkSuccessStories.href()} data-tilt data-tilt-intensity="4" data-stagger-item class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-emerald-500/5 to-teal-500/10 border border-emerald-500/15 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 overflow-hidden min-h-[220px]">
+            <a href={routes.ourWorkSuccessStories.href()} data-tilt data-tilt-intensity="4" class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-emerald-500/5 to-teal-500/10 border border-emerald-500/15 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 overflow-hidden min-h-[220px]">
               <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-2xl group-hover:bg-emerald-500/20 transition-all" />
               <div>
                 <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl mb-5">
@@ -279,7 +279,7 @@ export function OurWorkPage() {
             </a>
 
             {/* Industry Expertise */}
-            <a href={routes.ourWorkIndustryExpertise.href()} data-tilt data-tilt-intensity="4" data-stagger-item class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-violet-500/5 to-indigo-500/10 border border-violet-500/15 hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 overflow-hidden min-h-[220px]">
+            <a href={routes.ourWorkIndustryExpertise.href()} data-tilt data-tilt-intensity="4" class="group relative flex flex-col justify-between p-8 rounded-[1.75rem] bg-gradient-to-br from-violet-500/5 to-indigo-500/10 border border-violet-500/15 hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 overflow-hidden min-h-[220px]">
               <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-violet-500/10 blur-2xl group-hover:bg-violet-500/20 transition-all" />
               <div>
                 <div class="w-12 h-12 rounded-2xl bg-violet-500/10 text-violet-600 flex items-center justify-center text-2xl mb-5">
@@ -301,7 +301,7 @@ export function OurWorkPage() {
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(21,68,118,0.5)_0%,transparent_70%)] pointer-events-none" />
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_100%,rgba(245,158,11,0.12)_0%,transparent_60%)] pointer-events-none" />
         <div class="container mx-auto px-4 max-w-4xl text-center relative z-10">
-          <div data-reveal="scale" class="bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 p-10 md:p-20 rounded-[40px] text-white overflow-hidden relative shadow-2xl">
+          <div class="bg-gradient-to-br from-primary via-[#0f3060] to-surface-dark0 p-10 md:p-20 rounded-[40px] text-white overflow-hidden relative shadow-2xl">
             <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-secondary/25 blur-[80px] pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-primary-light/15 blur-[80px] pointer-events-none"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/[0.02] border border-white/5 pointer-events-none"></div>

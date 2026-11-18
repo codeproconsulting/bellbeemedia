@@ -13,7 +13,7 @@
 // ─── 1. Scroll Reveal ────────────────────────────────────────────────────────
 function initScrollReveal(): void {
   // Select elements that have data-reveal with any value (including bare attribute)
-  const targets = document.querySelectorAll<HTMLElement>('[data-reveal]')
+  const targets = document.querySelectorAll<HTMLElement>('[data-reveal]:not(.bb-revealed)')
   if (!targets.length) return
 
   const observer = new IntersectionObserver(
@@ -28,13 +28,18 @@ function initScrollReveal(): void {
         }
       })
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
   )
 
   targets.forEach((el) => {
-    // bb-reveal base class always added; direction variant handled by CSS [data-reveal="x"] selectors
-    el.classList.add('bb-reveal')
-    observer.observe(el)
+    const rect = el.getBoundingClientRect()
+    // If element is already in viewport on load/navigation, immediately reveal it
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('bb-revealed')
+    } else {
+      el.classList.add('bb-reveal')
+      observer.observe(el)
+    }
   })
 }
 
@@ -64,27 +69,37 @@ function countUp(el: HTMLElement): void {
 }
 
 function initCounters(): void {
-  const counters = document.querySelectorAll<HTMLElement>('[data-count]')
+  const counters = document.querySelectorAll<HTMLElement>('[data-count]:not([data-counted])')
   if (!counters.length) return
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          countUp(entry.target as HTMLElement)
-          observer.unobserve(entry.target)
+          const el = entry.target as HTMLElement
+          el.setAttribute('data-counted', 'true')
+          countUp(el)
+          observer.unobserve(el)
         }
       })
     },
-    { threshold: 0.5 }
+    { threshold: 0.2 }
   )
 
-  counters.forEach((el) => observer.observe(el))
+  counters.forEach((el) => {
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.setAttribute('data-counted', 'true')
+      countUp(el)
+    } else {
+      observer.observe(el)
+    }
+  })
 }
 
 // ─── 3. Stagger Groups ────────────────────────────────────────────────────────
 function initStaggerGroups(): void {
-  const groups = document.querySelectorAll<HTMLElement>('[data-stagger-group]')
+  const groups = document.querySelectorAll<HTMLElement>('[data-stagger-group]:not([data-stagger-init])')
   if (!groups.length) return
 
   const observer = new IntersectionObserver(
@@ -92,29 +107,44 @@ function initStaggerGroups(): void {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const group = entry.target as HTMLElement
+          group.setAttribute('data-stagger-init', 'true')
           const children = group.querySelectorAll<HTMLElement>('[data-stagger-item]')
           children.forEach((child, i) => {
             child.classList.add('bb-reveal')
             setTimeout(() => {
               child.classList.add('bb-revealed')
-            }, i * 120)
+            }, i * 80)
           })
           observer.unobserve(group)
         }
       })
     },
-    { threshold: 0.1 }
+    { threshold: 0.05 }
   )
 
-  groups.forEach((el) => observer.observe(el))
+  groups.forEach((group) => {
+    group.setAttribute('data-stagger-init', 'true')
+    const rect = group.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const children = group.querySelectorAll<HTMLElement>('[data-stagger-item]')
+      children.forEach((child, i) => {
+        setTimeout(() => {
+          child.classList.add('bb-revealed')
+        }, i * 60)
+      })
+    } else {
+      observer.observe(group)
+    }
+  })
 }
 
 // ─── 4. Card Tilt ─────────────────────────────────────────────────────────────
 function initCardTilt(): void {
-  const cards = document.querySelectorAll<HTMLElement>('[data-tilt]')
+  const cards = document.querySelectorAll<HTMLElement>('[data-tilt]:not([data-tilt-init])')
   if (!cards.length) return
 
   cards.forEach((card) => {
+    card.setAttribute('data-tilt-init', 'true')
     card.style.transformStyle = 'preserve-3d'
     card.style.transition = 'transform 0.25s ease-out, box-shadow 0.25s ease-out'
 
@@ -134,8 +164,9 @@ function initCardTilt(): void {
 
 // ─── 5. Animated hover glow on CTA buttons ───────────────────────────────────
 function initButtonGlow(): void {
-  const buttons = document.querySelectorAll<HTMLElement>('[data-glow-btn]')
+  const buttons = document.querySelectorAll<HTMLElement>('[data-glow-btn]:not([data-glow-init])')
   buttons.forEach((btn) => {
+    btn.setAttribute('data-glow-init', 'true')
     btn.addEventListener('mousemove', (e: MouseEvent) => {
       const rect = btn.getBoundingClientRect()
       const x = e.clientX - rect.left
@@ -470,7 +501,7 @@ function initProcessTimeline(): void {
   setTimeout(update, 1500)
 }
 
-// ─── Boot ─────────────────────────────────────────────────────────────────────
+// ─── Boot & Dynamic Client Navigation Support ─────────────────────────────────
 function boot(): void {
   initScrollReveal()
   initCounters()
@@ -481,18 +512,58 @@ function boot(): void {
   initProcessTimeline()
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', boot)
-} else {
-  boot()
-}
-window.addEventListener('load', boot)
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot)
+  } else {
+    boot()
+  }
+  window.addEventListener('load', boot)
 
-// Re-check in case elements are hydrated or rendered shortly after script evaluation
-setTimeout(initTestimonialsSlider, 150)
-setTimeout(initTestimonialsSlider, 600)
-setTimeout(initProcessTimeline, 150)
-setTimeout(initProcessTimeline, 600)
-setTimeout(initProcessTimeline, 1200)
+  // Re-run on client-side route changes & DOM mutations
+  let navTimer: any = null
+  const scheduleBoot = () => {
+    if (navTimer) clearTimeout(navTimer)
+    navTimer = setTimeout(boot, 40)
+  }
+
+  window.addEventListener('popstate', scheduleBoot)
+  window.addEventListener('hashchange', scheduleBoot)
+  document.addEventListener('remix:navigate', scheduleBoot)
+
+  // MutationObserver detects DOM changes made by Remix router or dynamic scripts
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      scheduleBoot()
+    })
+
+    const attach = () => {
+      if (document.body) {
+        observer.observe(document.body, { childList: true, subtree: true })
+      }
+    }
+
+    if (document.body) {
+      attach()
+    } else {
+      document.addEventListener('DOMContentLoaded', attach)
+    }
+  }
+
+  // Intercept anchor clicks on same-origin navigation so animations re-bind smoothly
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement)?.closest('a')
+    if (link && link.href && !link.target && link.origin === window.location.origin) {
+      setTimeout(boot, 60)
+      setTimeout(boot, 200)
+      setTimeout(boot, 500)
+    }
+  }, { passive: true })
+
+  // Re-check for hydrated or rendered elements
+  setTimeout(boot, 100)
+  setTimeout(boot, 300)
+  setTimeout(boot, 800)
+}
 
 

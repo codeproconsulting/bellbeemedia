@@ -38,7 +38,7 @@ gtag('js', new Date());`}
 
         <title>{title}</title>
         {head}
-        <link rel="stylesheet" href="/tailwind.css?v=39" />
+        <link rel="stylesheet" href="/tailwind.css?v=40" />
         <link rel="preconnect" href="https://unpkg.com" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
@@ -48,7 +48,7 @@ gtag('js', new Date());`}
         {children}
         <script type="module" src={`${routes.assets.href({ path: 'app/assets/entry.ts' })}?v=30`}></script>
         <script type="module" src={`${routes.assets.href({ path: 'app/assets/mobile-nav.ts' })}?v=30`}></script>
-        <script type="module" src={`${routes.assets.href({ path: 'app/assets/animations.ts' })}?v=30`}></script>
+        <script type="module" src={`${routes.assets.href({ path: 'app/assets/animations.ts' })}?v=31`}></script>
       </body>
     </html>
   )
