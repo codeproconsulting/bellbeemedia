@@ -1,6 +1,7 @@
 import { type Handle } from 'remix/ui'
 import type { CrmRole } from '../../data/appwrite-staff.ts'
 import { Document } from '../document.tsx'
+import { routes } from '../../routes.ts'
 import { LeadsOverview } from './leads-overview.tsx'
 import { type Lead, type LeadFilters, type LeadStatus } from '../../data/leads.ts'
 
@@ -27,6 +28,12 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
   }
   const inboxHref = `/admin/leads?${filterQuery}`
   const pipelineHref = `${inboxHref}&view=pipeline`
+  const isArchived = filters.archived === 'yes'
+  const archiveQuery = new URLSearchParams(filterQuery)
+  if (view === 'pipeline') archiveQuery.set('view', 'pipeline')
+  if (isArchived) archiveQuery.delete('archived')
+  else archiveQuery.set('archived', 'yes')
+  const archiveAction = isArchived ? 'Restore' : 'Archive'
 
   const needsReplyQuery = new URLSearchParams(filterQuery)
   needsReplyQuery.set('status', 'New')
@@ -37,9 +44,10 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
   const inboxPageCount = Math.ceil(matchingLeadCount / inboxPageSize)
   const inboxOffset = (inboxPage - 1) * inboxPageSize
   const inboxPageHref = (page: number) => page > 1 ? `${inboxHref}&page=${page}` : inboxHref
-  const pipelinePages = view === 'pipeline'
-    ? new Map(leads.map((lead, index) => [lead.id, Math.floor(index / inboxPageSize) + 1]))
-    : undefined
+  const leadHref = (id: string) => {
+    const back = view === 'pipeline' ? pipelineHref : inboxPageHref(inboxPage)
+    return `${routes.adminLead.href({ leadId: id })}?${new URLSearchParams({ back })}`
+  }
 
   const statusColors: Record<LeadStatus, { bg: string; text: string; border: string }> = {
     New: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/20' },
@@ -72,13 +80,16 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
+              {staff && role !== 'viewer' && (
+                <a href="/admin/leads/new" class="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white">Add prospect</a>
+              )}
               {isAdmin && (
                 <a
                   href={`/admin/leads/export?${filterQuery}`}
                   class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-sm transition-all"
                 >
                   <i class="ph-bold ph-microsoft-excel-logo text-base"></i>
-                  <span>{view === 'overview' ? 'Export all leads' : 'Export filtered leads'}</span>
+                  <span>{view === 'overview' ? 'Export active leads' : 'Export filtered leads'}</span>
                 </a>
               )}
 
@@ -115,14 +126,18 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
           {view === 'overview' && <LeadsOverview leads={leads} />}
 
-          {view === 'inbox' && (
+          {view !== 'overview' && (
             <div class="mb-4 flex flex-wrap gap-2">
-              <a href={`/admin/leads?${needsReplyQuery}`}
+              <a href={`/admin/leads?${archiveQuery}`}
+                class="inline-flex rounded-lg border border-border bg-white px-3 py-2 text-sm font-semibold text-foreground hover:border-primary">
+                {isArchived ? 'Active leads' : 'Archived leads'}
+              </a>
+              {view === 'inbox' && !isArchived && <a href={`/admin/leads?${needsReplyQuery}`}
                 class="inline-flex rounded-lg border border-border bg-white px-3 py-2 text-sm font-semibold text-foreground hover:border-primary"
                 aria-current={filters.status === 'New' ? 'true' : undefined}>
                 Needs a reply
-              </a>
-              {staff && (
+              </a>}
+              {view === 'inbox' && staff && (
                 <a href={`/admin/leads?${assignmentQuery}`}
                   class="inline-flex rounded-lg border border-border bg-white px-3 py-2 text-sm font-semibold text-foreground hover:border-primary">
                   {filters.assigned === 'me' ? 'Show all owners' : 'Assigned to me'}
@@ -137,6 +152,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             <form method="GET" action="/admin/leads" class="space-y-4">
               {view === 'pipeline' && <input type="hidden" name="view" value="pipeline" />}
               {filters.assigned && <input type="hidden" name="assigned" value={filters.assigned} />}
+              {isArchived && <input type="hidden" name="archived" value="yes" />}
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* Search */}
@@ -207,6 +223,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                     class="w-full px-3 py-2 rounded-xl border border-border text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   >
                     <option value="All" selected={!filters.source || filters.source === 'All'}>All Sources</option>
+                    <option value="manual" selected={filters.source === 'manual'}>Manual Prospects</option>
                     <option value="SEO" selected={filters.source === 'SEO'}>SEO Services (Islamabad)</option>
                     <option value="Performance" selected={filters.source === 'Performance'}>Performance Ads</option>
                     <option value="Contact" selected={filters.source === 'Contact'}>Contact Page</option>
@@ -271,7 +288,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                       <ul class="mt-3 space-y-3">
                         {stageLeads.map((lead) => (
                           <li key={lead.id} class="rounded-lg border border-border p-3 text-sm break-words">
-                            <a class="font-semibold underline" href={`${inboxPageHref(pipelinePages?.get(lead.id) ?? 1)}#row-${encodeURIComponent(lead.id)}`}>{lead.fullName}</a>
+                            <a class="font-semibold underline" href={`${leadHref(lead.id)}`}>{lead.fullName}</a>
                             {lead.company && <p class="mt-1 text-xs text-muted">{lead.company}</p>}
                           </li>
                         ))}
@@ -308,8 +325,8 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                 </button>
 
                 <form method="POST" action="/admin/leads" id="bulk-action-form" class="inline-flex gap-2">
-                  <input type="hidden" name="actionType" id="bulk-action-type" value="updateStatus" />
                   <input type="hidden" name="leadIds" id="bulk-lead-ids" value="" />
+                  <input type="hidden" name="archived" value={isArchived ? 'false' : 'true'} />
 
                   <select
                     name="status"
@@ -325,17 +342,20 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
                   <button
                     type="submit"
+                    name="actionType"
+                    value="updateStatus"
                     class="px-4 py-2 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-xs transition-all cursor-pointer"
                   >
                     Update Status
                   </button>
 
                   <button
-                    type="button"
-                    id="btn-bulk-delete"
-                    class="px-3 py-2 bg-red-600/30 hover:bg-red-600 text-red-200 hover:text-white border border-red-500/40 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                    type="submit"
+                    name="actionType"
+                    value="setArchived"
+                    class="px-3 py-2 border border-white/20 rounded-xl text-xs font-bold text-white"
                   >
-                    <i class="ph-bold ph-trash"></i> Delete
+                    {archiveAction} selected
                   </button>
                 </form>
               </div>
@@ -421,7 +441,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
 
                           {/* Prospect details */}
                           <td class="p-4">
-                            <div class="font-bold text-foreground text-sm">{lead.fullName}</div>
+                            <a href={leadHref(lead.id)} class="font-bold text-foreground text-sm underline">{lead.fullName}</a>
                             {lead.company && (
                               <div class="text-[11px] font-medium text-muted">{lead.company}</div>
                             )}
@@ -460,6 +480,7 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                             <span class="inline-block px-2.5 py-1 rounded-lg bg-surface-light border border-border text-[11px] font-bold text-foreground">
                               {lead.services || 'General Inquiry'}
                             </span>
+                            {lead.source === 'manual' && <p class="mt-1 text-[11px] text-muted">Manual prospect</p>}
                           </td>
 
                           {/* Submission Details Preview */}
@@ -499,26 +520,23 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                           {/* Actions */}
                           <td class="p-4 text-right whitespace-nowrap">
                             <div class="flex items-center justify-end gap-2">
-                              <button
-                                type="button"
-                                class="btn-view-lead p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
-                                data-lead={JSON.stringify(lead)}
-                                data-can-edit={canEdit ? 'true' : 'false'}
-                                title="View full lead record and notes"
-                              >
+                              <a href={leadHref(lead.id)} aria-label="Open lead record" title="Open lead record"
+                                class="p-2 text-primary hover:bg-primary/10 rounded-lg">
                                 <i class="ph-bold ph-eye text-base"></i>
-                              </button>
+                              </a>
 
                               {isAdmin && (
-                                <form method="POST" action="/admin/leads" class="lead-delete-form inline-block">
-                                  <input type="hidden" name="actionType" value="delete" />
+                                <form method="POST" action="/admin/leads" class="inline-block">
+                                  <input type="hidden" name="actionType" value="setArchived" />
                                   <input type="hidden" name="leadIds" value={lead.id} />
+                                  <input type="hidden" name="archived" value={isArchived ? 'false' : 'true'} />
                                   <button
                                     type="submit"
-                                    class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                                    title="Delete lead"
+                                    class="p-2 text-muted hover:bg-surface-light rounded-lg transition-colors cursor-pointer"
+                                    aria-label={`${archiveAction} lead`}
+                                    title={`${archiveAction} lead`}
                                   >
-                                    <i class="ph-bold ph-trash text-base"></i>
+                                    <i class={`ph-bold ${isArchived ? 'ph-arrow-counter-clockwise' : 'ph-archive'} text-base`}></i>
                                   </button>
                                 </form>
                               )}
@@ -551,108 +569,6 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
       </div>
 
       {view === 'inbox' && <>
-      {/* ── Modal: View & Edit Lead Record ── */}
-      <div id="lead-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-border relative max-h-[90vh] overflow-y-auto">
-          
-          <div class="flex items-start justify-between pb-4 border-b border-border mb-6">
-            <div>
-              <span id="modal-lead-source" class="text-[11px] font-bold uppercase tracking-wider text-secondary px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/20 inline-block mb-1">
-                Source
-              </span>
-              <h2 id="modal-lead-name" class="text-2xl font-black text-foreground">Lead Details</h2>
-              <span id="modal-lead-date" class="text-xs text-muted">Date</span>
-            </div>
-            <button type="button" id="modal-close-btn" aria-label="Close lead details" class="w-9 h-9 rounded-full bg-surface-light flex items-center justify-center text-muted hover:text-foreground text-lg cursor-pointer">
-              <i class="ph-bold ph-x"></i>
-            </button>
-          </div>
-
-          <div class="space-y-6">
-            {/* Contact Row */}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-surface-light rounded-2xl p-4 border border-border">
-              <div>
-                <span class="text-[11px] font-bold text-muted uppercase block">Email Address</span>
-                <a id="modal-lead-email" href="#" class="text-sm font-bold text-primary hover:underline break-all"></a>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-muted uppercase block">Phone / WhatsApp</span>
-                <div class="flex items-center gap-2 mt-0.5">
-                  <span id="modal-lead-phone" class="text-sm font-bold text-foreground"></span>
-                  <a id="modal-lead-wa" href="#" target="_blank" rel="noopener noreferrer" class="text-emerald-600 font-bold text-base" title="Open WhatsApp">
-                    <i class="ph-fill ph-whatsapp-logo"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Submission Full Content */}
-            <div>
-              <span class="text-xs font-bold text-foreground uppercase tracking-wider block mb-2">Form Submission Details</span>
-              <div id="modal-lead-details" class="p-4 rounded-2xl bg-surface-light border border-border text-xs text-foreground/90 whitespace-pre-wrap leading-relaxed font-mono">
-              </div>
-            </div>
-
-            {isAdmin && staff && (
-              <form method="POST" action="/admin/leads" class="space-y-2 pt-4 border-t border-border">
-                <input type="hidden" name="actionType" value="assignOwner" />
-                <input type="hidden" name="leadIds" id="modal-owner-lead-id" value="" />
-                <label for="modal-lead-owner" class="block text-xs font-bold text-foreground">Lead owner</label>
-                <div class="flex flex-wrap gap-2">
-                  <select id="modal-lead-owner" name="ownerId" class="min-w-0 flex-1 rounded-lg border border-border bg-white px-3 py-2 text-sm">
-                    <option value="">Unassigned</option>
-                    {staff.filter((member) => member.role !== 'viewer').map((member) => <option key={member.id} value={member.id}>{member.name}</option>)}
-                  </select>
-                  <button type="submit" class="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white">Save owner</button>
-                </div>
-              </form>
-            )}
-
-            <div id="modal-read-only-notes" class="space-y-2 pt-4 border-t border-border">
-              <p class="text-xs font-bold text-foreground">Internal notes</p>
-              <p id="modal-notes-preview" class="whitespace-pre-wrap text-sm text-muted"></p>
-            </div>
-            {role !== 'viewer' && (
-              <form method="POST" action="/admin/leads" id="modal-notes-form" hidden class="space-y-3 pt-4 border-t border-border">
-                <input type="hidden" name="actionType" value="updateNotes" />
-                <input type="hidden" name="leadIds" id="modal-lead-id-input" value="" />
-
-                <div class="flex items-center justify-between">
-                  <label for="modal-notes-textarea" class="text-xs font-bold text-foreground uppercase tracking-wider">
-                    Internal notes
-                  </label>
-                </div>
-                <textarea
-                  id="modal-notes-textarea"
-                  name="notes"
-                  rows={3}
-                  placeholder="Add meeting notes, agreed budget, status updates, or follow-up details..."
-                  class="w-full px-4 py-3 rounded-xl border border-border bg-surface-light text-foreground text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                ></textarea>
-
-                <div class="flex justify-end gap-3 pt-2">
-                  <button
-                    type="button"
-                    id="modal-cancel-btn"
-                    class="px-5 py-2.5 rounded-xl border border-border text-xs font-bold text-foreground hover:bg-surface-light transition-colors cursor-pointer"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    class="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-md transition-all cursor-pointer"
-                  >
-                    Save Notes
-                  </button>
-                </div>
-              </form>
-            )}
-
-          </div>
-
-        </div>
-      </div>
-
       {/* ── Client-side Interactive Script ── */}
       <script>
         {`
@@ -662,8 +578,6 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
             var bulkBar = document.getElementById('bulk-action-bar');
             var selectedLabel = document.getElementById('selected-count-label');
             var bulkLeadIds = document.getElementById('bulk-lead-ids');
-            var bulkForm = document.getElementById('bulk-action-form');
-            var bulkDeleteBtn = document.getElementById('btn-bulk-delete');
             var exportSelectedBtn = document.getElementById('btn-export-selected');
 
             function getSelectedIds() {
@@ -709,26 +623,6 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
               });
             });
 
-            // Single lead delete confirmations
-            document.querySelectorAll('.lead-delete-form').forEach(function(form) {
-              form.addEventListener('submit', function(e) {
-                if (!confirm('Are you sure you want to permanently delete this lead?')) {
-                  e.preventDefault();
-                }
-              });
-            });
-
-            if (bulkDeleteBtn) {
-              bulkDeleteBtn.addEventListener('click', function() {
-                var ids = getSelectedIds();
-                if (ids.length === 0) return;
-                if (confirm('Permanently delete ' + ids.length + ' selected lead(s)?')) {
-                  document.getElementById('bulk-action-type').value = 'delete';
-                  bulkForm.submit();
-                }
-              });
-            }
-
             // Export selected rows through the same endpoint as the filtered export.
             if (exportSelectedBtn) {
               exportSelectedBtn.addEventListener('click', function() {
@@ -740,73 +634,6 @@ export function DashboardPage(handle: Handle<DashboardPageProps>) {
                 var url = new URL(exportSelectedBtn.dataset.exportHref, window.location.origin);
                 url.searchParams.set('ids', ids.join(','));
                 window.location.assign(url.href);
-              });
-            }
-
-            // Modal functionality
-            var modal = document.getElementById('lead-modal');
-            var modalCloseBtn = document.getElementById('modal-close-btn');
-            var modalCancelBtn = document.getElementById('modal-cancel-btn');
-
-            document.querySelectorAll('.btn-view-lead').forEach(function(btn) {
-              btn.addEventListener('click', function() {
-                var dataStr = btn.getAttribute('data-lead');
-                if (!dataStr) return;
-                var lead = JSON.parse(dataStr);
-
-                document.getElementById('modal-lead-name').textContent = lead.fullName;
-                document.getElementById('modal-lead-source').textContent = lead.services || 'General Inquiry';
-                document.getElementById('modal-lead-date').textContent = 'Submitted: ' + new Date(lead.createdAt).toLocaleString('en-US', { timeZone: 'Asia/Karachi' }) + ' PKT';
-                
-                var emailEl = document.getElementById('modal-lead-email');
-                emailEl.textContent = lead.email || 'None';
-                if (lead.email) {
-                  emailEl.href = 'mailto:' + lead.email;
-                } else {
-                  emailEl.removeAttribute('href');
-                }
-
-                var phoneEl = document.getElementById('modal-lead-phone');
-                var waEl = document.getElementById('modal-lead-wa');
-                if (lead.phone) {
-                  phoneEl.textContent = lead.phone;
-                  waEl.href = 'https://wa.me/' + lead.phone.replace(/[^0-9]/g, '');
-                  waEl.classList.remove('hidden');
-                } else {
-                  phoneEl.textContent = 'None';
-                  waEl.classList.add('hidden');
-                }
-
-                document.getElementById('modal-lead-details').textContent = lead.details || 'No details specified.';
-                var canEdit = btn.dataset.canEdit === 'true';
-                var notesForm = document.getElementById('modal-notes-form');
-                if (notesForm) {
-                  notesForm.hidden = !canEdit;
-                  document.getElementById('modal-lead-id-input').value = lead.id;
-                  document.getElementById('modal-notes-textarea').value = lead.notes || '';
-                }
-                document.getElementById('modal-read-only-notes').hidden = canEdit;
-                document.getElementById('modal-notes-preview').textContent = lead.notes || 'No notes yet.';
-                var ownerSelect = document.getElementById('modal-lead-owner');
-                if (ownerSelect) {
-                  document.getElementById('modal-owner-lead-id').value = lead.id;
-                  ownerSelect.value = lead.ownerId || '';
-                  if (ownerSelect.selectedIndex < 0) ownerSelect.value = '';
-                }
-
-                modal.classList.remove('hidden');
-              });
-            });
-
-            function closeModal() {
-              if (modal) modal.classList.add('hidden');
-            }
-
-            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-            if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeModal);
-            if (modal) {
-              modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeModal();
               });
             }
 

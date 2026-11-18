@@ -19,6 +19,8 @@ export interface Lead {
   status: LeadStatus
   notes?: string
   ownerId?: string | null
+  source?: 'manual'
+  archived?: boolean
 }
 
 export interface LeadFilters {
@@ -29,10 +31,25 @@ export interface LeadFilters {
   dateTo?: string
   dateRange?: string
   assigned?: 'me'
+  archived?: 'yes'
+}
+
+export type BulkLeadChanges = Pick<Lead, 'status'> | { archived: boolean }
+export type LeadChanges = Partial<Pick<Lead, 'status' | 'notes' | 'ownerId' | 'archived'>>
+export type LeadEvent = {
+  $id: string
+  $createdAt: string
+  actorId: string
+  kind: 'status' | 'notes' | 'owner' | 'archive' | 'restore'
+  value?: string | null
 }
 
 export function isLegacyAdsEmail(email: string): boolean {
   return /^(?:[0-9]+|lead)@(?:meta|google)-ads\.bellbeemedia\.com$/i.test(email.trim())
+}
+
+export function isLeadSubmissionId(value: unknown): value is string {
+  return typeof value === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(value)
 }
 
 const DATA_FILE = path.resolve(process.cwd(), 'data', 'leads.json')
@@ -111,19 +128,45 @@ async function ensureDataFile(): Promise<void> {
 
 export async function getAllLeads(): Promise<Lead[]> {
   const leads = appwriteLeadsEnabled() ? await appwriteLeadStore('staff').list() : await readJsonLeads()
-  return leads.map((lead) => lead.email && isLegacyAdsEmail(lead.email) ? { ...lead, email: undefined } : lead)
+  return leads.map(withContactEmail)
+}
+
+export async function getLead(id: string): Promise<Lead | null> {
+  const lead = appwriteLeadsEnabled()
+    ? await appwriteLeadStore('staff').get(id)
+    : (await readJsonLeads()).find((row) => row.id === id)
+  return lead ? withContactEmail(lead) : null
+}
+
+function withContactEmail(lead: Lead) {
+  return lead.email && isLegacyAdsEmail(lead.email) ? { ...lead, email: undefined } : lead
 }
 
 async function readJsonLeads(): Promise<Lead[]> {
   await ensureDataFile()
-  try {
-    const raw = await fs.readFile(DATA_FILE, 'utf-8')
-    const list: Lead[] = JSON.parse(raw)
-    return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-  } catch (error) {
-    console.error('[Leads] Error reading leads file:', error)
-    return []
-  }
+  const raw = await fs.readFile(DATA_FILE, 'utf-8')
+  const list: Lead[] = JSON.parse(raw)
+  return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+}
+
+// shortcut: JSON writers are serialized within one process, use Appwrite for multiple instances.
+let jsonWrites = Promise.resolve()
+
+function mutateJsonLeads<T>(mutate: (leads: Lead[]) => T): Promise<T> {
+  const write = jsonWrites.then(async () => {
+    const leads = await readJsonLeads()
+    const result = mutate(leads)
+    const temporary = `${DATA_FILE}.${randomUUID()}.tmp`
+    try {
+      await fs.writeFile(temporary, JSON.stringify(leads, null, 2), { mode: 0o600 })
+      await fs.rename(temporary, DATA_FILE)
+    } finally {
+      await fs.rm(temporary, { force: true })
+    }
+    return result
+  })
+  jsonWrites = write.then(() => undefined, () => undefined)
+  return write
 }
 
 export async function saveLead(data: {
@@ -133,7 +176,7 @@ export async function saveLead(data: {
   company?: string
   services?: string
   details?: string
-}, submissionId?: string): Promise<boolean> {
+}, submissionId?: string, manualOwnerId?: string): Promise<boolean> {
   const newLead: Lead = {
     id: `lead-${randomUUID().replaceAll('-', '').slice(0, 31)}`,
     createdAt: new Date().toISOString(),
@@ -144,6 +187,7 @@ export async function saveLead(data: {
     services: data.services?.trim() || 'General Inquiry',
     details: data.details?.trim() || undefined,
     status: 'New',
+    ...(manualOwnerId ? { ownerId: manualOwnerId, source: 'manual' as const } : {}),
   }
 
   if (!newLead.fullName || (!newLead.email && !newLead.phone)) throw new Error('A lead needs a name and a contact method.')
@@ -154,65 +198,43 @@ export async function saveLead(data: {
       window, newLead.fullName, newLead.email?.toLowerCase(), newLead.company, newLead.phone,
       newLead.services, newLead.details?.replace(/\r\n/g, '\n'),
     ])
-    newLead.id = `web-${createHash('sha256').update(fingerprint).digest('hex').slice(0, 32)}`
-    return appwriteLeadStore('intake').create(newLead)
+    const hash = createHash('sha256')
+    if (manualOwnerId) hash.update(JSON.stringify([manualOwnerId]))
+    newLead.id = `${manualOwnerId ? 'crm' : 'web'}-${hash.update(fingerprint).digest('hex').slice(0, 32)}`
+    return appwriteLeadStore(manualOwnerId ? 'staff' : 'intake').create(newLead)
   }
-  const leads = await readJsonLeads()
-  leads.unshift(newLead)
-  await fs.writeFile(DATA_FILE, JSON.stringify(leads, null, 2), 'utf-8')
-  return true
+  if (manualOwnerId) throw new Error('Manual prospects require the Appwrite store.')
+  return mutateJsonLeads((leads) => {
+    leads.unshift(newLead)
+    return true
+  })
 }
 
 export async function updateLead(
   id: string,
   updates: Partial<Pick<Lead, 'status' | 'notes' | 'ownerId'>>,
+  actorId?: string,
 ): Promise<Lead | null> {
-  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').update(id, updates)
-  await ensureDataFile()
-  const leads = await readJsonLeads()
-  const idx = leads.findIndex((l) => l.id === id)
-  if (idx === -1) return null
-
-  leads[idx] = {
-    ...leads[idx],
-    ...updates,
-  }
-
-  await fs.writeFile(DATA_FILE, JSON.stringify(leads, null, 2), 'utf-8')
-  return leads[idx]
+  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').update(id, updates, actorId)
+  return mutateJsonLeads((leads) => {
+    const lead = leads.find((row) => row.id === id)
+    return lead ? Object.assign(lead, updates) : null
+  })
 }
 
-export async function updateBulkStatus(ids: string[], status: LeadStatus): Promise<number> {
+export async function updateBulkLeads(ids: string[], changes: BulkLeadChanges, actorId?: string): Promise<number> {
   if (!ids.length) return 0
-  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').bulk(ids, { status })
-  await ensureDataFile()
-  const leads = await readJsonLeads()
-  let count = 0
-
-  for (const lead of leads) {
-    if (ids.includes(lead.id)) {
-      lead.status = status
-      count++
-    }
-  }
-
-  await fs.writeFile(DATA_FILE, JSON.stringify(leads, null, 2), 'utf-8')
-  return count
-}
-
-export async function deleteLeads(ids: string[]): Promise<number> {
-  if (!ids.length) return 0
-  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').bulk(ids)
-  await ensureDataFile()
-  const leads = await readJsonLeads()
-  const filtered = leads.filter((l) => !ids.includes(l.id))
-  const deletedCount = leads.length - filtered.length
-  await fs.writeFile(DATA_FILE, JSON.stringify(filtered, null, 2), 'utf-8')
-  return deletedCount
+  if (appwriteLeadsEnabled()) return appwriteLeadStore('staff').bulk(ids, changes, actorId)
+  const selected = new Set(ids)
+  return mutateJsonLeads((leads) => {
+    const matches = leads.filter((lead) => selected.has(lead.id))
+    for (const lead of matches) Object.assign(lead, changes)
+    return matches.length
+  })
 }
 
 export function filterLeads(leads: Lead[], filters: LeadFilters, staffId?: string): Lead[] {
-  let result = [...leads]
+  let result = leads.filter((lead) => (lead.archived === true) === (filters.archived === 'yes'))
 
   if (filters.assigned === 'me') {
     if (!staffId) return []
@@ -226,14 +248,16 @@ export function filterLeads(leads: Lead[], filters: LeadFilters, staffId?: strin
 
   // Source / Service Filter
   if (filters.source && filters.source !== 'All') {
-    result = result.filter((l) => l.services?.toLowerCase().includes(filters.source!.toLowerCase()))
+    const source = filters.source.toLowerCase()
+    result = result.filter((lead) => source === 'manual' ? lead.source === 'manual' : lead.services?.toLowerCase().includes(source))
   }
 
   // Date Range Presets
   const now = new Date()
   if (filters.dateRange && filters.dateRange !== 'All') {
     if (filters.dateRange === 'Today') {
-      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()
+      const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi' }).format(now)
+      const todayStart = Date.parse(today + 'T00:00:00+05:00')
       result = result.filter((l) => new Date(l.createdAt).getTime() >= todayStart)
     } else if (filters.dateRange === '7days') {
       const sevenDaysAgo = now.getTime() - 7 * 24 * 60 * 60 * 1000
@@ -242,14 +266,15 @@ export function filterLeads(leads: Lead[], filters: LeadFilters, staffId?: strin
       const thirtyDaysAgo = now.getTime() - 30 * 24 * 60 * 60 * 1000
       result = result.filter((l) => new Date(l.createdAt).getTime() >= thirtyDaysAgo)
     } else if (filters.dateRange === 'month') {
-      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
+      const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi' }).format(now)
+      const monthStart = Date.parse(today.slice(0, 7) + '-01T00:00:00+05:00')
       result = result.filter((l) => new Date(l.createdAt).getTime() >= monthStart)
     }
   }
 
   // Custom Date From
   if (filters.dateFrom) {
-    const fromTime = new Date(filters.dateFrom).getTime()
+    const fromTime = Date.parse(filters.dateFrom + 'T00:00:00+05:00')
     if (!Number.isNaN(fromTime)) {
       result = result.filter((l) => new Date(l.createdAt).getTime() >= fromTime)
     }
@@ -257,9 +282,7 @@ export function filterLeads(leads: Lead[], filters: LeadFilters, staffId?: strin
 
   // Custom Date To
   if (filters.dateTo) {
-    const toDate = new Date(filters.dateTo)
-    toDate.setHours(23, 59, 59, 999)
-    const toTime = toDate.getTime()
+    const toTime = Date.parse(filters.dateTo + 'T23:59:59.999+05:00')
     if (!Number.isNaN(toTime)) {
       result = result.filter((l) => new Date(l.createdAt).getTime() <= toTime)
     }
@@ -298,6 +321,8 @@ export function generateLeadsCsv(leads: Lead[]): string {
     'Status',
     'Details / Message',
     'Internal Notes',
+    'Intake Channel',
+    'Archived',
   ]
 
   const escapeCsv = (val: string | undefined): string => {
@@ -318,6 +343,8 @@ export function generateLeadsCsv(leads: Lead[]): string {
     escapeCsv(l.status),
     escapeCsv(l.details || ''),
     escapeCsv(l.notes || ''),
+    escapeCsv(l.source === 'manual' ? 'Manual prospect' : ''),
+    escapeCsv(l.archived ? 'Yes' : 'No'),
   ])
 
   // \uFEFF is the UTF-8 Byte Order Mark for Excel

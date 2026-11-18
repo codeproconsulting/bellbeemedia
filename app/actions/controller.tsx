@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { createController } from 'remix/router'
 import { redirect } from 'remix/response/redirect'
 import { assetServer } from '../assets.ts'
@@ -64,14 +65,19 @@ import { BlogPostPage } from '../ui/blog-post-page.tsx'
 // Admin pages & data modules
 import { LoginPage } from '../ui/admin/login-page.tsx'
 import { DashboardPage, inboxPageSize } from '../ui/admin/dashboard-page.tsx'
+import { ProspectPage } from '../ui/admin/prospect-page.tsx'
+import { LeadPage } from '../ui/admin/lead-page.tsx'
 import {
   getAllLeads,
+  getLead,
   filterLeads,
   updateLead,
-  updateBulkStatus,
-  deleteLeads,
+  updateBulkLeads,
   generateLeadsCsv,
   leadStatuses,
+  isLeadSubmissionId,
+  isLegacyAdsEmail,
+  saveLead,
 } from '../data/leads.ts'
 import {
   verifyPassword,
@@ -103,6 +109,7 @@ function crmLeadFilters(params: URLSearchParams) {
     dateFrom: params.get('dateFrom') || '',
     dateTo: params.get('dateTo') || '',
     assigned: params.get('assigned') === 'me' ? 'me' as const : undefined,
+    archived: params.get('archived') === 'yes' ? 'yes' as const : undefined,
   }
 }
 
@@ -489,11 +496,11 @@ export default createController(routes, {
           }
         } else if (actionType === 'updateStatus') {
           if (status && ids.length) {
-            await updateBulkStatus(ids, status)
+            await updateBulkLeads(ids, { status }, access.id)
           }
         } else if (actionType === 'updateNotes') {
           if (ids.length && typeof notes === 'string') {
-            await updateLead(ids[0], { notes })
+            await updateLead(ids[0], { notes }, access.id)
           }
         } else if (actionType === 'assignOwner') {
           if (!access.staff) return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
@@ -504,17 +511,26 @@ export default createController(routes, {
           if (ownerId && !access.staff.some((member) => member.id === ownerId && member.role !== 'viewer')) {
             return new Response('Choose a current BellBee CRM team member.', { status: 400, headers: privateAdminHeaders })
           }
-          if (!await updateLead(ids[0], { ownerId: ownerId || null })) {
+          if (!await updateLead(ids[0], { ownerId: ownerId || null }, access.id)) {
             return new Response('Lead not found.', { status: 404, headers: privateAdminHeaders })
           }
-        } else if (actionType === 'delete') {
-          if (ids.length) {
-            await deleteLeads(ids)
+        } else if (actionType === 'setArchived') {
+          const archived = formData.get('archived')
+          if (!ids.length || (archived !== 'true' && archived !== 'false')) {
+            return new Response('Choose leads and an archive action.', { status: 400, headers: privateAdminHeaders })
           }
+          await updateBulkLeads(ids, { archived: archived === 'true' }, access.id)
+        } else {
+          return new Response('Unknown lead action.', { status: 400, headers: privateAdminHeaders })
         }
 
         const referer = URL.parse(context.request.headers.get('referer') ?? '')
         const origin = appwriteLeadsEnabled() ? appwriteStaffConfig().origin : new URL(context.request.url).origin
+        const returnTo = formData.get('returnTo')
+        const record = typeof returnTo === 'string' ? URL.parse(returnTo, origin) : null
+        if (ids.length === 1 && record?.origin === origin && record.pathname === routes.adminLead.href({ leadId: ids[0] })) {
+          return redirect(`${record.pathname}${record.search}`, { status: 303, headers: privateAdminHeaders })
+        }
         const filters = referer?.origin === origin && referer.pathname === '/admin/leads' ? referer.search : ''
         return redirect(`/admin/leads${filters}`, { status: 303 })
       }
@@ -543,6 +559,85 @@ export default createController(routes, {
         />,
         { headers: privateAdminHeaders },
       )
+    },
+
+    async adminLead(context) {
+      const access = await crmAccess(context.request)
+      if (!access) return redirect('/admin/login')
+      const lead = await getLead(context.params.leadId)
+      if (!lead) return new Response('Lead not found.', { status: 404, headers: privateAdminHeaders })
+
+      const url = new URL(context.request.url)
+      const back = URL.parse(url.searchParams.get('back') ?? '', url.origin)
+      const backHref = back?.origin === url.origin && back.pathname === '/admin/leads'
+        ? `${back.pathname}${back.search}`
+        : lead.archived ? '/admin/leads?archived=yes' : '/admin/leads'
+      const isAdmin = access.role === 'admin'
+      const requestedTab = url.searchParams.get('tab')
+      const historyEnabled = Boolean(access.id && process.env.APPWRITE_LEAD_EVENTS_TABLE_ID)
+      const tab = requestedTab === 'history' && historyEnabled ? 'history' :
+        requestedTab === 'notes' ? 'notes' : 'overview'
+      const cursor = url.searchParams.get('before') || undefined
+      if (cursor && !/^[A-Za-z0-9][A-Za-z0-9._-]{0,35}$/.test(cursor)) {
+        return new Response('Invalid history cursor.', { status: 400, headers: privateAdminHeaders })
+      }
+      const history = tab === 'history' ? await appwriteLeadStore('staff').history(lead.id, cursor) : undefined
+      return context.render(<LeadPage
+        lead={lead}
+        tab={tab}
+        historyEnabled={historyEnabled}
+        events={history?.events}
+        nextHistory={history?.next}
+        olderHistory={Boolean(cursor)}
+        backHref={backHref}
+        canEdit={isAdmin || (access.role === 'member' && lead.ownerId === access.id)}
+        isAdmin={isAdmin}
+        staff={access.staff}
+      />, { headers: privateAdminHeaders })
+    },
+
+    async adminProspect(context) {
+      const access = await crmAccess(context.request)
+      if (!access) return redirect('/admin/login')
+      if (!access.id || access.role === 'viewer') {
+        return new Response('Forbidden', { status: 403, headers: privateAdminHeaders })
+      }
+      if (context.request.method === 'GET') {
+        return context.render(<ProspectPage submissionId={randomUUID()} />, { headers: privateAdminHeaders })
+      }
+      if (context.request.method !== 'POST') return new Response('Method not allowed', { status: 405 })
+      if (!allowsCrmPost(context.request)) return new Response('Forbidden', { status: 403 })
+
+      const form = await context.request.formData()
+      const fields = { fullName: 512, email: 512, phone: 256, company: 512, services: 2048, details: 65535 }
+      const values: Record<keyof typeof fields, string> = { fullName: '', email: '', phone: '', company: '', services: '', details: '' }
+      let invalid = false
+      for (const [key, max] of Object.entries(fields) as [keyof typeof fields, number][]) {
+        const value = form.get(key)
+        if (typeof value === 'string') values[key] = value.trim().slice(0, max)
+        if (value !== null && (typeof value !== 'string' || value.trim().length > max)) invalid = true
+      }
+      const id = form.get('submissionId')
+      const submissionId = isLeadSubmissionId(id) ? id.toLowerCase() : randomUUID()
+      const renderError = (error: string, status: number) => context.render(
+        <ProspectPage submissionId={submissionId} values={values} error={error} />,
+        { status, headers: privateAdminHeaders },
+      )
+      if (!isLeadSubmissionId(id)) return renderError('The form expired. Confirm the details and submit again.', 400)
+      if (invalid || !values.fullName || (!values.email && !values.phone)) {
+        return renderError('Enter a name and at least one contact method. Check the field lengths.', 400)
+      }
+      if (values.email && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email) || isLegacyAdsEmail(values.email))) {
+        return renderError('Enter a valid email address.', 400)
+      }
+      if (values.phone && !/\d/.test(values.phone)) return renderError('Enter a phone number with digits.', 400)
+
+      try {
+        await saveLead(values, submissionId, access.id)
+      } catch {
+        return renderError('The prospect could not be saved. Try again.', 503)
+      }
+      return redirect('/admin/leads?assigned=me&source=manual', { status: 303, headers: privateAdminHeaders })
     },
 
     async adminLeadsExport(context) {

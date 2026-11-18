@@ -66,6 +66,8 @@ export const routes = route({
   adminLogin: '/admin/login',
   adminLogout: post('/admin/logout'),
   adminLeads: '/admin/leads',
+  adminProspect: '/admin/leads/new',
   adminLeadsExport: get('/admin/leads/export'),
+  adminLead: get('/admin/leads/:leadId'),
 })
 

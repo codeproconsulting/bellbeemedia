@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { after, test } from 'node:test'
 
 import { assetServer } from '../app/assets.ts'
-import { deleteLeads, filterLeads, generateLeadsCsv, getAllLeads, updateBulkStatus, updateLead } from '../app/data/leads.ts'
+import { filterLeads, generateLeadsCsv, getAllLeads, updateBulkLeads, updateLead } from '../app/data/leads.ts'
 import { submitProposal } from '../app/data/wordpress.ts'
 import { router } from '../app/router.ts'
 
@@ -74,12 +74,8 @@ test('Appwrite staging routes intake and staff operations to the same table', as
 
     assert.equal(url.pathname, rowPath)
     assert.deepEqual(JSON.parse(body.queries[0]), { method: 'equal', attribute: '$id', values: [stored?.$id] })
-    if (method === 'DELETE') {
-      stored = undefined
-    } else {
-      assert.equal(method, 'PATCH')
-      stored = { ...stored, ...body.data }
-    }
+    assert.equal(method, 'PATCH')
+    stored = { ...stored, ...body.data }
     return Response.json({ total: 1, rows: [] })
   })
 
@@ -113,7 +109,7 @@ test('Appwrite staging routes intake and staff operations to the same table', as
   assert.equal(lead.fullName, 'Synthetic Contact')
   assert.equal(lead.status, 'New')
   assert.equal((await updateLead(lead.id, { notes: 'Synthetic note' }))?.notes, 'Synthetic note')
-  assert.equal(await updateBulkStatus([lead.id, lead.id], 'Contacted'), 1)
+  assert.equal(await updateBulkLeads([lead.id, lead.id], { status: 'Contacted' }), 1)
   assert.equal(stored?.status, 'Contacted')
   const replay = await send()
   assert.equal(replay.status, 200)
@@ -121,9 +117,15 @@ test('Appwrite staging routes intake and staff operations to the same table', as
   assert.equal(forwards, 1)
   assert.equal(stored?.status, 'Contacted')
   assert.equal(stored?.notes, 'Synthetic note')
-  assert.equal(await deleteLeads(['bad/id']), 0)
-  assert.equal(await deleteLeads([lead.id]), 1)
-  assert.equal(Boolean(stored), false)
+  assert.equal(await updateBulkLeads(['bad/id'], { archived: true }), 0)
+  assert.equal(await updateBulkLeads([lead.id], { archived: true }), 1)
+  assert.equal(stored?.archived, true)
+  assert.equal((await send()).status, 200)
+  assert.equal(stored?.archived, true)
+  assert.equal(forwards, 1)
+  assert.equal(await updateBulkLeads([lead.id], { archived: false }), 1)
+  assert.equal(stored?.status, 'Contacted')
+  assert.equal(stored?.notes, 'Synthetic note')
 
   const legacy = { fullName: 'Synthetic Legacy', email: 'legacy@invalid.test' }
   assert.equal((await submitProposal(legacy)).success, true)

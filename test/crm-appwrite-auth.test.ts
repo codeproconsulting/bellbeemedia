@@ -48,6 +48,21 @@ test('Appwrite CRM requires an active team session for sign-in, reads and mutati
       assert.equal(headers.get('X-Appwrite-Key'), 'staff-fixture')
       assert.ok(active && member)
       rowRequests++
+      if (init.method === 'POST') {
+        assert.deepEqual(roles, ['member'])
+        const { rowId, data } = JSON.parse(String(init.body))
+        assert.match(rowId, /^crm-[0-9a-f]{32}$/)
+        assert.equal(data.ownerId, 'staff-self')
+        assert.equal(data.source, 'manual')
+        assert.equal(data.email, undefined)
+        assert.equal(data.phone, '+92 300 0000000')
+        if (leads.some((lead) => lead.$id === rowId)) {
+          return Response.json({ type: 'row_already_exists' }, { status: 409 })
+        }
+        const row = { $id: rowId, ...data }
+        leads.push(row)
+        return Response.json(row, { status: 201 })
+      }
       if (init.method === 'PATCH') {
         assert.deepEqual(roles, ['member'])
         const { queries, data } = JSON.parse(String(init.body))
@@ -61,10 +76,15 @@ test('Appwrite CRM requires an active team session for sign-in, reads and mutati
       assert.equal(init.method, 'GET')
       return Response.json({ rows: leads, total: leads.length })
     }
-    if (target.pathname === '/v1/tablesdb/crm/tables/leads/rows/fixture') {
+    if (target.pathname.startsWith('/v1/tablesdb/crm/tables/leads/rows/')) {
       assert.equal(headers.get('X-Appwrite-Key'), 'staff-fixture')
-      assert.equal(init.method, 'PATCH')
       assert.ok(active && member)
+      const row = leads.find((lead) => target.pathname.endsWith(`/${lead.$id}`))
+      if (init.method === 'GET') {
+        return row ? Response.json(row) : Response.json({ type: 'row_not_found' }, { status: 404 })
+      }
+      assert.equal(init.method, 'PATCH')
+      assert.equal(row, leads[0])
       const { data } = JSON.parse(String(init.body))
       leads[0].ownerId = data.ownerId
       return Response.json(leads[0])
@@ -133,7 +153,7 @@ test('Appwrite CRM requires an active team session for sign-in, reads and mutati
   member = true
   const malicious = await run('/admin/leads', {
     method: 'POST', headers: { cookie, origin: 'https://other.invalid' },
-    body: new URLSearchParams({ actionType: 'delete', leadIds: 'fixture' }),
+    body: new URLSearchParams({ actionType: 'setArchived', archived: 'true', leadIds: 'fixture' }),
   })
   assert.equal(malicious.status, 403)
   assert.equal(rowRequests, 1)
@@ -168,11 +188,12 @@ test('Appwrite CRM requires an active team session for sign-in, reads and mutati
   })
   const memberInbox = await (await run('/admin/leads', { headers: { cookie } })).text()
   assert.match(memberInbox, /Other staff example/)
-  assert.match(memberInbox, /data-can-edit="true"/)
-  assert.match(memberInbox, /data-can-edit="false"/)
-  assert.doesNotMatch(memberInbox, /data-export-href|class="lead-delete-form|name="ownerId"/)
+  assert.match(memberInbox, /href="\/admin\/leads\/fixture\?back=/)
+  assert.match((await (await run('/admin/leads/fixture?tab=notes', { headers: { cookie } })).text()), /Save notes/)
+  assert.doesNotMatch((await (await run('/admin/leads/other-lead?tab=notes', { headers: { cookie } })).text()), /Save notes/)
+  assert.doesNotMatch(memberInbox, /data-export-href|value="setArchived"|name="ownerId"/)
   assert.equal((await run('/admin/leads/export', { headers: { cookie } })).status, 403)
-  assert.equal((await postLead({ actionType: 'delete', leadIds: 'fixture' })).status, 403)
+  assert.equal((await postLead({ actionType: 'setArchived', archived: 'true', leadIds: 'fixture' })).status, 403)
   assert.equal((await assign('')).status, 403)
   assert.equal((await postLead({ actionType: 'updateStatus', leadIds: 'fixture,other-lead', status: 'Won' })).status, 403)
   assert.equal((await postLead({ actionType: 'updateStatus', leadIds: 'other-lead', status: 'Won' })).status, 403)
@@ -181,12 +202,38 @@ test('Appwrite CRM requires an active team session for sign-in, reads and mutati
   assert.equal((await postLead({ actionType: 'updateNotes', leadIds: 'fixture', notes: 'Synthetic note' })).status, 303)
   assert.equal((await postLead({ actionType: 'updateNotes', leadIds: 'other-lead', notes: 'Forbidden note' })).status, 403)
 
+  const newProspect = await run('/admin/leads/new', { headers: { cookie } })
+  const submissionId = (await newProspect.text()).match(/name="submissionId" value="([^"]+)"/)?.[1]
+  assert.ok(submissionId)
+  const saveProspect = (phone: string, source = origin) => run('/admin/leads/new', {
+    method: 'POST', headers: { cookie, origin: source },
+    body: new URLSearchParams({ submissionId, fullName: 'Phone-only prospect', phone }),
+  })
+  const invalidProspect = await saveProspect('')
+  assert.equal(invalidProspect.status, 400)
+  assert.match(await invalidProspect.text(), /Phone-only prospect/)
+  assert.equal((await saveProspect('+92 300 0000000', 'https://other.invalid')).status, 403)
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const saved = await saveProspect('+92 300 0000000')
+    assert.equal(saved.status, 303)
+    assert.equal(saved.headers.get('Location'), '/admin/leads?assigned=me&source=manual')
+  }
+  assert.equal(leads.filter((lead) => lead.fullName === 'Phone-only prospect').length, 1)
+  const prospectInbox = await (await run('/admin/leads?assigned=me&source=manual', { headers: { cookie } })).text()
+  assert.match(prospectInbox, /Phone-only prospect/)
+  assert.doesNotMatch(prospectInbox, /Unassigned example/)
+
   roles = ['viewer']
   const viewerInbox = await (await run('/admin/leads', { headers: { cookie } })).text()
-  assert.match(viewerInbox, /Synthetic note/)
-  assert.doesNotMatch(viewerInbox, /data-can-edit="true"|id="modal-notes-form"/)
+  assert.doesNotMatch(viewerInbox, /class="lead-status-select/)
+  const viewerNotes = await (await run('/admin/leads/fixture?tab=notes', { headers: { cookie } })).text()
+  assert.match(viewerNotes, /Synthetic note/)
+  assert.doesNotMatch(viewerNotes, /Save notes|Archive lead/)
+  assert.equal((await run('/admin/leads/missing', { headers: { cookie } })).status, 404)
   assert.equal((await postLead({ actionType: 'updateStatus', leadIds: 'fixture', status: 'Won' })).status, 403)
   assert.equal((await run('/admin/leads/export', { headers: { cookie } })).status, 403)
+  assert.equal((await run('/admin/leads/new', { headers: { cookie } })).status, 403)
+  assert.equal((await saveProspect('+92 300 0000000')).status, 403)
   roles = ['unknown']
   assert.equal((await run('/admin/leads', { headers: { cookie } })).headers.get('Location'), '/admin/login')
 

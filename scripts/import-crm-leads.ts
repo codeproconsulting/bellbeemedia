@@ -48,7 +48,13 @@ export function prepareLeads(input: unknown) {
     if (!data.email && !data.phone?.trim()) {
       throw new Error(`${position} needs an email or phone number.`)
     }
-    return { rowId: id, data }
+    const archived = source.archived
+    if (archived !== undefined && typeof archived !== 'boolean') {
+      throw new Error(`${position} has an invalid archive flag.`)
+    }
+    const rowData: Record<string, string | boolean | null> = { ...data }
+    if (archived !== undefined) rowData.archived = archived
+    return { rowId: id, data: rowData }
   })
 }
 
@@ -82,11 +88,14 @@ export async function importLeads(
       throw new Error(`Could not verify record ${index + 1} after a conflict (HTTP ${row.status}).`)
     }
     const existing = await row.json() as Record<string, unknown>
-    const identical = Object.entries(lead.data).every(([key, value]) =>
-      key === 'createdAt' && typeof existing[key] === 'string'
-        ? Date.parse(existing[key]) === Date.parse(value!)
-        : (existing[key] ?? null) === value,
-    )
+    const identical = Object.entries(lead.data).every(([key, value]) => {
+      const previous = existing[key]
+      if (key === 'archived') return (previous === true) === value
+      if (key === 'createdAt' && typeof previous === 'string' && typeof value === 'string') {
+        return Date.parse(previous) === Date.parse(value)
+      }
+      return (previous ?? null) === value
+    })
     if (existing.$id !== lead.rowId || !identical) {
       throw new Error(`Record ${index + 1} already exists with different values. Reconcile it before retrying.`)
     }

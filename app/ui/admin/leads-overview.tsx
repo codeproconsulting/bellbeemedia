@@ -15,8 +15,10 @@ export function LeadsOverview(handle: Handle<{ leads: Lead[] }>) {
   })
   const daysByDate = new Map(days.map((day) => [day.key, day]))
   const stages = new Map(leadStatuses.map((status) => [status, 0]))
+  let archivedCount = 0
   for (const lead of leads) {
-    stages.set(lead.status, (stages.get(lead.status) ?? 0) + 1)
+    if (lead.archived) archivedCount++
+    else stages.set(lead.status, (stages.get(lead.status) ?? 0) + 1)
     const submitted = Date.parse(lead.createdAt)
     if (Number.isNaN(submitted)) continue
     const day = daysByDate.get(intakeDate.format(submitted))
@@ -29,8 +31,8 @@ export function LeadsOverview(handle: Handle<{ leads: Lead[] }>) {
     <div class="space-y-6">
       <section aria-label="Lead totals" class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
         <div class="rounded-xl border border-border bg-white p-4">
-          <p class="text-xs font-semibold text-muted">Total leads</p>
-          <p class="mt-1 text-2xl font-black text-foreground">{leads.length}</p>
+          <p class="text-xs font-semibold text-muted">Active leads</p>
+          <p class="mt-1 text-2xl font-black text-foreground">{leads.length - archivedCount}</p>
         </div>
         {leadStatuses.map((status) => (
           <a key={status} href={`/admin/leads?status=${encodeURIComponent(status)}`}
@@ -40,6 +42,9 @@ export function LeadsOverview(handle: Handle<{ leads: Lead[] }>) {
           </a>
         ))}
       </section>
+      <a href="/admin/leads?archived=yes" class="inline-block text-sm font-semibold text-foreground underline">
+        Archived leads ({archivedCount})
+      </a>
       <section class="rounded-2xl border border-border bg-white p-5 sm:p-6" aria-labelledby="intake-heading">
         <h2 id="intake-heading" class="text-lg font-bold text-foreground">Lead intake</h2>
         <p class="mt-1 text-sm text-muted">{intakeCount} {intakeCount === 1 ? 'lead' : 'leads'} in the last 14 days · Pakistan Standard Time</p>

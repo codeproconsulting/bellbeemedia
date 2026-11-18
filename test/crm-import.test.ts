@@ -31,9 +31,10 @@ test('import keeps real addresses and clears known placeholders from phone leads
   const prepared = prepareLeads([
     fixture,
     { ...fixture, id: 'old-phone', email: '923000000000@meta-ads.bellbeemedia.com', phone },
-    { ...fixture, id: 'new-phone', email: undefined, phone },
+    { ...fixture, id: 'new-phone', email: undefined, phone, archived: true },
   ])
   assert.equal(prepared[0].data.email, fixture.email)
+  assert.equal(prepared[2].data.archived, true)
   for (const row of prepared.slice(1)) {
     assert.equal(row.data.email, null)
     assert.equal(row.data.phone, phone)

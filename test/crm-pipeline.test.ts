@@ -34,7 +34,7 @@ test('the private workspace keeps overview totals, pipeline links and exports co
     const html = await pipeline.text()
     assert.match(html, /Contacted \(1\)/)
     assert.match(html, /New \(0\)/)
-    assert.match(html, /search=Example[^"]*#row-fixture-1/)
+    assert.match(html, /\/admin\/leads\/fixture-1\?back=[^"]*search%3DExample/)
     assert.doesNotMatch(html, /Other Lead|googletagmanager/)
 
     const inbox = await router.fetch(new Request('http://localhost/admin/leads?search=Example', { headers: { cookie } }))
@@ -50,7 +50,7 @@ test('the private workspace keeps overview totals, pipeline links and exports co
     }
 
     const overview = await read('/admin/leads?view=overview&search=missing')
-    assert.match(overview, /Total leads<\/p><p[^>]+>28<\/p>/)
+    assert.match(overview, /Active leads<\/p><p[^>]+>28<\/p>/)
     assert.match(overview, /1 lead in the last 14 days/)
     assert.doesNotMatch(overview, /Example Lead|Queue Fixture/)
     const pageOne = await read('/admin/leads?search=Queue&status=New')
@@ -61,7 +61,7 @@ test('the private workspace keeps overview totals, pipeline links and exports co
     assert.match(pageTwo, /Showing 26–26 of 26 matching leads/)
     assert.match(pageTwo, /id="row-queue-26"/)
     const queuePipeline = await read('/admin/leads?search=Queue&status=New&view=pipeline')
-    assert.match(queuePipeline, /page=2#row-queue-26/)
+    assert.match(queuePipeline, /\/admin\/leads\/queue-26\?back=[^"]*view%3Dpipeline/)
 
     const filteredExport = await read('/admin/leads/export?search=Queue&status=New&page=2')
     assert.match(filteredExport, /"queue-1"/)
@@ -71,6 +71,48 @@ test('the private workspace keeps overview totals, pipeline links and exports co
     const selectedExport = await read('/admin/leads/export?ids=queue-26')
     assert.match(selectedExport, /"queue-26"/)
     assert.doesNotMatch(selectedExport, /"queue-1"/)
+    const recordPath = '/admin/leads/fixture-1?back=%2Fadmin%2Fleads%3Fsearch%3DExample'
+    const record = await read(recordPath)
+    assert.match(record, /Contact details/)
+    assert.match(record, /href="\/admin\/leads\?search=Example"/)
+    assert.doesNotMatch(record, /923000000000@meta-ads\.bellbeemedia\.com/)
+    const notesUrl = `${recordPath}&tab=notes`
+    const save = await router.fetch(new Request('http://localhost/admin/leads', {
+      method: 'POST', headers: { cookie },
+      body: new URLSearchParams({ actionType: 'updateNotes', leadIds: 'fixture-1', notes: 'Record-page note', returnTo: notesUrl }),
+    }))
+    assert.equal(save.headers.get('Location'), notesUrl)
+    assert.match(await read(notesUrl), /Record-page note/)
+    assert.doesNotMatch(await read('/admin/leads/fixture-1?back=https://outside.invalid/admin/leads'), /outside\.invalid/)
+
+    const archive = (archived: boolean) => router.fetch(new Request('http://localhost/admin/leads', {
+      method: 'POST', headers: { cookie },
+      body: new URLSearchParams({ actionType: 'setArchived', archived: String(archived), leadIds: 'fixture-1,queue-26' }),
+    }))
+    const [archived, annotated] = await Promise.all([
+      archive(true),
+      router.fetch(new Request('http://localhost/admin/leads', {
+        method: 'POST', headers: { cookie },
+        body: new URLSearchParams({ actionType: 'updateNotes', leadIds: 'fixture-1', notes: 'Concurrent annotation' }),
+      })),
+    ])
+    assert.equal(archived.status, 303)
+    assert.equal(annotated.status, 303)
+    assert.doesNotMatch(await read('/admin/leads?search=Example'), /id="row-fixture-1"/)
+    const archiveInbox = await read('/admin/leads?archived=yes')
+    assert.match(archiveInbox, /Restore lead/)
+    assert.match(archiveInbox, /id="row-fixture-1"/)
+    assert.match(archiveInbox, /id="row-queue-26"/)
+    assert.doesNotMatch(await read('/admin/leads/export?ids=fixture-1'), /"fixture-1"/)
+    const archivedCsv = await read('/admin/leads/export?archived=yes&ids=fixture-1')
+    assert.match(archivedCsv, /"Example Lead"/)
+    assert.match(archivedCsv, /"Concurrent annotation"/)
+    const archivedOverview = await read('/admin/leads?view=overview')
+    assert.match(archivedOverview, /Active leads<\/p><p[^>]+>26<\/p>/)
+    assert.match(archivedOverview, /Archived leads \(2\)/)
+    assert.match(archivedOverview, /1 lead in the last 14 days/)
+    assert.equal((await archive(false)).status, 303)
+    assert.match(await read('/admin/leads?search=Example&status=Contacted'), /id="row-fixture-1"/)
   } finally {
     process.chdir(originalDirectory)
     await rm(fixtureDirectory, { recursive: true, force: true })

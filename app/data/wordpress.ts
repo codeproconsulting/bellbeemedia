@@ -10,7 +10,7 @@
  * static placeholder data so the site renders without a live WordPress instance.
  */
 
-import { saveLead } from './leads.ts'
+import { isLeadSubmissionId, saveLead } from './leads.ts'
 import { appwriteLeadsEnabled } from './appwrite-leads.ts'
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -497,7 +497,7 @@ export type ProposalSubmissionResult = {
 }
 
 export async function submitProposal(data: ProposalFormData, submissionId?: FormDataEntryValue | null): Promise<ProposalSubmissionResult> {
-  const retryId = typeof submissionId === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(submissionId)
+  const retryId = isLeadSubmissionId(submissionId)
     ? submissionId.toLowerCase()
     : undefined
   let created: boolean

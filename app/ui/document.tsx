@@ -21,14 +21,13 @@ export function Document() {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {description && <meta name="description" content={description} />}
 
-        {/* Google tag (gtag.js) */}
+        {/* Google Tag Manager */}
         {!privatePage && <>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCXZ19KB1R"></script>
+        <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KKRTHCZL"></script>
         <script>
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-GCXZ19KB1R');`}
+gtag('js', new Date());`}
         </script>
         </>}
 
